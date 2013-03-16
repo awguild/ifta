@@ -5,6 +5,6 @@ task :initial_setup => :environment do
   user = User.new(:email => CONFIG[:super_admin_email], :password => CONFIG[:super_admin_password], :password_confirmation => CONFIG[:super_admin_password])
   user.role = 'admin'
   user.save
-  Conference.create(:conference_year => Time.now.year, :active => true)
+  Conference.create(:conference_year => Time.now.year, :active => true, :tax_rate => 0.07)
 end
 

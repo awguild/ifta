@@ -4,7 +4,7 @@ class ItinerariesController < ApplicationController
   
   #Paypal sends the user back here
   def index
-    redirect_to :action => "edit", :id => current_user.id
+    redirect_to edit_itinerary_path(current_user.itineraries.last)
   end
   
   #the itinerary edit page is THE MAIN INTERFACE for attendees

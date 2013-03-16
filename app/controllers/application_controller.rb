@@ -14,13 +14,13 @@ class ApplicationController < ActionController::Base
     elsif user.role == 'admin'
       return conference_path(Conference.active)
     else
-      user_itinerary = user.itineraries.current.to_a
-      user_itinerary = Itinerary.new if user_itinerary.blank?
-      if user_itinerary.new_record?
+      if user.itineraries.current.empty?
+        user_itinerary = Itinerary.new
         user_itinerary.conference = Conference.active
         user_itinerary.user = user
         user_itinerary.save
-      end      
+      end
+      user_itinerary = user.itineraries.current.first      
       session[:itinerary_id] = user_itinerary.id
       return edit_itinerary_path(user_itinerary)
       

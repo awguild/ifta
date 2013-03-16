@@ -1,6 +1,8 @@
 <h1>Conference Settings</h1>
 <%= simple_form_for @conference do |f| %>
 
+<%= render :partial => 'shared/error_messages', :locals => {:object => @conference} %>
+
 <%= f.input :conference_year, :as => :string %>
 <%= f.input :tax_rate, :as => :string %>
 <%= f.input :proposal_acceptance, :label => "Email text for an accepted proposal", input_html: {rows: 10, cols: 80} %>

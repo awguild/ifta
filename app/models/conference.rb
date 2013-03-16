@@ -11,6 +11,10 @@ class Conference < ActiveRecord::Base
   has_many :itineraries
   has_many :proposals, :through => :itineraries
   
+  validates :tax_rate, :numericality => {
+    :greater_than_or_equal_to => 0,
+    :less_than_or_equal_to => 1
+  }
   
   accepts_nested_attributes_for :conference_items, allow_destroy: true
   

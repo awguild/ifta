@@ -1,6 +1,6 @@
 <%= render 'shared/error_messages', {:object => @itinerary}%>
 
-<%= render :partial => 'cart', :locals => {:unpaid_line_items => @itinerary.unpaid_line_items, :itinerary => @itinerary}%>
+<%= render :partial => 'cart', :locals => {:unpaid_line_items => @itinerary.unpaid_line_items, :itinerary => @itinerary} %>
 
 <h1>Available Events</h1>
 <%- if !@itinerary.any_items? %>

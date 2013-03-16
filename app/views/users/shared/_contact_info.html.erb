@@ -14,11 +14,15 @@
 	<%= f.input :state %>
 	<%= f.input :address %>
 	<%= f.input :city %>
-	<%= f.input :zip, :as => :string %>
+	<%= f.label 'Zip'%>
+	<%= f.text_field :zip %>
 	
 	<h3>Other</h3>
-	<%= f.input :phone, :as => :string, input_html: {class: 'phone_number'}, hint: '<em>Include country and area codes e.g. 12223334444</em>' %>
-	<%= f.input :fax_number, :as => :string, input_html: {class: 'phone_number'} %>
+	<em>Please include country and area codes e.g. 12223334444</em><br>
+	<%= f.label 'Phone number' %>
+	<%= f.text_field :phone, class: 'phone_number' %><br>
+	<%= f.label 'Fax number' %>
+	<%= f.text_field :fax_number, class: 'phone_number' %>
 	<%= f.input :email %>
 	<%= f.input :student, label: 'Student?', hint: '<em>(Yes)</em>'%>
 	<%= f.input :member, label: 'IFTA Member?', hint: '<em>(Yes)</em>' %>

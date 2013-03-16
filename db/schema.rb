@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315231319) do
+ActiveRecord::Schema.define(:version => 20130316025351) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -109,9 +109,9 @@ ActiveRecord::Schema.define(:version => 20130315231319) do
   create_table "presenters", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "home_telephone"
-    t.integer  "work_telephone"
-    t.integer  "fax_number"
+    t.string   "home_telephone"
+    t.string   "work_telephone"
+    t.string   "fax_number"
     t.string   "email"
     t.string   "affiliation_name"
     t.string   "affiliation_position"
@@ -194,12 +194,12 @@ ActiveRecord::Schema.define(:version => 20130315231319) do
     t.integer  "zip"
     t.integer  "country_id"
     t.integer  "country_category"
-    t.integer  "phone"
+    t.string   "phone"
     t.string   "username"
     t.boolean  "member",                 :default => false
     t.boolean  "student",                :default => false
     t.string   "role",                   :default => "attendee"
-    t.integer  "fax_number"
+    t.string   "fax_number"
     t.string   "ifta_member_email"
   end
 
