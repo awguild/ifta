@@ -1,0 +1,54 @@
+<%= simple_form_for [@itinerary, @proposal]  do |f| %>
+<%= render :partial => 'shared/error_messages', :locals => {:object => @proposal} %>
+<%= f.hidden_field :student %>
+<h3>Presentation Format</h3>
+	<%= f.radio_button "format", "poster"%>Poster Display (Limit to four registered presenters)<br> 
+	<%= f.radio_button "format", "25min" %>25 minutes (Limit to two registered presenters)<br>
+	<%= f.radio_button "format", "45min" %>45 minutes (Limit to two registered presenters)<br>
+	<%= f.radio_button "format", "60min" %>60 minutes (Limit to four registered presenters)<br>
+
+<hr>	
+<h3>Category of Information to be presented</h3>
+	<%= f.radio_button "category", "clinical"%>Clinical<br>
+	<%= f.radio_button "category", "research"%>Research<br>
+	<%= f.radio_button "category", "theoretical"%>Theoretical<br>
+	<%= f.radio_button "category", "training"%>Training, Education, Supervision<br>
+	<%= f.radio_button "category", "policy"%>Social Policy<br>
+	<%= f.radio_button "category", "justice"%>Social Justice<br>
+<hr>
+<h3>Title</h3>
+	<%= f.label "Title of Abstract:"%>
+	<%= f.text_field  :title %> <br>
+	(90 characters max, including spaces)
+<hr>	
+<h3>Short Description (published in Program Guide)</h3>
+	<%= f.input :short_description, :label => "(50 words max)"%>
+<hr>
+<h3>Long Description (published in Book of Abstracts)</h3>
+	<%= f.input :long_description, :label => "(350 words max)", as: :text, input_html: {cols: '60', rows: '8'}  %>
+<hr>
+<h3>Audio Visual Needs</h3>
+<strong>Please note that there is no wireless internet in the rooms!</strong><br>
+<%= f.input :no_equipment, :label => "No Equipment Needed"%>
+<%= f.input :projector, :label => "LCD Projector"%>
+<%= f.input :sound, :label => "Sound (to play video)"%>
+
+<br>
+Note: Presenters must bring their own laptop
+
+<h3>Presenters</h3>
+<%= f.simple_fields_for :presenters do |builder|%>
+	<%= render 'presenter_fields', f: builder %>
+<% end %>
+<%= link_to_add_fields "Add Presenter", f, :presenters %>
+
+<br>
+
+<p>In submitting this abstract, I agree that if this proposal is selected, I and any co-presenters will register for the full Congress within a month of being notified of 'Accepted' Status.<br>
+<%= f.label :agree, "I agree" %>
+<%= f.check_box :agree %> 
+</p>
+<br>
+<%= f.submit %>
+
+<% end %>

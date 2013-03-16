@@ -1,0 +1,32 @@
+<%= render 'shared/error_messages', {:object => @itinerary}%>
+
+<%= render :partial => 'cart', :locals => {:unpaid_line_items => @itinerary.unpaid_line_items, :itinerary => @itinerary}%>
+
+<h1>Available Events</h1>
+<%- if !@itinerary.any_items? %>
+	<p>No conference items are currently available.</p>
+<%- else %>
+	<table id="event_table">
+	<tr><th>Event</th><th>Price</th><th>Action</th></tr>
+	<%= render :partial => "paid_line_item", :collection => @itinerary.paid_line_items %>
+	<%= render :partial => "available_conference_item", :collection => @itinerary.available_conference_items, :locals => {:itinerary => @itinerary} %>
+	</table>
+	
+	<%= form_for @itinerary do |f| %>
+	<p><em>If you have a discount key enter it below BEFORE adding items to your cart</em></p>
+		<%= f.label :discount_key%>
+		<%= f.text_field :discount_key %>
+		<br>
+		<%= f.submit 'Apply Discount' %>
+	<%- end %>
+<%- end %>
+
+<br>
+
+<h1>Submitted Proposals</h1>
+<%- if @itinerary.proposals.blank? %>
+	<p>You have not submitted any proposals yet.</p>
+<%- else %>
+	<%= render :partial => 'proposal', :collection => @itinerary.proposals, :locals => {:itinerary => @itinerary} %>
+<%- end %>
+<br><br>

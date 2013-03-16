@@ -1,0 +1,31 @@
+<tr id='item_<%= available_conference_item.id %>'>	
+	<%= form_tag itinerary_line_items_path(itinerary), :method => :post, :remote => true do %>
+	<%= hidden_field_tag 'line_item[conference_item_id]', available_conference_item.id %>
+	
+	
+	<td>
+		<%= available_conference_item.name %>
+		<%- if available_conference_item.user_comment %>
+		 	<br>
+		 	<em><%= available_conference_item.user_comment_prompt %></em>
+		 	<br>
+		 	<%= text_field_tag 'line_item[comment]', nil %>
+		<%- end %>
+	</td>
+	
+	
+	<td>
+		<%- if available_conference_item.manual_price %>	
+			$<%= text_field_tag 'line_item[price]', nil, :class => 'user_input_price' %>
+		<%- else %>
+			$<%= sprintf("%.2f", available_conference_item.price) %><%= hidden_field_tag 'line_item[price]', available_conference_item.price %>
+		<%- end %>
+	</td>
+	
+	
+	<td>
+		<%= submit_tag "Add to Cart", :class => 'add_to_cart' %>
+	</td>
+	
+	<%- end %>
+</tr>

@@ -1,0 +1,42 @@
+<h2>Search for user</h2>
+<em>*Results include partial matches the fields combined (ie a partial email match with the wrong first name won't show up) </em><br>
+<em>*blank values will match anything</em><br><br>
+	<%= form_tag users_path, method: 'get' do %>
+	<%= label_tag :email %>
+	<%= text_field_tag :email %>
+	<br>
+	<%= label_tag :first_name %>
+	<%= text_field_tag :first_name %>
+	<br>
+	<%= label_tag :last_name %>
+	<%= text_field_tag :last_name %>
+	<br>
+	<%= submit_tag :Search%>
+	<%- end %>	
+
+<h2>Matching Users</h2>
+<%- if @users.blank? %>
+	No matching users
+<%- else %>
+		<table>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Role</th>
+			<th>Other</th>
+		</tr>
+		
+	<%- @users.each_with_index do |user, index| %>
+		<tr>
+			<td><%= user.first_name + " " + user.last_name %></td>
+			<td><%= user.email %></td>
+			<td><%= user.role %></td>
+			<td><%= link_to "Users Dash", edit_itinerary_path(user.itineraries.current.first)%></td>
+		</tr>
+		
+		<%- if index == 10%>
+			<tr><td colspan="3"><em>Only showing the top ten results, try limiting your search further if necessary</em></td></tr>
+		<%- end %> 
+	<%- end %>
+		</table>
+<%- end %>

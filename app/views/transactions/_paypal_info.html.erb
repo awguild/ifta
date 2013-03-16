@@ -1,0 +1,5 @@
+<%= form_tag(CONFIG[:paypal_post_url], :authenticity_token => false) do %>
+	<%= hidden_field_tag :cmd, "_s-xclick" %>
+	<%= hidden_field_tag :encrypted, @transaction.paypal_encrypted %>
+   <%= submit_tag "Checkout with PayPal" %>
+<% end %>

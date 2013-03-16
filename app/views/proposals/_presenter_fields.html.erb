@@ -1,0 +1,25 @@
+<fieldset>
+	<%= render :partial => 'shared/error_messages', :locals => {:object => f.object} %>
+	
+	<%= f.input :first_name, label: "First name"%>
+	
+	<%= f.input :last_name, label: "Last name"%>
+	
+	<%= f.input :home_telephone, as: 'string', input_html: {class: 'phone_number'}, hint: '<em>Include country and area codes e.g. 12223334444</em>' %>
+	
+	<%= f.input :work_telephone, as: 'string', input_html: {class: 'phone_number'} %>
+	
+	<%= f.input :fax_number, as: 'string', input_html: {class: 'phone_number'} %>
+	
+	<%= f.input :email %>
+	
+	<%= f.input :affiliation_name, label: "Affiliation name (company, school, etc)"%>
+	
+	<%= f.input :affiliation_position, label: "Affiliation position"%>
+	
+	<br>
+	<%= f.input :registered, label: "Is this person currently registered for the conference?", hint: '<em>(Yes)</em>'%>
+	<%= f.input :other_presentations, label: "Is this person currently listed as a presenter on any other proposals?", hint: '<em>(Yes)</em>'%>
+	<br>
+	<%= f.input :other_emails, label: "If you answered yes to the question above and this person is using alternative email addresses please list any additional email addresses here (separated by commas) "%>
+</fieldset>

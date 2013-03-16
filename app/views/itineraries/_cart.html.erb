@@ -1,0 +1,15 @@
+<div id='cart'>
+	<h1>Cart</h1> 
+	<div id='cart_items'>
+		<p><%= render :partial => "unpaid_line_item", :collection => unpaid_line_items, :locals => {:itinerary => itinerary} -%></p>
+	</div>
+	<hr>
+	<div id='cart_total'>
+		Total: $<span id='cart_price'><%= sprintf("%.2f", itinerary.line_items_pre_tax_price) %></span><br>
+		Tax: $<span id='cart_tax'><%= sprintf("%.2f", itinerary.line_items_tax_price) %></span>
+	</div>
+	<p><em>Choose your payment method</em><br>
+	<%= link_to "Pay With Paypal (Credit Card)", itinerary_transactions_path(itinerary, :payment_method => :paypal), id: "check_out", :method => :post %><br>
+	<%= link_to "Mail a Check", itinerary_transactions_path(itinerary, :payment_method => :check), id: "check_out", :method => :post %><br>
+	<%= link_to "Electronic Bank Transfer", itinerary_transactions_path(itinerary, :payment_method => :bank), id: "check_out", :method => :post %></p>
+</div>

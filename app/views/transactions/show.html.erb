@@ -1,0 +1,31 @@
+<h1>Transaction details for <%= @user.first_name + ' ' + @user.last_name %></h1>
+
+<table>
+<%- @transaction.line_items.each do |item| %>
+	<tr>
+		<td><%= item.conference_item.name %></td>
+		<td>$<%= sprintf("%.2f", item.price) %></td>
+	</tr>
+<%- end%>
+	<tr>
+		<td>Tax</td>
+		<td>$<%= sprintf("%.2f", @transaction.tax) %></td>
+	</tr>
+	<tr>
+		<td><strong>Total:</strong></td>
+		<td><strong>$<%= sprintf("%.2f", @transaction.post_tax_total) %></strong></td>
+	</tr>
+</table>
+
+<%- #TODO cancel transaction link to destroy the transaction if it is not paid
+%>
+
+<%- if @transaction.payment_method == 'paypal' %>
+	<%= render 'paypal_info' %>
+<%- elsif @transaction.payment_method == 'check' %>
+	<%= render 'check_info' %>
+<%- elsif @transaction.payment_method == 'bank' %>
+	<%= render 'bank_info' %>
+<%- else %>
+	<p>Sorry, we couldn't determine what payment method you wanted to use.</p>
+<%- end %>

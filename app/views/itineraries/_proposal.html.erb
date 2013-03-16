@@ -1,0 +1,6 @@
+<strong>Title:</strong> <%= proposal.title %><br> 
+<strong>Submitted on:</strong> <%= proposal.created_at.strftime("%d %b %Y") %><br>
+<%- if !proposal.locked %>
+	<%= link_to 'Edit Proposal', edit_itinerary_proposal_path(itinerary, proposal)%><br>
+<%- end %>
+<br>

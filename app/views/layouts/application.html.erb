@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IFTA CONGRESS</title>
+  <link href="http://www.ifta-congress.org/includes/main.css" rel="stylesheet" type="text/css">
+  <link href="http://www.ifta-congress.org/includes/icon.css" rel="stylesheet" type="text/css">
+  <link href="http://www.ifta-congress.org/includes/colors.css" rel="stylesheet" type="text/css">
+  
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+<div id="headback">
+	<div id="head"><span>IFTA Congress</span></div>
+	<div id="background">
+		<div id="fat">	
+			<div id="nav">
+			<% if user_signed_in? %>
+				<%= render "layouts/nav" %>
+			<% else %>
+				<a href="http://www.ifta-congress.org/">Back To Main Website</a>
+			<% end %>
+			</div>
+			
+			<div id="page">
+			<% if ! flash[:notice].blank? %>
+				<p class="notice"><%= flash[:notice] %></p>
+			<% end %>
+			
+			<% if ! flash[:alert].blank?%>
+				<p class="alert"><%= flash[:alert] %></p>
+			<% end %>
+		
+			<%= yield %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= render "layouts/footer" %>
+
+</body>
+</html>

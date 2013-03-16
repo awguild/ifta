@@ -1,0 +1,140 @@
+@charset "utf-8";
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+/* CSS Document */
+
+/*Application wide*/
+
+#fat{
+	min-height:400px;
+	width:900px;
+}
+
+#nav a{
+	float: left;
+	padding-left:30px;
+	padding-bottom:0px;
+}
+#fat{
+	padding:0;
+	overflow:hidden;
+}
+#page {
+	padding-left:5px;
+	padding-right:5px;
+	overflow:hidden;
+}
+.notice, .alert{
+	font-family:Verdana;
+	font-weight:bold;
+	border:2px solid #042456;
+	border-style:groove;
+	clear:both;
+	padding:5px;
+	margin:5px;
+}
+.notice{
+	background-color:#33CC66;
+	color:#042456;
+	text-align:center;
+	
+}
+.alert{
+	background-color:#680000;
+	color:white;
+}
+.alert ul{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+.alert ul li{
+	margin:0;
+	padding:0;
+}
+.alert h2{
+	color:white;
+}
+.important_reminder{
+	font-weight:bold;
+	color:red;
+}
+
+
+/*Itineraries*/
+#cart{
+	float:right;
+	margin:10px;
+	width:250px;
+	padding:5px;
+}
+
+#cart h3{
+	text-align:center;
+}
+
+#cart_total{
+	font-weight: bold;
+}
+#event_table td{
+	padding:5px;
+}
+#event_table th{
+	border-bottom: 1px solid black;
+	text-align:center;
+}
+#line_item_price{
+	width:50px;
+}
+
+.add_to_cart {
+    overflow:visible; /* Shrinkwrap the text in IE7- */
+    margin:0;
+    padding:0;
+    border:0;
+    color:rgb(0,0,205);
+    background:transparent;
+    font:inherit; /* Inherit font settings (doesn’t work in IE7-) */
+    line-height:normal; /* Override line-height to avoid spacing issues */
+    text-decoration:underline; /* Make it look linky */
+    cursor:pointer; /* Buttons don’t make the cursor change in all browsers */
+    -moz-user-select:text; /* Make button text selectable in Gecko */
+}
+.add_to_cart:hover,
+.add_to_cart:focus {
+    color:red;
+}
+.add_to_cart::-moz-focus-inner {
+    padding:0;
+    border:0;
+}
+
+
+/*Users*/
+
+.edit_user label {
+	width:110px;
+    float:left;
+    text-align:right;
+    margin-top:2px;
+}
+
+/*Conference*/
+.price input{
+	width:50px;
+}
+
+
+

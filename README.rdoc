@@ -1,0 +1,53 @@
+GREETINGS FROM THE AUGUSTANA WEB GUILD
+
+
+
+This application is designed to handle various aspects of running IFTA's annual conference.
+*On the client front end this includes: sign up, event registration, payment, and proposal submission.
+*On the reviewer backend this includes: accepting/rejecting/wait-listing proposals.
+*On the admin backend this includes: declaring events, pricing those events, declaring discounts, setting messages to users, marking accepted payments, and other tasks. 
+
+
+
+NON GEM REQUIREMENTS
+OpenSSL
+
+
+CREATING PAYPAL CERTS
+Add cert to ifta's paypal
+
+
+
+
+DEVELOPMENT
+*Minimial steps for a working development environment 
+1. Bundle install
+2. Open the application.example.yml file and fill in relevant information, then rename the file applicaiton.yml
+3. bundle exec rake initial_setup
+
+*Extra Development Stuff
+If you want to test the IPN process you'll need to have the project on a publicly available host
+1. Go to developer.paypal.com make accounts
+2. Create Certs and put them in certs folder
+2. Upload certificates in certs folder
+
+
+
+
+
+PRODUCTION
+*To get the application up and running in production
+1. Set up a virtual host entry on the server
+2. Upload the rails files to the appropriate location (specified in your virtual host) 
+3. Set up MySQL user/password
+4. Create the MySQL database
+5. Create/Upload the public certificate for paypal
+6. Bundle install
+7. Open the application.example.yml file and fill in relevant information, then rename the file applicaiton.yml
+8. rake initial_setup
+
+
+
+
+#TODO write the RSpec tests
+#TODO I18n - pages and maybe even currency

@@ -1,0 +1,19 @@
+<fieldset>
+<%= f.input :name %>
+<%= f.input :visibility, :label => 'Make this item available' %>
+<%= f.input :description, :label => 'Supplemental Information:' %>
+<br>
+<div class='price'>
+<%- conference_item = f.object if conference_item.nil? #link_to_add_fields helper renders this partial without passing conference_item local so we set a default here
+%>
+<%= f.simple_fields_for :prices, conference_item.prices.sort!  do |builder| %>
+	<% render 'price_fields', f: builder, price: builder.object %>
+<%- end %>
+</div>
+<br>
+<%= f.input :manual_price, :label => 'Allow user to manually set price'%> (Set all the above prices to 1 even if you use this option)
+<br><br>
+<%= f.input :user_comment, :label => 'Text box for a user comment'%>
+<%= f.input :user_comment_prompt, :label => 'Prompt for user comment textbox:'%>
+</fieldset>
+<br>

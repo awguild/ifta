@@ -1,0 +1,2 @@
+class ConferenceItemsController < ApplicationController
+end

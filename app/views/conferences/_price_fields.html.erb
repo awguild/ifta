@@ -1,0 +1,10 @@
+<%= f.input :country_category, :as => :hidden, :input_html => { :value => price.country_category } %>
+<%= f.input :member, :as => :hidden, :input_html => { :value => price.member } %>
+
+<%- if price.member %>
+	Member Category <%= price.country_category %>:
+<%- else %> 
+	Non-Member Category <%= price.country_category %>:
+<%- end %>
+$<%= f.text_field :amount%>
+<br>

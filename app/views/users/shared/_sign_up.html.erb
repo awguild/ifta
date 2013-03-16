@@ -1,0 +1,20 @@
+<h2>Sign up (New Users)</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= 
+  #override this method in the DeviseHelper module to use the application error_messages partial
+  devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+  
+  <%= recaptcha_tags %>
+
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
