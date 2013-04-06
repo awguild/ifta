@@ -1,3 +1,6 @@
+<%- content_for :nav do %>
+	<%= render :partial => "layouts/admin_nav" %>
+<%- end %>
 <h1>Add members to the members list</h1>
 <%= form_tag add_to_members_list_path, method: :post do %>
 	<%= label_tag 'Enter new email addresses (seperated by commas and/or spaces)'%><br>

@@ -1,0 +1,16 @@
+Hi <%= @user.first_name %>,<br><br>
+
+<%- if @review.status == 'accept' %>
+	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which has been accepted for the upcoming IFTA Congress Conference.</p>
+	<p>In order to secure your spot in the conference you must register within one month of today: <%= Time.now.strftime("%B %e %Y") %> You can register at <%= root_url %></p>
+	<p><strong>Please be advised that your proposal has been accepted as a <%= @review.proposal.format %>. This may be different from the length you originally requested.</strong></p>
+<%- elsif @review.status == 'decline' %>
+	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which, we regret to inform you, has not been accepted for the upcoming IFTA Congress Conference.</p>
+	<p>There are many proposals of very high quality, but unfortunately space and time constraints do not allow us to accept them all. We would still like to thank you for your submission and encourage you to try again next year. We hope to see you at the conference.</p>
+<%- else %>
+	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which has been wait listed for the upcoming IFTA Congress Conference.</p>
+	<p>We will notify you as more information becomes available regarding our space and time constraints, hopefully with good news, but in the mean time we can only thank you for your promising submission.</p>
+<%- end %>
+
+<p>If you think you received this message in error please reply for clarification.</p>
+

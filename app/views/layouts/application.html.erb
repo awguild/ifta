@@ -18,7 +18,13 @@
 		<div id="fat">	
 			<div id="nav">
 			<% if user_signed_in? %>
-				<%= render "layouts/nav" %>
+				<%= link_to "Main", after_sign_in_path_for(current_user) %>
+				<%- if content_for?(:nav) %>
+					<%= yield(:nav)%>
+				<%- else %>
+					<%= render "layouts/attendee_nav" %>
+				<%- end %>
+				<%= link_to "Log Out", users_sign_out_path %>
 			<% else %>
 				<a href="http://www.ifta-congress.org/">Back To Main Website</a>
 			<% end %>

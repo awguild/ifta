@@ -9,8 +9,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(user)
     
     if user.role == 'reviewer'
-      #TODO redirect reviewers to their own landing page
-      
+      return conference_proposals_path(Conference.active)
     elsif user.role == 'admin'
       return conference_path(Conference.active)
     else
@@ -49,5 +48,7 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+  
+  helper_method :after_sign_in_path_for
   
 end

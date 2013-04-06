@@ -1,0 +1,16 @@
+<%- content_for :nav do %>
+	<%= render :partial => "layouts/reviewer_nav" %>
+<%- end %>
+
+<h1>Proposals</h1>
+<%= render :partial => 'shared/error_messages', :locals => {:object => @review } unless @review.blank? %>
+
+<div class="digg_pagination">
+<%= will_paginate @proposals %><br><br>
+</div>
+
+<%- if !@proposals.blank? %>
+	<%= render partial: 'reviews/review_proposal', collection: @proposals, :as => :proposal  %>
+<%- else %>
+	<p>No unreviewed proposals</p>
+<%- end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316025351) do
+ActiveRecord::Schema.define(:version => 20130406002759) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -29,14 +29,17 @@ ActiveRecord::Schema.define(:version => 20130316025351) do
 
   create_table "conferences", :force => true do |t|
     t.integer  "conference_year"
-    t.decimal  "tax_rate",            :precision => 10, :scale => 2
-    t.text     "proposal_acceptance"
-    t.text     "proposal_wait_list"
-    t.text     "proposal_reject"
+    t.decimal  "tax_rate",                    :precision => 10, :scale => 2
+    t.text     "proposal_acceptance_message"
+    t.text     "proposal_wait_list_message"
+    t.text     "proposal_rejection_message"
     t.text     "payment_recieved"
     t.boolean  "active"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
+    t.string   "proposal_acceptance_subject"
+    t.string   "proposal_wait_list_subject"
+    t.string   "proposal_rejection_subject"
   end
 
   create_table "countries", :force => true do |t|
@@ -154,9 +157,22 @@ ActiveRecord::Schema.define(:version => 20130316025351) do
     t.boolean  "sound"
     t.boolean  "projector"
     t.boolean  "locked",            :default => false
+    t.string   "status"
   end
 
   add_index "proposals", ["itinerary_id"], :name => "index_proposals_on_itinerary_id"
+
+  create_table "reviews", :force => true do |t|
+    t.integer  "proposal_id"
+    t.string   "status"
+    t.string   "comments"
+    t.integer  "reviewer_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "reviews", ["proposal_id"], :name => "index_reviews_on_proposal_id"
+  add_index "reviews", ["status"], :name => "index_reviews_on_status"
 
   create_table "transactions", :force => true do |t|
     t.integer  "itinerary_id"

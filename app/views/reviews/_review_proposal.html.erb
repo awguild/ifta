@@ -1,0 +1,27 @@
+<div id='proposal_<%= proposal.id %>'>
+	<strong>Title: <%= proposal.title %> </strong> <%= link_to "Edit", edit_itinerary_proposal_path(proposal.itinerary, proposal)%><br>
+	<em>Short:</em> <%= proposal.short_description %><br>
+	<em>Long:</em> <%= proposal.long_description %><br>
+	<em>Format:</em> <%= proposal.format %> <br>
+	<em>Category:</em> <%= proposal.category %><br>
+	
+	<em>Presenters:</em> 
+		<%- proposal.presenters.each_with_index do |presenter, index| %>
+			<%= "<span style='color: red;'>*</span>".html_safe if presenter.other_presentations %>
+			<%= presenter.first_name + " " + presenter.last_name %>
+			<%= ", " unless index == proposal.presenters.length - 1 %>
+		<%- end %><br>
+	<%- #this form looks weird because IFTA only has one review per proposal so I'm cutting corners here by loading the most recent review or creating a new review %>
+	<%= form_for proposal.reviews.last || Review.new do |f| %>
+		<%= hidden_field_tag 'review[proposal_id]', proposal.id %>
+		<%= hidden_field_tag 'review[reviewer_id]', current_user.id %>
+		<%= f.label :comments %>
+		<%= f.text_area :comments, rows: 2, cols: 30 %><br>
+		<%= f.submit "accept", name: 'review[status]' %><%= f.submit "decline", name: 'review[status]'  %><%= f.submit "wait list", name: 'review[status]'  %>
+		<%= f.label 'Send Emails' %>
+		<%= check_box_tag :send_emails, 1, true %>
+	<%- end %>
+	<br>
+</div>
+<hr>
+<br>

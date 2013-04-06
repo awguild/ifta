@@ -1,24 +1,28 @@
+<%- content_for :nav do %>
+	<%= render :partial => "layouts/admin_nav" %>
+<%- end %>
+
 <h2>Search for user</h2>
 <em>*Results include partial matches the fields combined (ie a partial email match with the wrong first name won't show up) </em><br>
 <em>*blank values will match anything</em><br><br>
 	<%= form_tag users_path, method: 'get' do %>
-	<%= label_tag :email %>
-	<%= text_field_tag :email %>
-	<br>
-	<%= label_tag :first_name %>
-	<%= text_field_tag :first_name %>
-	<br>
-	<%= label_tag :last_name %>
-	<%= text_field_tag :last_name %>
-	<br>
-	<%= submit_tag :Search%>
+		<%= label_tag :email %>
+		<%= text_field_tag :email %>
+		<br>
+		<%= label_tag :first_name %>
+		<%= text_field_tag :first_name %>
+		<br>
+		<%= label_tag :last_name %>
+		<%= text_field_tag :last_name %>
+		<br>
+		<%= submit_tag :Search%>
 	<%- end %>	
 
 <h2>Matching Users</h2>
 <%- if @users.blank? %>
 	No matching users
 <%- else %>
-		<table>
+		<table id='user_search_results'>
 		<tr>
 			<th>Name</th>
 			<th>Email</th>
@@ -26,17 +30,22 @@
 			<th>Other</th>
 		</tr>
 		
-	<%- @users.each_with_index do |user, index| %>
+	<%- @users.each do |user| %>
 		<tr>
 			<td><%= user.first_name + " " + user.last_name %></td>
 			<td><%= user.email %></td>
 			<td><%= user.role %></td>
-			<td><%= link_to "Users Dash", edit_itinerary_path(user.itineraries.current.first)%></td>
+			<td>
+				<%= link_to "Users Dash", after_sign_in_path_for(user)%>
+				<%= link_to "Make Reviewer", change_role_user_path(user, :new_role => 'reviewer'), method: :post if user.role == "attendee" %> 
+				<%= link_to "Make Attendee", change_role_user_path(user, :new_role => 'attendee'), method: :post if user.role == "reviewer" %>
+				
+			</td>
 		</tr>
-		
-		<%- if index == 10%>
-			<tr><td colspan="3"><em>Only showing the top ten results, try limiting your search further if necessary</em></td></tr>
-		<%- end %> 
 	<%- end %>
 		</table>
+		
+	<div class="digg_pagination">
+		<%= will_paginate @users %><br><br>
+	</div>
 <%- end %>

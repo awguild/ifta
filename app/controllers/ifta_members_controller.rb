@@ -9,7 +9,7 @@ class IftaMembersController < ApplicationController
     #TODO replace all takes forever, it should be a background process with delayed_job 
     #but I had issues with setting up monit to monitor dealyed_job so the minute of app downtime is perferable
     IftaMember.replace_all_members_with(params[:raw_emails])  
-    flash[:notice] = "Updating members list."
+    flash[:notice] = "Members list has been successfully replaced."
     redirect_to conference_path(Conference.active)
   end
   

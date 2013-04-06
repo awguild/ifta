@@ -47,4 +47,11 @@ class ProposalsController < ApplicationController
       render :action => 'edit'
     end
   end
+  
+  def index
+    authorize! :index, Proposal
+    @proposals = Proposal.search(params)
+    @proposals = @proposals.page(params[:page]).per_page(5).includes(:itinerary, :presenters)
+    @review = Review.new
+  end
 end

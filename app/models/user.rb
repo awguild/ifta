@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :payments, :through => :transactions
   has_many :itineraries
   belongs_to :ifta_member, primary_key: 'email', foreign_key: 'ifta_member_email'
-  
+  has_many :reviews, foreign_key: 'reviewer_id'
   validates :first_name, :presence => true, :unless => 'new_record?'
   validates :last_name, :presence => true, :unless => 'new_record?'
   validates :phone, :presence => true, :unless => 'new_record?'

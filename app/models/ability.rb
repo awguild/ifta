@@ -8,6 +8,13 @@ class Ability
       # admin permissions
       can :manage, :all
     elsif user.role == "reviewer"
+      can :update, User, :id => user.id
+      can :update, Itinerary, :user => {:id => user.id}
+      can :create, LineItem, :user => {:id => user.id} 
+      can :destroy, LineItem, :user => {:id => user.id}
+      can :create, Transaction, :user => {:id => user.id}
+      can :create, Review, :reviewer_id => user.id
+      can :manage, Proposal
       # reviewer permissions
     else
       #attendee permissions

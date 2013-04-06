@@ -11,6 +11,7 @@ gem 'mysql2'
 gem "recaptcha", :require => "recaptcha/rails"
 gem "paper_trail"
 gem 'delayed_job_active_record'
+gem 'will_paginate', '> 3.0'
 
 group :production do
   gem 'therubyracer', :platform => :ruby
