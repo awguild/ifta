@@ -25,7 +25,7 @@ class ProposalsController < ApplicationController
     authorize! :create, @proposal
     if @proposal.save
       flash[:notice] = "Thank you for your proposal submission."
-      redirect_to edit_itinerary_path(@itinerary)
+      redirect_to after_sign_in_path_for(current_user)
     else
       render :action => "new"
     end

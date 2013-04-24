@@ -3,5 +3,5 @@
 <%= link_to "Pricing", edit_conference_path(conference, pricing: true)%>
 <%= link_to "IFTA Members", mass_new_members_path %>
 <%= link_to "Users", users_path(email: false) %>
-<%= link_to "Payments", '#' %>
+<%= link_to "Payments", new_payment_path(unpaid: true) %>
 <%= link_to "Schedule", '#' %>

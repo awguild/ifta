@@ -1,20 +1,13 @@
-<%- 
-	#Remove any lingering alert messages
-%>
+<%# Remove any lingering alert messages %>
 $('.alert').remove()
 
-
-
-<%- 
-	# Add a new unpaid entry to to the cart box 
-%>
+<%# Add a new unpaid entry to to the cart box %>
 $('#cart_items').append("<%= j render(:partial => "itineraries/unpaid_line_item", :locals => {:unpaid_line_item => @line_item, :itinerary => @line_item.itinerary}) %>");
 
 
  
-<%-	
-	#Find the current cart total, add the line item price to it
-	#recalculate the tax, redisplay those figures, and remove the line item from the add to cart table 
+<%# Find the current cart total, add the line item price to it
+  #recalculate the tax, redisplay those figures, and remove the line item from the add to cart table 
 %>
 var total = parseFloat($('#cart_price').text());
 total = (total + <%= @line_item.price%>).toFixed(2);

@@ -20,9 +20,7 @@ class ApplicationController < ActionController::Base
         user_itinerary.save
       end
       user_itinerary = user.itineraries.current.first      
-      session[:itinerary_id] = user_itinerary.id
       return edit_itinerary_path(user_itinerary)
-      
     end
   end
   

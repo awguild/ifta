@@ -1,0 +1,6 @@
+<%# Remove any lingering alert messages %>
+$('.alert').remove()
+
+<%#display the flash message%>
+<%= render(:partial => 'shared/notice_message', :locals => {:notice_message => notice_message}) %>
+$('.notice').delay(3000).fadeOut();

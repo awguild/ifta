@@ -1,0 +1,13 @@
+<div class='mark_as_paid'>
+<%= form_for payment, :url => manual_payment_path do |f| %>
+		<%= f.hidden_field :transaction_id, :value => transaction.id %>
+		<%= f.hidden_field :confirmed, :value => true %>
+		<%= f.label 'Amount $' %>
+		<%= f.text_field :amount, :size => 5, :value => sprintf("%.2f", transaction.post_tax_total) %><br>
+		<%= f.label 'Comments'%>
+		<%= f.text_area :comments, :rows => 2, :cols => 20 %><br>
+		<%= f.submit "Mark As Paid" %>
+		<%= label_tag 'Send Email'%>
+		<%= check_box_tag :send_email, true, :checked => :checked %>
+<%- end %>
+</div>

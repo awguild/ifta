@@ -40,4 +40,20 @@ class UsersController < ApplicationController
       render :action => 'edit'
     end
   end
+  
+  def edit_password
+    @user = User.find(params[:id])
+    authorize! :update, @user
+  end
+  
+  
+  def update_password
+    @user = User.find(params[:id])
+    authorize! :update, @user
+    if @user.update_with_password(params[:user])
+      redirect_to after_sign_in_path_for(current_user)
+    else
+      render "edit_password"
+    end
+  end
 end

@@ -99,7 +99,7 @@
 	width:50px;
 }
 
-.add_to_cart {
+.button_as_link {
     overflow:visible; /* Shrinkwrap the text in IE7- */
     margin:0;
     padding:0;
@@ -112,11 +112,11 @@
     cursor:pointer; /* Buttons don’t make the cursor change in all browsers */
     -moz-user-select:text; /* Make button text selectable in Gecko */
 }
-.add_to_cart:hover,
-.add_to_cart:focus {
+.button_as_link:hover,
+.button_as_link:focus {
     color:red;
 }
-.add_to_cart::-moz-focus-inner {
+.button_as_link::-moz-focus-inner {
     padding:0;
     border:0;
 }
@@ -162,18 +162,18 @@
   .digg_pagination .current {
     font-style: normal;
     font-weight: bold;
-    background: #2e6ab1;
+    background: #042456;
     color: white;
-    border: 1px solid #2e6ab1; }
+    border: 1px solid #042456; }
   .digg_pagination a {
     text-decoration: none;
-    color: #105cb6;
-    border: 1px solid #9aafe5; }
+    color: #042456;
+    border: 1px solid #042456; }
     .digg_pagination a:hover, .digg_pagination a:focus {
       color: #000033;
       border-color: #000033; }
   .digg_pagination .page_info {
-    background: #2e6ab1;
+    background: #042456;
     color: white;
     padding: 0.4em 0.6em;
     width: 22em;
@@ -194,3 +194,25 @@
   *:first-child + html .digg_pagination {
     overflow: hidden; }
     
+    
+/* Payments */
+.paid, .unpiad{
+	overflow:hidden;
+	clear:both;
+	padding:5px;
+}
+.paid{
+	background-color:#33CC66;
+}
+.unpiad{
+}
+.mark_as_paid{
+	
+}
+.payment_option{
+	padding:3px;
+}
+.payment_option input{
+	padding:3px;
+}
+

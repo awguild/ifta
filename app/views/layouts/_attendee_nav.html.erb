@@ -1,9 +1,4 @@
-<%- if session[:itinerary_id].blank? %> 
-	<%- itinerary = Itinerary.find(params[:itinerary_id]) %>
-<%- else %>
-	<%- itinerary ||= Itinerary.find(session[:itinerary_id]) %>
-<%- end %>
-
+<%- itinerary = @itinerary || current_user.itineraries.current.last %>
 <%= link_to "Proposal Submission", splash_itinerary_proposals_path(itinerary) %>
 <%= link_to "Update Contact Info", edit_user_path(itinerary.user) %>
-<%= link_to "Change Password"  %>
+<%= link_to "Change Password", edit_user_password_path(itinerary.user) %>

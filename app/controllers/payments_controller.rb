@@ -17,6 +17,38 @@ class PaymentsController < ApplicationController
     end
     render :nothing => true
   end
+
+  def new
+    @payment = Payment.new
+    @transactions = Transaction.search_for_transactions(params).page(params[:page]).per_page(5).includes(:itinerary => [:user], :line_items => [:conference_item])
+    authorize! :create, @payment
+  end
+
+  def admin_create
+    @payment = Payment.new(params[:payment])
+    authorize! :create, @payment
+    if @payment.save
+      PaymentMailer.payment_notification(@payment).deliver if params[:send_email]
+      redirect_to after_sign_in_path_for(current_user) 
+    else
+      render :action => 'new'
+    end
+  end
   
+  def update
+    @payment = Payment.find(params[:id])
+    authorize! :update, @payment
+    if @payment.update_attributes(params[:payment])
+      render "update", :locals => {:notice_message => 'Successfully Updated Payment'}
+    else
+      render :partial => 'shared/error_messages', :locals => {:object => @line_item}
+    end
+  end
   
+  def destroy
+    @payment = Payment.find(params[:id])
+    authorize! :destroy, @payment
+    @payment.destroy
+    redirect_to after_sign_in_path_for(current_user)
+  end
 end

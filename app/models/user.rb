@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     options[:email] ||= ""
     options[:first_name] ||= "" 
     options[:last_name] ||= ""
-    where('email LIKE ? AND first_name LIKE ? AND last_name LIKE ?', options[:email] + "%", options[:first_name] + "%", options[:last_name] + "%").limit(10)
+    where('email LIKE ? AND first_name LIKE ? AND last_name LIKE ?', options[:email] + "%", options[:first_name] + "%", options[:last_name] + "%")
   end
   
   private

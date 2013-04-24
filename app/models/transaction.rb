@@ -1,11 +1,22 @@
 class Transaction < ActiveRecord::Base
   # attr_accessible :title, :body
   belongs_to :itinerary
+  has_one :payment
   has_many :line_items
   delegate :user, :to => :itinerary
   after_save :mark_line_items
   before_destroy :remove_line_item_links
   
+  def self.search_for_transactions(options)
+    #set defaults for the search
+    options[:status] = []
+    options[:status] << true if options[:paid] == "true"
+    options[:status] << false if options[:unpaid] == "true"
+    options[:email] ||= ""
+    options[:first_name] ||= "" 
+    options[:last_name] ||= ""
+    where('paid IN (?)', options[:status]).joins(:itinerary => :user).where('users.first_name LIKE ? AND users.last_name LIKE ? AND users.email LIKE ?', options[:first_name] + "%", options[:last_name] + "%", options[:email] + "%")
+  end
   
   def pre_tax_total
     return line_items.inject(0){|sum, item| sum + item.price}
