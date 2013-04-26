@@ -18,7 +18,9 @@ Iftaconferenceapp::Application.routes.draw do
   
   devise_for :users, :controllers => { :registrations => "users/registrations", :passwords => "devise/passwords" } do 
     get 'users/sign_out' => 'devise/sessions#destroy'
+    put 'users/password' => 'devise/passwords#update'
     match 'users/password' => 'devise/passwords#create' #Rails bug with post member routes
+    match 'users/password/edit' => 'devise/passwords#edit', :as => :edit_password
   end
   resources :users
   resources :itineraries do 

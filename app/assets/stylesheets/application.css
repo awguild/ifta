@@ -72,6 +72,10 @@
 	color:red;
 }
 
+.float_right{
+	float:right;
+	padding-right:15px;
+}
 
 /*Itineraries*/
 #cart{
