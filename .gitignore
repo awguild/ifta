@@ -15,3 +15,4 @@
 /tmp
 .project
 /config/application.yml
+/certs/app_*

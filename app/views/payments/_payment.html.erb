@@ -10,4 +10,5 @@
 		<%= label_tag 'Send Email'%>
 		<%= check_box_tag :send_email, true, :checked => :checked %>
 <%- end %>
+<%= button_to "Delete Transaction", itinerary_transaction_path(transaction.itinerary, transaction), method: :delete, :class => 'destroy' %>
 </div>

@@ -28,4 +28,11 @@ class TransactionsController < ApplicationController
     end
   end
   
+  def destroy
+    @transaction = Transaction.find(params[:id])
+    authorize! :destroy, @transaction
+    @transaction.destroy
+    redirect_to after_sign_in_path_for(current_user)
+  end
+  
 end
