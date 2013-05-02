@@ -28,7 +28,8 @@ class ReviewsController < ApplicationController
   def send_emails
     @review.proposal.presenters.each do |presenter|
       begin
-      ReviewMailer.review_notification(presenter, @review).deliver 
+        #email subject/message changes depending on the status of the review (accept, decline, wait-list)
+        ReviewMailer.review_notification(presenter, @review).deliver 
       rescue
         warning = "Unable to send email to #{presenter.email} for #{presenter.first_name + " " + presenter.last_name}"
         flash[:alert] = flash[:alert].blank? ? warning : flash[:alert] + ". #{warning}"   

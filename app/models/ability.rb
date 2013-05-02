@@ -23,6 +23,7 @@ class Ability
       can :create, LineItem, :user => {:id => user.id} 
       can :destroy, LineItem, :user => {:id => user.id}
       can :create, Transaction, :user => {:id => user.id}
+      can :destroy, Transaction, :paid => false, :user => {:id => user.id}
       can :create, Proposal, :user => {:id => user.id}
       can :update, Proposal, :locked => false, :user => {:id => user.id}
     end

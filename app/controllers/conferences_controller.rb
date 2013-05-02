@@ -5,13 +5,14 @@ class ConferencesController < ApplicationController
    authorize! @conference, :update
   end
   
-  #Conference resource is so big that editing it has been split into two screens event pricing and other
   def edit
     @conference = Conference.find(params[:id])
     authorize! @conference, :update
     if params[:pricing]
+      #this form is for editing the nested conference_items, I inappropriately named it after the narrower action of pricing confernece items
       render :pricing
     else
+      #this form is for editing other confernce settings (e.g. tax rate, year, etc)
       render :edit
     end
   end
@@ -23,6 +24,7 @@ class ConferencesController < ApplicationController
       redirect_to conference_path(@conference)
     else
       if params[:pricing]
+        #there were errors and the pricing flag was set, indicating the user was editing the nested conference_items
         render :pricing
       else
         render :edit

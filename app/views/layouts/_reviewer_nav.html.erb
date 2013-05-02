@@ -1,3 +1,5 @@
+<%- itinerary = @itinerary || current_user.itineraries.current.last %>
+<%= link_to "Registration", edit_itinerary_path(itinerary)%>
 <%= link_to "Unreviewed",  conference_proposals_path(Conference.active) %>
 <%= link_to "Accepted", conference_proposals_path(Conference.active, 'query[accept]' => true) %>
 <%= link_to "Declined", conference_proposals_path(Conference.active, 'query[decline]' => true) %>

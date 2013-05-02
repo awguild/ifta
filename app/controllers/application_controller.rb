@@ -3,43 +3,42 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :check_active_conference
   
-  #Reviewers, admins, & attendees each have a resource to edit as their main interface
-  #that resource should be blank when user accounts are created and when the conference gets rolled yearly
-  #this method ensures that when users log in they have an editable resource and redirects to that resource
+  #overriding a devise helper method
   def after_sign_in_path_for(user)
+    #Every user should have a conference itinerary, if you can't find one make it
+    if user.itineraries.current.empty?
+      user_itinerary = Itinerary.new
+      user_itinerary.conference = Conference.active
+      user_itinerary.user = user
+      user_itinerary.save
+    end
     
+    #role based after sign in path
     if user.role == 'reviewer'
       return conference_proposals_path(Conference.active)
     elsif user.role == 'admin'
       return conference_path(Conference.active)
-    else
-      if user.itineraries.current.empty?
-        user_itinerary = Itinerary.new
-        user_itinerary.conference = Conference.active
-        user_itinerary.user = user
-        user_itinerary.save
-      end
-      user_itinerary = user.itineraries.current.first      
-      return edit_itinerary_path(user_itinerary)
+    else 
+      return edit_itinerary_path(user.itineraries.current.first )
     end
   end
   
+  #overriding a devise helper method
   def after_sign_up_path_for(user)
     after_sign_in_path_for(user)
   end
   
   
-  #Loads the user contact_info partial if an attendee's country isn't set
+  #before filter which renders the user contact_info partial if the user isn't in a valid state
   def check_contact_info
-    #TODO currently this manually checks the country, but with conditional validations on the user model
-    #this could be changed to run the validation suite
-    if current_user.role == "attendee" && current_user.country_category.blank?
-     @user = current_user
+    if current_user.role == "attendee" && !current_user.valid?
+     @user = User.find(current_user.id) #don't want validation errors on current_user to show up
      render 'users/shared/_contact_info.html.erb'
      return false
     end
   end
   
+  #before filter which renders a splash page if there is no active conference
   def check_active_conference
     if Conference.active.blank?
       render 'shared/_conference_closed', :layout => 'application'
