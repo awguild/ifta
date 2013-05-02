@@ -24,6 +24,7 @@ class PaymentsController < ApplicationController
     authorize! :create, @payment
   end
 
+  #When IFTA gets checks or bank transfers the event planners have to mark the payments in the system as paid
   def admin_create
     @payment = Payment.new(params[:payment])
     authorize! :create, @payment

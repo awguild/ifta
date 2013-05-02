@@ -1,11 +1,10 @@
 class Transaction < ActiveRecord::Base
-  # attr_accessible :title, :body
   belongs_to :itinerary
   has_one :payment
   has_many :line_items
   delegate :user, :to => :itinerary
   after_save :mark_line_items
-  before_destroy :remove_line_item_links
+  before_destroy :clean_up
   
   def self.search_for_transactions(options)
     #set defaults for the search
@@ -70,7 +69,8 @@ class Transaction < ActiveRecord::Base
     line_items.update_all(:paid => paid)
   end
   
-  def remove_line_item_links
-    line_items.update_all(:transaction_id => nil)
+  def clean_up
+    line_items.update_all(:paid => false, :transaction_id => nil)
+    payment.destroy unless payment.nil?
   end
 end

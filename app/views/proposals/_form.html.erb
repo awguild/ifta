@@ -22,10 +22,12 @@
 	(90 characters max, including spaces)
 <hr>	
 <h3>Short Description (published in Program Guide)</h3>
-	<%= f.input :short_description, :label => "(50 words max)"%>
+	<%= f.label "(50 words max)"%>
+	<%= f.text_area :short_description, {cols: '60', rows: '6'} %>
 <hr>
 <h3>Long Description (published in Book of Abstracts)</h3>
-	<%= f.input :long_description, :label => "(350 words max)", as: :text, input_html: {cols: '60', rows: '8'}  %>
+	<%= f.label "(350 words max)"%>
+	<%= f.text_area :long_description, {cols: '60', rows: '20'} %>
 <hr>
 <h3>Audio Visual Needs</h3>
 <strong>Please note that there is no wireless internet in the rooms!</strong><br>

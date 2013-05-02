@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    @users = User.search_for_user(params).page(params[:page]).per_page(10)
+    @users = User.search_for_user(params).page(params[:page]).per_page(10) #search is an intersection not union
     authorize! :list, User
   end
   
@@ -19,8 +19,8 @@ class UsersController < ApplicationController
     authorize! :update, @user
     
     if @user.update_attributes(params[:user])
-      redirect_to after_sign_in_path_for(current_user)
       flash[:notice] = 'User successfully updated.'
+      redirect_to after_sign_in_path_for(current_user)
     else
       render :action => 'edit'
     end
@@ -50,8 +50,9 @@ class UsersController < ApplicationController
   def update_password
     @user = User.find(params[:id])
     authorize! :update, @user
-    if @user.update_with_password(params[:user])
-      redirect_to after_sign_in_path_for(current_user)
+    if @user.update_with_password(params[:user]) #devise helper method, prevents updating password without current password
+      sign_in @user, :bypass => true
+      redirect_to after_sign_in_path_for(@user)
     else
       render "edit_password"
     end

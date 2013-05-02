@@ -1,16 +1,14 @@
 class ProposalsController < ApplicationController
   before_filter :check_contact_info
   
-  #There can be different forms to choose from but they are all modeled via one proposal model
-  #the links on the splash page are just setting some variables in the new action e.g. student 
-  #this page technically doesn't need to be access controlled since its generic but we will anyway
+  #There can be different proposal forms to choose from but they are all different representations of one proposal model
+  #the links on the splash page are just pass information to the new action ie. student 
   def splash
     @itinerary = Itinerary.find(params[:itinerary_id])
     authorize! :update, @itinerary
   end
   
-  #At the moment student is the only attribute getting preset but this framework allows for 
-  #dynamic form generation, ie you can show different messages and fields depending on what gets set in this action
+  #At the moment student is the only query parameter but this design is easily extensible 
   def new
     @itinerary = Itinerary.find(params[:itinerary_id])
     student = params[:student] == 'yes'
@@ -48,9 +46,10 @@ class ProposalsController < ApplicationController
     end
   end
   
+  #reviewers can review proposals right from the search results
   def index
     authorize! :index, Proposal
-    @proposals = Proposal.search(params)
+    @proposals = Proposal.search(params) #search returns an intersection not union
     @proposals = @proposals.page(params[:page]).per_page(5).includes(:itinerary, :presenters)
     @review = Review.new
   end

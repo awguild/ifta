@@ -1,5 +1,7 @@
 <h1>Transaction details for <%= @user.first_name + ' ' + @user.last_name %></h1>
-
+<%- if can? :destroy, @transaction%>
+	<%= link_to "Cancel Transaction", itinerary_transaction_path(@transaction.itinerary, @transaction), :confirm => 'Are you sure', :method => :delete %><br /><br >
+<%- end %>
 <table>
 <%- @transaction.line_items.each do |item| %>
 	<tr>
@@ -16,9 +18,6 @@
 		<td><strong>$<%= sprintf("%.2f", @transaction.post_tax_total) %></strong></td>
 	</tr>
 </table>
-
-<%- #TODO cancel transaction link to destroy the transaction if it is not paid
-%>
 
 <%- if @transaction.payment_method == 'paypal' %>
 	<%= render 'paypal_info' %>

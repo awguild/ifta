@@ -1,6 +1,5 @@
 class TransactionsController < ApplicationController
   
-  #When the transaction is created 
   def show
     @transaction = Transaction.find(params[:id])
     authorize! :create, @transaction
@@ -10,7 +9,7 @@ class TransactionsController < ApplicationController
   #Transactions are a group of line items (priced conference items), total tax on those items, and a payment method
   #Transaction creation isn't exactly done the rails way because the interface to create a new transaction 
   #is embeded in the itineraries edit page, so all the loading is logically tied to the itineraries edit action
-  #but I didn't embed transaction creation as a nested model of itineraries, so we flip over to this controller to actually create a transaction
+  #but the itinerary itself doesn't create transactions using nested attributes, so we flip over to this controller to actually create a transaction
   def create
     @itinerary = Itinerary.find(params[:itinerary_id])
     @transaction = @itinerary.transactions.build
