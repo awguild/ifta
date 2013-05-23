@@ -27,7 +27,7 @@
 <hr>
 <h3>Keyword</h3>
 	<%= f.label :keywords, 'Keyword' %>
-	<%= f.select :keywords, grouped_options_for_select(f.object.keyword_options), {:include_blank => true}%>
+	<%= f.select :keywords, grouped_options_for_select(@proposal.keyword_options, @proposal.keywords), {:include_blank => true}%>
 <h3>Title</h3>
 	<%= f.label :title, "Title of Abstract:"%>
 	<%= f.text_field  :title %> <br>
