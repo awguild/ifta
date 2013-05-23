@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502052413) do
+ActiveRecord::Schema.define(:version => 20130523185309) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(:version => 20130502052413) do
   create_table "countries", :force => true do |t|
     t.string  "name"
     t.integer "category"
+  end
+
+  create_table "days", :force => true do |t|
+    t.integer  "schedule_id"
+    t.string   "label"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -159,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20130502052413) do
     t.boolean  "projector"
     t.boolean  "locked",                           :default => false
     t.string   "status"
+    t.string   "keywords"
   end
 
   add_index "proposals", ["itinerary_id"], :name => "index_proposals_on_itinerary_id"
@@ -174,6 +182,29 @@ ActiveRecord::Schema.define(:version => 20130502052413) do
 
   add_index "reviews", ["proposal_id"], :name => "index_reviews_on_proposal_id"
   add_index "reviews", ["status"], :name => "index_reviews_on_status"
+
+  create_table "rooms", :force => true do |t|
+    t.integer  "schedule_id"
+    t.string   "label"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "schedules", :force => true do |t|
+    t.integer  "conference_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "slots", :force => true do |t|
+    t.integer  "proposal_id"
+    t.integer  "day_id"
+    t.integer  "room_id"
+    t.string   "label"
+    t.string   "comments"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "transactions", :force => true do |t|
     t.integer  "itinerary_id"
