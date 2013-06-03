@@ -14,7 +14,7 @@ class DiscountsController < ApplicationController
     @conference = Conference.find(params[:conference_id])
     @discount = @conference.discounts.build params[:discount]
     if @discount.save
-      redirect_to after_sign_in_path_for(current_user) 
+      redirect_to conference_discounts_path(@conference)
     else
       render 'new'
     end
@@ -29,7 +29,7 @@ class DiscountsController < ApplicationController
     @conference = Conference.find(params[:conference_id])
     @discount = Discount.find(params[:id])
     if @discount.update_attributes params[:discount]
-      redirect_to after_sign_in_path_for(current_user)
+      redirect_to conference_discounts_path(@conference)
     else
       render "edit"
     end  

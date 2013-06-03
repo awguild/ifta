@@ -6,7 +6,7 @@ class Itinerary < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :conference
-  belongs_to :discount, :foreign_key => "discount_key"
+  belongs_to :discount, :foreign_key => "discount_key", :primary_key => "discount_key"
   has_many :line_items
   has_many :conference_items, :through => :line_items
   has_many :proposals
