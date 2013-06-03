@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   
   #before filter which renders the user contact_info partial if the user isn't in a valid state
   def check_contact_info
-    if current_user.role == "attendee" && !current_user.valid?
+    if current_user.invalid?
      @user = User.find(current_user.id) #don't want validation errors on current_user to show up
      render 'users/shared/_contact_info.html.erb'
      return false

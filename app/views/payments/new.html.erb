@@ -2,7 +2,7 @@
 	<%= render :partial => "layouts/admin_nav" %>
 <%- end %>
 
-<h1>Transactions</h1>
+<h1><%= @conference.conference_year %> Transactions</h1>
 <%= form_tag new_payment_path, :method => 'get' do %>
 	<%= label_tag :Paid %>
 	<%= check_box_tag :paid, 'true', params[:paid]%>

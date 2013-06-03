@@ -1,8 +1,8 @@
 class Price < ActiveRecord::Base
-  attr_accessible :country_category, :amount, :discount_key, :member
+  attr_accessible :country_category, :amount, :discount_key, :member, :conference_item_id
   belongs_to :conference_item
-  
-  validates :amount, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than => 0}
+  belongs_to :discount, :foreign_key => 'discount_key'
+  validates :amount, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than_or_equal_to => 0}
   
   def <=>(other)
     if self.member != other.member

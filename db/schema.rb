@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523185309) do
+ActiveRecord::Schema.define(:version => 20130530233001) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -47,13 +47,6 @@ ActiveRecord::Schema.define(:version => 20130523185309) do
     t.integer "category"
   end
 
-  create_table "days", :force => true do |t|
-    t.integer  "schedule_id"
-    t.string   "label"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
     t.integer  "attempts",   :default => 0
@@ -73,9 +66,12 @@ ActiveRecord::Schema.define(:version => 20130523185309) do
   create_table "discounts", :force => true do |t|
     t.string   "discount_key"
     t.string   "description"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "conference_id"
   end
+
+  add_index "discounts", ["conference_id"], :name => "index_discounts_on_conference_id"
 
   create_table "ifta_members", :force => true do |t|
     t.string "email"
@@ -141,7 +137,7 @@ ActiveRecord::Schema.define(:version => 20130523185309) do
     t.decimal  "amount",             :precision => 10, :scale => 2
     t.datetime "created_at",                                        :null => false
     t.datetime "updated_at",                                        :null => false
-    t.integer  "discount_key"
+    t.string   "discount_key"
     t.boolean  "member"
   end
 
@@ -182,29 +178,6 @@ ActiveRecord::Schema.define(:version => 20130523185309) do
 
   add_index "reviews", ["proposal_id"], :name => "index_reviews_on_proposal_id"
   add_index "reviews", ["status"], :name => "index_reviews_on_status"
-
-  create_table "rooms", :force => true do |t|
-    t.integer  "schedule_id"
-    t.string   "label"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "schedules", :force => true do |t|
-    t.integer  "conference_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  create_table "slots", :force => true do |t|
-    t.integer  "proposal_id"
-    t.integer  "day_id"
-    t.integer  "room_id"
-    t.string   "label"
-    t.string   "comments"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
 
   create_table "transactions", :force => true do |t|
     t.integer  "itinerary_id"

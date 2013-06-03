@@ -1,0 +1,21 @@
+<%= form_for [@conference, @discount] do |f| %>
+	<%= render :partial => 'shared/error_messages', :locals => {:object => @discount} %>
+	<%= f.hidden_field :discount_key, :value => @discount.discount_key %>
+	<%= f.label :discount_key %> <%= @discount.discount_key %><br>
+	
+	<%= f.label :description %>
+	<%= f.text_field :description %><br>
+	
+	<%= f.fields_for :prices do |price| %>
+		<div class='removable'>
+		<% item = price.object.conference_item %>
+		<%= price.label :amount, "#{item.name} Price" %>
+		<%= price.text_field :amount %>
+		<%= price.hidden_field :conference_item_id, :value => item.id %>
+		<%= price.hidden_field :_destroy %>
+		<%= link_to "Remove", "#", {:class => 'remove'} %>
+		</div>
+	<%- end %>
+	
+	<%= f.submit %>
+<%- end %>

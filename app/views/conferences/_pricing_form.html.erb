@@ -1,5 +1,5 @@
-<h1>Conference Pricing</h1>
-
+<h1><%= @conference.conference_year %> Conference Pricing</h1>
+<%= link_to "Manage Discounts", conference_discounts_path(@conference)%>
 <%= simple_form_for @conference, :url => conference_path(pricing: true) do |f| %>
 	<%= render :partial => 'shared/error_messages', :locals => {:object => @conference}%>
 	

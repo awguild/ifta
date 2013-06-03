@@ -35,7 +35,9 @@ Iftaconferenceapp::Application.routes.draw do
   
   resources :payments 
   post 'payments/manual' => 'payments#admin_create', :as => :manual_payment
-  resources :conferences
+  resources :conferences do
+    resources :discounts
+  end
   resources :reviews
   
 end

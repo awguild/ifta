@@ -1,4 +1,4 @@
-<h1>Conference Settings</h1>
+<h1><%= @conference.conference_year %> Conference Settings</h1>
 <%= simple_form_for @conference do |f| %>
 
 <%= render :partial => 'shared/error_messages', :locals => {:object => @conference} %>

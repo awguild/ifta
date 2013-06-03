@@ -7,6 +7,7 @@ class Conference < ActiveRecord::Base
   
   has_many :conference_items
   has_many :line_items, :through => :conference_items
+  has_many :discounts
   
   has_many :itineraries
   has_many :proposals, :through => :itineraries
