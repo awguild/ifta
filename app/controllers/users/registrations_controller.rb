@@ -12,6 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       respond_with_navigational(resource) { render :new }
     else
       flash.delete :recaptcha_error
+      flash[:errors] = 'hide'
       super
     end
   end
