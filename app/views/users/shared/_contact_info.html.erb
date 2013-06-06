@@ -33,7 +33,7 @@
 	<h3>Emergency Contact Information</h3>
 	<%= f.input :emergency_name, :label => 'Contact name' %><br>
     <%= f.input :emergency_relationship, :label => 'Relationship to contact' %><br>
-    <%= f.input :emergency_telephone %><br>
+    <%= f.input :emergency_telephone,  :input_html => {class: 'phone_number'}  %><br>
     <%= f.input :emergency_email %><br>
 	
 	<p>FYI If you would like an invitation letter for visa or funding purposes you MUST pay for the conference first, 

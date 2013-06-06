@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     authorize! :update, @user
     
     if @user.update_attributes(params[:user])
-      flash[:notice] = 'User successfully updated.'
+      flash[:notice] = 'Account successfully updated.'
       redirect_to after_sign_in_path_for(current_user)
     else
       render :action => 'edit'

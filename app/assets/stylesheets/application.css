@@ -196,7 +196,15 @@ label, .label {
     height: 1%; }
   *:first-child + html .digg_pagination {
     overflow: hidden; }
-    
+
+.login_page label{
+	width:110px;
+}
+
+.login_page{
+	margin-left:-20px;
+	padding:0px;
+}
     
 /* Payments */
 .paid, .unpiad{
