@@ -124,16 +124,15 @@
     padding:0;
     border:0;
 }
-
+label, .label {
+	width:170px;
+    display: inline-block;
+    text-align:right;
+}
 
 /*Users*/
 
-.edit_user label {
-	width:110px;
-    float:left;
-    text-align:right;
-    margin-top:2px;
-}
+
 
 /*Conference*/
 .price input{

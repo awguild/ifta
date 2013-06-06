@@ -9,7 +9,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :first_name, :last_name, :prefix, :initial, :suffix, :address, :city, :state, :country_id, :zip, :phone, :username, :member, :student, :ifta_member_email, :fax_number
+  attr_accessible :first_name, :last_name, :prefix, :initial, :suffix, :address, 
+                  :city, :state, :country_id, :zip, :phone, :username, :member, 
+                  :student, :ifta_member_email, :fax_number, :emergency_name,
+                  :emergency_relationship, :emergency_telephone, :emergency_email
   
   belongs_to :country
   has_many :transactions
@@ -22,7 +25,7 @@ class User < ActiveRecord::Base
   validates :phone, :presence => true, :unless => 'new_record?'
   validates :country_id, :presence => true, :unless => 'new_record?'
   validates :ifta_member, :existence => true, :if => 'member'
-  
+  validates :emergency_name, :emergency_relationship, :emergency_telephone, :presence => true, :unless => 'new_record?'
   #NOTE: if you want to set up validations make them conditional ... :unless => new_record? 
   #otherwise devise won't be able to create users
   

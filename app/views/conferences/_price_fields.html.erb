@@ -2,9 +2,9 @@
 <%= f.input :member, :as => :hidden, :input_html => { :value => price.member } %>
 
 <%- if price.member %>
-	Member Category <%= price.country_category %>:
+	<span class='label'>Member Cat <%= price.country_category %></span>
 <%- else %> 
-	Non-Member Category <%= price.country_category %>:
+	<span class='label'>Non-Member Cat <%= price.country_category %></span>
 <%- end %>
 $<%= f.text_field :amount%>
 <br>

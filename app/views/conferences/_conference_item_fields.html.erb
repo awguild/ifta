@@ -1,7 +1,8 @@
 <fieldset>
 <%= f.input :name %>
-<%= f.input :visibility, :label => 'Make this item available' %>
-<%= f.input :description, :label => 'Supplemental Information:' %>
+<%= f.label :visibility, 'Make this item available' %>
+<%= f.check_box :visibility %>
+<%= f.input :description, :label => 'Supplemental Info' %>
 <br>
 <div class='price'>
 <%- conference_item = f.object if conference_item.nil? #link_to_add_fields helper renders this partial without passing conference_item local so we set a default here
@@ -11,9 +12,13 @@
 <%- end %>
 </div>
 <br>
-<%= f.input :manual_price, :label => 'Allow user to manually set price'%> (Set all the above prices to 1 even if you use this option)
+<%= f.label :manual_price, 'User dictated price'%> 
+<%= f.check_box :manual_price %><em>(Note: Set all the above prices to 1 even if you use this option)</em><br>
 <br><br>
-<%= f.input :user_comment, :label => 'Text box for a user comment'%>
-<%= f.input :user_comment_prompt, :label => 'Prompt for user comment textbox:'%>
+<%= f.label :user_comment, 'Extra user input'%>
+<%= f.check_box :user_comment %><em>Adds a text box for a user comment</em><br />
+
+<%= f.label :user_comment_prompt, 'Comment textbox label'%>
+<%= f.text_field :user_comment_prompt %><em>e.g. Spouse Name</em><br>
 </fieldset>
 <br>

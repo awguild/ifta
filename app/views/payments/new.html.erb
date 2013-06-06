@@ -5,10 +5,10 @@
 <h1><%= @conference.conference_year %> Transactions</h1>
 <%= form_tag new_payment_path, :method => 'get' do %>
 	<%= label_tag :Paid %>
-	<%= check_box_tag :paid, 'true', params[:paid]%>
+	<%= check_box_tag :paid, 'true', params[:paid]%><br>
 	
 	<%= label_tag :Unpaid %>
-	<%= check_box_tag :unpaid, 'true', params[:unpaid] %>
+	<%= check_box_tag :unpaid, 'true', params[:unpaid] %><br>
 	<br>
 	<%= label_tag :first_name %>
 	<%= text_field_tag :first_name, params[:first_name] %>

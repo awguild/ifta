@@ -6,9 +6,9 @@
 		<%= f.text_field :amount, :size => 5, :value => sprintf("%.2f", transaction.post_tax_total) %><br>
 		<%= f.label 'Comments'%>
 		<%= f.text_area :comments, :rows => 2, :cols => 20 %><br>
-		<%= f.submit "Mark As Paid" %>
 		<%= label_tag 'Send Email'%>
-		<%= check_box_tag :send_email, true, :checked => :checked %>
+		<%= check_box_tag :send_email, true, :checked => :checked %><br>
+		<%= f.submit "Mark As Paid" %>
 <%- end %>
 <%= button_to "Delete Transaction", itinerary_transaction_path(transaction.itinerary, transaction), method: :delete, :class => 'destroy' %>
 </div>

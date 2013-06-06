@@ -3,16 +3,16 @@
 <%- end %>
 <h1>Add members to the members list</h1>
 <%= form_tag add_to_members_list_path, method: :post do %>
-	<%= label_tag 'Enter new email addresses (seperated by commas and/or spaces)'%><br>
+	<p>Enter new email addresses (seperated by commas and/or spaces)</p>
 	<%= text_area_tag :raw_emails, nil, rows: 8, cols: 80 %><Br>
 	<%= submit_tag 'Add Members'%>
 <%- end %>
 <br><Br>
 <h1>Complete Members List</h1>
 <%= form_tag complete_members_list_path, method: :post do %>
-	<%= label_tag 'Enter all members\' emails (seperated by commas and/or spaces).'%><br>
+	<p>Enter all members' emails (seperated by commas and/or spaces).</p>
 	<%= text_area_tag :raw_emails, nil, rows: 10, cols: 80 %><br>
-	<em>WARNING This action can take over a minute to processs, and it will remove all members not in the above list</em><br>
+	<em>WARNING This action will remove all members not in the above list</em><br>
 	<%= submit_tag 'Replace Members List'%>
 <%- end %>      
 <br>
