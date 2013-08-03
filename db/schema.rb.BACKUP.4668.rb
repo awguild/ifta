@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20130605223111) do
+=======
 ActiveRecord::Schema.define(:version => 20130711111221) do
+>>>>>>> refs/heads/1.0
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"

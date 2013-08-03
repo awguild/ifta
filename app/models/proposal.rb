@@ -8,6 +8,7 @@ class Proposal < ActiveRecord::Base
   has_many :reviews
   delegate :user, :to => :itinerary
   delegate :conference, :to => :itinerary
+  has_one :slot
   
   validates :short_description, :length => {
     :maximum => 50,

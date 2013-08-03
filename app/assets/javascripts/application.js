@@ -14,13 +14,15 @@
 //= require jquery_ujs
 //= require_tree .
 
-$(document).ready(function(){
-    $('.notice').delay(3000).fadeOut();
+$(function(){
+	//removes notifications after 3 seconds
+    $('.notice').delay(3000).fadeOut(); 
 
-	$('.phone_number').blur(function(){
-		var number = $(this).val();
-		number = number.replace(/\D/g,'');
-		$(this).val(number)
+	//formats telephone numbers.  
+	//nested presenter fields can be added to a proposal by the user after the DOM is loaded
+	//attaching the handler through live ensures those phone numbers are formatted too 
+	$('.phone_number').live("blur", function(){
+		var number = $(this).val($(this).val().replace(/\D/g,''));
 	});
 });
 

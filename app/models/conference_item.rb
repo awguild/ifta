@@ -21,7 +21,14 @@ class ConferenceItem < ActiveRecord::Base
   
   #Line Item creation checks that a conference item is being priced correctly by calling this method
   def item_price(itinerary)
-    price = itinerary.discount_key.blank? ? prices.where('country_category=? AND member=?', itinerary.user.country_category, itinerary.user.member).first : prices.where('discount_key=?', itinerary.discount_key).first 
+    #get the normal price for this person
+    price = prices.where('country_category=? AND member=?', itinerary.user.country_category, itinerary.user.member).first
+    #get the discount price if it's set
+    if !itinerary.discount_key.blank?
+      discount_price =  prices.where('discount_key=?', itinerary.discount_key).first 
+      price = discount_price unless discount_price.blank?
+    end
+    #return nil if the price isn't set
     return price.blank? ? nil : price.amount 
   end
   

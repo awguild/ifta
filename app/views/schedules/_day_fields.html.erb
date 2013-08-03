@@ -1,0 +1,12 @@
+<fieldset>
+	<%= f.label :label, 'Day' %>
+	<%= f.text_field :label %><br>
+	<%= f.label :day_date, 'Date' %>
+	<%= f.text_field :day_date %><br>
+	<h3>Time Slots</h3>
+	<%= f.fields_for :time_slots do |builder| %>
+		<%= render "time_slot_fields", f: builder %>
+	<%- end %>
+	
+	<%= link_to_add_fields "Add time slot", f, :time_slots unless f.object.blank? %>
+</fieldset>

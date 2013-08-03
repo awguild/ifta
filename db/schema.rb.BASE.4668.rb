@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711111221) do
+ActiveRecord::Schema.define(:version => 20130502052413) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -47,14 +47,6 @@ ActiveRecord::Schema.define(:version => 20130711111221) do
     t.integer "category"
   end
 
-  create_table "days", :force => true do |t|
-    t.integer  "schedule_id"
-    t.string   "label"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.date     "day_date"
-  end
-
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
     t.integer  "attempts",   :default => 0
@@ -74,12 +66,9 @@ ActiveRecord::Schema.define(:version => 20130711111221) do
   create_table "discounts", :force => true do |t|
     t.string   "discount_key"
     t.string   "description"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "conference_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
-
-  add_index "discounts", ["conference_id"], :name => "index_discounts_on_conference_id"
 
   create_table "ifta_members", :force => true do |t|
     t.string "email"
@@ -145,7 +134,7 @@ ActiveRecord::Schema.define(:version => 20130711111221) do
     t.decimal  "amount",             :precision => 10, :scale => 2
     t.datetime "created_at",                                        :null => false
     t.datetime "updated_at",                                        :null => false
-    t.string   "discount_key"
+    t.integer  "discount_key"
     t.boolean  "member"
   end
 
@@ -170,7 +159,6 @@ ActiveRecord::Schema.define(:version => 20130711111221) do
     t.boolean  "projector"
     t.boolean  "locked",                           :default => false
     t.string   "status"
-    t.string   "keywords"
   end
 
   add_index "proposals", ["itinerary_id"], :name => "index_proposals_on_itinerary_id"
@@ -186,38 +174,6 @@ ActiveRecord::Schema.define(:version => 20130711111221) do
 
   add_index "reviews", ["proposal_id"], :name => "index_reviews_on_proposal_id"
   add_index "reviews", ["status"], :name => "index_reviews_on_status"
-
-  create_table "rooms", :force => true do |t|
-    t.integer  "schedule_id"
-    t.string   "label"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "schedules", :force => true do |t|
-    t.integer  "conference_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  create_table "slots", :force => true do |t|
-    t.integer  "time_slot_id"
-    t.integer  "proposal_id"
-    t.integer  "room_id"
-    t.string   "code"
-    t.text     "comments"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "time_slots", :force => true do |t|
-    t.integer  "day_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.time     "start_time"
-    t.time     "end_time"
-    t.string   "code"
-  end
 
   create_table "transactions", :force => true do |t|
     t.integer  "itinerary_id"
@@ -262,10 +218,6 @@ ActiveRecord::Schema.define(:version => 20130711111221) do
     t.string   "role",                   :default => "attendee"
     t.string   "fax_number"
     t.string   "ifta_member_email"
-    t.string   "emergency_name"
-    t.string   "emergency_relationship"
-    t.string   "emergency_telephone"
-    t.string   "emergency_email"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
