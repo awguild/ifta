@@ -5,8 +5,9 @@ class Discount < ActiveRecord::Base
   has_many :conference_items, :through => :prices
   belongs_to :conference
   after_initialize :setup, :if => 'new_record? && prices.blank?'
-  before_create 'self.discount_key = SecureRandom.hex'
-  
+  before_create 'self.discount_key = SecureRandom.hex[0,6]'
+  validates :discount_key, :uniqueness => true
+    
   accepts_nested_attributes_for :prices, allow_destroy: true
   
   private
