@@ -131,7 +131,9 @@ label, .label {
 }
 
 /*Users*/
-
+.login_page .field_with_errors{
+  display: inline-block;
+}
 
 
 /*Conference*/
