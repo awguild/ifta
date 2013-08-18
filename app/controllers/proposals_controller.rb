@@ -50,7 +50,7 @@ class ProposalsController < ApplicationController
   def index
     authorize! :index, Proposal
     @proposals = Proposal.search(params) #search returns an intersection not union
-    @proposals = @proposals.page(params[:page]).per_page(5).includes(:itinerary, :presenters)
+    @proposals = @proposals.page(params[:page]).per_page(150).includes(:itinerary, :presenters)
     @review = Review.new
   end
 end

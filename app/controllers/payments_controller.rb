@@ -21,7 +21,7 @@ class PaymentsController < ApplicationController
   def new
     @conference = Conference.active
     @payment = Payment.new
-    @transactions = Transaction.search_for_transactions(params).page(params[:page]).per_page(5).includes(:itinerary => [:user], :line_items => [:conference_item])
+    @transactions = Transaction.search_for_transactions(params).page(params[:page]).per_page(20).includes(:itinerary => [:user], :line_items => [:conference_item])
     authorize! :create, @payment
   end
 

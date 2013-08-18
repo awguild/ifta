@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    @users = User.search_for_user(params).page(params[:page]).per_page(10) #search is an intersection not union
+    @users = User.search_for_user(params).page(params[:page]).per_page(20) #search is an intersection not union
     authorize! :list, User
   end
   
