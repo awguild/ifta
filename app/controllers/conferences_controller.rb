@@ -6,7 +6,7 @@ class ConferencesController < ApplicationController
   end
   
   def edit
-    @conference = Conference.find(params[:id])
+    @conference = Conference.includes(conference_items: [:regular_prices]).find(params[:id])
     authorize! @conference, :update
     if params[:pricing]
       #this form is for editing the nested conference_items, I inappropriately named it after the narrower action of pricing confernece items

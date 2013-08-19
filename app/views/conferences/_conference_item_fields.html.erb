@@ -7,7 +7,7 @@
 <div class='price'>
 <%- conference_item = f.object if conference_item.nil? #link_to_add_fields helper renders this partial without passing conference_item local so we set a default here
 %>
-<%= f.simple_fields_for :prices, conference_item.prices.sort!  do |builder| %>
+<%= f.simple_fields_for :prices, conference_item.regular_prices.sort!  do |builder| %>
 	<% render 'price_fields', f: builder, price: builder.object %>
 <%- end %>
 </div>
