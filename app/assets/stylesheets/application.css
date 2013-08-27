@@ -10,35 +10,41 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require bootstrap-datepicker
  *= require_tree .
  */
 
 /* CSS Document */
 
 /*Application wide*/
-
 #fat{
 	min-height:400px;
 	width:900px;
 }
-
-#nav a{
-	float: left;
-	padding-left:30px;
-	padding-bottom:0px;
+.nav {
+  background-color: #042456;
+  font-weight: bold;
+}
+.nav a{
+  text-decoration: none;
+  color:white;
+}
+.nav>li>a:hover, .nav>li>a:focus, .open>a:hover, .nav .open>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .nav .open>a, .nav .open>a:hover, .nav .open>a:focus{
+  background-color: #042466;
+  color:white;
 }
 #fat{
 	padding:0;
 	overflow:hidden;
 }
 #page {
-	padding-left:5px;
-	padding-right:5px;
+	padding-left:10px;
+	padding-right:10px;
 	overflow:hidden;
+  font-family: 'Roboto', sans-serif;
 }
 .notice, .alert{
-	font-family:Verdana;
-	font-weight:bold;
+  font-size: 18px;
 	border:2px solid #042456;
 	border-style:groove;
 	clear:both;
@@ -76,12 +82,44 @@
 	float:right;
 	padding-right:15px;
 }
+.btn{
+  text-decoration: none;
+  margin:2px;
+}
+.btn a{
+  text-decoration: none;
+  color:white;
+  font-weight: bold;
+}
+a.btn{
+  color:white;
+}
+.btn-primary{
+  background-color: #042456;
+  border-color:black;
+}
+.btn-danger{
+  background-color: #680000;
+  border-color: black;
+}
+.btn-success{
+  background-color: #33CC66;
+}
+.btn-info, .label-info{
+  background-color: #f9f9f9;
+  border-color:white;
+  color:#042456;
+}
 
+fieldset.show-fieldset{
+  border:1px solid gray;
+  padding:5px;
+}
 /*Itineraries*/
 #cart{
 	float:right;
 	margin:10px;
-	width:250px;
+	width:290px;
 	padding:5px;
 }
 
@@ -92,12 +130,14 @@
 #cart_total{
 	font-weight: bold;
 }
+#event_table{
+  width:500px;
+}
 #event_table td{
 	padding:5px;
 }
 #event_table th{
 	border-bottom: 1px solid black;
-	text-align:center;
 }
 #line_item_price{
 	width:50px;
@@ -124,15 +164,13 @@
     padding:0;
     border:0;
 }
-label, .label {
-	width:170px;
-    display: inline-block;
-    text-align:right;
-}
+
 
 /*Users*/
-.login_page .field_with_errors{
-  display: inline-block;
+.contact-form label{
+  width: 110px;
+  text-align: right;
+  padding:5px;
 }
 
 
@@ -150,6 +188,14 @@ label, .label {
 	padding-left:15px;
 	padding-right:15px;
 }
+
+/* Proposals */
+.presenter-fields label{
+  width: 110px;
+  text-align: right;
+  padding:5px;
+}
+
 
 /* Pagination */
 .digg_pagination {
@@ -199,14 +245,6 @@ label, .label {
   *:first-child + html .digg_pagination {
     overflow: hidden; }
 
-.login_page label{
-	width:110px;
-}
-
-.login_page{
-	margin-left:-20px;
-	padding:0px;
-}
     
 /* Payments */
 .paid, .unpiad{
@@ -228,4 +266,3 @@ label, .label {
 .payment_option input{
 	padding:3px;
 }
-

@@ -1,15 +1,15 @@
 <h1><%= @conference.conference_year %> Conference Pricing</h1>
-<%= link_to "Manage Discounts", conference_discounts_path(@conference)%>
-<%= simple_form_for @conference, :url => conference_path(pricing: true) do |f| %>
+
+<%= form_for @conference, :url => conference_path(pricing: true), :class => 'form-horizontal' do |f| %>
 	<%= render :partial => 'shared/error_messages', :locals => {:object => @conference}%>
 	
 	<h2>Conference Items</h2>
-	<%= f.simple_fields_for :conference_items do |builder| %>
+	<%= f.fields_for :conference_items do |builder| %>
 		<%= render 'conference_item_fields', f: builder, conference_item: builder.object %>
 	<%- end %>
 	
 	<%= link_to_add_fields "Add Conference Item", f, :conference_items %>
 	<br><br>
-	<%= f.submit %>
+	<%= f.submit :name => 'Update Conference', :class => 'btn btn-primary'  %>
 	<br><br>
 <%- end %>

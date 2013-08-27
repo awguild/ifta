@@ -2,5 +2,4 @@
 	<%= render :partial => "layouts/admin_nav" %>
 <%- end %>
 <h1><%= @conference.conference_year %> Discounts</h1>
-<%= link_to "New Discount", new_conference_discount_path(@conference)%><br><br>
 <%= render @discounts %>

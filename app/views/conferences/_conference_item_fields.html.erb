@@ -1,24 +1,38 @@
-<fieldset>
-<%= f.input :name %>
+<fieldset class="show-fieldset">
+<div class="control-group">
+	<%= f.label :name, :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_field :name %>
+	</div>
+</div>
+
 <%= f.label :visibility, 'Make this item available' %>
 <%= f.check_box :visibility %>
-<%= f.input :description, :label => 'Supplemental Info' %>
+
+<div class="control-group">
+	<%= f.label :description, 'Supplemental Info', :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_field :description %><em>(Not an active feature right now)</em>
+	</div> 
+</div>
+
 <br>
+
 <div class='price'>
 <%- conference_item = f.object if conference_item.nil? #link_to_add_fields helper renders this partial without passing conference_item local so we set a default here
 %>
-<%= f.simple_fields_for :prices, conference_item.regular_prices.sort!  do |builder| %>
+<%= f.fields_for :prices, conference_item.regular_prices.sort!  do |builder| %>
 	<% render 'price_fields', f: builder, price: builder.object %>
 <%- end %>
-</div>
-<br>
-<%= f.label :manual_price, 'User dictated price'%> 
-<%= f.check_box :manual_price %><em>(Note: Set all the above prices to 1 even if you use this option)</em><br>
-<br><br>
-<%= f.label :user_comment, 'Extra user input'%>
-<%= f.check_box :user_comment %><em>Adds a text box for a user comment</em><br />
 
+</div>
+<%= f.label :manual_price, 'User dictated price'%> 
+<%= f.check_box :manual_price %><em>(Note: Set all the above prices to 1 even if you use this option)</em>
+<br>
+<%= f.label :user_comment, 'Extra user input'%>
+<%= f.check_box :user_comment %><em>Adds a text box for a user comment</em>
+<br>
 <%= f.label :user_comment_prompt, 'Comment textbox label'%>
-<%= f.text_field :user_comment_prompt %><em>e.g. Spouse Name</em><br>
+<%= f.text_field :user_comment_prompt %><em>e.g. Spouse Name</em>
 </fieldset>
 <br>

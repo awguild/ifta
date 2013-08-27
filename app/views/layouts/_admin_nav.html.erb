@@ -1,7 +1,33 @@
 <%- conference ||= Conference.active %>
-<%= link_to "Settings", edit_conference_path(conference)%>
-<%= link_to "Pricing", edit_conference_path(conference, pricing: true)%>
-<%= link_to "IFTA Members", mass_new_members_path %>
-<%= link_to "Users", users_path(email: false) %>
-<%= link_to "Payments", new_payment_path(unpaid: true) %>
-<%= link_to "Schedule", conference_schedule_path(conference) %>
+<li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Conference<b class="caret"></b></a>
+	<ul class="dropdown-menu">
+		<li><%= link_to "Settings", edit_conference_path(conference)%></li>
+		<li><%= link_to "Pricing", edit_conference_path(conference, pricing: true)%></li>
+		<li><%= link_to "Manage Discounts", conference_discounts_path(@conference)%></li>
+		<li><%= link_to "New Discount", new_conference_discount_path(@conference)%></li>
+	</ul>
+</li>
+<li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Proposals<b class="caret"></b></a>
+	<ul class="dropdown-menu">
+		<%= render 'layouts/proposals_by_status' %>
+	</ul>
+</li>
+<li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">IFTA Members<b class="caret"></b></a>
+	<ul class="dropdown-menu">
+		<li><%= link_to "Browse", members_path %></li>
+		<li><%= link_to "Manage", mass_new_members_path %></li>
+	</ul>
+</li>
+
+<li><%= link_to "Users", users_path(email: false) %></li>
+<li><%= link_to "Payments", new_payment_path(unpaid: true) %></li>
+<li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Schedule<b class="caret"></b></a>
+	<ul class="dropdown-menu">
+		<li><%= link_to "View Schedule", conference_schedule_path(conference) %></li>
+		<li><%= link_to "Manage Schedule", edit_conference_schedule_path(conference) %></li>
+	</ul>
+</li>

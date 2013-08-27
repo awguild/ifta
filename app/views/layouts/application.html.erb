@@ -2,13 +2,15 @@
 <html>
 <head>
   <title>IFTA CONGRESS</title>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="http://www.ifta-congress.org/includes/main.css" rel="stylesheet" type="text/css">
   <link href="http://www.ifta-congress.org/includes/icon.css" rel="stylesheet" type="text/css">
   <link href="http://www.ifta-congress.org/includes/colors.css" rel="stylesheet" type="text/css">
-  
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -16,20 +18,22 @@
 	<div id="head"><span>IFTA Congress</span></div>
 	<div id="background">
 		<div id="fat">	
-			<div id="nav">
+			<ul class="nav nav-pills">
 			<% if user_signed_in? %>
-				<%= link_to "Main", after_sign_in_path_for(current_user) %>
+				<li><%= link_to "Main", after_sign_in_path_for(current_user) %></li>
 				<%- if content_for?(:nav) %>
 					<%= yield(:nav)%>
 				<%- else %>
 					<%= render "layouts/attendee_nav" %>
 				<%- end %>
-				<%= link_to "Log Out", users_sign_out_path %>
+				<li><%= link_to "Log Out", users_sign_out_path %></li>
+
 			<% else %>
-				<a href="http://www.ifta-congress.org/">Back To Main Website</a>
-				<span class="float_right"><%= link_to "Sign In", root_path %></span>
+				<li><a href="http://www.ifta-congress.org/">Back To Main Website</a></li>
+				<li><span class="float_right"><%= link_to "Sign In", root_path %></span></li>
 			<% end %>
-			</div>
+			</ul>
+			
 			
 			<div id="page">
 			<% if ! flash[:notice].blank? %>

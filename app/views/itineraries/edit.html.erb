@@ -6,18 +6,22 @@
 <%- if !@itinerary.any_items? %>
 	<p>No conference items are currently available.</p>
 <%- else %>
-	<table id="event_table">
+	<table id="event_table" class="table-striped">
 	<tr><th>Event</th><th>Price</th><th>Action</th></tr>
 	<%= render :partial => "paid_line_item", :collection => @itinerary.paid_line_items %>
 	<%= render :partial => "available_conference_item", :collection => @itinerary.available_conference_items, :locals => {:itinerary => @itinerary} %>
 	</table>
+	<p class="label label-info">If you have a discount key enter it below BEFORE adding items to your cart</p>
+	<%= form_for @itinerary, :class => 'form-horizontal' do |f| %>
+	<div class="control-group">
+		<%= f.label :discount_key, :class => 'control-label' %>
+		<div class="controls">
+			<%= f.text_field :discount_key %>
+		</div>
+	</div>
 	
-	<%= form_for @itinerary do |f| %>
-	<p><em>If you have a discount key enter it below BEFORE adding items to your cart</em></p>
-		<%= f.label :discount_key%>
-		<%= f.text_field :discount_key %>
-		<br>
-		<%= f.submit 'Apply Discount' %>
+	<%= f.submit 'Apply Discount', :class => 'btn btn-info' %>
+	
 	<%- end %>
 <%- end %>
 

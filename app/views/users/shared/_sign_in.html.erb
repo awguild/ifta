@@ -1,19 +1,36 @@
 <h2>Sign in (Returning Users)</h2>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div class='login_page'>
-  <div><%= f.label :email %>
-  <%= f.email_field :email %></div>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal"}) do |f| %>
+  
+  <div class="control-group">
+    <%= f.label :email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.email_field :email %>
+    </div>
+  </div>
 
-  <div><%= f.label :password %>
-  <%= f.password_field :password %></div>
+  <div class="control-group">
+    <%= f.label :password, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password %>
+    </div>
+  </div>
 
   <% if devise_mapping.rememberable? -%>
-    <div><%= f.label :remember_me %><%= f.check_box :remember_me %> </div>
+    <div class="control-group">
+      <%= f.label :remember_me, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.check_box :remember_me %>
+      </div>
+    </div>
   <% end -%>
+
+  <div>
+    <%= f.submit "Sign in" %>
   </div>
-  <div><%= f.submit "Sign in" %></div>
+
   <br>
-  <%= link_to "Forgot your password?", new_user_password_path %>
-  
+  <div class="btn btn-warning">
+    <%= link_to "Forgot your password?", new_user_password_path %>
+  </div>
 <% end %>

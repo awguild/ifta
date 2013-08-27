@@ -1,20 +1,33 @@
 <h2>Sign up (New Users)</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal'}) do |f| %>
   <%= 
   #override this method in the DeviseHelper module to use the application error_messages partial
   devise_error_messages! %>
-  <div class='login_page'>
-  <div><%= f.label :email %>
-  <%= f.email_field :email %></div>
-
-  <div><%= f.label :password %>
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %></div>
+  <div class="control-group">
+    <%= f.label :email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.email_field :email %>
+    </div>
   </div>
+
+  <div class="control-group">
+    <%= f.label :password, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password_confirmation, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
+  
   <%= recaptcha_tags %>
 
-  <div><%= f.submit "Sign up" %></div>
+  <div>
+    <%= f.submit "Sign up" %>
+  </div>
 <% end %>

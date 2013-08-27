@@ -9,7 +9,7 @@
 		Tax: $<span id='cart_tax'><%= sprintf("%.2f", itinerary.line_items_tax_price) %></span>
 	</div>
 	<p><em>Choose your payment method</em><br>
-	<%= link_to "Pay With Paypal (Credit Card)", itinerary_transactions_path(itinerary, :payment_method => :paypal), id: "check_out", :method => :post %><br>
-	<%= link_to "Mail a Check", itinerary_transactions_path(itinerary, :payment_method => :check), id: "check_out", :method => :post %><br>
-	<%= link_to "Electronic Bank Transfer", itinerary_transactions_path(itinerary, :payment_method => :bank), id: "check_out", :method => :post %></p>
+	<%= link_to "Pay With Paypal (Credit Card)", itinerary_transactions_path(itinerary, :payment_method => :paypal), id: "check_out", :method => :post, :class => 'btn btn-success' %><br>
+	<%= link_to "Mail a Check", itinerary_transactions_path(itinerary, :payment_method => :check), id: "check_out", :method => :post, :class => 'btn btn-success' %><br>
+	<%= link_to "Electronic Bank Transfer", itinerary_transactions_path(itinerary, :payment_method => :bank), id: "check_out", :method => :post, :class => 'btn btn-success' %></p>
 </div>

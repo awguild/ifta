@@ -11,6 +11,7 @@ Iftaconferenceapp::Application.routes.draw do
   get 'members/edit' => 'ifta_members#mass_new', :as => :mass_new_members
   post 'members/new_list' => 'ifta_members#add_to_members_list', :as => :add_to_members_list
   post 'members/add_to_list' => 'ifta_members#complete_members_list', :as => :complete_members_list
+  get 'members/index' => 'ifta_members#index', :as => :members
   
   #proposal routes
   get 'conference/:id/proposals' => 'proposals#index', :as => :conference_proposals  

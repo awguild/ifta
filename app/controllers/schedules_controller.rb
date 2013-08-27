@@ -1,11 +1,13 @@
 class SchedulesController < ApplicationController
   def show
-    @schedule = Conference.find(params[:conference_id]).schedule
+    @conference = Conference.find(params[:conference_id])
+    @schedule = @conference.schedule
     authorize! :show, @schedule
   end
   
   def edit
-    @schedule = Conference.find(params[:conference_id]).schedule
+    @conference = Conference.find(params[:conference_id])
+    @schedule = @conference.schedule
     authorize! :edit, @schedule
   end
   

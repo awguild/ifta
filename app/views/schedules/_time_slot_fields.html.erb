@@ -1,12 +1,33 @@
 <fieldset>
-<%= f.label :start_time %>
-<%= f.text_field :start_time %><br>
-<%= f.label :end_time %>
-<%= f.text_field :end_time %><br>
-<%= f.label :code %>
-<%= f.text_field :code %><br>
+<div class="control-group">
+	<%= f.label :start_time, :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_field :start_time, :class => 'timepicker' %>
+	</div>
+</div>
+
+<div class="control-group">
+	<%= f.label :end_time, :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_field :end_time, :class => 'timepicker' %>
+	</div>
+</div>
+
+<div class="control-group">
+	<%= f.label :code, :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_field :code %>
+	</div>
+</div>
+
+
 <%- if f.object.new_record? || true%>
-<%= f.label :quantity %>
-<%= f.text_field :quantity %><br>
+<div class="control-group">
+	<%= f.label :quantity, 'Number of presentations for this slot', :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_field :quantity %>
+	</div>
+</div>
 <%- end %>
+<hr />
 </fieldset>

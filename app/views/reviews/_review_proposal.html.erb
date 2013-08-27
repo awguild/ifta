@@ -19,7 +19,9 @@
 		<%= hidden_field_tag 'review[reviewer_id]', current_user.id %>
 		<%= f.label :comments %>
 		<%= f.text_area :comments, rows: 2, cols: 30 %><br>
-		<%= f.submit "accept", name: 'review[status]' %><%= f.submit "decline", name: 'review[status]'  %><%= f.submit "wait list", name: 'review[status]'  %>
+		<%= f.submit "accept", name: 'review[status]', :class => 'btn btn-primary' %>
+		<%= f.submit "decline", name: 'review[status]', :class => 'btn btn-primary'   %>
+		<%= f.submit "wait list", name: 'review[status]', :class => 'btn btn-primary'   %>
 		<%= f.label 'Send Emails' %>
 		<%= check_box_tag :send_emails, 1, true %>
 	<%- end %>

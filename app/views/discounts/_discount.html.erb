@@ -1,5 +1,7 @@
-Description: <%= discount.description %> 
-<%= link_to "Edit", edit_conference_discount_path(@conference, discount)%><br />
-Key: <%= discount.discount_key %>
+<div class="btn btn-primary">
+	<%= link_to "Edit", edit_conference_discount_path(@conference, discount)%>
+</div><br>
+<b>Description:</b> <%= discount.description %> <br>
+<b>Key:</b> <%= discount.discount_key %>
 <hr>
 

@@ -2,24 +2,37 @@
 	<%= render :partial => "layouts/admin_nav" %>
 <%- end %>
 
-<h1><%= @conference.conference_year %> Transactions</h1>
-<%= form_tag new_payment_path, :method => 'get' do %>
-	<%= label_tag :Paid %>
-	<%= check_box_tag :paid, 'true', params[:paid]%><br>
+<h1>Search Transactions</h1>
+<%= form_tag new_payment_path, :method => 'get', :class => 'form-horiztontal' do %>
 	
-	<%= label_tag :Unpaid %>
-	<%= check_box_tag :unpaid, 'true', params[:unpaid] %><br>
-	<br>
-	<%= label_tag :first_name %>
-	<%= text_field_tag :first_name, params[:first_name] %>
-	<br>
-	<%= label_tag :last_name %>
-	<%= text_field_tag :last_name, params[:last_name] %>
-	<br>
-	<%= label_tag :email %>
-	<%= text_field_tag :email, params[:email] %>
-	<Br>
-	<%= submit_tag :Search%>
+	<%= label_tag :Paid, 'Paid' %>
+	<%= check_box_tag :paid, 'true', params[:paid]%>
+	
+	<%= label_tag :Unpaid, 'Unpaid' %>
+	<%= check_box_tag :unpaid, 'true', params[:unpaid] %>
+	
+	<div class="control-group">
+		<%= label_tag :first_name, 'First Name', :class => 'control-label' %>
+		<div class='controls'>
+			<%= text_field_tag :first_name, params[:first_name] %>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<%= label_tag :last_name, 'Last Name', :class => 'control-label' %>
+		<div class="controls">
+			<%= text_field_tag :last_name, params[:last_name] %>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<%= label_tag :email, 'Email', :class => 'control-label' %>
+		<div class='controls'>
+			<%= text_field_tag :email, params[:email] %>
+		</div>
+	</div>
+
+	<%= submit_tag :Search, :class => 'btn btn-primary' %>
 	<br>
 <%-end%>
 

@@ -1,10 +1,10 @@
-<%= f.input :country_category, :as => :hidden, :input_html => { :value => price.country_category } %>
-<%= f.input :member, :as => :hidden, :input_html => { :value => price.member } %>
+<%= f.hidden_field :country_category, :value => price.country_category %>
+<%= f.hidden_field :member, :value => price.member %>
 
 <%- if price.member %>
-	<span class='label'>Member Cat <%= price.country_category %></span>
+	<label class='control-label'>Member Cat <%= price.country_category %></label>
 <%- else %> 
-	<span class='label'>Non-Member Cat <%= price.country_category %></span>
+	<label class='control-label'>Non-Member Cat <%= price.country_category %></label>
 <%- end %>
 $<%= f.text_field :amount%>
 <br>

@@ -2,13 +2,21 @@
 <%= form_for payment, :url => manual_payment_path do |f| %>
 		<%= f.hidden_field :transaction_id, :value => transaction.id %>
 		<%= f.hidden_field :confirmed, :value => true %>
-		<%= f.label 'Amount $' %>
-		<%= f.text_field :amount, :size => 5, :value => sprintf("%.2f", transaction.post_tax_total) %><br>
-		<%= f.label 'Comments'%>
-		<%= f.text_area :comments, :rows => 2, :cols => 20 %><br>
-		<%= label_tag 'Send Email'%>
+		<div class="control-group">
+			<%= f.label :amount, 'Amount $', :class => 'control-label' %>
+			<%= f.text_field :amount, :size => 5, :value => sprintf("%.2f", transaction.post_tax_total) %>
+		</div>
+		<div class="control-group">
+			<%= f.label :comments, 'Comments', :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_area :comments, :rows => 2, :cols => 20 %>
+			</div>
+		</div>
+
+		<%= label_tag :send_email, 'Send Email', :class => 'control-label' %>
 		<%= check_box_tag :send_email, true, :checked => :checked %><br>
-		<%= f.submit "Mark As Paid" %>
+
+		<%= f.submit "Mark As Paid", :class => 'btn btn-primary' %>
 <%- end %>
-<%= button_to "Delete Transaction", itinerary_transaction_path(transaction.itinerary, transaction), method: :delete, :class => 'destroy' %>
+<%= button_to "Delete Transaction", itinerary_transaction_path(transaction.itinerary, transaction), method: :delete, :class => 'destroy btn btn-danger' %>
 </div>

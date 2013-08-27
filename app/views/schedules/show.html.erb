@@ -1,5 +1,8 @@
+<%- content_for :nav do %>
+	<%= render :partial => "layouts/admin_nav" %>
+<%- end %>
+
 <h1><%= @schedule.conference.conference_year %> Conference Schedule</h1>
-<%= link_to "Edit Schedule", edit_conference_schedule_path(@schedule.conference) %>
 
 <div id='schedule_table'>
 	<h1>Schedule</h1>

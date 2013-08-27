@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-datepicker
+//= require jquery.timepicker.js
 //= require_tree .
 
 $(function(){
@@ -24,5 +26,8 @@ $(function(){
 	$('.phone_number').live("blur", function(){
 		var number = $(this).val($(this).val().replace(/\D/g,''));
 	});
+
+  	//date picker
+    $('.datepicker').datepicker();
 });
 

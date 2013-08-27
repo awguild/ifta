@@ -3,44 +3,56 @@
 <%- end %>
 
 <h2>Search for user</h2>
-<em>*Results include partial matches the fields combined (ie a partial email match with the wrong first name won't show up) </em><br>
-<em>*blank values will match anything</em><br><br>
-	<%= form_tag users_path, method: 'get' do %>
-		<%= label_tag :email %>
-		<%= text_field_tag :email %>
+<em>* Performs partial matches (Mar will match Mary) </em><br>
+<em>* blank fields will match anything</em><br><br>
+	<%= form_tag users_path, method: 'get', :class => 'form-horizontal' do %>
+		<div class="control-group">
+			<%= label_tag :email, 'Email', :class => 'control-label' %>
+			<div class="controls">
+				<%= text_field_tag :email %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= label_tag :first_name, 'First Name', :class => 'control-label' %>
+			<div class="controls">
+				<%= text_field_tag :first_name %>
+			</div>
+		</div>
+		<div class="control-group">
+		<%= label_tag :last_name, 'Last Name', :class => 'control-label' %>
+			<div class="controls">
+				<%= text_field_tag :last_name %>
+			</div>
+		</div>
 		<br>
-		<%= label_tag :first_name %>
-		<%= text_field_tag :first_name %>
-		<br>
-		<%= label_tag :last_name %>
-		<%= text_field_tag :last_name %>
-		<br>
-		<%= submit_tag :Search%>
+		<%= submit_tag :Search, :class => 'btn btn-primary' %>
 	<%- end %>	
 
 <h2>Matching Users</h2>
 <%- if @users.blank? %>
 	No matching users
 <%- else %>
-		<table id='user_search_results'>
+		<table id='user_search_results' class='table table-stripped'>
 		<tr>
-			<th>Name</th>
-			<th>Email</th>
-			<th>Role</th>
-			<th>Other</th>
+			<th>User</th>
+			<th>Conference</th>
+			<th>Precongress</th>
+			<th>Gala</th>
 		</tr>
 		
 	<%- @users.each do |user| %>
 		<tr>
-			<td><%= user.first_name + " " + user.last_name %></td>
-			<td><%= user.email %></td>
-			<td><%= user.role %></td>
-			<td>
-				<%= link_to "Users Dash", after_sign_in_path_for(user)%>
+			<td><%= user.first_name + " " + user.last_name %><br>
+				<%= user.email %><br>
+				<%= user.role %><br>
 				<%= link_to "Make Reviewer", change_role_user_path(user, :new_role => 'reviewer'), method: :post if user.role == "attendee" %> 
 				<%= link_to "Make Attendee", change_role_user_path(user, :new_role => 'attendee'), method: :post if user.role == "reviewer" %>
-				
+				<br>
+				<%= link_to "Dashboard", after_sign_in_path_for(user), :class => 'btn btn-primary' %>
 			</td>
+			<td>Pending</td>
+			<td>Unregistered</td>
+			<td>Registered</td>
 		</tr>
 	<%- end %>
 		</table>
