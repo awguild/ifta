@@ -1,5 +1,8 @@
 class IftaMembersController < ApplicationController
   
+  def index
+    @members = IftaMember.all
+  end
   def mass_new
     authorize! :update, IftaMember
   end

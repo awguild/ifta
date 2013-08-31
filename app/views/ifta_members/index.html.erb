@@ -1,0 +1,8 @@
+<%- content_for :nav do %>
+	<%= render :partial => "layouts/admin_nav" %>
+<%- end %>
+
+<h1>Ifta Members</h1>
+<ul>
+<%= render :partial => 'ifta_members/member', :collection => @members %>
+</ul>

@@ -1,11 +1,11 @@
-<%- conference ||= Conference.active %>
+<%- conference = @conference || Conference.active %>
 <li class="dropdown">
 	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Conference<b class="caret"></b></a>
 	<ul class="dropdown-menu">
 		<li><%= link_to "Settings", edit_conference_path(conference)%></li>
 		<li><%= link_to "Pricing", edit_conference_path(conference, pricing: true)%></li>
-		<li><%= link_to "Manage Discounts", conference_discounts_path(@conference)%></li>
-		<li><%= link_to "New Discount", new_conference_discount_path(@conference)%></li>
+		<li><%= link_to "Manage Discounts", conference_discounts_path(conference)%></li>
+		<li><%= link_to "New Discount", new_conference_discount_path(conference)%></li>
 	</ul>
 </li>
 <li class="dropdown">
