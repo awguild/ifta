@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-datepicker
-//= require jquery.timepicker.js
 //= require_tree .
 
 $(function(){
@@ -28,6 +27,6 @@ $(function(){
 	});
 
   	//date picker
-    $('.datepicker').datepicker();
+    $('.datepicker').datepicker({ dateFormat: 'yyyy-mm-dd' });
 });
 

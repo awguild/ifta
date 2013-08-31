@@ -13,6 +13,8 @@ gem "paper_trail"
 gem 'delayed_job_active_record'
 gem 'will_paginate', '> 3.0'
 gem 'newrelic_rpm'
+gem 'validates_timeliness'
+
 group :production do
   gem 'therubyracer', :platform => :ruby
 end
