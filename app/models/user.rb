@@ -15,9 +15,11 @@ class User < ActiveRecord::Base
                   :emergency_relationship, :emergency_telephone, :emergency_email
   
   belongs_to :country
-  has_many :transactions
-  has_many :payments, :through => :transactions
   has_many :itineraries
+  has_many :transactions, :through => :itineraries
+  has_many :line_items, :through => :transactions
+  has_many :conference_items, :through => :line_items
+  has_many :payments, :through => :transactions
   belongs_to :ifta_member, primary_key: 'email', foreign_key: 'ifta_member_email'
   has_many :reviews, foreign_key: 'reviewer_id'
   validates :first_name, :presence => true, :unless => 'new_record?'
@@ -44,12 +46,43 @@ class User < ActiveRecord::Base
     options[:last_name] ||= ""
     where('email LIKE ? AND first_name LIKE ? AND last_name LIKE ?', options[:email] + "%", options[:first_name] + "%", options[:last_name] + "%")
   end
-  
+
+  def item_status(item)
+    @sorted_items ||= sort_line_items
+    return "Paid" if @sorted_items[:paid].include?(item.id)
+    return "Pending" if @sorted_items[:unpaid].include?(item.id)
+    return "--"
+  end
+
+  def item_comment(item)
+    @item_comments ||= extract_line_item_comments
+    return @item_comments[item.id]
+  end
+
   private
   def set_country_category  
     update_column(:country_category, Country.find(self.country_id).category) unless country_id.blank?
   end
-  
-  
+
+  def sort_line_items
+    sorted = {:paid => [], :unpaid => []}
+    line_items.each do |line_item| 
+      if line_item.paid
+        sorted[:paid] << line_item.conference_item_id
+      else
+        sorted[:unpaid] << line_item.conference_item_id
+      end
+    end
+    return sorted
+  end
+
+  def extract_line_item_comments
+    comments = {}
+    line_items.each do |line_item|
+      comments[line_item.conference_item_id] = line_item.comment
+    end
+    return comments
+  end
+
 end
 

@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   
   def index
     @conference = Conference.active
-    @users = User.search_for_user(params).page(params[:page]).per_page(20) #search is an intersection not union
+    @conference_items = @conference.conference_items
+    @users = User.search_for_user(params).includes(:line_items).page(params[:page]).per_page(150) #search is an intersection not union
     authorize! :list, User
   end
   

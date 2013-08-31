@@ -32,15 +32,15 @@
 <%- if @users.blank? %>
 	No matching users
 <%- else %>
-		<table id='user_search_results' class='table table-stripped'>
+		<table id='user_search_results' class='table table-striped'>
 		<tr>
 			<th>User</th>
-			<th>Conference</th>
-			<th>Precongress</th>
-			<th>Gala</th>
+			<%- @conference_items.each do |item| %>
+				<th><%= item.name %></th>
+			<%- end %>
 		</tr>
 		
-	<%- @users.each do |user| %>
+		<%- @users.each do |user| %>
 		<tr>
 			<td><%= user.first_name + " " + user.last_name %><br>
 				<%= user.email %><br>
@@ -50,11 +50,15 @@
 				<br>
 				<%= link_to "Dashboard", after_sign_in_path_for(user), :class => 'btn btn-primary' %>
 			</td>
-			<td>Pending</td>
-			<td>Unregistered</td>
-			<td>Registered</td>
+			<%- @conference_items.each do |item| %>
+				<td>
+					<%- if !user.item_comment(item).nil? %>
+						<%= user.item_comment(item) %><br>
+					<%- end %>
+					<%= user.item_status(item) %></td>
+			<%- end %>
 		</tr>
-	<%- end %>
+		<%- end %>
 		</table>
 		
 	<div class="digg_pagination">
