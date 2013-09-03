@@ -1,5 +1,5 @@
 $(function(){
-    $('.timepicker').each(formatInputDate);    
+    $('.timepicker').each(formatInputDate);
 })
 
 function formatInputDate(){

@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-datepicker
+//= require jquery.ui.all
 //= require_tree .
 
 $(function(){
@@ -27,6 +27,10 @@ $(function(){
 	});
 
   	//date picker
-    $('.datepicker').datepicker({ dateFormat: 'yyyy-mm-dd' });
+    $('.datepicker').live("mousedown", function(){
+    	$(this).datepicker({ dateFormat: 'yy-mm-dd' });
+    });
+
+    $('.add_fields').addClass("btn btn-primary");
 });
 
