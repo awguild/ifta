@@ -39,6 +39,7 @@ Iftaconferenceapp::Application.routes.draw do
   resources :conferences do
     resources :discounts
     resource :schedule
+    resources :rooms
   end
   resources :reviews
   
