@@ -15,7 +15,7 @@ Iftaconferenceapp::Application.routes.draw do
   
   #proposal routes
   get 'conference/:id/proposals' => 'proposals#index', :as => :conference_proposals  
-  get 'conference/:id/proposals' => 'proposals#index', :as => :conference_proposals  
+  get 'conference/:id/unslotted-proposals' => 'proposals#unslotted', :as => :unslotted_proposals  
   
   devise_for :users, :controllers => { :registrations => "users/registrations", :passwords => "devise/passwords" } do 
     get 'users/sign_out' => 'devise/sessions#destroy'

@@ -53,4 +53,9 @@ class ProposalsController < ApplicationController
     @proposals = @proposals.page(params[:page]).per_page(150).includes(:itinerary, :presenters)
     @review = Review.new
   end
+
+  def unslotted
+    authorize! :index, Proposal
+    @proposals = Proposal.unslotted.includes(:presenters)
+  end 
 end

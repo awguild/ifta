@@ -1,0 +1,19 @@
+<h1>Unslotted Accepted Proposals</h1>
+<table class="table-striped">
+	<tr>
+		<th>ID#</th>
+		<th>Title</th>
+		<th>Presenters</th>
+	</tr>
+<%- @proposals.each do |proposal| %>
+<tr>
+	<td><%= proposal.id %></td>
+	<td><%= proposal.title %></td>
+	<td>
+		<%- proposal.presenters.each do |presenter| %>
+			<%= presenter.first_name + " " + presenter.last_name + " " + presenter.email %><br>
+		<%- end %>
+	</td>
+</tr>
+<%- end %>
+</table>
