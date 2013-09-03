@@ -1,0 +1,19 @@
+<%#  awful awful view logic to show day label if the day is changing %>
+<%- slot = f.object %>
+<%- @current_day = slot.time_slot.day_id %>
+<%- @prev_day ||= -1 %>
+<%- if @current_day != @prev_day  %>
+	<%- @prev_day = @current_day %>
+	<h1><%= slot.time_slot.day.label %></h1>
+<%-end %>
+
+<%# I'm going to cry ;,( more view logic to show the time slot code if it changed %>
+<%- @current_time_slot = slot.time_slot.id %>
+<%- @prev_time_slot ||= -1 %>
+<%- if @current_time_slot != @prev_time_slot %>
+	<%- @prev_time_slot = @current_time_slot %>
+	<h4><%= slot.time_slot.code  + " " + slot.time_slot.start_time.strftime("%I:%M%p")  + "-" + slot.time_slot.end_time.strftime("%I:%M%p") %></h4>
+	<%# link_to_add_fields "Add Slot", schedule_builder, :slots %>
+<%- end %>
+<%= render :partial => 'schedules/slot_fields', :locals => {:f => f}  %>
+<br>

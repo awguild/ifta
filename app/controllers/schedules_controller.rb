@@ -2,6 +2,8 @@ class SchedulesController < ApplicationController
   def show
     @conference = Conference.find(params[:conference_id])
     @schedule = @conference.schedule
+    @slots = @schedule.slots.includes([:proposal, :room, {:time_slot => :day}])
+    @rooms = @conference.rooms
     authorize! :show, @schedule
   end
   
@@ -12,12 +14,19 @@ class SchedulesController < ApplicationController
   end
   
   def update
-    @schedule = Conference.find(params[:conference_id]).schedule
+    @conference = Conference.find(params[:conference_id])
+    @schedule = @conference.schedule
     authorize! :update, @schedule
     if @schedule.update_attributes params[:schedule]
       redirect_to after_sign_in_path_for(current_user), :notice => 'Schedule successfully updated'
     else
-      render :action => 'edit'
+      if params[:update_proposals]
+            @slots = @schedule.slots
+            @rooms = @conference.rooms
+            render :action => 'show'
+      else
+        render :action => 'edit'
+      end
     end
   end
 end

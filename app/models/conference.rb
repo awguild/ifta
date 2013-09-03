@@ -11,6 +11,8 @@ class Conference < ActiveRecord::Base
   has_many :itineraries
   has_many :proposals, :through => :itineraries
   has_one :schedule
+  has_many :rooms, :through => :schedule
+  has_many :slots, :through => :schedule
   
   accepts_nested_attributes_for :conference_items, allow_destroy: true
   

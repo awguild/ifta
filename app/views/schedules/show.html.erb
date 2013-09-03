@@ -4,20 +4,15 @@
 
 <h1><%= @schedule.conference.conference_year %> Conference Schedule</h1>
 
+
 <div id='schedule_table'>
 	<h1>Schedule</h1>
-	<%- @schedule.days.each do |day| %>
-		<div class='schedule_day'>
-		<h3><%= day.label %></h3>
-			<%- day.time_slots.each do |time_slot| %>
-			<div class='schedule_time_slot'>
-				<b><%= time_slot.code + " " + time_slot.start_time.strftime("%I:%M%p")  + "-" + time_slot.end_time.strftime("%I:%M%p")%></b>
-					<%- (time_slot.slots).each_with_index do |slot, index| %>
-						<div class='slot'><%= index %></div>
-					<%- end %>
-			<%- end %>
-			</div>	
-		<hr>	
-		</div>
-	<%- end%>
+	<%= simple_form_for [@conference, @schedule], :class => 'form-horizontal' do |f| %> 
+	<%= render :partial => 'shared/error_messages', :locals => {:object => @schedule}%>
+		<%= hidden_field_tag :update_proposals, true %>
+		<%= f.fields_for :slots, @slots do |g| %>
+			<%= render :partial => 'schedules/time_slots', :locals => {:f => g, :schedule_builder => f} %>
+		<%- end %>
+		<%= f.submit %>
+	<%- end %>
 </div>
