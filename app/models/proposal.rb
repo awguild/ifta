@@ -34,7 +34,7 @@ class Proposal < ActiveRecord::Base
   #scope :unreviewed, lambda {where('proposals.id NOT IN (' + reviewed.select('proposals.id').to_sql + ')')}
   scope :unreviewed, where(:status => nil)
   scope :reviewed, joins(:reviews)
-  scope :unslotted, joins("LEFT OUTER JOIN slots ON slots.proposal_id = proposals.id").where("slots.proposal_id IS NULL")
+  scope :unslotted, joins("LEFT OUTER JOIN slots ON slots.proposal_id = proposals.id").where("slots.proposal_id IS NULL AND proposals.status='accept'")
   def keyword_options
 return [["Abuse and Domestic Violence",
   [
