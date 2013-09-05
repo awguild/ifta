@@ -20,6 +20,6 @@ class IftaMember < ActiveRecord::Base
   #returns the array of all of those hashes
   def self.emails_to_members_array (raw_emails)
     raw_emails = raw_emails.strip
-    raw_emails.split(/[\s]*[\,\s]+[\s]*/).map { |email| {:email => email}} 
+    raw_emails.split(/[\s]*[\,\s]+[\s]*/).uniq.map { |email| {:email => email}} 
   end
 end
