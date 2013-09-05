@@ -19,7 +19,7 @@ class IftaMember < ActiveRecord::Base
   #then takes that array of email addresses and makes each one a hash that could be used to create a member
   #returns the array of all of those hashes
   def self.emails_to_members_array (raw_emails)
-    raw_emails = raw_emails.strip
+    raw_emails = raw_emails.strip.downcase
     raw_emails.split(/[\s]*[\,\s]+[\s]*/).uniq.map { |email| {:email => email}} 
   end
 end
