@@ -23,6 +23,7 @@
 		<%= f.submit "accept", name: 'review[status]', :class => 'btn btn-primary' %>
 		<%= f.submit "decline", name: 'review[status]', :class => 'btn btn-primary'   %>
 		<%= f.submit "wait list", name: 'review[status]', :class => 'btn btn-primary'   %>
+		<%= f.submit "drop out", name: 'review[status]', :class => 'btn btn-primary'   %>
 		<%= f.label 'Send Emails' %>
 		<%= check_box_tag :send_emails, 1, true %>
 	<%- end %>
