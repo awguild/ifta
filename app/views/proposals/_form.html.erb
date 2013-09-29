@@ -3,6 +3,21 @@
 <%= render :partial => 'shared/error_messages', :locals => {:object => @proposal} %>
 
 <%= f.hidden_field :student %>
+<h3>Language</h3>
+<p>Workshops will be presented in English, Spanish or Portuguese.  Please tell us which languages you speakfluently and would be willing to speak in your workshop.  Check as many as apply.
+The Program Committee will make the decision as which language you will present in based on the number and balance of the proposals.  </p>
+<p>Los talleres serán presentados en Inglés, español o portugués. Por favor díganos qué idiomas hablas con fluidez y estaría dispuesto a hablar en su taller. Ver todas las que correspondan.
+El Comité del Programa tomará la decisión que el idioma que va a presentar en función del número y el equilibrio de las propuestas.</p>
+<p>Workshops serão apresentados em Inglês, Espanhol ou Português. Por favor, diga-nos quais idiomas você falar fluentemente e estaria disposto a falar em sua oficina. Confira como muitos como aplicar.
+O Comitê de Programa vai tomar a decisão de qual linguagem você vai apresentar em com base no número e equilíbrio das propostas.</p> 
+
+	<%= f.label :language_english, 'English' %>
+	<%= f.check_box :language_english %><br>
+	<%= f.label :language_spanish, 'Spanish' %>
+	<%= f.check_box :language_spanish %><br>
+	<%= f.label :language_portuguese, 'Portuguese' %>
+	<%= f.check_box :language_portuguese %><br>
+<hr>
 
 <h3>Presentation Format</h3>	
 	<%= f.radio_button :format, "poster"%> <%= f.label :format_poster, "Poster Display" %> 

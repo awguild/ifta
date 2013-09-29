@@ -1,5 +1,5 @@
 class Proposal < ActiveRecord::Base
-  attr_accessible :format, :category, :title, :short_description, :long_description, :student, :agree, :presenters_attributes, :no_equipment, :sound, :projector, :keywords
+  attr_accessible :format, :category, :title, :short_description, :long_description, :student, :agree, :presenters_attributes, :no_equipment, :sound, :projector, :keywords, :language_english, :language_spanish, :language_portuguese
   
   has_paper_trail #object versioning, don't let the users delete yo data!
   
@@ -108,6 +108,14 @@ return [["Abuse and Domestic Violence",
     "Spirituality",
   ]
 ]]
+end
+
+def show_languages
+  languages = ""
+  languages += "English, " if language_english
+  languages += "Spanish, " if language_spanish
+  languages += "Portugese, " if language_portuguese
+  languages.chomp(", ")
 end
   private
   
