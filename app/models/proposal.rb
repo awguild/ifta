@@ -24,12 +24,13 @@ class Proposal < ActiveRecord::Base
   validates :category, :presence => true
   validates :title, :presence => true
   validates_associated :presenters
+  validates :presenters, :length => {:maximum => 4, :message => 'the maximum number of presenters is 4'}
   validates :agree, :acceptance => {:accept => true}
   
   #accepts_nested_attributes_for :proposal_multimedia, allow_destroy: true
   accepts_nested_attributes_for :presenters, allow_destroy: true
   
-  after_initialize :add_self_as_presenter, :if => "self.new_record?"
+  after_initialize :add_self_as_presenter, :if => "self.new_record? && presenters.length == 0"
   scope :current, lambda{ joins(:itinerary).select('proposals.*,itineraries.conference_id').joins('INNER JOIN conferences ON conferences.id = conference_id').where('conference_id = ?', Conference.active)}
   #scope :unreviewed, lambda {where('proposals.id NOT IN (' + reviewed.select('proposals.id').to_sql + ')')}
   scope :unreviewed, where(:status => nil)
