@@ -3,7 +3,7 @@ class Proposal < ActiveRecord::Base
   
   has_paper_trail #object versioning, don't let the users delete yo data!
   
-  has_many :presenters
+  has_many :presenters, :dependent => :destroy
   belongs_to :itinerary
   has_many :reviews
   delegate :user, :to => :itinerary
@@ -29,7 +29,7 @@ class Proposal < ActiveRecord::Base
   #accepts_nested_attributes_for :proposal_multimedia, allow_destroy: true
   accepts_nested_attributes_for :presenters, allow_destroy: true
   
-  after_initialize :add_self_as_presenter, :if => "presenters.blank?"
+  after_initialize :add_self_as_presenter, :if => "self.new_record?"
   scope :current, lambda{ joins(:itinerary).select('proposals.*,itineraries.conference_id').joins('INNER JOIN conferences ON conferences.id = conference_id').where('conference_id = ?', Conference.active)}
   #scope :unreviewed, lambda {where('proposals.id NOT IN (' + reviewed.select('proposals.id').to_sql + ')')}
   scope :unreviewed, where(:status => nil)
@@ -120,13 +120,13 @@ end
   private
   
   def add_self_as_presenter
-    presenter_attributes = {
-      first_name: user.first_name,
-      last_name: user.last_name,
-      home_telephone: user.phone,
-      email: user.email
-    }
-    presenters.build(presenter_attributes)
+      presenter_attributes = {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        home_telephone: user.phone,
+        email: user.email
+      }
+      presenters.build(presenter_attributes)
   end
   
   def self.search(options)
