@@ -2,3 +2,4 @@
 <li><%= link_to "Accepted", conference_proposals_path(Conference.active, 'query[accept]' => true) %></li>
 <li><%= link_to "Declined", conference_proposals_path(Conference.active, 'query[decline]' => true) %></li>
 <li><%= link_to "Wait Listed", conference_proposals_path(Conference.active, 'query[wait_list]' => true) %></li>
+<li><%= link_to "Drop Outs", conference_proposals_path(Conference.active, 'query[drop_out]' => true) %></li>

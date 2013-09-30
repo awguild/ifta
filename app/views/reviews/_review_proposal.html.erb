@@ -1,12 +1,14 @@
 <div id='proposal_<%= proposal.id %>'>
 	<strong>Proposal #<%= proposal.id %></strong> <%= link_to "Edit", edit_itinerary_proposal_path(proposal.itinerary, proposal)%><br>
+	<em>Languages:</em> <%= proposal.show_languages %><br>
 	<em>Title:</em> <%= proposal.title %>  <br>
 	<em>Short:</em> <%= proposal.short_description %><br>
 	<em>Long:</em> <%= proposal.long_description %><br>
 	<em>Format:</em> <%= proposal.format %> <br>
 	<em>Keywords:</em> <%= proposal.keywords %><br>
 	<em>Category:</em> <%= proposal.category %><br>
-	
+	<em>AV:</em> <%= proposal.sound ? "Yes" : "No" %><br>
+	<em>Projector:</em> <%= proposal.projector ? "Yes" : "No" %><br>
 	<em>Presenters:</em> 
 		<%- proposal.presenters.each_with_index do |presenter, index| %>
 			<%= "<span style='color: red;'>*</span>".html_safe if presenter.other_presentations %>
@@ -22,6 +24,7 @@
 		<%= f.submit "accept", name: 'review[status]', :class => 'btn btn-primary' %>
 		<%= f.submit "decline", name: 'review[status]', :class => 'btn btn-primary'   %>
 		<%= f.submit "wait list", name: 'review[status]', :class => 'btn btn-primary'   %>
+		<%= f.submit "drop out", name: 'review[status]', :class => 'btn btn-primary'   %>
 		<%= f.label 'Send Emails' %>
 		<%= check_box_tag :send_emails, 1, true %>
 	<%- end %>

@@ -1,6 +1,7 @@
 <div <%- if transaction.paid -%> class='paid'<%- else -%>class='unpaid'<%- end -%>>
 
 <%= transaction.user.first_name + " " + transaction.user.last_name -%><br>
+Method: <%= transaction.payment_method %><br>
 <%- transaction.line_items.each do |line_item| %>
 	<%= line_item.conference_item.name %>
 	$<%= sprintf "%.2f", line_item.price %><br>

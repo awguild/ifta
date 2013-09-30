@@ -33,6 +33,16 @@ class ConferenceItem < ActiveRecord::Base
     return price.blank? ? nil : price.amount 
   end
   
+  #loads and sorts price objects for the given conference item
+  def sorted_regular_prices
+    if self.new_record?
+      # since this is a new conference item there won't be any existing prices created for this item so we don't need to exclude discounts
+      self.prices.sort!
+    else
+      #exclude all of the prices created for this item that have a discount key set
+      self.regular_prices.sort! 
+    end
+  end
   def self.regular_priced_items(user)
     current_active.joins(:prices).where('prices.country_category=? AND prices.member=?', user.country_category, user.member).select("conference_items.*, prices.amount as price")
   end
