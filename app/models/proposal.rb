@@ -118,8 +118,39 @@ def show_languages
   languages += "Portugese, " if language_portuguese
   languages.chomp(", ")
 end
-  private
   
+def self.accepted_and_unregistered(conference)
+  report = {}
+  conference.proposals.where(:status => 'accept').includes(:presenters).each do |proposal|
+    proposal.presenters.each do |presenter|
+      u = User.where(:email => presenter.email).first
+      if u.blank?
+        status = 'No User'
+      else
+        conference_registration = u.itineraries.where(:conference_id => conference).first.conference_items.where("name like ?", '%Conference%')
+        conference_ids = conference_registration.collect(&:id)
+        if conference_registration.blank?
+          status = 'Not registered'
+        elsif u.itineraries.where(:conference_id => conference).first.line_items.where("paid=? AND conference_item_id IN (?)", true, conference_ids).blank?
+          status = 'Pending Registration'
+        end
+      end
+
+      if !status.nil?
+        report[proposal.id] ||= {:proposal_title => proposal.title, :accepted_on => proposal.updated_at, :presenters => []}
+        report[proposal.id][:presenters] << {
+          :first_name => presenter.first_name,
+          :last_name => presenter.last_name,
+          :email => presenter.email,
+          :status => status
+        }
+      end
+    end
+  end
+  return report
+end
+
+  private
   def add_self_as_presenter
       presenter_attributes = {
         first_name: user.first_name,

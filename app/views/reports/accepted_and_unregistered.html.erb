@@ -1,0 +1,15 @@
+<%- content_for :nav do %>
+	<%= render :partial => "layouts/admin_nav" %>
+<%- end %>
+
+<h1>Accepted and Unregistered</h1>
+<p><em>Note this report will only work if the confernce event has 'Conference' in its name</em></p>
+<%- @report.each do |key, item| %>
+	<b>Proposal:</b> <%= item[:proposal_title] %><br>
+	<em>Accepted on:</em> <%= item[:accepted_on].to_date %><br>
+	<em>Presenters</em><br>
+	<%- item[:presenters].each do |presenter| %>
+		<%= presenter[:first_name] + " " + presenter[:last_name] + " (" + presenter[:email] + ") " + presenter[:status] %><br>
+	<%- end %>
+	<hr>
+<%- end %>
