@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711111221) do
+ActiveRecord::Schema.define(:version => 20130928234556) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -158,19 +158,22 @@ ActiveRecord::Schema.define(:version => 20130711111221) do
     t.string   "format"
     t.string   "category"
     t.string   "title"
-    t.text     "short_description", :limit => 255
-    t.text     "long_description",  :limit => 255
+    t.text     "short_description",   :limit => 255
+    t.text     "long_description",    :limit => 255
     t.boolean  "student"
     t.boolean  "agree"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.integer  "itinerary_id"
     t.boolean  "no_equipment"
     t.boolean  "sound"
     t.boolean  "projector"
-    t.boolean  "locked",                           :default => false
+    t.boolean  "locked",                             :default => false
     t.string   "status"
     t.string   "keywords"
+    t.boolean  "language_english",                   :default => true
+    t.boolean  "language_spanish"
+    t.boolean  "language_portuguese"
   end
 
   add_index "proposals", ["itinerary_id"], :name => "index_proposals_on_itinerary_id"

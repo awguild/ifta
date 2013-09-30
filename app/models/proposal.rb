@@ -1,9 +1,9 @@
 class Proposal < ActiveRecord::Base
-  attr_accessible :format, :category, :title, :short_description, :long_description, :student, :agree, :presenters_attributes, :no_equipment, :sound, :projector, :keywords
+  attr_accessible :format, :category, :title, :short_description, :long_description, :student, :agree, :presenters_attributes, :no_equipment, :sound, :projector, :keywords, :language_english, :language_spanish, :language_portuguese
   
   has_paper_trail #object versioning, don't let the users delete yo data!
   
-  has_many :presenters
+  has_many :presenters, :dependent => :destroy
   belongs_to :itinerary
   has_many :reviews
   delegate :user, :to => :itinerary
@@ -24,12 +24,13 @@ class Proposal < ActiveRecord::Base
   validates :category, :presence => true
   validates :title, :presence => true
   validates_associated :presenters
+  validates :presenters, :length => {:maximum => 4, :message => 'the maximum number of presenters is 4'}
   validates :agree, :acceptance => {:accept => true}
   
   #accepts_nested_attributes_for :proposal_multimedia, allow_destroy: true
   accepts_nested_attributes_for :presenters, allow_destroy: true
   
-  after_initialize :add_self_as_presenter, :if => "presenters.blank?"
+  after_initialize :add_self_as_presenter, :if => "self.new_record? && presenters.length == 0"
   scope :current, lambda{ joins(:itinerary).select('proposals.*,itineraries.conference_id').joins('INNER JOIN conferences ON conferences.id = conference_id').where('conference_id = ?', Conference.active)}
   #scope :unreviewed, lambda {where('proposals.id NOT IN (' + reviewed.select('proposals.id').to_sql + ')')}
   scope :unreviewed, where(:status => nil)
@@ -109,16 +110,55 @@ return [["Abuse and Domestic Violence",
   ]
 ]]
 end
-  private
+
+def show_languages
+  languages = ""
+  languages += "English, " if language_english
+  languages += "Spanish, " if language_spanish
+  languages += "Portugese, " if language_portuguese
+  languages.chomp(", ")
+end
   
+def self.accepted_and_unregistered(conference)
+  report = {}
+  conference.proposals.where(:status => 'accept').includes(:presenters).each do |proposal|
+    proposal.presenters.each do |presenter|
+      u = User.where(:email => presenter.email).first
+      if u.blank?
+        status = 'No User'
+      else
+        conference_registration = u.itineraries.where(:conference_id => conference).first.conference_items.where("name like ?", '%Conference%')
+        conference_ids = conference_registration.collect(&:id)
+        if conference_registration.blank?
+          status = 'Not registered'
+        elsif u.itineraries.where(:conference_id => conference).first.line_items.where("paid=? AND conference_item_id IN (?)", true, conference_ids).blank?
+          status = 'Pending Registration'
+        end
+      end
+
+      if !status.nil?
+        report[proposal.id] ||= {:proposal_title => proposal.title, :accepted_on => proposal.updated_at, :presenters => []}
+        report[proposal.id][:presenters] << {
+          :first_name => presenter.first_name,
+          :last_name => presenter.last_name,
+          :email => presenter.email,
+          :status => status
+        }
+      end
+    end
+  end
+  return report
+end
+
+  private
   def add_self_as_presenter
-    presenter_attributes = {
-      first_name: user.first_name,
-      last_name: user.last_name,
-      home_telephone: user.phone,
-      email: user.email
-    }
-    presenters.build(presenter_attributes)
+      presenter_attributes = {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        home_telephone: user.phone,
+        email: user.email
+      }
+      presenters.build(presenter_attributes)
   end
   
   def self.search(options)
