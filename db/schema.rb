@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(:version => 20130928234556) do
   create_table "conference_items", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.boolean  "multiple",                           :default => false
+    t.boolean  "multiple",            :default => false
     t.integer  "max"
     t.integer  "conference_id"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
-    t.boolean  "visibility",          :limit => 255
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.boolean  "visibility"
     t.boolean  "manual_price"
     t.boolean  "user_comment"
     t.string   "user_comment_prompt"
@@ -111,6 +111,10 @@ ActiveRecord::Schema.define(:version => 20130928234556) do
   add_index "line_items", ["itinerary_id"], :name => "index_line_items_on_itinerary_id"
   add_index "line_items", ["transaction_id"], :name => "index_line_items_on_transaction_id"
 
+  create_table "multimedia", :force => true do |t|
+    t.string "media_name"
+  end
+
   create_table "payments", :force => true do |t|
     t.integer  "transaction_id"
     t.integer  "amount",         :default => 0
@@ -158,20 +162,20 @@ ActiveRecord::Schema.define(:version => 20130928234556) do
     t.string   "format"
     t.string   "category"
     t.string   "title"
-    t.text     "short_description",   :limit => 255
-    t.text     "long_description",    :limit => 255
+    t.text     "short_description"
+    t.text     "long_description"
     t.boolean  "student"
     t.boolean  "agree"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.integer  "itinerary_id"
     t.boolean  "no_equipment"
     t.boolean  "sound"
     t.boolean  "projector"
-    t.boolean  "locked",                             :default => false
+    t.boolean  "locked",              :default => false
     t.string   "status"
     t.string   "keywords"
-    t.boolean  "language_english",                   :default => true
+    t.boolean  "language_english",    :default => true
     t.boolean  "language_spanish"
     t.boolean  "language_portuguese"
   end
@@ -209,8 +213,8 @@ ActiveRecord::Schema.define(:version => 20130928234556) do
     t.integer  "room_id"
     t.string   "code"
     t.text     "comments"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "time_slots", :force => true do |t|
