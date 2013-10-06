@@ -38,6 +38,15 @@ class Conference < ActiveRecord::Base
   def registration_count
     line_items.count
   end
+
+  def registration_breakdown
+    @report = [];
+    @conference_items = conference_items
+    @conference_items.each do |item|
+      @report << [item.name, item.line_items.where(paid: true).count]
+    end
+    return @report
+  end
   
   private
   #creates a schedule for this conference

@@ -44,6 +44,6 @@ Iftaconferenceapp::Application.routes.draw do
   resources :reviews
 
   #reports
-  get 'conferences/:id/accepted_and_unregistered' => 'reports#accepted_and_unregistered', :as => :accepted_and_unregistered
-  
+  get 'conferences/:id/accepted_and_unregistered' => 'reports#accepted_and_unregistered', :as => :accepted_and_unregistered_report
+  get 'conferences/:id/registration_breakdown' => 'reports#registration_breakdown', :as => :registration_breakdown_report
 end
