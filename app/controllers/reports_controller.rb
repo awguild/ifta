@@ -13,4 +13,10 @@ class ReportsController < ApplicationController
 		@report = @conference.registration_breakdown
 		respond_with @report
 	end
+
+	def student_presentations
+		@conference = Conference.find(params[:id])
+		authorize! :report, @conference
+		@report = @conference.proposals.where(:student => true)
+	end
 end

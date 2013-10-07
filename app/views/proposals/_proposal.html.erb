@@ -3,6 +3,6 @@
 <em>Long Description: </em><%= proposal.long_description %><br>
 <em>Presenters: </em>
 <%- proposal.presenters.each do |presenter| %>
-	<%= presenter.first_name + " " + presenter.last_name + " "%>
+	<%= presenter.first_name + " " + presenter.last_name + ", "%>
 <%- end %><br>
 <hr>
