@@ -1,0 +1,7 @@
+<%- content_for :nav do %>
+	<%= render :partial => "layouts/admin_nav" %>
+<%- end %>
+<h1>Student Presentations</h1>
+<%- @report.each do |proposal| %>
+	<%= render partial: 'proposals/proposal', locals: {proposal: proposal} %>
+<%- end %>
