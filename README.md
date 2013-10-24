@@ -1,89 +1,90 @@
 IFTA Conference Managment System
-================================
+=========================
 
-Non Gem Requirements
---------------------
-OpenSSL
-
-Purpose
--------
+##Purpose
 This application handles various aspects of running IFTA's annual conference including:
 
 * Attendees signing up, registering for events, paying, and submitting proposals.
 * Reviewers accepting/rejecting/wait-listing proposals.
 * Admins declaring events, pricing events, declaring discounts, managing payments, scheduling, and other tasks. 
 
-Some of the logic is specific to IFTA's conference needs but eventually large portions of the project can be refactored into a conference managment plugin.
 
-Setup
------
-* Rename config/applicaiton.example.yml to config/applicaiton.yml and fill in blank values with your own information
-* Certificate for paypal (commands should be run in the certs directory)
+##Developer Setup
 
- 1. Generate the private key *openssl genrsa -out app_key.pem 1024*
- 2. Generate the certificate *openssl req -new -key app_key.pem -x509 -days 365 -out app_cert.pem*
- 3. Upload your certificate to your paypal account
- 4. Copy the certificate id paypal gives you and put it in your application.yml file
-* Create production database if you intend to run in production mode
-* Install gems *bundle install*
-* Migrate and seed databases *bundle exec rake initial_setup*
+### Supporting Software
+1. [Download Git](http://git-scm.com/downloads)
+1. [Virtualbox](https://www.virtualbox.org/wiki/Downloads) & [Vagrant](http://www.vagrantup.com/) or Install MySQL natively with [XAMPP](http://www.apachefriends.org/en/xampp.html)
+1. Download a Ruby manger [Pik](http://rubyinstaller.org/add-ons/pik/) (Windows)  [rbenv](https://github.com/sstephenson/rbenv) or [RVM](https://rvm.io/rvm/install), (Mac) 
+1. Install Ruby 2.0.0 as per your Ruby manger's guide
+1. Suggested Text editor [Sublime](http://www.sublimetext.com/2)
+1. Suggested MySQL GUI's [Heidi SQL](http://www.heidisql.com/download.php) (Windows) [Seque Pro](http://www.sequelpro.com/) (Mac)
+1. Suggested Git GUI [Offical](http://git-scm.com/downloads/guis)
 
-Coming Soon
--------------------
-Still haven't gotten to version 1.0 yet. The top of the todo list includes
-  
-* Discounts
-* Scheduling
-* RSpec tests :)
+### Supporting files
+1. Request the latest sql dump from the Augie Web guild 
+1. Copy the application.example.yml file and rename it application.yml 
+1. Fill in application.yml with your own information (contact the web guild for help)
+1. Generate certificates as described below
+
+### Vagrant Setup
+Vagrant is a tool that helps you easily create and destroy virtual machines by using a Vagrantfile.  This repo has two Vagrantfiles.  
+
+* Vagrantfile.base - sets up an Ubuntu 13.04 box running Ruby 1.9.3. You can then install MySQL, install the app's gems, run database migrations, seed the database, and package that fully provisioned box into a vagrant box called *ifta.pkg*
+
+* Vagrantfile.developer -This Vagrantfile gets used to start up the ifta box 
+
+*Note: Commands should be run from your project directory*
+
+1. Add the ubuntu box locally ``` vagrant box add ubuntu http://goo.gl/Y4aRr ```
+1. Copy Vagrantfile.base and rename the copy Vagrantfile
+1. Start your VM
+```
+vagrant up 
+```
+1. Install gems 
+
+```
+vagrant ssh
+cd /vagrant
+bundle install
+exit
+```
+1. Install MySQL (set root password to password)
+```
+apt-get install mysql-server
+```
+1. Allow remote access to mysql server (so that you can access it from your host machine)
+
+```
+vagrant ssh
+sudo vi /etc/my.cnf
+[set bind-address=0.0.0.0]
+mysql -u root -p [when prompted the password is password]
+GRANT ALL ON *.* TO root@'%' IDENTIFIED BY 'password';
+exit
+exit
+```
+1. Load SQL data.  The easiest way to do this is to use your MySQL GUI.
+1. Package the box 
+```
+vagrant package --output ifta.pkg
+```
+1. Add the box to your local list
+```
+vagrant box add ifta ifta.pkg
+```
+1. Bring down your VM ``` vagrant destroy ```
+1. Delete Vagrantfile
+1. Copy Vagrantfile.developer and rename the copy Vagrantfile 
+###Testing Paypal
+If you want to test the IPN process you'll need to host the app on a publicly available host. Then follow these steps 
+
+1. Go to developer.paypal.com and make a sandbox account
+1. Upload the certificate to your paypal sandbox account
+1. Copy the certificate id paypal gives you and put it in your application.yml file
 
 
 
-This application is designed to handle various aspects of running IFTA's annual conference.
-*On the client front end this includes: sign up, event registration, payment, and proposal submission.
-*On the reviewer backend this includes: accepting/rejecting/wait-listing proposals.
-*On the admin backend this includes: declaring events, pricing those events, declaring discounts, setting messages to users, marking accepted payments, and other tasks. 
-
-
-
-NON GEM REQUIREMENTS
-OpenSSL
-
-
-CREATING PAYPAL CERTS
-Add cert to ifta's paypal
-
-
-
-
-DEVELOPMENT
-*Minimial steps for a working development environment 
-1. Bundle install
-2. Open the application.example.yml file and fill in relevant information, then rename the file applicaiton.yml
-3. bundle exec rake initial_setup
-
-*Extra Development Stuff
-If you want to test the IPN process you'll need to have the project on a publicly available host
-1. Go to developer.paypal.com make accounts
-2. Create Certs and put them in certs folder
-2. Upload certificates in certs folder
-
-
-
-
-
-PRODUCTION
-*To get the application up and running in production
-1. Set up a virtual host entry on the server
-2. Upload the rails files to the appropriate location (specified in your virtual host) 
-3. Set up MySQL user/password
-4. Create the MySQL database
-5. Create/Upload the public certificate for paypal
-6. Bundle install
-7. Open the application.example.yml file and fill in relevant information, then rename the file applicaiton.yml
-8. rake initial_setup
-
-
-
-
-#TODO write the RSpec tests
-#TODO I18n - pages and maybe even currency
+## TODO 
+1. Write the RSpec tests
+1. I18n 

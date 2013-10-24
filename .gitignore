@@ -11,8 +11,11 @@
 /db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
+.vagrant
 /log/*.log
 /tmp
 .project
 /config/application.yml
 /certs/app_*
+ifta.pkg
+Vagrantfile
