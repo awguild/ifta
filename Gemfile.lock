@@ -63,6 +63,7 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.7.5)
+    libv8 (3.16.14.3)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -105,6 +106,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     recaptcha (0.3.5)
+    ref (1.0.5)
     sass (3.2.3)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -119,6 +121,9 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
     sqlite3 (1.3.6-x86-mingw32)
+    therubyracer (0.12.0)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.16.0)
     tilt (1.3.3)
     timeliness (0.3.7)
@@ -137,6 +142,7 @@ GEM
     will_paginate (3.0.3)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
