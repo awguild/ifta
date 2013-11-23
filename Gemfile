@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
+ruby "2.0.0"
 
 gem 'rails', '3.2.8'
-gem 'sqlite3'
 gem 'devise', '2.1.2'
 gem 'cancan', '1.6.8'
 gem 'simple_form', '2.0.4'
