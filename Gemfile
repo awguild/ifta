@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.0.0"
+ruby "1.9.3"
 
 gem 'rails', '3.2.8'
 gem 'devise', '2.1.2'
@@ -15,7 +15,6 @@ gem 'will_paginate', '> 3.0'
 gem 'newrelic_rpm'
 gem 'validates_timeliness'
 gem 'jquery-ui-rails'
-gem 'paloma'
 
 group :production do
   gem 'therubyracer', :platform => :ruby

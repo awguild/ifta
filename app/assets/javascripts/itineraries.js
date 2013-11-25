@@ -3,7 +3,7 @@
 //allowed to add conference items if they are flagged as multiple=t 
 //in preperation for that functionality we attach the handler through live
 $(function() {
-$('.user_input_price').live("blur", function(){
+$('.user_input_price').on("blur", function(){
     var curVal = parseFloat($(this).val()),
         curInt = parseInt(curVal, 10),
         curDec = parseInt(curVal*100, 10) - parseInt(curInt*100, 10);

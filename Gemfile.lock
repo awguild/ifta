@@ -66,13 +66,11 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.25)
+    mime-types (1.25.1)
     multi_json (1.8.2)
     mysql2 (0.3.14)
     newrelic_rpm (3.6.9.171)
     orm_adapter (0.5.0)
-    paloma (3.0.2)
-      jquery-rails
     paper_trail (2.7.2)
       activerecord (~> 3.0)
       railties (~> 3.0)
@@ -149,7 +147,6 @@ DEPENDENCIES
   jquery-ui-rails
   mysql2
   newrelic_rpm
-  paloma
   paper_trail
   rails (= 3.2.8)
   recaptcha

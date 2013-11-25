@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
-//= require paloma
 //= require_tree .
 
 $(function(){
@@ -23,12 +22,12 @@ $(function(){
 	//formats telephone numbers.  
 	//nested presenter fields can be added to a proposal by the user after the DOM is loaded
 	//attaching the handler through live ensures those phone numbers are formatted too 
-	$('.phone_number').live("blur", function(){
+	$('.phone_number').on("blur", function(){
 		var number = $(this).val($(this).val().replace(/\D/g,''));
 	});
 
   	//date picker
-    $('.datepicker').live("mousedown", function(){
+    $('.datepicker').on("mousedown", function(){
     	$(this).datepicker({ dateFormat: 'yy-mm-dd' });
     });
 
