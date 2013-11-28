@@ -1,5 +1,6 @@
 IFTA Conference Managment System
 =========================
+[![Code Climate](https://codeclimate.com/github/awguild/ifta.png)](https://codeclimate.com/github/awguild/ifta)
 
 ##Purpose
 This application handles various aspects of running IFTA's annual conference including:
