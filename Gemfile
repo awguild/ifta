@@ -33,4 +33,5 @@ group :development, :test do
     gem 'rspec-rails'
     gem 'mocha'
     gem 'factory_girl_rails'
+    gem 'shoulda'
 end
