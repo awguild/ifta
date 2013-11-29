@@ -14,17 +14,34 @@ describe IftaMember do
   # the build method will instantiate a new IftaMember object but not save it to the test database
   # the parameter to build (:ifta_member) is how FactoryGirl looks up what object to build
   # inside of the spec/factories/ifta_members file we defined a factory with the symbol :ifta_member
-  let(:ifta_member) { FactoryGirl.build(:ifta_member)}
-
-
-  describe "testing association with user" do
-    #TODO
-    pending
-  end
+  let!(:ifta_member) { FactoryGirl.build(:ifta_member) }
 
   describe "testing uniquness validation" do
-    #TODO
-    pending
+    it "should create a uniquness error" do
+        # there are gems like shoulda that make it easier to test validations.  We'll use shoulda in the next test, but for now we'll write this verbose test
+        # first persist the ifta_member record to the database
+        ifta_member.save!
+        # next try to create another IftaMember with the same email address, it shouldn't add a record to the database
+        expect { IftaMember.create({email: ifta_member.email})}.to change{IftaMember.count}.by(0)
+    end
+  end
+
+  describe "testing association with user" do
+    # here we are going to save the IfaMember record to the database using create instead of build
+    # we can access this object using the member helper method, and this object was set up to have an associated user record
+    let(:member) { FactoryGirl.create(:member_with_user)}
+
+    # the default implied subject of the IftaMember describe block is an instance of IftaMember created by calling IftaMember.new
+    # we can set a different subject like this special ifta member with a user that we created
+    subject { member }
+
+    # the parameter to its (:user) gets called user called on the subject (which we set above)
+    # should also gets called on the subject 
+    its(:user) { should belong_to(:country)}
+
+    # Note: [method].should [matcher][params] has fallen out of favour in rspec
+    # the perfered syntax is now expect [Proc or method call].to [matcher][params]
+    # you'll see many examples that use the should syntax; combined with its you can write some very concise tests
   end
 
   describe "testing IftaMember#add_new_members" do
@@ -56,6 +73,7 @@ describe IftaMember do
       # use context blocks to wrap a series of tests that occur under the same state
       # this first group of tests is for when there is an existing member that should be removed
       context "when a member should be removed" do
+        # this before block will execute before each of the tests in this context
         before {
             ifta_member.save!
             IftaMember.count.should == 1
@@ -63,11 +81,13 @@ describe IftaMember do
 
         it "should have 2 ifta members" do
             IftaMember.replace_all_members_with('mdoe@example.com, ndoe@example.com')
+            # expect doesn't have to take a Proc, in this case it evaluates the code right away and uses the matcher (eq) to decide if the output is correct
             expect(IftaMember.count).to eq(2)
         end
 
         it "should remove the old ifta members" do
             IftaMember.replace_all_members_with('mdoe@example.com')
+            # you can use not_to to negate a matcher.  In this case we're using the include matcher to look through an array for a particular record
             expect(IftaMember.all).not_to include(ifta_member)
         end
 
