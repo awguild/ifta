@@ -28,3 +28,4 @@ env:
 deploy:
     api_key:
       secure: IXAPNgMy6LjS75vvPT4hb6BCcG2f/t+xFd9yJDRigeMkmQ14ZpVD9b+iSBt1tMZEPF+zWCMErOLSHW/LC9ZDDlCTGJC2cp0Pw3uONzCi2neLJS++pk6Jsh1ioRjfZ9rIsRrfTYDNTRAEy5npqoDCUI0tLJVVnHVQb8EWu1UUtvM=
+    app: 'ifta-stage'
