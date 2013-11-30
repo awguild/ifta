@@ -26,6 +26,7 @@ env:
   - MYSQL_USERNAME='root'
   - MYSQL_PASSWORD=''
 deploy:
-  provider: 'heroku'
-    secure: IXAPNgMy6LjS75vvPT4hb6BCcG2f/t+xFd9yJDRigeMkmQ14ZpVD9b+iSBt1tMZEPF+zWCMErOLSHW/LC9ZDDlCTGJC2cp0Pw3uONzCi2neLJS++pk6Jsh1ioRjfZ9rIsRrfTYDNTRAEy5npqoDCUI0tLJVVnHVQb8EWu1UUtvM=
-    app: 'ifta-stage'
+  provider: heroku
+  api_key:
+    secure: "CQ3eyHp+xYxw0GTHTGb+am33sTd0jSk5CQD5FIKEKrxkFQWCldQxyCT5c1hp+PuV/UEK0UbOBBJJqgeHhCdYempi+icppU9dsAHWkHf1vHingrg3Njg9DRpxk82mp/JlIasIX/OvXJRFkovnFp6JhlHXrO5tHdqE4B4ZTeYuq7c="
+  app: 'ifta-stage'
