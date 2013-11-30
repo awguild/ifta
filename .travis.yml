@@ -29,4 +29,5 @@ deploy:
   provider: heroku
   api_key:
     secure: "CQ3eyHp+xYxw0GTHTGb+am33sTd0jSk5CQD5FIKEKrxkFQWCldQxyCT5c1hp+PuV/UEK0UbOBBJJqgeHhCdYempi+icppU9dsAHWkHf1vHingrg3Njg9DRpxk82mp/JlIasIX/OvXJRFkovnFp6JhlHXrO5tHdqE4B4ZTeYuq7c="
-  app: 'ifta-stage'
+  app:
+    staging: 'ifta-stage'
