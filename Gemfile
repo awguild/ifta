@@ -15,6 +15,7 @@ gem 'will_paginate', '> 3.0'
 gem 'newrelic_rpm'
 gem 'validates_timeliness'
 gem 'jquery-ui-rails'
+gem 'foreman'
 
 group :production do
   gem 'therubyracer', :platform => :ruby
