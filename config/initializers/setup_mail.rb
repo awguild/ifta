@@ -1,5 +1,5 @@
 require 'development_mail_interceptor' 
-ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?  
+ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) unless Rails.env.production?  
 
 # SMTP Connection Settings
 ActionMailer::Base.delivery_method = :smtp
