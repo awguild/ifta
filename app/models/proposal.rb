@@ -9,6 +9,7 @@ class Proposal < ActiveRecord::Base
   delegate :user, :to => :itinerary
   delegate :conference, :to => :itinerary
   has_one :slot
+  has_one :room, :through => :slot
   
   validates :short_description, :length => {
     :maximum => 50,
