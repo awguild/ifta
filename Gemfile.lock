@@ -28,6 +28,7 @@ GEM
     activesupport (3.2.8)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    angularjs-rails (1.2.5)
     arel (3.0.3)
     bcrypt-ruby (3.1.2)
     bcrypt-ruby (3.1.2-x86-mingw32)
@@ -174,6 +175,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  angularjs-rails
   cancan (= 1.6.8)
   coffee-rails (~> 3.2.1)
   delayed_job_active_record

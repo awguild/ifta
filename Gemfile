@@ -16,6 +16,7 @@ gem 'newrelic_rpm'
 gem 'validates_timeliness'
 gem 'jquery-ui-rails'
 gem 'foreman'
+gem 'angularjs-rails'
 
 group :production do
   gem 'therubyracer', :platform => :ruby
