@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require angular
+//= require scheduler
 //= require_tree .
 
 $(function(){
