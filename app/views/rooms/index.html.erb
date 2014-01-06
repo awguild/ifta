@@ -2,4 +2,11 @@
 	<%= render :partial => "layouts/admin_nav" %>
 <%- end %>
 <h1>Conference Rooms</h1>
-<%= render "form" %>
+<!-- TODO error messages -->
+
+<div ng-app="schedulerApp" ng-controller="RoomsCtrl as rooms">
+    <div ng-repeat="room in rooms.rooms"
+        <div room='room'>
+    </div>
+    <a href="#" class="btn btn-primary">Add Room</a>
+</div>
