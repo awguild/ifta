@@ -56,8 +56,8 @@ class Transaction < ActiveRecord::Base
   end
   
   PAYPAL_CERT_PEM = File.read("#{Rails.root}/certs/" + CONFIG[:paypal_cert_pem])
-  APP_CERT_PEM = File.read("#{Rails.root}/certs/app_cert.pem")
-  APP_KEY_PEM = File.read("#{Rails.root}/certs/app_key.pem")
+  APP_CERT_PEM = "-----BEGIN CERTIFICATE-----\n" + CONFIG[:app_cert] + "\n-----END CERTIFICATE-----"
+  APP_KEY_PEM = "-----BEGIN RSA PRIVATE KEY-----\n" + CONFIG[:app_key] + "\n-----END RSA PRIVATE KEY-----"
 
   private 
   def encrypt_for_paypal(values)

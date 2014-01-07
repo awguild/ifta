@@ -15,3 +15,5 @@ paypal_cert_id: <%= ENV["PAYPAL_CERT_ID"] %>
 paypal_cert_pem: <%= ENV["PAYPAL_CERT_PEM"] %>
 mysql_username: <%= ENV["MYSQL_USERNAME"] %>
 mysql_password: <%= ENV["MYSQL_PASSWORD"] %>
+app_cert: <%= ENV["APP_CERT"] %>
+app_key: <%= ENV["APP_KEY"] %>
