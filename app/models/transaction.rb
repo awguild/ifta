@@ -14,7 +14,7 @@ class Transaction < ActiveRecord::Base
     options[:email] ||= ""
     options[:first_name] ||= "" 
     options[:last_name] ||= ""
-    where('paid IN (?)', options[:status]).joins(:itinerary => :user).where('users.first_name LIKE ? AND users.last_name LIKE ? AND users.email LIKE ?', options[:first_name] + "%", options[:last_name] + "%", options[:email] + "%")
+    where('transactions.paid IN (?)', options[:status]).joins(:itinerary => :user).where('users.first_name LIKE ? AND users.last_name LIKE ? AND users.email LIKE ?', options[:first_name] + "%", options[:last_name] + "%", options[:email] + "%")
   end
   
   def pre_tax_total
