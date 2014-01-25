@@ -28,15 +28,8 @@
 		<li><%= link_to "Accepted & Unregistered", accepted_and_unregistered_report_path(conference) %></li>
 		<li><%= link_to "Registration Breakdown", registration_breakdown_report_path(conference) %></li>
 		<li><%= link_to "Student Presentations", student_presentations_report_path(conference) %></li>
-	</ul>
-</li>
-<li><%= link_to "Users", users_path(email: false) %></li>
-<li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Schedule<b class="caret"></b></a>
-	<ul class="dropdown-menu">
-		<li><%= link_to "Manage Rooms", conference_rooms_path(conference) %></li>
-		<li><%= link_to "Schedule Format", edit_conference_schedule_path(conference) %></li>
-		<li><%= link_to "Schedule Proposals", conference_schedule_path(conference) %></li>
 		<li><%= link_to "Unsloted Proposals", unslotted_proposals_path(conference) %></li>
 	</ul>
 </li>
+<li><%= link_to "Users", users_path(email: false) %></li>
+<li><%= link_to "Schedule", edit_conference_schedule_path(conference) %></li>
