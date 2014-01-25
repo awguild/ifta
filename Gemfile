@@ -17,6 +17,7 @@ gem 'validates_timeliness'
 gem 'jquery-ui-rails'
 gem 'foreman'
 gem 'angularjs-rails'
+gem 'jbuilder'
 
 group :production do
   gem 'therubyracer', :platform => :ruby
