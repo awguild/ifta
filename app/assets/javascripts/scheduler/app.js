@@ -1,3 +1,3 @@
 'use strict';
 
-var schedulerApp = angular.module('schedulerApp', ['ngResource']);
+var schedulerApp = angular.module('schedulerApp', ['ngResource', 'ngRoute']);
