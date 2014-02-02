@@ -1,6 +1,8 @@
 <%- content_for :nav do %>
 	<%= render :partial => "layouts/admin_nav" %>
 <%- end %>
-
-<h1>Edit Schedule</h1>
-<%= render "form" %>
+<div ng-app="schedulerApp"> 
+    <div><a href="#/rooms">Manage Rooms</a> | <a href="#/format">Schedule Format</a> | <a href="#/presentations">Schedule Proposals</a></div>
+    <div ng-view>
+    </div>
+</div>
