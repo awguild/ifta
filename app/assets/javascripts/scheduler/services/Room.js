@@ -7,5 +7,9 @@ roomService.factory('RoomsService', function($resource){
         {
             conference_id: "@conference_id",
             id: "@id"
-        })
+        },
+        {
+            update: {method: 'PUT'}
+        }
+    );
 });

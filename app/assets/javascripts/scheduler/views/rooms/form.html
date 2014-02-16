@@ -1,17 +1,23 @@
 <fieldset class="show-fieldset fields">
     <div class="control-group">
         <label class='control-label'>Room Name</label>
+        
         <div class='controls'>
             <input type="text" ng-model="room.label" />
         </div>
         <label class='control-label'>Audio?</label>
+        
         <div class='controls'>
-            <input type="text" ng-model="room.audio" />
+            <select ng-model="room.audio" ng-options="option.name for option in $parent.roomsCtrl.audio_options">
+            </select>
         </div>
+        
         <label class='control-label'>Video?</label>
         <div class='controls'>
-            <input type="text" ng-model="room.video" />
+            <select ng-model="room.video" ng-options="option.name for option in $parent.roomsCtrl.video_options" />
         </div>
+
+        <button ng-click="room.$update()" class="btn btn-primary">Save</button>
     </div>
     <a href="#" class="btn btn-danger remove_fields">Remove Room</a>
 </fieldset>
