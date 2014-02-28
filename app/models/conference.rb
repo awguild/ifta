@@ -5,6 +5,8 @@ class Conference < ActiveRecord::Base
   
   attr_accessible :conference_year, :tax_rate, :conference_items_attributes, :active
   
+  scope :active, -> { find_by_active(true) }
+
   has_many :conference_items
   has_many :line_items, :through => :conference_items
   has_many :discounts
@@ -22,11 +24,6 @@ class Conference < ActiveRecord::Base
   }
   after_create :build_schedule
   
-  #returns the active conference or a new confernece
-  def self.active
-    Conference.find_by_active(true) || Conference.new 
-    #TODO Log into different conferences SESSION VARIABLE || find_by_active
-  end
   
   #returns the number of proposals scoped to this conference
   def proposal_count
