@@ -27,6 +27,20 @@ class ApplicationController < ActionController::Base
   def after_sign_up_path_for(user)
     after_sign_in_path_for(user)
   end
+
+  # return the currently active conference or the confernece selected by the session variable selected_conference_id
+  def current_conference
+    if session[:selected_conference_id].blank?
+      Conference.active
+    else
+      begin 
+        Conference.find(session[:current_conference_id])
+      rescue ActiveRecord::RecordNotFound
+        session[:selected_conference_id] = nil
+        Conference.active
+      end    
+    end
+  end
   
   
   #before filter which renders the user contact_info partial if the user isn't in a valid state
@@ -47,5 +61,6 @@ class ApplicationController < ActionController::Base
   end
   
   helper_method :after_sign_in_path_for
+  helper_method :current_conference
   
 end
