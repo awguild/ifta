@@ -49,13 +49,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  #before filter which renders a splash page if there is no active conference
-  def check_active_conference
-    if Conference.active.blank?
-      render 'shared/_conference_closed', :layout => 'application'
-      return false
-    end
-  end
   
   helper_method :after_sign_in_path_for
   helper_method :selected_conference
