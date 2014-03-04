@@ -59,6 +59,18 @@ class User < ActiveRecord::Base
     return @item_comments[item.id]
   end
 
+  def is_reviewer?
+    role == 'reviewer'
+  end
+
+  def is_admin?
+    role == 'admin'
+  end
+
+  def is_attendee?
+    role == 'attendee'
+  end
+
   private
   def set_country_category  
     update_column(:country_category, Country.find(self.country_id).category) unless country_id.blank?
