@@ -14,7 +14,7 @@ class Itinerary < ActiveRecord::Base
   
   validates :discount, :existence => true, :unless => "discount_key.blank?"
   
-  scope :current, where("conference_id='?'", Conference.active)
+  scope :selected_or_current_conference, -> (conference_id = Conference.current.id) { find_by_conference_id(conference_id) }
   
   #Finding conference items and line items by various criteria
   def unpaid_line_items

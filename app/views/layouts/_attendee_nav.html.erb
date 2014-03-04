@@ -1,4 +1,4 @@
-<%- itinerary = @itinerary || current_user.itineraries.current.last %>
+<%- itinerary = @itinerary || current_user.itineraries.selected_or_current_conference(selected_conference) %>
 <li><%= link_to "Proposal Submission", splash_itinerary_proposals_path(itinerary) %></li>
 <li><%= link_to "Update Contact Info", edit_user_path(itinerary.user) %></li>
 <li><%= link_to "Change Password", edit_user_password_path(itinerary.user) %></li>

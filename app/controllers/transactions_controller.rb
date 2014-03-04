@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
     
     @unpaid_line_items = @itinerary.line_items.find_all_by_paid(false)
     @transaction.line_items = @unpaid_line_items
-    @transaction.tax = @transaction.pre_tax_total * Conference.active.tax_rate
+    @transaction.tax = @transaction.pre_tax_total * selected_conference.tax_rate
     @transaction.payment_method = params[:payment_method]
     
     if @transaction.save

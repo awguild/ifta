@@ -6,15 +6,15 @@ class ApplicationController < ActionController::Base
   #overriding a devise helper method
   def after_sign_in_path_for(user)
     #Every user should have a conference itinerary, if you can't find one make it
-    user.itineraries.create({conference_id: Conference.active}) if user.itineraries.current.empty?
+    user.itineraries.create({conference_id: Conference.active}) if user.itineraries.selected_or_current_conference.empty?
     
     #role based after sign in path
     if user.is_reviewer?
-      return conference_proposals_path(Conference.active)
+      return conference_proposals_path(selected_conference)
     elsif user.is_admin?
-      return conference_path(Conference.active)
+      return conference_path(selected_conference)
     elsif user.is_attendee?
-      return edit_itinerary_path(user.itineraries.current.first )
+      return edit_itinerary_path(user.itineraries.selected_or_current_conference(selected_conference) )
     else
       raise "Unknown user role"
     end
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   # return the currently active conference or the confernece selected by the session variable selected_conference_id
-  def current_conference
+  def selected_conference
     if session[:selected_conference_id].blank?
       Conference.active
     else
@@ -58,6 +58,6 @@ class ApplicationController < ActionController::Base
   end
   
   helper_method :after_sign_in_path_for
-  helper_method :current_conference
+  helper_method :selected_conference
   
 end
