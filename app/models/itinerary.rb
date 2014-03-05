@@ -14,8 +14,6 @@ class Itinerary < ActiveRecord::Base
   
   validates :discount, :existence => true, :unless => "discount_key.blank?"
   
-  scope :selected_or_current_conference, -> (conference_id = Conference.current.id) { find_by_conference_id(conference_id) }
-  
   #Finding conference items and line items by various criteria
   def unpaid_line_items
     @unpaid_line_items ||= line_items.find_all_by_paid(false)
@@ -41,7 +39,7 @@ class Itinerary < ActiveRecord::Base
   def line_items_tax_price
     @tax = line_items_pre_tax_price * Conference.active.tax_rate
   end
-  
+
   private 
   
   #helper methods for finding available conference items
