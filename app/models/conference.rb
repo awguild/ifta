@@ -4,8 +4,6 @@ class Conference < ActiveRecord::Base
   has_paper_trail 
   
   attr_accessible :conference_year, :tax_rate, :conference_items_attributes, :active
-  
-  scope :active, -> { find_by_active(true) }
 
   has_many :conference_items
   has_many :line_items, :through => :conference_items
@@ -43,6 +41,11 @@ class Conference < ActiveRecord::Base
       @report << [item.name, item.line_items.where(paid: true).count]
     end
     return @report
+  end
+
+  # essentially a named scope, but implemented as a class method beecause scopes must be chainable and find_by_x isn't chainable
+  def self.active
+    find_by_active(true)
   end
   
   private
