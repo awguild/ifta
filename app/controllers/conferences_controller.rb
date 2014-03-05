@@ -44,4 +44,9 @@ class ConferencesController < ApplicationController
       end
     end
   end
+
+  def select_year
+    session[:selected_conference_id] = params[:conference_id]
+    redirect_to after_sign_in_path_for(current_user)
+  end
 end

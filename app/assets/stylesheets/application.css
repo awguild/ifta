@@ -82,18 +82,18 @@
 	float:right;
 	padding-right:15px;
 }
-.btn{
+.btn, input[type="submit"] {
+  background-color: #042456;
+  color:white;
+  border-color: black;
   text-decoration: none;
   margin:2px;
 }
 .btn a{
   text-decoration: none;
-  color:white;
   font-weight: bold;
 }
-a.btn{
-  color:white;
-}
+
 .btn-primary{
   background-color: #042456;
   border-color:black;
@@ -194,6 +194,20 @@ fieldset.show-fieldset{
   width: 110px;
   text-align: right;
   padding:5px;
+}
+
+.editCurrentConference {
+  float: left;
+  width: 350px;
+}
+
+.switchConferences {
+  float: right;
+  width: 450px;
+}
+
+.switchConferences {
+  display:block;
 }
 
 

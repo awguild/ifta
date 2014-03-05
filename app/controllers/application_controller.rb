@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
       @selected_conference = Conference.active
     else
       begin 
-        @selected_conference = Conference.find(session[:current_conference_id])
+        @selected_conference = Conference.find(session[:selected_conference_id])
       rescue ActiveRecord::RecordNotFound
         session[:selected_conference_id] = nil
         @selected_conference = Conference.active
