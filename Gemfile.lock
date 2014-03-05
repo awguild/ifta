@@ -178,6 +178,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   delayed_job_active_record
   devise (= 2.1.2)
+  dotenv
   factory_girl_rails
   foreman
   jquery-rails
