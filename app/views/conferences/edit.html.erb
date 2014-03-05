@@ -2,4 +2,9 @@
 	<%= render :partial => "layouts/admin_nav" %>
 <%- end %>
 
-<%= render "settings_form" %>
+<h1><%= @conference.conference_year %> Conference Settings</h1>
+<%= render partial: "settings_form", locals: {conference: @conference} %>
+
+<hr>
+<h3>Time for the next conference?</h3>
+<%= render partial: "settings_form", locals: {conference: @new_conference} %>
