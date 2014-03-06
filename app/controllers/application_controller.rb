@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   #overriding a devise helper method
   def after_sign_in_path_for(user)
     #Every user should have a conference itinerary, if you can't find one make it
-    user.itineraries.create({conference_id: Conference.active}) if user.itineraries.where(conference_id: selected_conference).empty?
+    user.itineraries.create({conference_id: selected_conference.id}) if user.itineraries.find_by_conference_id(selected_conference.id).blank?
     
     #role based after sign in path
     if user.is_reviewer?
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     elsif user.is_admin?
       return conference_path(selected_conference)
     elsif user.is_attendee?
-      return edit_itinerary_path(user.itineraries.where(conference_id: selected_conference).first )
+      return edit_itinerary_path(user.itineraries.find_by_conference_id(selected_conference))
     else
       raise "Unknown user role"
     end

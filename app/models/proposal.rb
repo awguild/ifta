@@ -31,7 +31,7 @@ class Proposal < ActiveRecord::Base
   accepts_nested_attributes_for :presenters, allow_destroy: true
   
   after_initialize :add_self_as_presenter, :if => "self.new_record? && presenters.length == 0"
-  scope :current, lambda{ joins(:itinerary).select('proposals.*,itineraries.conference_id').joins('INNER JOIN conferences ON conferences.id = conference_id').where('conference_id = ?', Conference.active)}
+  scope :current, ->(conference_id = Conference.active.id){ joins(:itinerary).select('proposals.*,itineraries.conference_id').joins('INNER JOIN conferences ON conferences.id = conference_id').where('conference_id = ?', conference_id)}
   #scope :unreviewed, lambda {where('proposals.id NOT IN (' + reviewed.select('proposals.id').to_sql + ')')}
   scope :unreviewed, where(:status => nil)
   scope :reviewed, joins(:reviews)
@@ -162,7 +162,7 @@ end
   end
   
   def self.search(options)
-    proposals = Proposal.current
+    proposals = Proposal.current(options[:conference_id])
     #Requests to the proposals index controller should have a hash called query whose keys are the proposal statuses you want returned
     #default behavior is to return proposals with no status
     options[:query].blank? ? proposals.where('proposals.status IS NULL') : proposals.where('proposals.status IN (?)', options[:query].keys.join(", ").sub('_', ' '))
