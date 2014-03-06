@@ -91,12 +91,13 @@
 }
 .btn a{
   text-decoration: none;
-  font-weight: bold;
+  color:white;
 }
 
 .btn-primary{
   background-color: #042456;
   border-color:black;
+  color:white;
 }
 .btn-danger{
   background-color: #680000;
@@ -279,4 +280,12 @@ fieldset.show-fieldset{
 }
 .payment_option input{
 	padding:3px;
+}
+
+/* sign in / up */
+
+.signInForm, .signUpForm {
+  float:left;
+  margin-left: 50px;
+  width: 350px;
 }
