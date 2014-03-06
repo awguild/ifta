@@ -48,7 +48,9 @@
 				<%= link_to "Make Reviewer", change_role_user_path(user, :new_role => 'reviewer'), method: :post if user.role == "attendee" %> 
 				<%= link_to "Make Attendee", change_role_user_path(user, :new_role => 'attendee'), method: :post if user.role == "reviewer" %>
 				<br>
-				<%= link_to "Dashboard", after_sign_in_path_for(user), :class => 'btn btn-primary' %>
+				<div class="btn btn-primary">
+					<%= link_to "Dashboard", after_sign_in_path_for(user) %>
+				</div>
 			</td>
 			<%- @conference_items.each do |item| %>
 				<td>

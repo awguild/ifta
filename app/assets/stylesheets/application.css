@@ -82,21 +82,22 @@
 	float:right;
 	padding-right:15px;
 }
-.btn{
+.btn, input[type="submit"] {
+  background-color: #042456;
+  color:white;
+  border-color: black;
   text-decoration: none;
   margin:2px;
 }
 .btn a{
   text-decoration: none;
   color:white;
-  font-weight: bold;
 }
-a.btn{
-  color:white;
-}
+
 .btn-primary{
   background-color: #042456;
   border-color:black;
+  color:white;
 }
 .btn-danger{
   background-color: #680000;
@@ -196,6 +197,20 @@ fieldset.show-fieldset{
   padding:5px;
 }
 
+.editCurrentConference {
+  float: left;
+  width: 350px;
+}
+
+.switchConferences {
+  float: right;
+  width: 450px;
+}
+
+.switchConferences {
+  display:block;
+}
+
 
 /* Pagination */
 .digg_pagination {
@@ -265,4 +280,12 @@ fieldset.show-fieldset{
 }
 .payment_option input{
 	padding:3px;
+}
+
+/* sign in / up */
+
+.signInForm, .signUpForm {
+  float:left;
+  margin-left: 50px;
+  width: 350px;
 }

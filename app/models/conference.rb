@@ -1,10 +1,9 @@
 #Conferences are the main administrative resource, they define a bunch of settings
 #and own conference items (which are what users)
 class Conference < ActiveRecord::Base
-  has_paper_trail 
   
   attr_accessible :conference_year, :tax_rate, :conference_items_attributes, :active
-  
+
   has_many :conference_items
   has_many :line_items, :through => :conference_items
   has_many :discounts
@@ -20,13 +19,12 @@ class Conference < ActiveRecord::Base
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 1
   }
+
+  validates :conference_year, :uniqueness => true
+
+  after_save :enforce_one_active_conference
   after_create :build_schedule
   
-  #returns the active conference or a new confernece
-  def self.active
-    Conference.find_by_active(true) || Conference.new 
-    #TODO Log into different conferences SESSION VARIABLE || find_by_active
-  end
   
   #returns the number of proposals scoped to this conference
   def proposal_count
@@ -47,10 +45,28 @@ class Conference < ActiveRecord::Base
     end
     return @report
   end
+
+  # essentially a named scope, but implemented as a class method beecause scopes must be chainable and find_by_x isn't chainable
+  def self.active
+    find_by_active(true)
+  end
   
   private
+
   #creates a schedule for this conference
   def build_schedule
-    build_schedule(:conference_id => id)
+    create_schedule({:conference_id => id})
+  end
+
+  def enforce_one_active_conference
+    # if the current conference is going to be active then there cannot be any other active conferneces
+    if Conference.where(active: true).count == 0
+      self.update_column(:active, true)
+    elsif Conference.where(active: true).count > 1
+       Conference.where(active: true).each do |conference|
+        conference.update_column(:active, false)
+      end
+      self.update_column(:active, true)
+    end
   end
 end

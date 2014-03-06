@@ -2,7 +2,7 @@
 #users register for conference items by adding line items (conference item + price) to an itinerary 
 #transactions group unpaid line items together to allow the user to pay for them via Paypal, check, or bank transfer
 class Itinerary < ActiveRecord::Base
-  attr_accessible :discount_key
+  attr_accessible :discount_key, :conference_id
   
   belongs_to :user
   belongs_to :conference
@@ -13,8 +13,6 @@ class Itinerary < ActiveRecord::Base
   has_many :transactions
   
   validates :discount, :existence => true, :unless => "discount_key.blank?"
-  
-  scope :current, where("conference_id='?'", Conference.active)
   
   #Finding conference items and line items by various criteria
   def unpaid_line_items
@@ -41,7 +39,7 @@ class Itinerary < ActiveRecord::Base
   def line_items_tax_price
     @tax = line_items_pre_tax_price * Conference.active.tax_rate
   end
-  
+
   private 
   
   #helper methods for finding available conference items
