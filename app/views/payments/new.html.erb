@@ -4,6 +4,8 @@
 
 <h1>Search Transactions</h1>
 <%= form_tag new_payment_path, :method => 'get', :class => 'form-horiztontal' do %>
+
+	<%= hidden_field_tag :conference_id, selected_conference.id %>
 	
 	<%= label_tag :Paid, 'Paid' %>
 	<%= check_box_tag :paid, 'true', params[:paid]%>
