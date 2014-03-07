@@ -4,10 +4,10 @@
   <title>IFTA CONGRESS</title>
   <link rel="stylesheet" type="text/css" media="all" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css"    />
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag "http://www.ifta-congress.org/#{selected_conference.conference_year}/includes/main.css" %>
+  <%= stylesheet_link_tag "http://www.ifta-congress.org/#{selected_conference.conference_year}/includes/icon.css" %>
+  <%= stylesheet_link_tag "http://www.ifta-congress.org/#{selected_conference.conference_year}/includes/colors.css" %>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://www.ifta-congress.org/includes/main.css" rel="stylesheet" type="text/css">
-  <link href="http://www.ifta-congress.org/includes/icon.css" rel="stylesheet" type="text/css">
-  <link href="http://www.ifta-congress.org/includes/colors.css" rel="stylesheet" type="text/css">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>

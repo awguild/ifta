@@ -11,16 +11,22 @@
 	
 	<%= f.fields_for :prices do |price| %>
 		<div class='removable'>
-		<% item = price.object.conference_item %>
-		<%= price.label :amount, "#{item.name} Price" %>
-		<%= price.text_field :amount %>
-		<%= price.hidden_field :conference_item_id, :value => item.id %>
-		<%= price.hidden_field :_destroy %>
-		<div class="btn btn-danger">
-			<%= link_to "Remove", "#", {:class => 'remove'} %>
-		</div>
+			<% item = price.object.conference_item %>
+			<div class="control-group">
+				<%= price.label :amount, "#{item.name} Price", :class => 'control-label' %>
+				<div class="controls">
+					<%= price.text_field :amount %>
+				</div>
+			</div>
+			<%= price.hidden_field :conference_item_id, :value => item.id %>
+			<%= price.hidden_field :_destroy %>
+			<div class="btn btn-danger">
+				<%= link_to "Remove discount for this item", "#", {:class => 'remove'} %>
+			</div>
+			<hr>
 		</div>
 	<%- end %>
 	
 	<%= f.submit name: 'Submit', class: 'btn btn-primary' %>
 <%- end %>
+

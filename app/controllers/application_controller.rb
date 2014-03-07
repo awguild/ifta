@@ -1,31 +1,42 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate_user!
-  before_filter :check_active_conference
   
   #overriding a devise helper method
   def after_sign_in_path_for(user)
     #Every user should have a conference itinerary, if you can't find one make it
-    if user.itineraries.current.empty?
-      user_itinerary = Itinerary.new
-      user_itinerary.conference = Conference.active
-      user_itinerary.user = user
-      user_itinerary.save
-    end
+    user.itineraries.create({conference_id: selected_conference.id}) if user.itineraries.find_by_conference_id(selected_conference.id).blank?
     
     #role based after sign in path
-    if user.role == 'reviewer'
-      return conference_proposals_path(Conference.active)
-    elsif user.role == 'admin'
-      return conference_path(Conference.active)
-    else 
-      return edit_itinerary_path(user.itineraries.current.first )
+    if user.is_reviewer?
+      return conference_proposals_path(selected_conference)
+    elsif user.is_admin?
+      return conference_path(selected_conference)
+    elsif user.is_attendee?
+      return edit_itinerary_path(user.itineraries.find_by_conference_id(selected_conference))
+    else
+      raise "Unknown user role"
     end
   end
   
   #overriding a devise helper method
   def after_sign_up_path_for(user)
     after_sign_in_path_for(user)
+  end
+
+  # return the currently active conference or the confernece selected by the session variable selected_conference_id
+  def selected_conference
+    return @selected_conference unless @selected_conference.blank?
+    if session[:selected_conference_id].blank?
+      @selected_conference = Conference.active
+    else
+      begin 
+        @selected_conference = Conference.find(session[:selected_conference_id])
+      rescue ActiveRecord::RecordNotFound
+        session[:selected_conference_id] = nil
+        @selected_conference = Conference.active
+      end    
+    end
   end
   
   
@@ -38,14 +49,8 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  #before filter which renders a splash page if there is no active conference
-  def check_active_conference
-    if Conference.active.blank?
-      render 'shared/_conference_closed', :layout => 'application'
-      return false
-    end
-  end
   
   helper_method :after_sign_in_path_for
+  helper_method :selected_conference
   
 end

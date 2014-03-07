@@ -14,7 +14,7 @@ class Transaction < ActiveRecord::Base
     options[:email] ||= ""
     options[:first_name] ||= "" 
     options[:last_name] ||= ""
-    where('transactions.paid IN (?)', options[:status]).joins(:itinerary => :user).where('users.first_name LIKE ? AND users.last_name LIKE ? AND users.email LIKE ?', options[:first_name] + "%", options[:last_name] + "%", options[:email] + "%")
+    where('transactions.paid IN (?)', options[:status]).joins(:itinerary => :user).where('users.first_name LIKE ? AND users.last_name LIKE ? AND users.email LIKE ? AND itineraries.conference_id = ?', options[:first_name] + "%", options[:last_name] + "%", options[:email] + "%", options[:conference_id])
   end
   
   def pre_tax_total
@@ -55,7 +55,7 @@ class Transaction < ActiveRecord::Base
     encrypt_for_paypal(values)
   end
   
-  PAYPAL_CERT_PEM = File.read("#{Rails.root}/certs/" + CONFIG[:paypal_cert_pem])
+  PAYPAL_CERT_PEM = File.read("#{Rails.root}/certs/#{CONFIG[:paypal_cert_pem]}")
   APP_CERT_PEM = "-----BEGIN CERTIFICATE-----\n" + ENV['APP_CERT'] + "\n-----END CERTIFICATE-----\n"
   APP_KEY_PEM = "-----BEGIN RSA PRIVATE KEY-----\n" + ENV['APP_KEY'] + "\n-----END RSA PRIVATE KEY-----\n"
 
