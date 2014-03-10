@@ -57,8 +57,10 @@ class ConferenceItem < ActiveRecord::Base
     prices.build(:country_category => 1, :member => true)
     prices.build(:country_category => 2, :member => true)
     prices.build(:country_category => 3, :member => true)
+    prices.build(:country_category => 4, :member => true)
     prices.build(:country_category => 1, :member => false)
     prices.build(:country_category => 2, :member => false)
     prices.build(:country_category => 3, :member => false)
+    prices.build(:country_category => 4, :member => false)
   end
 end

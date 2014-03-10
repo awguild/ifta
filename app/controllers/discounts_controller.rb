@@ -1,8 +1,8 @@
 class DiscountsController < ApplicationController
   
   def index
-    @discounts = Discount.all
     @conference = Conference.find(params[:conference_id])
+    @discounts = @conference.discounts
   end
   
   def new
