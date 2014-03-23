@@ -4,6 +4,8 @@ class Price < ActiveRecord::Base
   belongs_to :discount, :foreign_key => 'discount_key'
   validates :amount, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than_or_equal_to => 0}
 
+  scope :user_price, lambda{|user| where('country_category=? AND member=?', user.country_category, user.member)}
+
   def <=>(other)
     if self.member != other.member
       return self.member ? -1 : 1

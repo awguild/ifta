@@ -25,7 +25,7 @@ class LineItem < ActiveRecord::Base
   #implemented this check as a before_save callback so that validations are already run
   def check_price
     #Line item fields are all safe to use since they are checked for existence during the validations
-    server_price = conference_item.item_price(itinerary)
+    server_price = conference_item.item_price(itinerary.user, itinerary.discount_key)
     if (price == server_price) || conference_item.manual_price
       return true
     else

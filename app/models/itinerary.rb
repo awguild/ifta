@@ -44,10 +44,10 @@ class Itinerary < ActiveRecord::Base
 
   #helper methods for finding available conference items
   def discounted_conference_items
-    @discounted_items ||= ConferenceItem.discounted_items(self).not_registered(line_items)
+    @discounted_items ||= ConferenceItem.discounted_items(discount_key).not_registered(line_items)
   end
 
   def regular_priced_conference_items
-    @regular_priced_items = ConferenceItem.regular_priced_items(user).not_registered(line_items).not_discounted(discounted_conference_items)
+    @regular_priced_items ||= ConferenceItem.regular_priced_items(user).not_registered(line_items).not_discounted(discounted_conference_items)
   end
 end
