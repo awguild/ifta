@@ -1,35 +1,35 @@
-class UsersController < ApplicationController 
+class UsersController < ApplicationController
   before_filter :authenticate_user!
-  
+
   def index
     @conference = selected_conference
     @conference_items = @conference.conference_items
     @users = User.search_for_user(params).includes(:line_items).page(params[:page]).per_page(150) #search is an intersection not union
     authorize! :list, User
   end
-  
+
   def edit
-    #I redirected the devise edit route (which doesn't put the user id in the URL) to this action, 
+    #I redirected the devise edit route (which doesn't put the user id in the URL) to this action,
     #fall back on current_user
     @user = User.find(params[:id] || current_user)
     authorize! :update, @user
   end
-  
-  
+
+
   def update
     @user = User.find(params[:id] || current_user)
     authorize! :update, @user
-    
+
     if @user.update_attributes(params[:user])
       flash[:notice] = 'Account successfully updated.'
       redirect_to after_sign_in_path_for(current_user)
     else
       render :action => 'edit'
     end
-    
+
   end
-  
-  
+
+
   def change_role
     @user = User.find(params[:id])
     authorize! :change_role, @user
@@ -42,13 +42,13 @@ class UsersController < ApplicationController
       render :action => 'edit'
     end
   end
-  
+
   def edit_password
     @user = User.find(params[:id])
     authorize! :update, @user
   end
-  
-  
+
+
   def update_password
     @user = User.find(params[:id])
     authorize! :update, @user

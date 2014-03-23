@@ -1,6 +1,6 @@
 class Slot < ActiveRecord::Base
   attr_accessible :comments, :code, :proposal_id, :room_id, :time_slot_id
-  
+
   belongs_to :time_slot
   belongs_to :proposal
   belongs_to :room

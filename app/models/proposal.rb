@@ -1,15 +1,15 @@
 class Proposal < ActiveRecord::Base
   attr_accessible :format, :category, :title, :short_description, :long_description, :student, :agree, :presenters_attributes, :no_equipment, :sound, :projector, :keywords, :language_english, :language_spanish, :language_portuguese
-  
+
   has_paper_trail #object versioning, don't let the users delete yo data!
-  
+
   has_many :presenters, :dependent => :destroy
   belongs_to :itinerary
   has_many :reviews
   delegate :user, :to => :itinerary
   delegate :conference, :to => :itinerary
   has_one :slot
-  
+
   validates :short_description, :length => {
     :maximum => 50,
     :tokenizer => lambda { |str| str.scan(/\w+/) },
@@ -26,10 +26,10 @@ class Proposal < ActiveRecord::Base
   validates_associated :presenters
   validates :presenters, :length => {:maximum => 4, :message => 'the maximum number of presenters is 4'}
   validates :agree, :acceptance => {:accept => true}
-  
+
   #accepts_nested_attributes_for :proposal_multimedia, allow_destroy: true
   accepts_nested_attributes_for :presenters, allow_destroy: true
-  
+
   after_initialize :add_self_as_presenter, :if => "self.new_record? && presenters.length == 0"
   scope :current, ->(conference_id = Conference.active.id){ joins(:itinerary).select('proposals.*,itineraries.conference_id').joins('INNER JOIN conferences ON conferences.id = conference_id').where('conference_id = ?', conference_id)}
   #scope :unreviewed, lambda {where('proposals.id NOT IN (' + reviewed.select('proposals.id').to_sql + ')')}
@@ -48,11 +48,11 @@ return [["Abuse and Domestic Violence",
   [
     "Collaborative Care",
     "Community Issues and Systems",
-    "Homelessness, Migration, Resettlement", 
+    "Homelessness, Migration, Resettlement",
     "Medical Issues and Systems"
   ]
 ],
-["Education and Training of Therapists",             
+["Education and Training of Therapists",
   [
     "Educational Preparation",
     "Clinical Training",
@@ -65,7 +65,7 @@ return [["Abuse and Domestic Violence",
 ["Family Development",
   [
     "Clinical Implications of Family Development",
-    "Theories of Family Development and Clinical Interventions", 
+    "Theories of Family Development and Clinical Interventions",
     "Child Development and Its Implications",
     "Parenting"
   ]
@@ -85,18 +85,18 @@ return [["Abuse and Domestic Violence",
   ]
 ],
 ["Therapy",
-  [  
+  [
     "Couple and Marital Therapy",
     "Family Therapy"
   ]
 ],
 ["Trauma and Healing",
-  [  
+  [
     "Accident and Injury",
     "Natural Catastrophe",
     "Terrorism",
-    "Torture",        
-    "War/Political"   
+    "Torture",
+    "War/Political"
   ]
 ],
 ["Other",
@@ -118,7 +118,7 @@ def show_languages
   languages += "Portugese, " if language_portuguese
   languages.chomp(", ")
 end
-  
+
 def self.accepted_and_unregistered(conference)
   report = {}
   conference.proposals.where(:status => 'accept').includes(:presenters).each do |proposal|
@@ -160,12 +160,12 @@ end
       }
       presenters.build(presenter_attributes)
   end
-  
+
   def self.search(options)
     proposals = Proposal.current(options[:conference_id])
     #Requests to the proposals index controller should have a hash called query whose keys are the proposal statuses you want returned
     #default behavior is to return proposals with no status
     options[:query].blank? ? proposals.where('proposals.status IS NULL') : proposals.where('proposals.status IN (?)', options[:query].keys.join(", ").sub('_', ' '))
   end
- 
+
 end

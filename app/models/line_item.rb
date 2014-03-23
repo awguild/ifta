@@ -1,28 +1,28 @@
 class LineItem < ActiveRecord::Base
   attr_accessible :conference_item_id, :itinerary_id, :price, :comment
   #Note: Pricing is a bit confusing. A valid price is stored when the line_item is created
-  #the validity of that price can expire before it is actually paid through a transaction though 
-  #the line_item price should be authorative once set despite being listed in attr_accesible 
+  #the validity of that price can expire before it is actually paid through a transaction though
+  #the line_item price should be authorative once set despite being listed in attr_accesible
   #because only admins can update line_items
-  
+
   belongs_to :conference_item
   belongs_to :transaction
   belongs_to :itinerary
   delegate :user, :to => :itinerary #slick, check out what this allows in the Ability class
-  
+
   validates :itinerary, :existence => true
   validates :conference_item_id, :existence => true
   validates :price, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than_or_equal_to => 0}
   before_save :check_price
-  
- 
+
+
   def self.total_price(line_items)
     return line_items.inject(0){|sum, item| sum + item.price}.round(2)
   end
-  
+
   private
-   
-  #implemented this check as a before_save callback so that validations are already run  
+
+  #implemented this check as a before_save callback so that validations are already run
   def check_price
     #Line item fields are all safe to use since they are checked for existence during the validations
     server_price = conference_item.item_price(itinerary)

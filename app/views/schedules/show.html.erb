@@ -7,7 +7,7 @@
 
 <div id='schedule_table'>
 	<h1>Schedule</h1>
-	<%= simple_form_for [@conference, @schedule], :class => 'form-horizontal' do |f| %> 
+	<%= simple_form_for [@conference, @schedule], :class => 'form-horizontal' do |f| %>
 	<%= render :partial => 'shared/error_messages', :locals => {:object => @schedule}%>
 		<%= hidden_field_tag :update_proposals, true %>
 		<%= f.fields_for :slots, @slots do |g| %>
