@@ -38,12 +38,9 @@ class Conference < ActiveRecord::Base
   end
 
   def registration_breakdown
-    @report = [];
-    @conference_items = conference_items
-    @conference_items.each do |item|
-      @report << [item.name, item.line_items.where(paid: true).count]
+    conference_items.map do |item|
+      [item.name, item.number_of_paid_registrants]
     end
-    return @report
   end
 
   # essentially a named scope, but implemented as a class method beecause scopes must be chainable and find_by_x isn't chainable

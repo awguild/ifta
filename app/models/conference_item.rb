@@ -51,6 +51,10 @@ class ConferenceItem < ActiveRecord::Base
     current_active.joins(:prices).where('prices.discount_key=?', itinerary.discount_key).select("conference_items.*, prices.amount as price")
   end
 
+  def number_of_paid_registrants
+    line_items.where(paid: true).count
+  end
+
   private
 
   def build_price_objects
