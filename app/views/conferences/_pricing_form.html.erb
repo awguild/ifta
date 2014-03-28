@@ -2,12 +2,12 @@
 
 <%= form_for @conference, :url => conference_path(pricing: true), :class => 'form-horizontal' do |f| %>
 	<%= render :partial => 'shared/error_messages', :locals => {:object => @conference}%>
-	
+
 	<h2>Conference Items</h2>
 	<%= f.fields_for :conference_items do |builder| %>
 		<%= render 'conference_item_fields', f: builder, conference_item: builder.object %>
 	<%- end %>
-	
+
 	<%= link_to_add_fields "Add Conference Item", f, :conference_items %>
 	<br><br>
 	<%= f.submit :name => 'Update Conference', :class => 'btn btn-primary'  %>

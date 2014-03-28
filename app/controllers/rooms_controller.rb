@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-	def index		
+	def index
 	    @conference = Conference.find(params[:conference_id])
 	    @schedule = @conference.schedule
 	    @rooms = @schedule.rooms

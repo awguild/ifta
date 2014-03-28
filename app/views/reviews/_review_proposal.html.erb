@@ -9,7 +9,7 @@
 	<em>Category:</em> <%= proposal.category %><br>
 	<em>AV:</em> <%= proposal.sound ? "Yes" : "No" %><br>
 	<em>Projector:</em> <%= proposal.projector ? "Yes" : "No" %><br>
-	<em>Presenters:</em> 
+	<em>Presenters:</em>
 		<%- proposal.presenters.each_with_index do |presenter, index| %>
 			<%= "<span style='color: red;'>*</span>".html_safe if presenter.other_presentations %>
 			<%= presenter.first_name + " " + presenter.last_name + " (" + presenter.email + ")" %>

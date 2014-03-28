@@ -1,8 +1,8 @@
 <fieldset class="show-fieldset">
 	<%= render :partial => 'shared/error_messages', :locals => {:object => f.object} %>
-	
-	<%= f.input :first_name, label: "First name" %> 
-	<%= f.input :last_name, label: "Last name" %> 
+
+	<%= f.input :first_name, label: "First name" %>
+	<%= f.input :last_name, label: "Last name" %>
 
 	<em>Please include country and area codes e.g. 12223334444</em><br>
 	<%= f.label 'Home phone' %><%= f.text_field :home_telephone, class: 'phone_number' %><br>
@@ -10,11 +10,11 @@
 	<%= f.label 'Fax number' %><%= f.text_field :fax_number, class: 'phone_number' %><br>
 
 	<%= f.input :email %>
-	
+
 	<%= f.input :affiliation_name, label: "Affiliation name (company, etc) "%>
-	
+
 	<%= f.input :affiliation_position, label: "Affiliation position "%>
-	
+
 	<br>
 	<%= f.label :registered, "Is this person currently registered for the conference? "%>
 	<%= f.check_box :registered %><em>(Yes)</em><br>

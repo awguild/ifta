@@ -7,15 +7,15 @@ class Discount < ActiveRecord::Base
   after_initialize :setup, :if => 'new_record? && prices.blank?'
   before_create 'self.discount_key = SecureRandom.hex[0,6]'
   validates :discount_key, :uniqueness => true
-    
+
   accepts_nested_attributes_for :prices, allow_destroy: true
-  
+
   private
-  
+
   def setup
     #build a new price item for each conference item that has been declared for this conference
     conference.conference_items.each do |item|
-      self.prices << item.prices.build(:discount_key => self.discount_key) 
+      self.prices << item.prices.build(:discount_key => self.discount_key)
     end
   end
 end

@@ -1,22 +1,22 @@
 class ProposalsController < ApplicationController
   before_filter :check_contact_info
-  
+
   #There can be different proposal forms to choose from but they are all different representations of one proposal model
-  #the links on the splash page are just pass information to the new action ie. student 
+  #the links on the splash page are just pass information to the new action ie. student
   def splash
     @itinerary = Itinerary.find(params[:itinerary_id])
     authorize! :update, @itinerary
   end
-  
-  #At the moment student is the only query parameter but this design is easily extensible 
+
+  #At the moment student is the only query parameter but this design is easily extensible
   def new
     @itinerary = Itinerary.find(params[:itinerary_id])
     student = params[:student] == 'yes'
     @proposal = @itinerary.proposals.build(student: student)
     authorize! :create, @proposal
   end
-  
-  #Nothing special here, proposal model takes care of nested presenter models.  Gotta love Rails :) 
+
+  #Nothing special here, proposal model takes care of nested presenter models.  Gotta love Rails :)
   def create
     @itinerary = Itinerary.find(params[:itinerary_id])
     @proposal = @itinerary.proposals.build(params[:proposal])
@@ -28,13 +28,13 @@ class ProposalsController < ApplicationController
       render :action => "new"
     end
   end
-  
+
   def edit
     @itinerary = Itinerary.find(params[:itinerary_id])
     @proposal = Proposal.find(params[:id])
     authorize! :update, @proposal
   end
-  
+
   def update
     @itinerary = Itinerary.find(params[:itinerary_id])
     @proposal = Proposal.find(params[:id])
@@ -45,7 +45,7 @@ class ProposalsController < ApplicationController
       render :action => 'edit'
     end
   end
-  
+
   #reviewers can review proposals right from the search results
   def index
     authorize! :index, Proposal
@@ -57,5 +57,5 @@ class ProposalsController < ApplicationController
   def unslotted
     authorize! :index, Proposal
     @proposals = Proposal.unslotted.includes(:presenters)
-  end 
+  end
 end

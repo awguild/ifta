@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_paper_trail 
-  
+  has_paper_trail
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :first_name, :last_name, :prefix, :initial, :suffix, :address, 
-                  :city, :state, :country_id, :zip, :phone, :username, :member, 
+  attr_accessible :first_name, :last_name, :prefix, :initial, :suffix, :address,
+                  :city, :state, :country_id, :zip, :phone, :username, :member,
                   :student, :ifta_member_email, :fax_number, :emergency_name,
                   :emergency_relationship, :emergency_telephone, :emergency_email
-  
+
   belongs_to :country
   has_many :itineraries
   has_many :transactions, :through => :itineraries
@@ -28,21 +28,21 @@ class User < ActiveRecord::Base
   validates :country_id, :presence => true, :unless => 'new_record?'
   validates :ifta_member, :existence => true, :if => 'member'
   validates :emergency_name, :emergency_relationship, :emergency_telephone, :presence => true, :unless => 'new_record?'
-  #NOTE: if you want to set up validations make them conditional ... :unless => new_record? 
+  #NOTE: if you want to set up validations make them conditional ... :unless => new_record?
   #otherwise devise won't be able to create users
-  
+
   after_save :set_country_category #WARNING this un-drys category data from the country table
-  
+
   ROLES = %W[attendee reviewer admin]
-  
-  
+
+
   def country_id=(id)
     write_attribute(:country_id, id)
   end
 
   def self.search_for_user(options)
     options[:email] ||= ""
-    options[:first_name] ||= "" 
+    options[:first_name] ||= ""
     options[:last_name] ||= ""
     where('email LIKE ? AND first_name LIKE ? AND last_name LIKE ?', options[:email] + "%", options[:first_name] + "%", options[:last_name] + "%")
   end
@@ -72,13 +72,13 @@ class User < ActiveRecord::Base
   end
 
   private
-  def set_country_category  
+  def set_country_category
     update_column(:country_category, Country.find(self.country_id).category) unless country_id.blank?
   end
 
   def sort_line_items
     sorted = {:paid => [], :unpaid => []}
-    line_items.each do |line_item| 
+    line_items.each do |line_item|
       if line_item.paid
         sorted[:paid] << line_item.conference_item_id
       else

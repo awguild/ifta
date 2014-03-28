@@ -17,8 +17,8 @@ class TimeSlot < ActiveRecord::Base
     self.quantity = 0 if self.quantity.nil?
     self.quantity.to_i.times do |n|
       self.slots.create
-    end   
-    self.quantity = 0 
+    end
+    self.quantity = 0
   end
 
   def parseTimes

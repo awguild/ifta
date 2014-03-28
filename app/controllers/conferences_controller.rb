@@ -1,5 +1,5 @@
 class ConferencesController < ApplicationController
-  
+
   def show
    @conference = Conference.find(params[:id])
    authorize! @conference, :update
@@ -14,9 +14,9 @@ class ConferencesController < ApplicationController
     else
       flash[:alert] = "Could not create conference because #{@conference.errors.full_messages.join(', ')}"
     end
-    redirect_to after_sign_in_path_for(current_user) 
+    redirect_to after_sign_in_path_for(current_user)
   end
-  
+
   def edit
     @conference = Conference.includes(conference_items: [:regular_prices]).find(params[:id])
     @new_conference = Conference.new(conference_year: (@conference.conference_year + 1), tax_rate: @conference.tax_rate)
@@ -29,7 +29,7 @@ class ConferencesController < ApplicationController
       render :edit
     end
   end
-  
+
   def update
     @conference = Conference.find(params[:id])
     authorize! @conference, :update

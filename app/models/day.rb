@@ -9,7 +9,7 @@ class Day < ActiveRecord::Base
   before_save :sync_time_slots_date
 
   private
-  
+
   def parse_day_date
     self.day_date = Date.parse(self.day_date.to_s) unless self.day_date.nil?
   end
