@@ -1,7 +1,10 @@
 <div class="btn btn-primary">
 	<%= link_to "Edit", edit_conference_discount_path(@conference, discount)%>
-</div><br>
-<%= button_to "Remove", conference_discount_path(@conference, discount), :method => :delete, :class => 'destroy btn btn-danger'%><br>
+</div>
+<div class="removeDiscount">
+  <%= button_to "Remove", conference_discount_path(@conference, discount), :method => :delete, :class => 'destroy btn-danger'%>
+</div>
+<br>
 <b>Description:</b> <%= discount.description %> <br>
 <b>Key:</b> <%= discount.discount_key %>
 <hr>

@@ -55,7 +55,7 @@
 	background-color:#33CC66;
 	color:#042456;
 	text-align:center;
-	
+
 }
 .alert{
 	background-color:#680000;
@@ -99,7 +99,7 @@
   border-color:black;
   color:white;
 }
-.btn-danger{
+.btn-danger, .btn-danger[type=submit]{
   background-color: #680000;
   border-color: black;
 }
@@ -260,7 +260,7 @@ fieldset.show-fieldset{
   *:first-child + html .digg_pagination {
     overflow: hidden; }
 
-    
+
 /* Payments */
 .paid, .unpiad{
 	overflow:hidden;
@@ -273,7 +273,7 @@ fieldset.show-fieldset{
 .unpiad{
 }
 .mark_as_paid{
-	
+
 }
 .payment_option{
 	padding:3px;
@@ -289,3 +289,9 @@ fieldset.show-fieldset{
   margin-left: 50px;
   width: 350px;
 }
+
+/* discounts */
+.removeDiscount{
+  display:inline-block;
+}
+
