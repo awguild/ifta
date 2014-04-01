@@ -1,5 +1,6 @@
 class Proposal < ActiveRecord::Base
-  attr_accessible :format, :category, :title, :short_description, :long_description, :student, :agree, :presenters_attributes, :no_equipment, :sound, :projector, :keywords, :language_english, :language_spanish, :language_portuguese
+  attr_accessible :format, :category, :title, :short_description, :long_description, :student, :agree, :presenters_attributes, :no_equipment, :sound, :projector, :keywords
+  attr_accessible :language_english, :language_spanish, :language_portuguese, :language_mandarin, :language_malay
 
   has_paper_trail #object versioning, don't let the users delete yo data!
 
