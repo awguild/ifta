@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140328210129) do
+ActiveRecord::Schema.define(:version => 20140401005459) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -117,12 +117,12 @@ ActiveRecord::Schema.define(:version => 20140328210129) do
 
   create_table "payments", :force => true do |t|
     t.integer  "transaction_id"
-    t.integer  "amount",         :default => 0
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.decimal  "amount",         :precision => 10, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                     :null => false
+    t.datetime "updated_at",                                                     :null => false
     t.text     "params"
     t.boolean  "confirmed"
-    t.string   "comments",       :default => ""
+    t.string   "comments",                                      :default => ""
   end
 
   create_table "presenters", :force => true do |t|
