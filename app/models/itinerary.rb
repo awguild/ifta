@@ -4,6 +4,7 @@
 class Itinerary < ActiveRecord::Base
   attr_accessible :discount_key, :conference_id
 
+  #associations
   belongs_to :user
   belongs_to :conference
   belongs_to :discount, :foreign_key => "discount_key", :primary_key => "discount_key"
@@ -12,6 +13,7 @@ class Itinerary < ActiveRecord::Base
   has_many :proposals
   has_many :transactions
 
+  #validations
   validates :discount, :existence => true, :unless => "discount_key.blank?"
 
   #Finding conference items and line items by various criteria

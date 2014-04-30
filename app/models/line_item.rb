@@ -5,14 +5,18 @@ class LineItem < ActiveRecord::Base
   #the line_item price should be authorative once set despite being listed in attr_accesible
   #because only admins can update line_items
 
+  #associations
   belongs_to :conference_item
   belongs_to :transaction
   belongs_to :itinerary
   delegate :user, :to => :itinerary #slick, check out what this allows in the Ability class
 
+  #validations
   validates :itinerary, :existence => true
   validates :conference_item_id, :existence => true
   validates :price, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than_or_equal_to => 0}
+  
+  #life cycle hooks
   before_save :check_price
 
 

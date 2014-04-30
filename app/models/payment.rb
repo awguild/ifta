@@ -1,11 +1,15 @@
 class Payment < ActiveRecord::Base
   attr_accessible :transaction_id, :amount, :params, :confirmed, :comments
+  
+  #associations
   belongs_to :transaction
-  delegate :user, :to => :transaction
-  serialize :params
-
+  
+  #life cycle hooks
   after_save :mark_transaction
   before_destroy :clear_transaction
+
+  serialize :params
+  delegate :user, :to => :transaction
 
   def mark_transaction
       transaction.paid = confirmed
