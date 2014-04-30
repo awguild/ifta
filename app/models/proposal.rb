@@ -1,16 +1,24 @@
 class Proposal < ActiveRecord::Base
   attr_accessible :format, :category, :title, :short_description, :long_description, :student, :agree, :presenters_attributes, :no_equipment, :sound, :projector, :keywords
   attr_accessible :language_english, :language_spanish, :language_portuguese, :language_mandarin, :language_malay
+  accepts_nested_attributes_for :presenters, allow_destroy: true
 
-  has_paper_trail #object versioning, don't let the users delete yo data!
+  #object versioning, don't let the users delete yo data!
+  has_paper_trail 
 
+  #associations
   has_many :presenters, :dependent => :destroy
-  belongs_to :itinerary
   has_many :reviews
-  delegate :user, :to => :itinerary
-  delegate :conference, :to => :itinerary
   has_one :slot
+  belongs_to :itinerary
 
+  #query
+  scope :current, ->(conference_id = Conference.active.id){ joins(:itinerary).select('proposals.*,itineraries.conference_id').joins('INNER JOIN conferences ON conferences.id = conference_id').where('conference_id = ?', conference_id)}
+  scope :unreviewed, where(:status => nil)
+  scope :reviewed, joins(:reviews)
+  scope :unslotted, joins("LEFT OUTER JOIN slots ON slots.proposal_id = proposals.id").where("slots.proposal_id IS NULL AND proposals.status='accept'")
+
+  #validations
   validates :short_description, :length => {
     :maximum => 50,
     :tokenizer => lambda { |str| str.scan(/\w+/) },
@@ -28,15 +36,12 @@ class Proposal < ActiveRecord::Base
   validates :presenters, :length => {:maximum => 4, :message => 'the maximum number of presenters is 4'}
   validates :agree, :acceptance => {:accept => true}
 
-  #accepts_nested_attributes_for :proposal_multimedia, allow_destroy: true
-  accepts_nested_attributes_for :presenters, allow_destroy: true
-
+  #life cycle hooks
   after_initialize :add_self_as_presenter, :if => "self.new_record? && presenters.length == 0"
-  scope :current, ->(conference_id = Conference.active.id){ joins(:itinerary).select('proposals.*,itineraries.conference_id').joins('INNER JOIN conferences ON conferences.id = conference_id').where('conference_id = ?', conference_id)}
-  #scope :unreviewed, lambda {where('proposals.id NOT IN (' + reviewed.select('proposals.id').to_sql + ')')}
-  scope :unreviewed, where(:status => nil)
-  scope :reviewed, joins(:reviews)
-  scope :unslotted, joins("LEFT OUTER JOIN slots ON slots.proposal_id = proposals.id").where("slots.proposal_id IS NULL AND proposals.status='accept'")
+  
+  delegate :user, :to => :itinerary
+  delegate :conference, :to => :itinerary
+
   def keyword_options
 return [["Abuse and Domestic Violence",
   [

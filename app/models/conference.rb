@@ -1,9 +1,10 @@
 #Conferences are the main administrative resource, they define a bunch of settings
 #and own conference items (which are what users)
 class Conference < ActiveRecord::Base
-
   attr_accessible :conference_year, :tax_rate, :conference_items_attributes, :active
+  accepts_nested_attributes_for :conference_items, allow_destroy: true
 
+  #associations
   has_many :conference_items
   has_many :line_items, :through => :conference_items
   has_many :discounts
@@ -13,15 +14,14 @@ class Conference < ActiveRecord::Base
   has_many :rooms, :through => :schedule
   has_many :slots, :through => :schedule
 
-  accepts_nested_attributes_for :conference_items, allow_destroy: true
-
+  #validations
   validates :tax_rate, :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 1
   }
-
   validates :conference_year, :uniqueness => true
 
+  #life cycle hooks
   after_save :enforce_one_active_conference
   after_create :build_schedule
 

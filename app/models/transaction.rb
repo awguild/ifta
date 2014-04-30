@@ -1,10 +1,15 @@
 class Transaction < ActiveRecord::Base
-  belongs_to :itinerary
-  has_one :payment
+  
+  #associations
   has_many :line_items
-  delegate :user, :to => :itinerary
+  has_one :payment
+  belongs_to :itinerary
+  
+  #life cycle hooks
   after_save :mark_line_items
   before_destroy :clean_up
+
+  delegate :user, :to => :itinerary
 
   def self.search_for_transactions(options)
     #set defaults for the search
