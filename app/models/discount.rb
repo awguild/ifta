@@ -1,12 +1,13 @@
 class Discount < ActiveRecord::Base
   attr_accessible :discount_key, :description, :prices_attributes
-  accepts_nested_attributes_for :prices, allow_destroy: true
   
   #associations
   has_many :itineraries, :foreign_key => "discount_key", :primary_key => "discount_key"
   has_many :prices, :foreign_key => "discount_key", :primary_key => "discount_key"
   has_many :conference_items, :through => :prices
   belongs_to :conference
+
+  accepts_nested_attributes_for :prices, allow_destroy: true
 
   #validations
   validates :discount_key, :uniqueness => true
