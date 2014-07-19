@@ -1,6 +1,6 @@
 class Discount < ActiveRecord::Base
   attr_accessible :discount_key, :description, :prices_attributes
-  
+
   #associations
   has_many :itineraries, :foreign_key => "discount_key", :primary_key => "discount_key"
   has_many :prices, :foreign_key => "discount_key", :primary_key => "discount_key"
@@ -11,18 +11,24 @@ class Discount < ActiveRecord::Base
 
   #validations
   validates :discount_key, :uniqueness => true
+  validates :discount_key, length: { is: 6 }
 
   #life cycle hooks
-  after_initialize :setup, :if => 'new_record? && prices.blank?'
-  before_create 'self.discount_key = SecureRandom.hex[0,6]'
-  
+  after_initialize :generate_key, :if => 'discount_key.blank?'
+
+  #build a new price item for each conference item that has been declared for this conference
+  def build_prices_for_conference_items
+    return false if conference.blank?
+
+    conference.conference_items.each do |item|
+      prices << item.prices.build(:discount_key => discount_key)
+    end
+    true
+  end
 
   private
 
-  def setup
-    #build a new price item for each conference item that has been declared for this conference
-    conference.conference_items.each do |item|
-      self.prices << item.prices.build(:discount_key => self.discount_key)
-    end
+  def generate_key
+    self.discount_key = SecureRandom.hex[0,6]
   end
 end
