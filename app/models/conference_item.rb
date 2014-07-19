@@ -59,14 +59,14 @@ class ConferenceItem < ActiveRecord::Base
   end
 
   def build_price_objects
-    prices.build(:country_category => 1, :member => true)
-    prices.build(:country_category => 2, :member => true)
-    prices.build(:country_category => 3, :member => true)
-    prices.build(:country_category => 4, :member => true)
-    prices.build(:country_category => 1, :member => false)
-    prices.build(:country_category => 2, :member => false)
-    prices.build(:country_category => 3, :member => false)
-    prices.build(:country_category => 4, :member => false)
+    prices.build(:amount => 0, :country_category => 1, :member => true)
+    prices.build(:amount => 0, :country_category => 2, :member => true)
+    prices.build(:amount => 0, :country_category => 3, :member => true)
+    prices.build(:amount => 0, :country_category => 4, :member => true)
+    prices.build(:amount => 0, :country_category => 1, :member => false)
+    prices.build(:amount => 0, :country_category => 2, :member => false)
+    prices.build(:amount => 0, :country_category => 3, :member => false)
+    prices.build(:amount => 0, :country_category => 4, :member => false)
   end
 
   def sorted_prices_without_discounts
