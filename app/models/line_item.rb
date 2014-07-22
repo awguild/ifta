@@ -15,19 +15,14 @@ class LineItem < ActiveRecord::Base
   validates :itinerary, :existence => true
   validates :conference_item_id, :existence => true
   validates :price, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than_or_equal_to => 0}
-  
-  #life cycle hooks
-  before_save :check_price
 
 
   def self.total_price(line_items)
     return line_items.inject(0){|sum, item| sum + item.price}.round(2)
   end
 
-  private
-
-  #implemented this check as a before_save callback so that validations are already run
   def check_price
+    return false if (conference_item.blank? || itinerary.blank?)
     #Line item fields are all safe to use since they are checked for existence during the validations
     server_price = conference_item.item_price(itinerary.user, itinerary.discount_key)
     if (price == server_price) || conference_item.manual_price
@@ -37,4 +32,5 @@ class LineItem < ActiveRecord::Base
       return false
     end
   end
+
 end
