@@ -30,10 +30,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development, :test do 
+group :development, :test do
     gem 'rspec-rails'
     gem 'mocha'
     gem 'factory_girl_rails'
     gem 'shoulda'
     gem 'dotenv-rails'
+    gem 'spork'
 end
