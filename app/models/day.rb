@@ -1,10 +1,11 @@
 class Day < ActiveRecord::Base
   attr_accessible :label, :time_slots_attributes, :day_date
-  accepts_nested_attributes_for :time_slots, :allow_destroy => true
   
   #associations
   belongs_to :schedule, :autosave => true
   has_many :time_slots, :autosave => true, :dependent => :destroy
+  
+  accepts_nested_attributes_for :time_slots, :allow_destroy => true
   
   #validations
   validates :label,  :presence => true

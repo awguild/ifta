@@ -2,7 +2,6 @@
 #and own conference items (which are what users)
 class Conference < ActiveRecord::Base
   attr_accessible :conference_year, :tax_rate, :conference_items_attributes, :active
-  accepts_nested_attributes_for :conference_items, allow_destroy: true
 
   #associations
   has_many :conference_items
@@ -13,6 +12,8 @@ class Conference < ActiveRecord::Base
   has_one :schedule
   has_many :rooms, :through => :schedule
   has_many :slots, :through => :schedule
+
+  accepts_nested_attributes_for :conference_items, allow_destroy: true
 
   #validations
   validates :tax_rate, :numericality => {
@@ -46,6 +47,10 @@ class Conference < ActiveRecord::Base
   # essentially a named scope, but implemented as a class method beecause scopes must be chainable and find_by_x isn't chainable
   def self.active
     find_by_active(true)
+  end
+
+  def to_param
+    conference_year
   end
 
   private

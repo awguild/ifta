@@ -8,6 +8,7 @@ class DiscountsController < ApplicationController
 
   def new
     @discount = @conference.discounts.build
+    @discount.build_prices_for_conference_items
     authorize! :create, @discount
   end
 

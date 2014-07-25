@@ -1,10 +1,11 @@
 class TimeSlot < ActiveRecord::Base
   attr_accessible :start_time, :end_time, :code, :quantity
-  accepts_nested_attributes_for :slots, :allow_destroy => true
 
   #associations
   has_many :slots, :dependent => :destroy
   belongs_to :day, :autosave => true
+
+  accepts_nested_attributes_for :slots, :allow_destroy => true
 
   #validations
   validates_datetime :end_time

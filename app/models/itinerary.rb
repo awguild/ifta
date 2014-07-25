@@ -18,11 +18,11 @@ class Itinerary < ActiveRecord::Base
 
   #Finding conference items and line items by various criteria
   def unpaid_line_items
-    @unpaid_line_items ||= line_items.find_all_by_paid(false)
+    @unpaid_line_items ||= line_items.where(paid: false)
   end
 
   def paid_line_items
-    @paid_line_items = line_items.find_all_by_paid(true)
+    @paid_line_items = line_items.where(paid: true)
   end
 
   def available_conference_items

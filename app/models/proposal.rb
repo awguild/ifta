@@ -1,7 +1,6 @@
 class Proposal < ActiveRecord::Base
   attr_accessible :format, :category, :title, :short_description, :long_description, :student, :agree, :presenters_attributes, :no_equipment, :sound, :projector, :keywords
   attr_accessible :language_english, :language_spanish, :language_portuguese, :language_mandarin, :language_malay
-  accepts_nested_attributes_for :presenters, allow_destroy: true
 
   #object versioning, don't let the users delete yo data!
   has_paper_trail 
@@ -11,6 +10,8 @@ class Proposal < ActiveRecord::Base
   has_many :reviews
   has_one :slot
   belongs_to :itinerary
+
+  accepts_nested_attributes_for :presenters, allow_destroy: true
 
   #query
   scope :current, ->(conference_id = Conference.active.id){ joins(:itinerary).select('proposals.*,itineraries.conference_id').joins('INNER JOIN conferences ON conferences.id = conference_id').where('conference_id = ?', conference_id)}
