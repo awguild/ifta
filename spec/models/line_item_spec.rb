@@ -13,29 +13,29 @@ describe LineItem do
     end
   end
 
-  describe 'check_price' do
+  describe 'validations' do
     it 'should return false if the itinerary is missing' do
       line_item = LineItem.new
-      expect(line_item.check_price).to be_false
+      expect(line_item).to be_invalid
     end
 
     it 'should return false if the conference_item is missing' do
       line_item = LineItem.new
-      expect(line_item.check_price).to be_false
+      expect(line_item).to be_invalid
     end
 
     it 'should not allow price to differ from conference item price for user' do
       line_item = FactoryGirl.create(:line_item)
       line_item.price = 5
       line_item.conference_item.stubs(:item_price).returns(10)
-      expect(line_item.check_price).to be_false
+      expect(line_item).to be_invalid
     end
 
     it 'should return true when the line item price matches the conference item price' do
       line_item = FactoryGirl.create(:line_item)
       line_item.price = 10
       line_item.conference_item.stubs(:item_price).returns(10)
-      expect(line_item.check_price).to be_true
+      expect(line_item).to be_valid
     end
   end
 end

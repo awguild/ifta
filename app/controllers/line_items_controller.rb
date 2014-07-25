@@ -7,7 +7,7 @@ class LineItemsController < ApplicationController
     @line_item = @itinerary.line_items.build(params[:line_item])
     authorize! :create, @line_item unless @line_item.invalid? #the authorize! method expects valid associations, we can skip authorize! if the validations aren't going to pass because none of the data will be persisted anyway
 
-    if @line_item.valid? && @line_item.check_price && @line_item.save
+    if @line_item.save
       @tax_rate = selected_conference.tax_rate
       render "create"
     else

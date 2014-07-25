@@ -15,11 +15,13 @@ class LineItem < ActiveRecord::Base
   validates :itinerary, :existence => true
   validates :conference_item_id, :existence => true
   validates :price, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than_or_equal_to => 0}
-
+  validate :check_price
 
   def self.total_price(line_items)
     return line_items.inject(0){|sum, item| sum + item.price}.round(2)
   end
+
+  private
 
   def check_price
     return false if (conference_item.blank? || itinerary.blank?)
