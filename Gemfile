@@ -40,4 +40,5 @@ group :development, :test do
     gem 'debugger'
     gem 'awesome_print'
     gem 'meta_request'
+    gem 'capybara'
 end
