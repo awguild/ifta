@@ -1,7 +1,7 @@
 class ConferencesController < ApplicationController
 
   def show
-   @conference = Conference.find(params[:id])
+   @conference = Conference.find_by_conference_year(params[:id])
    authorize! @conference, :update
   end
 
