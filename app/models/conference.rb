@@ -49,6 +49,10 @@ class Conference < ActiveRecord::Base
     find_by_active(true)
   end
 
+  def to_param
+    conference_year
+  end
+
   private
 
   #creates a schedule for this conference

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140401005459) do
+ActiveRecord::Schema.define(:version => 20140725200919) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(:version => 20140401005459) do
     t.string   "proposal_wait_list_subject"
     t.string   "proposal_rejection_subject"
   end
+
+  add_index "conferences", ["conference_year"], :name => "index_conferences_on_conference_year"
 
   create_table "countries", :force => true do |t|
     t.string  "name"
