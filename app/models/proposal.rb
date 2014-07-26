@@ -16,7 +16,7 @@ class Proposal < ActiveRecord::Base
   accepts_nested_attributes_for :presenters, allow_destroy: true
 
   #query
-  scope :current, ->(conference_id = Conference.active.id){ joins(:itinerary).select('proposals.*,itineraries.conference_id').joins('INNER JOIN conferences ON conferences.id = conference_id').where('conference_id = ?', conference_id)}
+  scope :current, ->(conference_id = Conference.active.id){ joins('INNER JOIN conferences ON conferences.id = proposals.conference_id').where('conference_id = ?', conference_id)}
   scope :unreviewed, where(:status => nil)
   scope :reviewed, joins(:reviews)
   scope :unslotted, joins("LEFT OUTER JOIN slots ON slots.proposal_id = proposals.id").where("slots.proposal_id IS NULL AND proposals.status='accept'")
