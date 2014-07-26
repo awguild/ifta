@@ -1,5 +1,5 @@
 <div id='proposal_<%= proposal.id %>'>
-	<strong>Proposal #<%= proposal.id %></strong> <%= link_to "Edit", edit_itinerary_proposal_path(proposal.itinerary, proposal)%><br>
+	<strong>Proposal #<%= proposal.relative_number %></strong> <%= link_to "Edit", edit_itinerary_proposal_path(proposal.itinerary, proposal)%><br>
 	<em>Languages:</em> <%= show_languages(proposal) %><br>
 	<em>Title:</em> <%= proposal.title %>  <br>
 	<em>Short:</em> <%= proposal.short_description %><br>
