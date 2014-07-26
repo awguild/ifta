@@ -64,21 +64,21 @@ describe Itinerary do
       ConferenceItem.stubs(:discounted_items).returns(stub(not_registered: []))
       ConferenceItem.stubs(:regular_priced_items).returns(stub(not_registered: stub(not_discounted: [])))
       itinerary = FactoryGirl.build(:itinerary)
-      expect(itinerary.any_items?).to be_false
+      expect(itinerary.any_items?).to be_falsey
     end
 
     it 'should have items when it has discounted items' do
       ConferenceItem.stubs(:discounted_items).returns(stub(not_registered: [{}]))
       ConferenceItem.stubs(:regular_priced_items).returns(stub(not_registered: stub(not_discounted: [])))
       itinerary = FactoryGirl.build(:itinerary)
-      expect(itinerary.any_items?).to be_true
+      expect(itinerary.any_items?).to be_truthy
     end
 
     it 'should have items when it has regular items' do
       ConferenceItem.stubs(:discounted_items).returns(stub(not_registered: []))
       ConferenceItem.stubs(:regular_priced_items).returns(stub(not_registered: stub(not_discounted: [{}])))
       itinerary = FactoryGirl.build(:itinerary)
-      expect(itinerary.any_items?).to be_true
+      expect(itinerary.any_items?).to be_truthy
     end
   end
 

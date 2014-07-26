@@ -55,12 +55,12 @@ describe Conference do
     it "should de-activate an old conference for a new conference" do
       c1 = Conference.create({tax_rate: 0.1, conference_year: 2013, active: true})
       c2 = Conference.create({tax_rate: 0.1, conference_year: 2014, active: true})
-      expect(Conference.find(c1).active).to be_false
+      expect(Conference.find(c1).active).to be_falsey
     end
 
     it "should force activate a conference when there is no active conference" do
       c1 = Conference.create({tax_rate: 0.1, conference_year: 2013, active: false})
-      expect(c1.active).to be_true
+      expect(c1.active).to be_truthy
     end
 
   end

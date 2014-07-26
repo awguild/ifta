@@ -9,7 +9,7 @@ describe Payment do
 
       transaction.expects(:save)
       payment.save
-      expect(transaction.paid).to be_false
+      expect(transaction.paid).to be_falsey
     end
 
     it 'should set transaction paid to true' do
@@ -19,7 +19,7 @@ describe Payment do
 
       transaction.expects(:save)
       payment.save
-      expect(transaction.paid).to be_true
+      expect(transaction.paid).to be_truthy
     end
 
   end
@@ -32,7 +32,7 @@ describe Payment do
 
       transaction.expects(:save)
       payment.destroy
-      expect(transaction.paid).to be_false
+      expect(transaction.paid).to be_falsey
     end
   end
 end
