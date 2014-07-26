@@ -1,21 +1,6 @@
 <%- content_for :nav do %>
-	<%= render :partial => "layouts/admin_nav" %>
+	<%= render :partial => 'layouts/admin_nav' %>
 <%- end %>
 <h1><%= @conference.conference_year %> Paid Registrations Breakdown</h1>
-<table>
-<%- @report.each do |event| -%>
-	<tr>
-		<td><%= event[0] %></td>
-		<td><%= event[1] %></td>
-	</tr>
-<%- end %>
-</table>
 
-<script language="javascript" type="text/javascript" src="<%= root_url %>/assets/jqplot/jquery.jqplot.min.js"></script>
-<script type="text/javascript" src="<%= root_url %>/assets/jqplot/plugins/jqplot.donutRenderer.min.js"></script>
-<script type="text/javascript" src="<%= root_url %>/assets/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%= root_url %>/assets/jqplot/jquery.jqplot.css" />
-
-<div id="report_data_url" data-url="<%= registration_breakdown_report_path(@conference)%>.json"></div>
-<div id="chart1"></div>
-<div id="chart3"></div>
+<%= render :partial => 'reports/conference_item_breakdown' %>
