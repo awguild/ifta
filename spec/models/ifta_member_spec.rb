@@ -3,10 +3,10 @@ require 'spec_helper'
 # this outer block indicates that we're testing the IftaMember class
 # we want to test both the class api and the instances api
 # the instance api can include testing things like whether the association methods work and whether callbacks/validations are properly triggered
-# the class api is basically the methods defined with self 
+# the class api is basically the methods defined with self
 # private methods shouldn't be directly tested because they can't be called externally, but they shouldn't be stubbed out in your tests either otherwise you're not really testing the method
 describe IftaMember do
-  # let defines a memoized helper method 
+  # let defines a memoized helper method
   # Note: memoized means after you call it once it will just return a reference to its return value in all subsequent calls, aka it won't execute the method body again
   # the parameter inside of let (:ifta_member) will be the name of the helper method, you can use that method (ifta_member) anywhere in this describe block
   # { FactoryGirl.build(:ifta_member) } is a proc that essentially opperates as the body of the function (let adds the memoization). In this case it will return an instance of the IftaMember class (as defined in our :ifta_member factory)
@@ -36,8 +36,8 @@ describe IftaMember do
     subject { member }
 
     # the parameter to its (:user) gets called user called on the subject (which we set above)
-    # should also gets called on the subject 
-    its(:user) { should belong_to(:country)}
+    # should also gets called on the subject
+    #its(:user) { should belong_to(:country)} #TODO deprecated research what this was replaced with
 
     # Note: [method].should [matcher][params] has fallen out of favour in rspec
     # the perfered syntax is now expect [Proc or method call].to [matcher][params]
@@ -62,9 +62,9 @@ describe IftaMember do
 
         it "should not create a ifta_member with a duplicate email address" do
             # we've already tested that a record won't save with uniqueness validation errors
-            # but we should treat the api for this object is like a black box 
+            # but we should treat the api for this object is like a black box
             # the add_new_members method might do something to skip the validation callbacks
-            # so we'll test to make sure that this method doesn't create records with duplicate email addresses 
+            # so we'll test to make sure that this method doesn't create records with duplicate email addresses
             expect { IftaMember.add_new_members('jdoe@example.com, jdoe@example.com') }.to change{IftaMember.count}.by(1)
         end
    end

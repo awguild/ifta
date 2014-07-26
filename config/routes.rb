@@ -17,7 +17,8 @@ Iftaconferenceapp::Application.routes.draw do
   get 'conference/:id/proposals' => 'proposals#index', :as => :conference_proposals
   get 'conference/:id/unslotted-proposals' => 'proposals#unslotted', :as => :unslotted_proposals
 
-  devise_for :users, :controllers => { :registrations => "users/registrations", :passwords => "devise/passwords" } do
+  devise_for :users, :controllers => { :registrations => "users/registrations", :passwords => "devise/passwords" }
+  devise_scope :user do
     get 'users/sign_out' => 'devise/sessions#destroy'
     put 'users/password' => 'devise/passwords#update'
     match 'users/password' => 'devise/passwords#create' #Rails bug with post member routes

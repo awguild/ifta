@@ -12,16 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
+//= require jquery-ui
 //= require_tree .
 
 $(function(){
 	//removes notifications after 3 seconds
-    $('.notice').delay(3000).fadeOut(); 
+    $('.notice').delay(3000).fadeOut();
 
-	//formats telephone numbers.  
+	//formats telephone numbers.
 	//nested presenter fields can be added to a proposal by the user after the DOM is loaded
-	//attaching the handler through live ensures those phone numbers are formatted too 
+	//attaching the handler through live ensures those phone numbers are formatted too
 	$('.phone_number').on("blur", function(){
 		var number = $(this).val($(this).val().replace(/\D/g,''));
 	});

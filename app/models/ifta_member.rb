@@ -1,8 +1,12 @@
 class IftaMember < ActiveRecord::Base
   attr_accessible :email
+  
+  #associaitons
   has_one :user, primary_key: 'email', foreign_key: 'ifta_member_email'
 
+  #validations
   validates :email, :uniqueness => true
+
   def self.add_new_members(raw_emails)
     create(emails_to_members_array(raw_emails))
   end
