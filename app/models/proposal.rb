@@ -20,6 +20,8 @@ class Proposal < ActiveRecord::Base
   scope :unreviewed, where(:status => nil)
   scope :reviewed, joins(:reviews)
   scope :unslotted, joins("LEFT OUTER JOIN slots ON slots.proposal_id = proposals.id").where("slots.proposal_id IS NULL AND proposals.status='accept'")
+  scope :accepted, where(:status => 'accept')
+  scope :wait_listed, where(:status => 'wait list')
 
   #validations
   validates :short_description, :length => {

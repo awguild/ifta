@@ -32,6 +32,14 @@ class Conference < ActiveRecord::Base
     proposals.count
   end
 
+  def accepted_proposal_count
+    proposals.accepted.count
+  end
+
+  def wait_listed_proposal_count
+    proposals.wait_listed.count
+  end
+
   #returns the number of line_items scoped to this model
   #Note: this statistic is not the same as the number of people registered
   def registration_count
@@ -40,7 +48,10 @@ class Conference < ActiveRecord::Base
 
   def registration_breakdown
     conference_items.map do |item|
-      [item.name, item.number_of_paid_registrants]
+      {
+        name: item.name,
+        registrant_count: item.number_of_paid_registrants
+      }
     end
   end
 
