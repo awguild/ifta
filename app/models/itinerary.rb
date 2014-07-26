@@ -33,6 +33,16 @@ class Itinerary < ActiveRecord::Base
     return !(regular_priced_conference_items.blank? && discounted_conference_items.blank? && paid_line_items.blank? && unpaid_line_items.blank?)
   end
 
+  def registered_for_conference?
+    return false unless has_line_items?
+    line_items.joins(:conference_item).where("paid = true AND name like ?", "%Conference%").any?
+  end
+
+  def has_pending_conference_registration?
+    return false unless has_line_items?
+    line_items.joins(:conference_item).where("paid=false AND name like ?", "%Conference%").any?
+  end
+
   #Calculating price information on line items
   def line_items_pre_tax_price
     @pre_tax ||= LineItem.total_price(unpaid_line_items)
@@ -51,5 +61,9 @@ class Itinerary < ActiveRecord::Base
 
   def regular_priced_conference_items
     @regular_priced_items ||= ConferenceItem.regular_priced_items(user).not_registered(line_items).not_discounted(discounted_conference_items)
+  end
+
+  def has_line_items?
+    @has_line_items ||= line_items.any?
   end
 end

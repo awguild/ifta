@@ -10,5 +10,15 @@ FactoryGirl.define do
     factory :paid_line_item do
       paid true
     end
+
+    factory :pending_conference_line_item do
+      paid false
+      conference_item { FactoryGirl.create(:conference_2014_conference_item)}
+    end
+
+    factory :paid_conference_line_item do
+      paid true
+      conference_item { FactoryGirl.create(:conference_2014_conference_item)}
+    end
   end
 end

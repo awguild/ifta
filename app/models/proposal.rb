@@ -11,6 +11,7 @@ class Proposal < ActiveRecord::Base
   has_one :slot
   belongs_to :itinerary
   belongs_to :conference
+  belongs_to :user
 
   accepts_nested_attributes_for :presenters, allow_destroy: true
 
@@ -31,66 +32,58 @@ class Proposal < ActiveRecord::Base
     :tokenizer => lambda { |str| str.scan(/\w+/) },
     :too_long => "must have at most %{count} words"
   }
-  validates :format, :presence => true
-  validates :category, :presence => true
-  validates :title, :presence => true
+  validates :format, :category, :title, :relative_number, :itinerary, :conference, :presence => true
   validates_associated :presenters
   validates :presenters, :length => {:maximum => 4, :message => 'the maximum number of presenters is 4'}
   validates :agree, :acceptance => {:accept => true}
 
   #life cycle hooks
-  after_initialize :add_self_as_presenter, :if => "self.new_record? && presenters.length == 0"
+  before_validation :add_relative_number
 
-  delegate :user, :to => :itinerary
-  delegate :conference, :to => :itinerary
-
-def self.accepted_and_unregistered(conference)
-  report = {}
-  conference.proposals.where(:status => 'accept').includes(:presenters).each do |proposal|
-    proposal.presenters.each do |presenter|
-      u = User.where(:email => presenter.email).first
-      if u.blank?
-        status = 'No User'
-      else
-        conference_registration = u.itineraries.where(:conference_id => conference).first.conference_items.where("name like ?", '%Conference%')
-        conference_ids = conference_registration.collect(&:id)
-        if conference_registration.blank?
-          status = 'Not registered'
-        elsif u.itineraries.where(:conference_id => conference).first.line_items.where("paid=? AND conference_item_id IN (?)", true, conference_ids).blank?
-          status = 'Pending Registration'
-        end
-      end
-
-      if !status.nil?
-        report[proposal.id] ||= {:proposal_title => proposal.title, :accepted_on => proposal.updated_at, :presenters => []}
+  def self.accepted_and_unregistered(conference)
+    report = {}
+    conference.proposals.where(:status => 'accept').includes(:presenters).find_each do |proposal|
+      proposal.presenters.each do |presenter|
+        report[proposal.id] ||= {
+          :proposal_title => proposal.title,
+          :accepted_on => proposal.updated_at,
+          :presenters => []
+        } # initialize each proposal once
         report[proposal.id][:presenters] << {
           :first_name => presenter.first_name,
           :last_name => presenter.last_name,
           :email => presenter.email,
-          :status => status
+          :status => Presenter.presenter_conference_status(presenter.email, conference.id)
         }
       end
     end
+    return report
   end
-  return report
-end
 
-private
   def add_self_as_presenter
-      presenter_attributes = {
-        first_name: user.first_name,
-        last_name: user.last_name,
-        home_telephone: user.phone,
-        email: user.email
-      }
-      presenters.build(presenter_attributes)
+    presenters.build({
+      first_name: user.first_name,
+      last_name: user.last_name,
+      home_telephone: user.phone,
+      email: user.email
+    })
   end
 
-  def self.search(options)
-    proposals = Proposal.current(options[:conference_id])
-    #Requests to the proposals index controller should have a hash called query whose keys are the proposal statuses you want returned
-    #default behavior is to return proposals with no status
-    options[:query].blank? ? proposals.where('proposals.status IS NULL') : proposals.where('proposals.status IN (?)', options[:query].keys.join(", ").sub('_', ' '))
-  end
+  private
 
+    def self.search(options)
+      proposals = Proposal.current(options[:conference_id])
+      #Requests to the proposals index controller should have a hash called query whose keys are the proposal statuses you want returned
+      #default behavior is to return proposals with no status
+      options[:query].blank? ? proposals.where('proposals.status IS NULL') : proposals.where('proposals.status IN (?)', options[:query].keys.join(", ").sub('_', ' '))
+    end
+
+    def self.next_relative_number(conference_id)
+      proposal = where(conference_id: conference_id).where('relative_number IS NOT NULL').order('relative_number DESC').first
+      (proposal.present? ? proposal.relative_number : 0) + 1
+    end
+
+    def add_relative_number
+      self.relative_number = Proposal.next_relative_number(conference_id) if relative_number.blank?
+    end
 end

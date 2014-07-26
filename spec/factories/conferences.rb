@@ -23,5 +23,13 @@ FactoryGirl.define do
         end
       end
     end
+
+    factory :conference_with_3_proposals do
+      after(:create) do |conference, evaluator|
+        3.times do
+          FactoryGirl.create(:proposal, conference: conference)
+        end
+      end
+    end
   end
 end

@@ -100,4 +100,38 @@ describe Itinerary do
       expect(itinerary.line_items_tax_price).to eql(3.0)
     end
   end
+
+  context :registered_for_conference? do
+    it 'should be false when itinerary has no line items' do
+      itinerary = FactoryGirl.build(:itinerary)
+      expect(itinerary.registered_for_conference?).to be_falsey
+    end
+
+    it 'should be false when itinerary has a pending conference registration' do
+      itinerary = FactoryGirl.create(:itinerary_with_pending_conference)
+      expect(itinerary.registered_for_conference?).to be_falsey
+    end
+
+    it 'should be true when itinerary has a paid conference line item' do
+      itinerary = FactoryGirl.create(:itinerary_with_paid_conference)
+      expect(itinerary.registered_for_conference?).to be_truthy
+    end
+  end
+
+  context :has_pending_conference_registration? do
+    it 'should be false when itinerary has no line items' do
+      itinerary = FactoryGirl.build(:itinerary)
+      expect(itinerary.has_pending_conference_registration?).to be_falsey
+    end
+
+    it 'should be true when itinerary has a pending conference registration' do
+      itinerary = FactoryGirl.create(:itinerary_with_pending_conference)
+      expect(itinerary.has_pending_conference_registration?).to be_truthy
+    end
+
+    it 'should be false when itinerary has a paid conference line item' do
+      itinerary = FactoryGirl.create(:itinerary_with_paid_conference)
+      expect(itinerary.has_pending_conference_registration?).to be_falsey
+    end
+  end
 end

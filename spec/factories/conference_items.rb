@@ -10,5 +10,9 @@ FactoryGirl.define do
     factory :not_visible_conference_item do
       visibility false
     end
+
+    factory :conference_2014_conference_item do
+      name 'conference 2014'
+    end
   end
 end
