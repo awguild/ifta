@@ -1,16 +1,23 @@
 class TimeSlot < ActiveRecord::Base
   attr_accessible :start_time, :end_time, :code, :quantity
-  belongs_to :day, :autosave => true
+
+  #associations
   has_many :slots, :dependent => :destroy
+  belongs_to :day, :autosave => true
+
+  accepts_nested_attributes_for :slots, :allow_destroy => true
+
+  #validations
   validates_datetime :end_time
   validates_datetime :start_time
   validates_datetime :end_time, :after => :start_time
 
-  attr_accessor :quantity
+  #life cycle hooks  
   after_save :build_slots
   before_validation :parseTimes
-  accepts_nested_attributes_for :slots, :allow_destroy => true
+  
 
+  attr_accessor :quantity
   private
 
   def build_slots

@@ -40,7 +40,7 @@ The Program Committee will make the decision as which language you will present 
 
 <h3>Keyword</h3>
 	<%= f.label :keywords, 'Keyword' %>
-	<%= f.select :keywords, grouped_options_for_select(@proposal.keyword_options, @proposal.keywords), {:include_blank => true}%>
+	<%= f.select :keywords, grouped_options_for_select(keyword_options, @proposal.keywords), {:include_blank => true}%>
 <hr>
 <h3>Title</h3>
 	<%= f.label :title, "Title of Abstract:"%>

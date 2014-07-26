@@ -8,7 +8,7 @@ env:
   global:
   - APP_CERT='abc'
   - APP_KEY='abc'
-  - SECRET_TOKEN='8ulnsldfuo8unalksnafsljkf2'
+  - SECRET_TOKEN='3d528738744c3e704d619e4ff37117c8'
   - RECAPTCHA_PUBLIC_KEY='6LdFod0SAAAAAFI1MtM_C2MzS0f9KtXSxJYQO29q'
   - secure: "byAfWqfFPiYqkipO/nYHysTxvo2sl0xadpaQWWJ0ByghUFq9n0Ih7kBDpiZ9xfuYQzblcBpET5tHwRa+HTp8XeCzlnCXpc802TTKrrUORhtu8gzb1+zY4b3SyoHRvdKJ36l2ACA3SauIyAfiQNAC1TJ+NRKJ+KkLjDpBKqpPEbI="
   - SUPER_ADMIN_EMAIL='jdoe@example.com'

@@ -13,7 +13,7 @@
 	</tr>
 <%- @proposals.each do |proposal| %>
 <tr>
-	<td><%= proposal.id %></td>
+	<td><%= proposal.relative_number %></td>
 	<td><%= proposal.title %></td>
 	<td>
 		<%- proposal.presenters.each do |presenter| %>
