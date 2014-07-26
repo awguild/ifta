@@ -19,17 +19,17 @@ class User < ActiveRecord::Base
   has_many :reviews, foreign_key: 'reviewer_id'
   belongs_to :country
   belongs_to :ifta_member, primary_key: 'email', foreign_key: 'ifta_member_email'
-  
+
   #validations
   #NOTE: validations must be conditional :unless => new_record?
-  #otherwise devise can't create user 
+  #otherwise devise can't create user
   validates :first_name, :presence => true, :unless => 'new_record?'
   validates :last_name, :presence => true, :unless => 'new_record?'
   validates :phone, :presence => true, :unless => 'new_record?'
   validates :country_id, :presence => true, :unless => 'new_record?'
   validates :ifta_member, :existence => true, :if => 'member'
   validates :emergency_name, :emergency_relationship, :emergency_telephone, :presence => true, :unless => 'new_record?'
-  
+
   #life cycle hooks
   after_save :set_country_category #WARNING this un-drys category data from the country table
 
@@ -69,6 +69,10 @@ class User < ActiveRecord::Base
 
   def is_attendee?
     role == 'attendee'
+  end
+
+  def itinerary_by_conference_id(conference_id)
+    itineraries.where(:conference_id => conference_id).first
   end
 
   private

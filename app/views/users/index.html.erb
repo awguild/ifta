@@ -45,7 +45,6 @@
 			<td><%= user.first_name + " " + user.last_name %><br>
 				<%= user.email %><br>
 				<%= user.role %><br>
-				<%= link_to "Make Reviewer", change_role_user_path(user, :new_role => 'reviewer'), method: :post if user.role == "attendee" %>
 				<%= link_to "Make Attendee", change_role_user_path(user, :new_role => 'attendee'), method: :post if user.role == "reviewer" %>
 				<br>
 				<div class="btn btn-primary">

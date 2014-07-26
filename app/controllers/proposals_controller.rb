@@ -10,16 +10,20 @@ class ProposalsController < ApplicationController
 
   #At the moment student is the only query parameter but this design is easily extensible
   def new
-    @itinerary = Itinerary.find(params[:itinerary_id])
+    @itinerary = Itinerary.includes(:user).find(params[:itinerary_id])
     student = params[:student] == 'yes'
     @proposal = @itinerary.proposals.build(student: student)
+    @proposal.user = @itinerary.user
+    @proposal.add_self_as_presenter
     authorize! :create, @proposal
   end
 
   #Nothing special here, proposal model takes care of nested presenter models.  Gotta love Rails :)
   def create
-    @itinerary = Itinerary.find(params[:itinerary_id])
+    @itinerary = Itinerary.includes([:conference, :user]).find(params[:itinerary_id])
     @proposal = @itinerary.proposals.build(params[:proposal])
+    @proposal.conference = @itinerary.conference
+    @proposal.user = @itinerary.user
     authorize! :create, @proposal
     if @proposal.save
       flash[:notice] = "Thank you for your proposal submission."

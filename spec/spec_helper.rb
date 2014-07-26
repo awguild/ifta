@@ -51,4 +51,6 @@ RSpec.configure do |config|
   config.order = "random"
   config.include ValidUserRequestHelper, :type => :request
   config.include Capybara::DSL
+
+  config.infer_spec_type_from_file_location!
 end

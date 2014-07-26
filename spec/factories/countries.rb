@@ -5,7 +5,6 @@ FactoryGirl.define do
     factory :usa do
         name "USA"
         category 1
-        id 1
     end
   end
 end

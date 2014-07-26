@@ -64,21 +64,21 @@ describe Itinerary do
       ConferenceItem.stubs(:discounted_items).returns(stub(not_registered: []))
       ConferenceItem.stubs(:regular_priced_items).returns(stub(not_registered: stub(not_discounted: [])))
       itinerary = FactoryGirl.build(:itinerary)
-      expect(itinerary.any_items?).to be_false
+      expect(itinerary.any_items?).to be_falsey
     end
 
     it 'should have items when it has discounted items' do
       ConferenceItem.stubs(:discounted_items).returns(stub(not_registered: [{}]))
       ConferenceItem.stubs(:regular_priced_items).returns(stub(not_registered: stub(not_discounted: [])))
       itinerary = FactoryGirl.build(:itinerary)
-      expect(itinerary.any_items?).to be_true
+      expect(itinerary.any_items?).to be_truthy
     end
 
     it 'should have items when it has regular items' do
       ConferenceItem.stubs(:discounted_items).returns(stub(not_registered: []))
       ConferenceItem.stubs(:regular_priced_items).returns(stub(not_registered: stub(not_discounted: [{}])))
       itinerary = FactoryGirl.build(:itinerary)
-      expect(itinerary.any_items?).to be_true
+      expect(itinerary.any_items?).to be_truthy
     end
   end
 
@@ -98,6 +98,40 @@ describe Itinerary do
       itinerary.stubs(:line_items_pre_tax_price).returns(10)
       Conference.stubs(active: stub(tax_rate: 0.3))
       expect(itinerary.line_items_tax_price).to eql(3.0)
+    end
+  end
+
+  context :registered_for_conference? do
+    it 'should be false when itinerary has no line items' do
+      itinerary = FactoryGirl.build(:itinerary)
+      expect(itinerary.registered_for_conference?).to be_falsey
+    end
+
+    it 'should be false when itinerary has a pending conference registration' do
+      itinerary = FactoryGirl.create(:itinerary_with_pending_conference)
+      expect(itinerary.registered_for_conference?).to be_falsey
+    end
+
+    it 'should be true when itinerary has a paid conference line item' do
+      itinerary = FactoryGirl.create(:itinerary_with_paid_conference)
+      expect(itinerary.registered_for_conference?).to be_truthy
+    end
+  end
+
+  context :has_pending_conference_registration? do
+    it 'should be false when itinerary has no line items' do
+      itinerary = FactoryGirl.build(:itinerary)
+      expect(itinerary.has_pending_conference_registration?).to be_falsey
+    end
+
+    it 'should be true when itinerary has a pending conference registration' do
+      itinerary = FactoryGirl.create(:itinerary_with_pending_conference)
+      expect(itinerary.has_pending_conference_registration?).to be_truthy
+    end
+
+    it 'should be false when itinerary has a paid conference line item' do
+      itinerary = FactoryGirl.create(:itinerary_with_paid_conference)
+      expect(itinerary.has_pending_conference_registration?).to be_falsey
     end
   end
 end

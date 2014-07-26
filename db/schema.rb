@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140725200919) do
+ActiveRecord::Schema.define(:version => 20140726194243) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -182,9 +182,14 @@ ActiveRecord::Schema.define(:version => 20140725200919) do
     t.boolean  "language_portuguese"
     t.boolean  "language_mandarin"
     t.boolean  "language_malay"
+    t.integer  "relative_number"
+    t.integer  "conference_id"
+    t.integer  "user_id"
   end
 
+  add_index "proposals", ["conference_id"], :name => "index_proposals_on_conference_id"
   add_index "proposals", ["itinerary_id"], :name => "index_proposals_on_itinerary_id"
+  add_index "proposals", ["user_id"], :name => "index_proposals_on_user_id"
 
   create_table "reviews", :force => true do |t|
     t.integer  "proposal_id"

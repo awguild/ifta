@@ -18,7 +18,7 @@ class ConferencesController < ApplicationController
   end
 
   def edit
-    @conference = Conference.includes(conference_items: [:regular_prices]).find(params[:id])
+    @conference = Conference.includes(conference_items: [:regular_prices]).find_by_conference_year(params[:id])
     @new_conference = Conference.new(conference_year: (@conference.conference_year + 1), tax_rate: @conference.tax_rate)
     authorize! @conference, :update
     if params[:pricing]
@@ -31,7 +31,7 @@ class ConferencesController < ApplicationController
   end
 
   def update
-    @conference = Conference.find(params[:id])
+    @conference = Conference.find_by_conference_year(params[:id])
     authorize! @conference, :update
     if @conference.update_attributes(params[:conference])
       redirect_to conference_path(@conference)
