@@ -32,6 +32,7 @@ end
 
 group :development, :test do
     gem 'rspec-rails'
+    gem 'rspec-core', '~> 2.99.1'
     gem 'mocha'
     gem 'factory_girl_rails'
     gem 'shoulda'

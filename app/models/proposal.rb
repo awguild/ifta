@@ -10,6 +10,7 @@ class Proposal < ActiveRecord::Base
   has_many :reviews
   has_one :slot
   belongs_to :itinerary
+  belongs_to :conference
 
   accepts_nested_attributes_for :presenters, allow_destroy: true
 
@@ -74,7 +75,7 @@ def self.accepted_and_unregistered(conference)
   return report
 end
 
-  private
+private
   def add_self_as_presenter
       presenter_attributes = {
         first_name: user.first_name,
