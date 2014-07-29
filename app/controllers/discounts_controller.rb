@@ -46,6 +46,6 @@ class DiscountsController < ApplicationController
 
   private
     def load_conference
-      @conference = Conference.find(params[:conference_id])
+      @conference = Conference.find_by_conference_year(params[:conference_id])
     end
 end
