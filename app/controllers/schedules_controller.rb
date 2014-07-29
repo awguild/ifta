@@ -1,6 +1,7 @@
 class SchedulesController < ApplicationController
+  before_filter :load_conference
+
   def show
-    @conference = Conference.find(params[:conference_id])
     @schedule = @conference.schedule
     @slots = @schedule.slots.includes([:proposal, :room, {:time_slot => :day}])
     @rooms = @conference.rooms
@@ -8,13 +9,11 @@ class SchedulesController < ApplicationController
   end
 
   def edit
-    @conference = Conference.find(params[:conference_id])
     @schedule = @conference.schedule
     authorize! :edit, @schedule
   end
 
   def update
-    @conference = Conference.find(params[:conference_id])
     @schedule = @conference.schedule
     authorize! :update, @schedule
     if @schedule.update_attributes params[:schedule]
@@ -29,4 +28,9 @@ class SchedulesController < ApplicationController
       end
     end
   end
+
+  private
+    def load_conference
+      @conference = Conference.find_by_conference_year(params[:conference_id])
+    end
 end
