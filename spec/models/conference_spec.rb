@@ -28,9 +28,16 @@ describe Conference do
   end
 
   context 'registration_count' do
-    it 'should have 6 line items' do
-      active_conference.stubs(:line_items).returns(stub(count: 6))
+    it 'should have 6 registered events' do
+      active_conference.stubs(:line_items).returns(stub(where: stub(count: 6)))
       expect(active_conference.registration_count).to eql(6)
+    end
+  end
+
+  context 'pending_registration_count' do
+    it 'should have 6 pending events' do
+      active_conference.stubs(:line_items).returns(stub(where: stub(count: 6)))
+      expect(active_conference.pending_registration_count).to eql(6)
     end
   end
 

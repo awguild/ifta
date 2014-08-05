@@ -40,10 +40,12 @@ class Conference < ActiveRecord::Base
     proposals.wait_listed.count
   end
 
-  #returns the number of line_items scoped to this model
-  #Note: this statistic is not the same as the number of people registered
   def registration_count
-    line_items.count
+    line_items.where(:paid => true).count
+  end
+
+  def pending_registration_count
+    line_items.where(:paid => false).count
   end
 
   def registration_breakdown
