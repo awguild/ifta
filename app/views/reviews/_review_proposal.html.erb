@@ -15,8 +15,7 @@
 			<%= presenter.first_name + " " + presenter.last_name + " (" + presenter.email + ")" %>
 			<%= ", " unless index == proposal.presenters.length - 1 %>
 		<%- end %><br>
-	<%- #this form looks weird because IFTA only has one review per proposal so I'm cutting corners here by loading the most recent review or creating a new review %>
-	<%= form_for proposal.reviews.last || Review.new do |f| %>
+	<%= form_for current_review(proposal), html: {:class => 'review_form'} do |f| %>
 		<%= hidden_field_tag 'review[proposal_id]', proposal.id %>
 		<%= hidden_field_tag 'review[reviewer_id]', current_user.id %>
 		<%= f.label :comments %>
