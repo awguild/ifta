@@ -82,4 +82,10 @@ module ProposalsHelper
     languages += "Portugese, " if proposal.language_portuguese
     languages.chomp(", ")
   end
+
+  # IFTA only has one review per proposal
+  # loading the most recent review or creating a new review
+  def current_review(proposal)
+    proposal.reviews.last || Review.new
+  end
 end

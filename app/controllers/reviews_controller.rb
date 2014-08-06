@@ -1,29 +1,41 @@
 class ReviewsController < ApplicationController
-
   def create
     @review = Review.new(params[:review])
     authorize! :create, @review
 
-    if @review.save
-      send_emails if params[:send_emails]
-      flash[:notice] = 'Proposal successfully reviewed'
-    else
-      flash[:alert] = 'Unable to save your last review'
+    respond_to do |format|
+      if @review.save
+        send_emails if send_emails?
+        format.html { redirect_to after_sign_in_path_for(current_user), :notice => 'Proposal successfully reviewed.' }
+        format.json { head :no_content }
+      else
+        format.html { render :action => 'edit', :alert => 'Unable to save your last review' }
+        format.json { render json: @review.errors, status: :unprocessable_entity }
+      end
     end
-    redirect_to after_sign_in_path_for(current_user)
   end
 
   def update
     @review = Review.find(params[:id])
-    if @review.update_attributes(params[:review])
-      send_emails if params[:send_emails]
-    else
-      flash[:alert] = 'Unable to save your last review'
+    authorize! :create, @review
+
+    respond_to do |format|
+      if @review.update_attributes(params[:review])
+        send_emails if send_emails?
+        format.html { redirect_to after_sign_in_path_for(current_user), :notice => 'Proposal successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render :action => 'edit', :alert => 'Unable to save your last review' }
+        format.json { render json: @review.errors, status: :unprocessable_entity }
+      end
     end
-    redirect_to after_sign_in_path_for(current_user)
   end
 
   private
+
+  def send_emails?
+    params[:send_emails] == "true" || params[:send_emails] == true || params[:send_emails] == '1'
+  end
 
   def send_emails
     @review.proposal.presenters.each do |presenter|
