@@ -4,10 +4,10 @@
   <title>IFTA CONGRESS</title>
   <link rel="stylesheet" type="text/css" media="all" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css"    />
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag "http://www.ifta-congress.org/#{selected_conference.conference_year}/includes/main.css" %>
+  <%= stylesheet_link_tag "http://www.ifta-congress.org/#{selected_conference.conference_year}/includes/icon.css" %>
+  <%= stylesheet_link_tag "http://www.ifta-congress.org/#{selected_conference.conference_year}/includes/colors.css" %>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://www.ifta-congress.org/includes/main.css" rel="stylesheet" type="text/css">
-  <link href="http://www.ifta-congress.org/includes/icon.css" rel="stylesheet" type="text/css">
-  <link href="http://www.ifta-congress.org/includes/colors.css" rel="stylesheet" type="text/css">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -18,7 +18,7 @@
 <div id="headback">
 	<div id="head"><span>IFTA Congress</span></div>
 	<div id="background">
-		<div id="fat">	
+		<div id="fat">
 			<ul class="nav nav-pills">
 			<% if user_signed_in? %>
 				<li><%= link_to "Main", after_sign_in_path_for(current_user) %></li>
@@ -34,17 +34,17 @@
 				<li><%= link_to "Sign In", new_user_session_path %></li>
 			<% end %>
 			</ul>
-			
-			
+
+
 			<div id="page">
 			<% if ! flash[:notice].blank? %>
 				<p class="notice"><%= flash[:notice] %></p>
 			<% end %>
-			
+
 			<% if ! flash[:alert].blank?%>
 				<p class="alert"><%= flash[:alert] %></p>
 			<% end %>
-		
+
 			<%= yield %>
 			</div>
 		</div>

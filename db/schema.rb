@@ -11,8 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131224165250) do
 
+ActiveRecord::Schema.define(:version => 20140726194243) do
   create_table "conference_items", :force => true do |t|
     t.string   "name"
     t.string   "description"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(:version => 20131224165250) do
     t.string   "proposal_wait_list_subject"
     t.string   "proposal_rejection_subject"
   end
+
+  add_index "conferences", ["conference_year"], :name => "index_conferences_on_conference_year"
 
   create_table "countries", :force => true do |t|
     t.string  "name"
@@ -117,12 +119,12 @@ ActiveRecord::Schema.define(:version => 20131224165250) do
 
   create_table "payments", :force => true do |t|
     t.integer  "transaction_id"
-    t.integer  "amount",         :default => 0
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.decimal  "amount",         :precision => 10, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                     :null => false
+    t.datetime "updated_at",                                                     :null => false
     t.text     "params"
     t.boolean  "confirmed"
-    t.string   "comments",       :default => ""
+    t.string   "comments",                                      :default => ""
   end
 
   create_table "presenters", :force => true do |t|
@@ -178,9 +180,16 @@ ActiveRecord::Schema.define(:version => 20131224165250) do
     t.boolean  "language_english",    :default => true
     t.boolean  "language_spanish"
     t.boolean  "language_portuguese"
+    t.boolean  "language_mandarin"
+    t.boolean  "language_malay"
+    t.integer  "relative_number"
+    t.integer  "conference_id"
+    t.integer  "user_id"
   end
 
+  add_index "proposals", ["conference_id"], :name => "index_proposals_on_conference_id"
   add_index "proposals", ["itinerary_id"], :name => "index_proposals_on_itinerary_id"
+  add_index "proposals", ["user_id"], :name => "index_proposals_on_user_id"
 
   create_table "reviews", :force => true do |t|
     t.integer  "proposal_id"

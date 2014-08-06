@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
 	before_filter :set_room, only: [:show, :update, :destroy]
-    def index
+
+	def index
 	    @conference = Conference.find(params[:conference_id])
 	    @schedule = @conference.schedule
 	    @rooms = @schedule.rooms

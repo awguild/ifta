@@ -2,4 +2,18 @@
 	<%= render :partial => "layouts/admin_nav" %>
 <%- end %>
 
-<%= render "settings_form" %>
+<div class="editCurrentConference">
+	<h1><%= @conference.conference_year %> Conference Settings</h1>
+	<%= render partial: "settings_form", locals: {conference: @conference} %>
+</div>
+
+<div class="switchConferences">
+	<h3>Switch to view a previous confernece</h3>
+		<%= form_tag select_year_conferences_path do %>
+			<%= select_tag("conference_id", options_from_collection_for_select(Conference.all, "id", "conference_year")) %>
+			<%= submit_tag("Switch Year") %>
+		<%- end %>
+	<hr>
+	<h3>Time for the next conference?</h3>
+<%= render partial: "settings_form", locals: {conference: @new_conference} %>
+</div>

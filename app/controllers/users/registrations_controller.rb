@@ -1,7 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-   
+
    #Adds a captcha check to the sign up process
-   #this way if our sign up form gets bombed by spam bots we don't have a ton of nonsensical users 
+   #this way if our sign up form gets bombed by spam bots we don't have a ton of nonsensical users
    def create
     if !verify_recaptcha
       flash.delete :recaptcha_error

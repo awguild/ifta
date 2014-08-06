@@ -1,6 +1,6 @@
 <div id='proposal_<%= proposal.id %>'>
-	<strong>Proposal #<%= proposal.id %></strong> <%= link_to "Edit", edit_itinerary_proposal_path(proposal.itinerary, proposal)%><br>
-	<em>Languages:</em> <%= proposal.show_languages %><br>
+	<strong>Proposal #<%= proposal.relative_number %></strong> <%= link_to "Edit", edit_itinerary_proposal_path(proposal.itinerary, proposal)%><br>
+	<em>Languages:</em> <%= show_languages(proposal) %><br>
 	<em>Title:</em> <%= proposal.title %>  <br>
 	<em>Short:</em> <%= proposal.short_description %><br>
 	<em>Long:</em> <%= proposal.long_description %><br>
@@ -9,14 +9,13 @@
 	<em>Category:</em> <%= proposal.category %><br>
 	<em>AV:</em> <%= proposal.sound ? "Yes" : "No" %><br>
 	<em>Projector:</em> <%= proposal.projector ? "Yes" : "No" %><br>
-	<em>Presenters:</em> 
+	<em>Presenters:</em>
 		<%- proposal.presenters.each_with_index do |presenter, index| %>
 			<%= "<span style='color: red;'>*</span>".html_safe if presenter.other_presentations %>
 			<%= presenter.first_name + " " + presenter.last_name + " (" + presenter.email + ")" %>
 			<%= ", " unless index == proposal.presenters.length - 1 %>
 		<%- end %><br>
-	<%- #this form looks weird because IFTA only has one review per proposal so I'm cutting corners here by loading the most recent review or creating a new review %>
-	<%= form_for proposal.reviews.last || Review.new do |f| %>
+	<%= form_for current_review(proposal), html: {:class => 'review_form'} do |f| %>
 		<%= hidden_field_tag 'review[proposal_id]', proposal.id %>
 		<%= hidden_field_tag 'review[reviewer_id]', current_user.id %>
 		<%= f.label :comments %>

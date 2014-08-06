@@ -1,26 +1,18 @@
 <%= form_for [@conference, @discount] do |f| %>
 	<%= render :partial => 'shared/error_messages', :locals => {:object => @discount} %>
+
+	<%= f.label :discount_key %>
+	<%= @discount.discount_key %>
 	<%= f.hidden_field :discount_key, :value => @discount.discount_key %>
-	<%= f.label :discount_key %> <%= @discount.discount_key %>
-	<%- if f.object.new_record? %>
-		<em>Will appear after you create the discount</em>
-	<%- end %>
 	<br>
 	<%= f.label :description %>
-	<%= f.text_field :description %><br>
-	
-	<%= f.fields_for :prices do |price| %>
-		<div class='removable'>
-		<% item = price.object.conference_item %>
-		<%= price.label :amount, "#{item.name} Price" %>
-		<%= price.text_field :amount %>
-		<%= price.hidden_field :conference_item_id, :value => item.id %>
-		<%= price.hidden_field :_destroy %>
-		<div class="btn btn-danger">
-			<%= link_to "Remove", "#", {:class => 'remove'} %>
-		</div>
-		</div>
+	<%= f.text_field :description %>
+	<hr>
+
+	<%= f.fields_for :prices do |g| %>
+		<%= render :partial => 'discounts/price', :locals => {:f => g, :price => g.object} %>
 	<%- end %>
-	
+
 	<%= f.submit name: 'Submit', class: 'btn btn-primary' %>
 <%- end %>
+

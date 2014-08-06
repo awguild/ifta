@@ -26,7 +26,7 @@
 		</div>
 		<br>
 		<%= submit_tag :Search, :class => 'btn btn-primary' %>
-	<%- end %>	
+	<%- end %>
 
 <h2>Matching Users</h2>
 <%- if @users.blank? %>
@@ -39,16 +39,17 @@
 				<th><%= item.name %></th>
 			<%- end %>
 		</tr>
-		
+
 		<%- @users.each do |user| %>
 		<tr>
 			<td><%= user.first_name + " " + user.last_name %><br>
 				<%= user.email %><br>
 				<%= user.role %><br>
-				<%= link_to "Make Reviewer", change_role_user_path(user, :new_role => 'reviewer'), method: :post if user.role == "attendee" %> 
 				<%= link_to "Make Attendee", change_role_user_path(user, :new_role => 'attendee'), method: :post if user.role == "reviewer" %>
 				<br>
-				<%= link_to "Dashboard", after_sign_in_path_for(user), :class => 'btn btn-primary' %>
+				<div class="btn btn-primary">
+					<%= link_to "Dashboard", after_sign_in_path_for(user) %>
+				</div>
 			</td>
 			<%- @conference_items.each do |item| %>
 				<td>
@@ -60,7 +61,7 @@
 		</tr>
 		<%- end %>
 		</table>
-		
+
 	<div class="digg_pagination">
 		<%= will_paginate @users %><br><br>
 	</div>

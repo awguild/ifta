@@ -20,6 +20,6 @@
 	<%= f.fields_for :time_slots do |builder| %>
 		<%= render "time_slot_fields", f: builder %>
 	<%- end %>
-	
+
 	<%= link_to_add_fields "Add time slot", f, :time_slots unless f.object.blank? %>
 </fieldset>
