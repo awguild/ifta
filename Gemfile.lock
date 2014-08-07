@@ -215,7 +215,6 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-
   angularjs-rails
   awesome_print
   cancan (= 1.6.8)
@@ -226,8 +225,8 @@ DEPENDENCIES
   devise (= 2.1.2)
   dotenv-rails
   factory_girl_rails
-  jbuilder
   foreman (= 0.74)
+  jbuilder
   jquery-rails
   jquery-ui-rails
   meta_request
