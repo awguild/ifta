@@ -1,4 +1,10 @@
 $(function(){
+  var submitButton;
+
+  $('input[type=submit]').click(function(e) {
+    submitButton = $(e.target);
+  });
+
   $('.review_form').each(function(index, form){
     $(form).submit(submitForm);
   });
@@ -7,6 +13,7 @@ $(function(){
     var self = this;
 
     e.preventDefault();
+
     $.ajax({
       type: getMethod(self),
       dataType: 'json',
@@ -14,7 +21,7 @@ $(function(){
       data: {
         send_emails: shouldSendEmails(self),
         review: {
-          status: getStatus(self),
+          status: submitButton.val(),
           comments: getComments(self),
           proposal_id: getProposalId(self),
           reviewer_id: getReviewerId(self)
@@ -39,10 +46,6 @@ $(function(){
 
   function getMethod(form){
     return $(form).find('input[name=_method]').val() || 'post';
-  }
-
-  function getStatus(form){
-    return $(form).find('input[type=submit]:focus').val();
   }
 
   function getComments(form){
