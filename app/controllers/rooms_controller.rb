@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
 	before_filter :set_room, only: [:show, :update, :destroy]
 
 	def index
-	    @conference = Conference.find(params[:conference_id])
+	    @conference = Conference.find_by_conference_year(params[:conference_id])
 	    @schedule = @conference.schedule
 	    @rooms = @schedule.rooms
 	    authorize! :edit, @schedule
@@ -13,6 +13,9 @@ class RoomsController < ApplicationController
 
     def show
         authorize! :show, @room
+        respond_to do |format|
+            format.json { render json: @room}
+        end
     end
 
     def create
@@ -30,8 +33,6 @@ class RoomsController < ApplicationController
     end
 
     def update
-        @room = Room.find(:id)
-
         authorize! :update, @room
 
         if @room.update_attributes(params[:room])

@@ -43,7 +43,7 @@ Iftaconferenceapp::Application.routes.draw do
     end
     resources :discounts
     resource :schedule
-    resources :rooms
+    resources :rooms, :defaults => { :format => 'json' }
   end
   resources :reviews
 
