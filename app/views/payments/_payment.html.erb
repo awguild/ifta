@@ -18,5 +18,5 @@
 
 		<%= f.submit "Mark As Paid", :class => 'btn btn-primary' %>
 <%- end %>
-<%= button_to "Delete Transaction", itinerary_transaction_path(transaction.itinerary, transaction), method: :delete, :class => 'destroy btn btn-danger' %>
+<%= button_to "Delete Transaction", itinerary_transaction_path(transaction.itinerary, transaction), method: :delete, :class => 'destroy btn btn-danger deleteTransaction' %>
 </div>
