@@ -30,8 +30,11 @@ class TransactionsController < ApplicationController
   def destroy
     @transaction = Transaction.find(params[:id])
     authorize! :destroy, @transaction
-    @transaction.destroy
-    redirect_to after_sign_in_path_for(current_user)
+    if @transaction.destroy
+      head :no_content
+    else
+      render json: "Could not remove transaction"
+    end
   end
 
 end
