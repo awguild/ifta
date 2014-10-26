@@ -36,4 +36,5 @@ group :development, :test do
     gem 'awesome_print'
     gem 'meta_request'
     gem 'capybara'
+    gem 'quiet_assets'
 end
