@@ -11,6 +11,7 @@ class ReportsController < ApplicationController
 		@conference = Conference.find_by_conference_year(params[:id])
 		authorize! :report, @conference
 		@conference_item_breakdown_report = @conference.registration_breakdown
+		@registrations = RegistrationBreakdownQuery.exec(@conference.conference_year)
 		respond_with @report
 	end
 
