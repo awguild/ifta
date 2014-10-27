@@ -5,6 +5,8 @@
 
 <%= render :partial => 'reports/conference_item_breakdown' %>
 
+<h3>Transactions by User</h3>
+<%= link_to "Download CSV", registration_breakdown_report_path(format: 'csv') %><br><br>
 <%- @registrations.each(:as => :hash) do |registration| %>
   <b>Member Status</b>: <%= registration['member_status'] %><br>
   <b>Last Name</b>: <%= registration['last_name'] %><br>

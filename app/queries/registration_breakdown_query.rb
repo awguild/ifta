@@ -13,13 +13,55 @@ class RegistrationBreakdownQuery
     ce_certificate: 71
   }
 
+  def self.to_csv(registrations)
+    CSV.generate do |csv|
+      # headers
+      csv << [
+        'Member Status',
+        'Last Name', 
+        'First Name',
+        'Email',
+        'Country',
+        'Registration Status',
+        'Payment Date',
+        'Payment Type',
+        'Total Amount Paid',
+        'Conference',
+        'Conference + Membership',
+        'Spouse / Guest',
+        'CE Certificate',
+        'Tax',
+        'Comments'
+      ]
+
+      registrations.each(:as => :hash) do |registration|
+        csv << [
+          registration['member_status'],
+          registration['last_name'],
+          registration['first_name'],
+          registration['email'],
+          registration['country'],
+          registration['attendee_type'],
+          registration['payment_date'],
+          registration['payment_method'],
+          registration['total_amount_paid'],
+          registration['conference_price'],
+          registration['conference_and_membership'],
+          registration['spouse_or_guest'],
+          registration['ce_certificate'],
+          registration['tax'],
+          registration['comments']
+        ]
+      end
+    end
+  end
+
   def self.exec(year = "2014")
-    if year == "2014"
+    if year == 2015
       items = LINE_ITEM_IDS_2015
     else
       items = LINE_ITEM_IDS_2014
     end
-
 
     ActiveRecord::Base.connection.execute(
     "SELECT CASE 
