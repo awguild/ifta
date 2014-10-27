@@ -56,8 +56,8 @@ class RegistrationBreakdownQuery
     end
   end
 
-  def self.exec(year = "2014")
-    if year == 2015
+  def self.exec(conference_id)
+    if conference_id == 11
       items = LINE_ITEM_IDS_2015
     else
       items = LINE_ITEM_IDS_2014
@@ -123,6 +123,6 @@ class RegistrationBreakdownQuery
                    ON u.country_id = c.id 
            LEFT JOIN payments AS p 
                   ON p.transaction_id = t.id 
-    WHERE  i.conference_id = 11")
+    WHERE  i.conference_id = #{conference_id}")
   end
 end
