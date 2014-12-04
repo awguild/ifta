@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140726194243) do
+ActiveRecord::Schema.define(:version => 20141027032730) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -185,6 +185,10 @@ ActiveRecord::Schema.define(:version => 20140726194243) do
     t.integer  "relative_number"
     t.integer  "conference_id"
     t.integer  "user_id"
+    t.datetime "date_accepted"
+    t.datetime "date_emailed"
+    t.datetime "invite_letter"
+    t.text     "notes"
   end
 
   add_index "proposals", ["conference_id"], :name => "index_proposals_on_conference_id"
