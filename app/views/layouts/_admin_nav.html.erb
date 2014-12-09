@@ -28,7 +28,7 @@
 		<li><%= link_to "Accepted Proposals Registrations", accepted_and_unregistered_report_path(conference) %></li>
 		<li><%= link_to "Registration Breakdown", registration_breakdown_report_path(conference) %></li>
 		<li><%= link_to "Student Presentations", student_presentations_report_path(conference) %></li>
-		<li><%= link_to "Presentations", presentations_report_path(format: 'csv') %></li>
+		<li><%= link_to "Presentations", presentations_report_path(conference, format: 'csv') %></li>
 	</ul>
 </li>
 <li><%= link_to "Users", users_path(email: false) %></li>
