@@ -2,12 +2,17 @@
 <%= simple_form_for @user, :html => {:class => 'contact-form'} do |f| %>
 	<%= render :partial => 'shared/error_messages', :locals => {:object => @user} %>
 
-	<h3>Full Name</h3>
+	<h3>Name</h3>
 	<%= f.input :first_name %>
 	<%= f.input :last_name %>
 	<%= f.input :prefix %>
 	<%= f.input :initial %>
 	<%= f.input :suffix %>
+
+	<h3>Nametag &amp; Certificate</h3>
+	<p><em>Please type your name as you'd like it to appear on your nametag. If you plan on ordering a certificate of continuing education type your name as you'd like it to appear on the certificate.</em></p>
+	<%= f.input :nametag_name %>
+	<%= f.input :certificate_name %>
 
 	<h3>Residency</h3>
 	<%= f.association :country %>
