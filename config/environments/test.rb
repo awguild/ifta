@@ -34,4 +34,7 @@ Iftaconferenceapp::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # capybara suggestion for tests
+  config.allow_concurrency = false
 end
