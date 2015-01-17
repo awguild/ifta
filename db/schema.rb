@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141027032730) do
+ActiveRecord::Schema.define(:version => 20150117164323) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -286,6 +286,8 @@ ActiveRecord::Schema.define(:version => 20141027032730) do
     t.string   "emergency_relationship"
     t.string   "emergency_telephone"
     t.string   "emergency_email"
+    t.string   "nametag_name"
+    t.string   "certificate_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
