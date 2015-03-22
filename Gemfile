@@ -37,7 +37,3 @@ group :development, :test do
     gem 'capybara'
     gem 'quiet_assets'
 end
-
-group :development do
-    gem 'debugger'
-end
