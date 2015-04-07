@@ -24,10 +24,7 @@ class User < ActiveRecord::Base
   #validations
   #NOTE: validations must be conditional :unless => new_record?
   #otherwise devise can't create user
-  validates :first_name, :presence => true, :unless => 'new_record?'
-  validates :last_name, :presence => true, :unless => 'new_record?'
-  validates :phone, :presence => true, :unless => 'new_record?'
-  validates :country_id, :presence => true, :unless => 'new_record?'
+  validates :first_name, :last_name, :phone, :nametag_name, :certificate_name, :country_id, :presence => true, :unless => 'new_record?'
   validates :ifta_member, :existence => true, :if => 'member'
   validates :emergency_name, :emergency_relationship, :emergency_telephone, :presence => true, :unless => 'new_record?'
 
