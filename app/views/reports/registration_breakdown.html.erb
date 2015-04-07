@@ -4,3 +4,24 @@
 <h1><%= @conference.conference_year %> Paid Registrations Breakdown</h1>
 
 <%= render :partial => 'reports/conference_item_breakdown' %>
+
+<h3>Transactions by User</h3>
+<%= link_to "Download CSV", registration_breakdown_report_path(format: 'csv') %><br><br>
+<%- @registrations.each(:as => :hash) do |registration| %>
+  <b>Member Status</b>: <%= registration['member_status'] %><br>
+  <b>Last Name</b>: <%= registration['last_name'] %><br>
+  <b>First Name</b>: <%= registration['first_name'] %><br>
+  <b>Email</b>: <%= registration['email'] %><br>
+  <b>Country</b>: <%= registration['country'] %><br>
+  <b>Registration Status</b>: <%= registration['attendee_type'] %><br>
+  <b>Payment Date</b>: <%= registration['payment_date'] %><br>
+  <b>Payment Type</b>: <%= registration['payment_method'] %><br>
+  <b>Total Amount Paid</b>: <%= registration['total_amount_paid'] %><br>
+  <b>Conference</b>: <%= registration['conference_price'] %><br>
+  <b>Conference + Membership</b>: <%= registration['conference_and_membership'] %><br>
+  <b>Spouse / Guest</b>: <%= registration['spouse_or_guest'] %><br>
+  <b>CE Certificate</b>: <%= registration['ce_certificate'] %><br>
+  <b>Tax</b>: <%= registration['tax'] %><br>
+  <b>Comments</b>: <%= registration['comments'] %><br>
+  <hr>
+<%- end %>

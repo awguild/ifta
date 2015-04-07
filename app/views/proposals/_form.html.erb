@@ -3,18 +3,6 @@
 <%= render :partial => 'shared/error_messages', :locals => {:object => @proposal} %>
 
 <%= f.hidden_field :student %>
-<h3>Language</h3>
-<p>Workshops will be presented in English, Mandarin or Malay.  Please tell us which languages you speak fluently and would be willing to speak in your workshop.  Check as many as apply.
-The Program Committee will make the decision as which language you will present in based on the number and balance of the proposals.  </p>
-
-	<%= f.label :language_english, 'English' %>
-	<%= f.check_box :language_english %><br>
-	<%= f.label :language_mandarin, 'Mandarin' %>
-	<%= f.check_box :language_mandarin %><br>
-	<%= f.label :language_malay, 'Malay' %>
-	<%= f.check_box :language_malay %><br>
-<hr>
-
 <h3>Presentation Format</h3>
 	<%= f.radio_button :format, "poster"%> <%= f.label :format_poster, "Poster Display" %>
 	<em>(Limit four presenters)</em><br>
@@ -24,9 +12,6 @@ The Program Committee will make the decision as which language you will present 
 
 	<%= f.radio_button :format, "45min" %> <%= f.label :format_45min, "45 minutes"%>
 	<em>(Limit to two registered presenters)</em><br>
-
-	<%= f.radio_button :format, "60min" %> <%= f.label :format_60min, "60 minutes "%>
-	<em>(Limit to four registered presenters)</em><br>
 <hr>
 
 <h3>Category of Information to be presented</h3>
@@ -78,6 +63,6 @@ Note: Presenters must bring their own laptop
 <%= f.check_box :agree %>
 </p>
 <br>
-<%= f.submit %>
+<%= f.button :submit, :class => 'btn submit' %>
 
 <% end %>

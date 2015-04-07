@@ -11,5 +11,8 @@
 	<p><em>Choose your payment method</em><br>
 	<%= link_to "Pay With Paypal (Credit Card)", itinerary_transactions_path(itinerary, :payment_method => :paypal), id: "check_out", :method => :post, :class => 'btn btn-success' %><br>
 	<%= link_to "Mail a Check", itinerary_transactions_path(itinerary, :payment_method => :check), id: "check_out", :method => :post, :class => 'btn btn-success' %><br>
-	<%= link_to "Electronic Bank Transfer", itinerary_transactions_path(itinerary, :payment_method => :bank), id: "check_out", :method => :post, :class => 'btn btn-success' %></p>
+	<%= link_to "Electronic Bank Transfer", itinerary_transactions_path(itinerary, :payment_method => :bank), id: "check_out", :method => :post, :class => 'btn btn-success' %>
+	<br>
+	<%= link_to "Bank Transfer Instructions", "http://ifta-congress.org/bank_electronic_and_wire_transfer_info.php", {target: '_blank'} %>
+	</p>
 </div>

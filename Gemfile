@@ -34,8 +34,8 @@ group :development, :test do
     gem 'shoulda'
     gem 'dotenv-rails'
     gem 'spork'
-    gem 'debugger'
     gem 'awesome_print'
     gem 'meta_request'
     gem 'capybara'
+    gem 'quiet_assets'
 end

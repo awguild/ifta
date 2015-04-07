@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :prefix, :initial, :suffix, :address,
                   :city, :state, :country_id, :zip, :phone, :username, :member,
                   :student, :ifta_member_email, :fax_number, :emergency_name,
-                  :emergency_relationship, :emergency_telephone, :emergency_email
+                  :emergency_relationship, :emergency_telephone, :emergency_email,
+                  :nametag_name, :certificate_name
 
   # associaiton
   has_many :itineraries
@@ -23,10 +24,7 @@ class User < ActiveRecord::Base
   #validations
   #NOTE: validations must be conditional :unless => new_record?
   #otherwise devise can't create user
-  validates :first_name, :presence => true, :unless => 'new_record?'
-  validates :last_name, :presence => true, :unless => 'new_record?'
-  validates :phone, :presence => true, :unless => 'new_record?'
-  validates :country_id, :presence => true, :unless => 'new_record?'
+  validates :first_name, :last_name, :phone, :nametag_name, :certificate_name, :country_id, :presence => true, :unless => 'new_record?'
   validates :ifta_member, :existence => true, :if => 'member'
   validates :emergency_name, :emergency_relationship, :emergency_telephone, :presence => true, :unless => 'new_record?'
 

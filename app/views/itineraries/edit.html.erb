@@ -2,7 +2,15 @@
 
 <%= render :partial => 'cart', :locals => {:unpaid_line_items => @itinerary.unpaid_line_items, :itinerary => @itinerary} %>
 
-<h1>Available Events</h1>
+<h3>Your Submitted Proposal(s)</h3>
+<%- if @itinerary.proposals.blank? %>
+	<p>You have not submitted any proposals yet.</p>
+<%- else %>
+	<%= render :partial => 'proposal', :collection => @itinerary.proposals, :locals => {:itinerary => @itinerary} %>
+<%- end %>
+<br><br>
+
+<h3>Available Events</h3>
 <%- if !@itinerary.any_items? %>
 	<p>No conference items are currently available.</p>
 <%- else %>
@@ -26,11 +34,3 @@
 <%- end %>
 
 <br>
-
-<h1>Submitted Proposals</h1>
-<%- if @itinerary.proposals.blank? %>
-	<p>You have not submitted any proposals yet.</p>
-<%- else %>
-	<%= render :partial => 'proposal', :collection => @itinerary.proposals, :locals => {:itinerary => @itinerary} %>
-<%- end %>
-<br><br>

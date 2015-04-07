@@ -29,7 +29,16 @@
   text-decoration: none;
   color:white;
 }
-.nav>li>a:hover, .nav>li>a:focus, .open>a:hover, .nav .open>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .nav .open>a, .nav .open>a:hover, .nav .open>a:focus{
+.nav>li>a:hover,
+.nav>li>a:focus,
+.open>a:hover,
+.nav .open>a:focus,
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus,
+.nav .open>a,
+.nav .open>a:hover,
+.nav .open>a:focus,
+.submit:hover{
   background-color: #042466;
   color:white;
 }
@@ -82,7 +91,8 @@
 	float:right;
 	padding-right:15px;
 }
-.btn, input[type="submit"] {
+.btn,
+input[type="submit"] {
   background-color: #042456;
   color:white;
   border-color: black;
@@ -169,7 +179,7 @@ fieldset.show-fieldset{
 
 /*Users*/
 .contact-form label{
-  width: 110px;
+  width: 120px;
   text-align: right;
   padding:5px;
 }
