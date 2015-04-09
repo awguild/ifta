@@ -44,8 +44,7 @@ class ApplicationController < ActionController::Base
   def check_contact_info
     @user = current_user
     if @user.invalid?
-     render 'users/shared/_contact_info'
-     return false
+     return redirect_to edit_user_path(current_user)
     end
   end
 
