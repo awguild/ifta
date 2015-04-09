@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   def check_contact_info
     @user = current_user
     if @user.invalid?
-     render 'users/shared/_contact_info.html.erb'
+     render 'users/shared/_contact_info'
      return false
     end
   end
