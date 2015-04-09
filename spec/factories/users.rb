@@ -22,6 +22,10 @@ FactoryGirl.define do
     emergency_email "jdoe@example.com"
     password "abcdefgh"
 
+    factory :admin do
+        role "admin"
+    end
+
     before(:create) do |user, evaluator|
         FactoryGirl.create(:usa)
     end
