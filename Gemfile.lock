@@ -225,7 +225,6 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   cancan (= 1.6.8)
-  capybara
   coffee-rails (~> 3.2.1)
   debugger
   delayed_job_active_record
