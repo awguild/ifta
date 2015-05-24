@@ -2,8 +2,8 @@ class ConferencesController < ApplicationController
 
   def show
     @conference = Conference.find_by_conference_year(params[:id])
-    @conference_item_breakdown_report = @conference.registration_breakdown
     authorize! @conference, :update
+    @conference_item_breakdown_report = @conference.registration_breakdown
   end
 
   def create

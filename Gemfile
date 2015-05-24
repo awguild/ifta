@@ -34,6 +34,10 @@ group :development, :test do
     gem 'spork'
     gem 'awesome_print'
     gem 'meta_request'
-    gem 'capybara'
     gem 'quiet_assets'
+    gem 'poltergeist'
+end
+
+group :development do
+    gem 'debugger'
 end
