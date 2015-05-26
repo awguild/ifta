@@ -6,7 +6,6 @@ module Api
       respond_to :json
 
       def index
-        @conference = Conference.find_by_conference_year(params[:conference_id])
         @rooms = @conference.rooms
         authorize! :edit, @conference
         render json: @rooms

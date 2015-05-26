@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe '/api/v1/conferences/*' do
+describe '/api/v1/conferences/*/rooms' do
   before {
     @room = FactoryGirl.create(:room)
     @conference = @room.conference
