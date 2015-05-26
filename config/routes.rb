@@ -41,8 +41,11 @@ Iftaconferenceapp::Application.routes.draw do
     collection do
       post 'select_year', as: :select_year
     end
+
+    member do
+      get 'schedule', as: :schedule
+    end
     resources :discounts
-    resource :schedule
   end
   resources :reviews
 
@@ -55,6 +58,7 @@ Iftaconferenceapp::Application.routes.draw do
   namespace :api, :defaults => { :format => 'json' } do
     namespace :v1 do
       resources :conferences do
+        resource :schedule
         resources :rooms
       end
     end
