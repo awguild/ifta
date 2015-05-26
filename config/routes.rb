@@ -43,7 +43,6 @@ Iftaconferenceapp::Application.routes.draw do
     end
     resources :discounts
     resource :schedule
-    resources :rooms, :defaults => { :format => 'json' }
   end
   resources :reviews
 
@@ -52,4 +51,12 @@ Iftaconferenceapp::Application.routes.draw do
   get 'conferences/:id/registration_breakdown' => 'reports#registration_breakdown', :as => :registration_breakdown_report
   get 'conferences/:id/student_presentations' => 'reports#student_presentations', :as => :student_presentations_report
   get 'conferences/:id/presentations' => 'reports#presentations', :as => :presentations_report
+
+  namespace :api, :defaults => { :format => 'json' } do
+    namespace :v1 do
+      resources :conferences do
+        resources :rooms
+      end
+    end
+  end
 end
