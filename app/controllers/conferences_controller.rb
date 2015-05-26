@@ -1,7 +1,7 @@
 class ConferencesController < ApplicationController
 
+  before_filter :find_conference, only: [:show, :update, :schedule]
   def show
-    @conference = Conference.find_by_conference_year(params[:id])
     authorize! @conference, :update
     @conference_item_breakdown_report = @conference.registration_breakdown
   end
@@ -32,7 +32,6 @@ class ConferencesController < ApplicationController
   end
 
   def update
-    @conference = Conference.find_by_conference_year(params[:id])
     authorize! @conference, :update
     if @conference.update_attributes(params[:conference])
       redirect_to conference_path(@conference)
@@ -46,8 +45,20 @@ class ConferencesController < ApplicationController
     end
   end
 
+  def schedule
+    @schedule = @conference.schedule
+    authorize! :edit, @schedule
+    render 'schedules/edit'
+  end
+
   def select_year
     session[:selected_conference_id] = params[:conference_id]
     redirect_to after_sign_in_path_for(current_user)
   end
+
+  private
+
+    def find_conference
+      @conference = Conference.find_by_conference_year(params[:id])
+    end
 end
