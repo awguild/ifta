@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150117164323) do
+ActiveRecord::Schema.define(:version => 20150526031845) do
 
   create_table "conference_items", :force => true do |t|
     t.string   "name"
@@ -47,14 +47,6 @@ ActiveRecord::Schema.define(:version => 20150117164323) do
   create_table "countries", :force => true do |t|
     t.string  "name"
     t.integer "category"
-  end
-
-  create_table "days", :force => true do |t|
-    t.integer  "schedule_id"
-    t.string   "label"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.date     "day_date"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -230,15 +222,6 @@ ActiveRecord::Schema.define(:version => 20150117164323) do
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "time_slots", :force => true do |t|
-    t.integer  "day_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.time     "start_time"
-    t.time     "end_time"
-    t.string   "code"
   end
 
   create_table "transactions", :force => true do |t|

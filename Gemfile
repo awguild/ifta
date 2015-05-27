@@ -27,6 +27,7 @@ group :production do
 end
 
 group :development, :test do
+    gem 'thin'
     gem 'rspec-rails'
     gem 'rspec-core', '~> 2.99.1'
     gem 'mocha'
