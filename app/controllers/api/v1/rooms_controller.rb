@@ -3,6 +3,7 @@ module Api
     class RoomsController < ApplicationController
       before_filter :set_room, only: [:show, :update, :destroy]
       before_filter :find_conference, only: [:index, :create]
+      skip_before_filter :verify_authenticity_token
       respond_to :json
 
       def index
