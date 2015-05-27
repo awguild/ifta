@@ -1,10 +1,15 @@
 'use strict';
 
-var roomsCtrl = angular.module('schedulerApp');
+angular.module('schedulerApp')
+/*
+ * Controls
+ *
+ */
+.controller('RoomsCtrl', ["$scope", "$location", "$routeParams", "Room",
+function($scope, $location, $routeParams, Room){
+  $scope.rooms = Room.query();
 
-roomsCtrl.controller('RoomsCtrl', ["$scope", "$location", "$routeParams", "RoomsService", function($scope, $location, $routeParams, RoomsService){
-    var binary_options = [{name: 'Yes'}, {name: 'No'}]
-    this.rooms = RoomsService.query({conference_id: 1});
-    this.audio_options = binary_options;
-    this.video_options = binary_options;
+  $scope.save = function(room){
+    room.$update();
+  }
 }]);

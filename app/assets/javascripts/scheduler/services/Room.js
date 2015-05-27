@@ -1,15 +1,16 @@
 'use strict';
 
-var roomService = angular.module('schedulerApp');
+angular.module('schedulerApp')
 
-roomService.factory('RoomsService', function($resource){
-    return $resource('/conferences/:conference_id/rooms/:id.json',
-        {
-            conference_id: "@conference_id",
-            id: "@id"
-        },
-        {
-            update: {method: 'PUT'}
-        }
-    );
+.factory('Room', function($resource){
+  var year = "2016"; //tood inject conference
+  return $resource('/api/v1/conferences/:conference_year/rooms/:id',
+    {
+        conference_year: year,
+        id: "@id"
+    },
+    {
+        update: {method: 'PUT'}
+    }
+  );
 });
