@@ -16,11 +16,12 @@ gem 'newrelic_rpm'
 gem 'validates_timeliness'
 gem 'jquery-ui-rails'
 gem 'angularjs-rails'
-gem 'jbuilder'
 gem 'foreman', '0.74'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier', '>= 1.0.3'
+gem 'rabl'
+gem 'oj'
 
 group :production do
   gem 'therubyracer', :platform => :ruby
