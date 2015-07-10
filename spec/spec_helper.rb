@@ -49,4 +49,5 @@ RSpec.configure do |config|
   config.include ValidUserRequestHelper, :type => :request
 
   config.infer_spec_type_from_file_location!
+  config.include Requests::JsonHelpers, type: :request
 end

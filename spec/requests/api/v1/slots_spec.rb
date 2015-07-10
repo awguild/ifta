@@ -12,7 +12,7 @@ describe '/api/v1/conferences/*/slots' do
     slot = @schedule.slots.create!
     get @stem
     expect(response).to be_success
-    json = JSON.parse(response.body)
+
     expect(json.length).to eql(1)
     expect(json[0]["id"]).to eql(slot.id)
   end
