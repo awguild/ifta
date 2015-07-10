@@ -1,11 +1,11 @@
 module Api
   module V1
-    class SchedulesController < ApplicationController
+    class SlotsController < ApplicationController
       before_filter :load_conference
       skip_before_filter :verify_authenticity_token
       respond_to :json
 
-      def show
+      def index
         authorize! :edit, @conference
         @slots = @conference.schedule.slots.includes([:proposal, :room])
       end
