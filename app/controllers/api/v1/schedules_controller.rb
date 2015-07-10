@@ -6,9 +6,8 @@ module Api
       respond_to :json
 
       def show
+        authorize! :edit, @conference
         @slots = @conference.schedule.slots.includes([:proposal, :room])
-        authorize! :show, @conference.schedule
-        render json: @slots
       end
 
       private
