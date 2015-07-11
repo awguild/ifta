@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+ruby "2.1.2"
 
 gem 'rails', '4.2.3'
 gem 'devise'
@@ -43,5 +43,5 @@ group :development, :test do
 end
 
 group :development do
-    gem 'debugger'
+    gem 'byebug'
 end

@@ -42,6 +42,8 @@ GEM
     bcrypt (3.1.10)
     bcrypt (3.1.10-x86-mingw32)
     builder (3.2.2)
+    byebug (5.0.0)
+      columnize (= 0.9.0)
     callsite (0.0.11)
     cancan (1.6.10)
     capybara (2.4.4)
@@ -60,12 +62,6 @@ GEM
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
     daemons (1.2.3)
-    debugger (1.6.8)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.3.5)
-    debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.3.8)
     delayed_job (4.0.6)
       activesupport (>= 3.0, < 5.0)
     delayed_job_active_record (4.0.3)
@@ -252,9 +248,9 @@ PLATFORMS
 DEPENDENCIES
   angularjs-rails
   awesome_print
+  byebug
   cancan
   coffee-rails
-  debugger
   delayed_job_active_record
   devise
   dotenv-rails
