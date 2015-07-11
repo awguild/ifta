@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 1.9.3
+- 2.1.2
 before_script:
 - mysql -e 'create database ifta_conference_test'
 - RAILS_ENV=test bundle exec rake db:migrate
