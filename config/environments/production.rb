@@ -69,6 +69,6 @@ Iftaconferenceapp::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Default URL Options
-  config.action_mailer.default_url_options = {:host => CONFIG[:mailer_host]}
+  config.action_mailer.default_url_options = {:host => ENV["MAILER_HOST"]}
 
 end

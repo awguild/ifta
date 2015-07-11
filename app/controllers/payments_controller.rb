@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
   #This action only handles the Payments created through the PayPal IPN Process
   def create
     #PaypalCallback object sends the raw post request to paypal and expects to get VERIFIED back
-    response = PaypalCallback::PaypalCallback.new(params, request.raw_post, CONFIG[:paypal_post_url])
+    response = PaypalCallback::PaypalCallback.new(params, request.raw_post, ENV["PAYPAL_POST_URL"])
 
     #check that the payment says completed & paypal verifies post content
     if response.completed? && response.valid?

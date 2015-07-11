@@ -1,6 +1,6 @@
 class ReviewMailer < ActionMailer::Base
-  default :from => CONFIG[:gmail_username]
-  
+  default :from => ENV["GMAIL_USERNAME"]
+
   def review_notification(user, review)
     if review.status == 'accept'
       subject = Conference.active.proposal_acceptance_subject || 'Your IFTA Proposal has been accepted!'
@@ -15,5 +15,5 @@ class ReviewMailer < ActionMailer::Base
     @review = review
     mail(:to => user.email, :subject => subject)
   end
-  
+
 end

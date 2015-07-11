@@ -9,11 +9,7 @@ if defined?(Bundler)
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
 end
-
-CONFIG = YAML.load(ERB.new(File.read(File.expand_path('../application.yml', __FILE__))).result)
-CONFIG.merge! CONFIG.fetch(Rails.env, {})
-CONFIG.symbolize_keys!
-
+Dotenv::Railtie.load
 module Iftaconferenceapp
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
