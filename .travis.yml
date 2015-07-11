@@ -3,7 +3,7 @@ rvm:
 - 2.1.2
 before_script:
 - mysql -e 'create database ifta_conference_test'
-- RAILS_ENV=test rake db:schema:load
+- RAILS_ENV=test bundle exec rake db:schema:load
 env:
   global:
   - APP_CERT='abc'
