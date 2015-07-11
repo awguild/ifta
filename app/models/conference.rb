@@ -1,8 +1,6 @@
 #Conferences are the main administrative resource, they define a bunch of settings
 #and own conference items (which are what users)
 class Conference < ActiveRecord::Base
-  attr_accessible :conference_year, :tax_rate, :conference_items_attributes, :active
-
   #associations
   has_many :conference_items
   has_many :line_items, :through => :conference_items

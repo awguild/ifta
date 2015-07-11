@@ -20,12 +20,17 @@ class ItinerariesController < ApplicationController
     @itinerary = Itinerary.find(params[:id])
     authorize! :update, @itinerary
 
-    if @itinerary.update_attributes(params[:itinerary])
+    if @itinerary.update_attributes(itinerary_params)
       redirect_to edit_itinerary_path(@itinerary)
     else
       render 'edit'
     end
+  end
 
+  private
+
+  def itinerary_params
+    params.require(:itinerary).permit(:discount_key, :conference_id)
   end
 
 end

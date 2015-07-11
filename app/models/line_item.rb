@@ -1,5 +1,4 @@
 class LineItem < ActiveRecord::Base
-  attr_accessible :conference_item_id, :itinerary_id, :price, :comment
   #Note: Pricing is a bit confusing. A valid price is stored when the line_item is created
   #the validity of that price can expire before it is actually paid through a transaction though
   #the line_item price should be authorative once set despite being listed in attr_accesible

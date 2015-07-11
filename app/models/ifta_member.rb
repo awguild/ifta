@@ -1,6 +1,4 @@
 class IftaMember < ActiveRecord::Base
-  attr_accessible :email
-  
   #associaitons
   has_one :user, primary_key: 'email', foreign_key: 'ifta_member_email'
 

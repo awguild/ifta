@@ -7,7 +7,7 @@ class ConferencesController < ApplicationController
   end
 
   def create
-    @conference = Conference.new(params[:conference])
+    @conference = Conference.new(conference_params)
     authorize! :create, @conference
 
     if @conference.save
@@ -33,7 +33,7 @@ class ConferencesController < ApplicationController
 
   def update
     authorize! @conference, :update
-    if @conference.update_attributes(params[:conference])
+    if @conference.update_attributes(conference_params)
       redirect_to conference_path(@conference)
     else
       if params[:pricing]
@@ -59,5 +59,17 @@ class ConferencesController < ApplicationController
 
     def find_conference
       @conference = Conference.find_by_conference_year(params[:id])
+    end
+
+    def conference_params
+      params.require(:conference).permit(
+        # conference params
+        :conference_year, :tax_rate, :active
+          # nested conference items
+          conference_items_attributes: [:name, :description, :multiple, :max, :visibility, :manual_price, :user_comment, :user_comment_prompt, :conference_id,
+            # nested prices
+            prices_attributes: Price::WHITE_LISTED
+          ]
+      )
     end
 end

@@ -1,7 +1,6 @@
 
 class ConferenceItem < ActiveRecord::Base
   has_paper_trail
-  attr_accessible :name, :description, :multiple, :max, :visibility, :prices_attributes, :manual_price, :user_comment, :user_comment_prompt, :conference_id
 
   belongs_to :conference
   has_many :prices
@@ -14,8 +13,8 @@ class ConferenceItem < ActiveRecord::Base
   accepts_nested_attributes_for :prices, allow_destroy: true
 
   scope :current_active, ->{ where("visibility=? AND conference_id='?'", true, Conference.active.id) }
-  scope :not_registered, lambda{|line_items| where("conference_items.id not in (?)", line_items.blank? ? '' : line_items.collect(&:conference_item_id))}
-  scope :not_discounted, lambda{|discounted_items| where("conference_items.id not in (?)", discounted_items.blank? ? '' : discounted_items.collect(&:id))}
+  scope :not_registered, ->{|line_items| where("conference_items.id not in (?)", line_items.blank? ? '' : line_items.collect(&:conference_item_id))}
+  scope :not_discounted, ->{|discounted_items| where("conference_items.id not in (?)", discounted_items.blank? ? '' : discounted_items.collect(&:id))}
   #I couldn't figure out a single sql query that would inner join prices and conference items where the itinerary discount key matches price discount key, or (if no such price exists) where price country_category + member matches same fields in user
   #So instead I find the discounted items first and then price all the conference items that aren't in discounted items
 

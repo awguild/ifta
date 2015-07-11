@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
 
   #When IFTA gets checks or bank transfers the event planners have to mark the payments in the system as paid
   def admin_create
-    @payment = Payment.new(params[:payment])
+    @payment = Payment.new(payment_params)
     authorize! :create, @payment
     if @payment.save
       PaymentMailer.payment_notification(@payment).deliver if params[:send_email]
@@ -40,7 +40,7 @@ class PaymentsController < ApplicationController
   def update
     @payment = Payment.find(params[:id])
     authorize! :update, @payment
-    if @payment.update_attributes(params[:payment])
+    if @payment.update_attributes(payment_params)
       render "update", :locals => {:notice_message => 'Successfully Updated Payment'}
     else
       render :partial => 'shared/error_messages', :locals => {:object => @line_item}
@@ -53,4 +53,9 @@ class PaymentsController < ApplicationController
     @payment.destroy
     redirect_to after_sign_in_path_for(current_user)
   end
+
+  private
+    def payment_params
+      params.require(:payment).permit(:transaction_id, :amount, :params, :confirmed, :comments)
+    end
 end

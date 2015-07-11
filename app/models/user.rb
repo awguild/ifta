@@ -4,13 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :first_name, :last_name, :prefix, :initial, :suffix, :address,
-                  :city, :state, :country_id, :zip, :phone, :username, :member,
-                  :student, :ifta_member_email, :fax_number, :emergency_name,
-                  :emergency_relationship, :emergency_telephone, :emergency_email,
-                  :nametag_name, :certificate_name
-
   # associaiton
   has_many :itineraries
   has_many :transactions, :through => :itineraries

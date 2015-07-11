@@ -1,6 +1,4 @@
 class Payment < ActiveRecord::Base
-  attr_accessible :transaction_id, :amount, :params, :confirmed, :comments
-
   #associations
   belongs_to :transaction
 
