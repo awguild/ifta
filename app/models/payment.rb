@@ -1,6 +1,7 @@
 class Payment < ActiveRecord::Base
   #associations
-  belongs_to :transaction
+  belongs_to :order, class_name: "Transaction"
+
 
   #life cycle hooks
   after_save :mark_transaction

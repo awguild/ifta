@@ -6,7 +6,6 @@ class LineItem < ActiveRecord::Base
 
   #associations
   belongs_to :conference_item
-  belongs_to :transaction
   belongs_to :itinerary
   delegate :user, :to => :itinerary #slick, check out what this allows in the Ability class
 
