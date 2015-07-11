@@ -7,7 +7,7 @@ class Price < ActiveRecord::Base
   belongs_to :discount, :foreign_key => 'discount_key'
 
   #query
-  scope :user_price, ->{|user| where('country_category=? AND member=?', user.country_category, user.member)}
+  scope :user_price, lambda {|user| where('country_category=? AND member=?', user.country_category, user.member)}
 
   #validations
   validates :amount, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than_or_equal_to => 0}

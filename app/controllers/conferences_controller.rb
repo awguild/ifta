@@ -64,7 +64,7 @@ class ConferencesController < ApplicationController
     def conference_params
       params.require(:conference).permit(
         # conference params
-        :conference_year, :tax_rate, :active
+        :conference_year, :tax_rate, :active,
           # nested conference items
           conference_items_attributes: [:name, :description, :multiple, :max, :visibility, :manual_price, :user_comment, :user_comment_prompt, :conference_id,
             # nested prices
