@@ -13,7 +13,7 @@ class LineItem < ActiveRecord::Base
   #validations
   validates :itinerary, :existence => true
   validates :conference_item_id, :existence => true
-  validates :price, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than_or_equal_to => 0}
+  validates :price, :format => { :with => /\A\d+??(?:\.\d{0,2})?\z/ }, :numericality => {:greater_than_or_equal_to => 0}
   validate :check_price
 
   def self.total_price(line_items)
