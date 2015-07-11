@@ -1,6 +1,4 @@
 class Discount < ActiveRecord::Base
-  attr_accessible :discount_key, :description, :prices_attributes
-
   #associations
   has_many :itineraries, :foreign_key => "discount_key", :primary_key => "discount_key"
   has_many :prices, :foreign_key => "discount_key", :primary_key => "discount_key"

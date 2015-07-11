@@ -1,10 +1,10 @@
 class Transaction < ActiveRecord::Base
-  
+
   #associations
   has_many :line_items
   has_one :payment
   belongs_to :itinerary
-  
+
   #life cycle hooks
   after_save :mark_line_items
   before_destroy :clean_up
@@ -32,13 +32,13 @@ class Transaction < ActiveRecord::Base
 
   def paypal_encrypted
     values = {
-      :business => CONFIG[:paypal_seller],
+      :business => ENV["PAYPAL_SELLER"],
       :cmd => '_cart',
       :upload => 1,
-      :return => CONFIG[:paypal_return_url],
+      :return => ENV["PAYPAL_RETURN_URL"],
       :invoice => id,
-      :notify_url => CONFIG[:paypal_notify_url],
-      :cert_id => CONFIG[:paypal_cert_id]
+      :notify_url => ENV["PAYPAL_NOTIFY_URL"],
+      :cert_id => ENV["PAYPAL_CERT_ID"]
     }
 
     line_items.each_with_index do |item, index|
@@ -60,7 +60,7 @@ class Transaction < ActiveRecord::Base
     encrypt_for_paypal(values)
   end
 
-  PAYPAL_CERT_PEM = File.read("#{Rails.root}/certs/#{CONFIG[:paypal_cert_pem]}")
+  PAYPAL_CERT_PEM = File.read("#{Rails.root}/certs/#{ENV["PAYPAL_CERT_PEM"]}")
   APP_CERT_PEM = "-----BEGIN CERTIFICATE-----\n" + ENV['APP_CERT'] + "\n-----END CERTIFICATE-----\n"
   APP_KEY_PEM = "-----BEGIN RSA PRIVATE KEY-----\n" + ENV['APP_KEY'] + "\n-----END RSA PRIVATE KEY-----\n"
 

@@ -1,8 +1,6 @@
 #Conferences are the main administrative resource, they define a bunch of settings
 #and own conference items (which are what users)
 class Conference < ActiveRecord::Base
-  attr_accessible :conference_year, :tax_rate, :conference_items_attributes, :active
-
   #associations
   has_many :conference_items
   has_many :line_items, :through => :conference_items
@@ -57,13 +55,13 @@ class Conference < ActiveRecord::Base
     end
   end
 
-  # essentially a named scope, but implemented as a class method beecause scopes must be chainable and find_by_x isn't chainable
+  # essentially a named scope, but implemented as a class method beecause scopes must be chainable and find_by isn't chainable
   def self.active
-    find_by_active(true)
+    find_by(active: true)
   end
 
   def to_param
-    conference_year
+    conference_year.to_s
   end
 
   private

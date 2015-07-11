@@ -11,7 +11,7 @@ describe '/api/v1/conferences/*/slots' do
   it 'should return an array of slots for the conference' do
     slot = @schedule.slots.create!
     get @stem
-    expect(response).to be_success
+    expect(response.status).to eql(200)
 
     expect(json.length).to eql(1)
     expect(json[0]["id"]).to eql(slot.id)

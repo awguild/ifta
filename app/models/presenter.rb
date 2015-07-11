@@ -1,6 +1,4 @@
 class Presenter < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :home_telephone, :work_telephone, :fax_number, :email, :affiliation_name, :affiliation_position, :registered, :other_presentations, :other_emails
-
   #associations
   belongs_to :proposal
 
@@ -12,7 +10,7 @@ class Presenter < ActiveRecord::Base
     user = User.where(:email => email).first
     return 'No User' if user.blank?
     #look for itinerary for the relevant conference
-    itinerary = user.itinerary_by_conference_id(conference_id)
+    itinerary = user.itineraries.find_by(conference_id: conference_id)
 
     if itinerary.registered_for_conference?
       return 'Registered'

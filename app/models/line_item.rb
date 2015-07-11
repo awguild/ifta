@@ -1,5 +1,4 @@
 class LineItem < ActiveRecord::Base
-  attr_accessible :conference_item_id, :itinerary_id, :price, :comment
   #Note: Pricing is a bit confusing. A valid price is stored when the line_item is created
   #the validity of that price can expire before it is actually paid through a transaction though
   #the line_item price should be authorative once set despite being listed in attr_accesible
@@ -7,14 +6,13 @@ class LineItem < ActiveRecord::Base
 
   #associations
   belongs_to :conference_item
-  belongs_to :transaction
   belongs_to :itinerary
   delegate :user, :to => :itinerary #slick, check out what this allows in the Ability class
 
   #validations
   validates :itinerary, :existence => true
   validates :conference_item_id, :existence => true
-  validates :price, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than_or_equal_to => 0}
+  validates :price, :format => { :with => /\A\d+??(?:\.\d{0,2})?\z/ }, :numericality => {:greater_than_or_equal_to => 0}
   validate :check_price
 
   def self.total_price(line_items)

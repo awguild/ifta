@@ -9,13 +9,13 @@ describe 'Authentication' do
   end
 
   it 'should not be able to get authenticated page when not signed in' do
-    get 'users/edit'
+    get '/users/edit'
     expect(response.status).to eql(302)
   end
 
   it 'should be able to get authenticated page when signed in' do
     sign_in_as_a_valid_user
-    get 'users/edit'
+    get '/users/edit'
     expect(response.status).to eql(200)
   end
 
@@ -23,14 +23,14 @@ describe 'Authentication' do
     sign_in_as_a_valid_user
     conference = Conference.first
     expect {
-      get "conferences/#{conference.conference_year}"
+      get "/conferences/#{conference.conference_year}"
     }.to raise_error(CanCan::AccessDenied)
   end
 
   it 'should allow the admin to get to the admin page' do
     sign_in_as_a_admin_user
     conference = Conference.first
-    get "conferences/#{conference.conference_year}"
+    get "/conferences/#{conference.conference_year}"
     expect(response.status).to eql(200)
   end
 

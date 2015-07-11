@@ -11,7 +11,7 @@ FactoryGirl.define do
     city 'Springfield'
     state 'IL'
     zip 12345
-    country_id { Country.find_or_create_by_name('USA') }
+    country_id { Country.find_or_create_by({name: 'USA'}) }
     country_category 1
     phone "1112223333"
     username "jdoe@example.com"

@@ -13,7 +13,7 @@ module Api
       end
 
       def create
-        @room = Room.new params[:room]
+        @room = Room.new room_params
         @room.schedule = @conference.schedule
 
         authorize! :create, @room
@@ -27,7 +27,7 @@ module Api
 
       def update
         authorize! :update, @room
-        if @room.update_attributes(params[:room])
+        if @room.update_attributes(room_params)
           head :no_content
         else
           render json: @room.errors, status: :unprocessable_entity
@@ -35,9 +35,9 @@ module Api
       end
 
       def destroy
-        @room.destroy
-
         authorize! :destroy, @room
+
+        @room.destroy
         head :no_content
       end
 
@@ -48,7 +48,11 @@ module Api
       end
 
       def find_conference
-        @conference = Conference.find_by_conference_year!(params[:conference_id])
+        @conference = Conference.find_by!(conference_year: params[:conference_id])
+      end
+
+      def room_params
+        params.require(:room).permit(:label, :audio, :video)
       end
     end
   end

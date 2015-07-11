@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :payment do
-    transaction { FactoryGirl.create(:transaction)}
+    order { FactoryGirl.create(:transaction)}
     amount 100
     confirmed true
 
