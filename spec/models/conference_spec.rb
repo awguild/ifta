@@ -96,7 +96,7 @@ describe Conference do
     it 'should return a conference_year' do
       conference = FactoryGirl.build(:conference)
       conference.conference_year = 2014
-      expect(conference.to_param).to eql(2014)
+      expect(conference.to_param).to eql("2014")
     end
   end
 end

@@ -1,6 +1,6 @@
 class Payment < ActiveRecord::Base
   #associations
-  belongs_to :order, class_name: "Transaction"
+  belongs_to :order, class_name: "Transaction", foreign_key: 'transaction_id' # rails 4 reserved transaction method, rename to order
 
 
   #life cycle hooks
@@ -13,12 +13,12 @@ class Payment < ActiveRecord::Base
   private
 
   def mark_transaction
-      transaction.paid = confirmed
-      transaction.save
+    order.paid = confirmed
+    order.save
   end
 
   def clear_transaction
-    transaction.paid = false
-    transaction.save
+    order.paid = false
+    order.save
   end
 end

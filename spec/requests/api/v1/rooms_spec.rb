@@ -11,7 +11,9 @@ describe '/api/v1/conferences/*/rooms' do
   describe 'index' do
     it 'should return the rooms for a conference' do
       get "#{@stem}/rooms"
-      expect(response.body).to eql([@room].to_json)
+
+      expect(json.length).to eql(1)
+      expect(json[0]["id"]).to eql(@room.id)
     end
   end
 
