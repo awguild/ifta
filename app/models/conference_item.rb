@@ -6,7 +6,7 @@ class ConferenceItem < ActiveRecord::Base
   has_many :prices
   has_many :line_items
   has_many :itineraries, :through => :line_items
-  has_many :regular_prices, :conditions => {:discount_key => nil}, :class_name => 'Price' #exclude all of the prices created for this item that have a discount key set
+  has_many :regular_prices, -> { where :discount_key => nil }, :class_name => 'Price' #exclude all of the prices created for this item that have a discount key set
 
   after_initialize :build_price_objects, :if => "prices.blank?" #When a new conference item is created the event planners will probably want to price these six categories
 
