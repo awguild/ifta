@@ -61,7 +61,7 @@ class Conference < ActiveRecord::Base
   end
 
   def to_param
-    conference_year
+    conference_year.to_s
   end
 
   private
