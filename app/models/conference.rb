@@ -55,9 +55,9 @@ class Conference < ActiveRecord::Base
     end
   end
 
-  # essentially a named scope, but implemented as a class method beecause scopes must be chainable and find_by_x isn't chainable
+  # essentially a named scope, but implemented as a class method beecause scopes must be chainable and find_by isn't chainable
   def self.active
-    find_by_active(true)
+    find_by(active: true)
   end
 
   def to_param

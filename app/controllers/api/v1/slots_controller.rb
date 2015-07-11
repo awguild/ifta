@@ -12,7 +12,7 @@ module Api
 
       private
         def load_conference
-          @conference = Conference.find_by_conference_year(params[:conference_id])
+          @conference = Conference.find_by(conference_year: params[:conference_id])
         end
     end
   end

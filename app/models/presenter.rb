@@ -10,7 +10,7 @@ class Presenter < ActiveRecord::Base
     user = User.where(:email => email).first
     return 'No User' if user.blank?
     #look for itinerary for the relevant conference
-    itinerary = user.itinerary_by_conference_id(conference_id)
+    itinerary = user.itinerary_by(conference_id: conference_id)
 
     if itinerary.registered_for_conference?
       return 'Registered'
