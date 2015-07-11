@@ -76,7 +76,7 @@ describe IftaMember do
         # this before block will execute before each of the tests in this context
         before {
             ifta_member.save!
-            IftaMember.count.should == 1
+            expect(IftaMember.count).to eql(1)
         }
 
         it "should have 2 ifta members" do

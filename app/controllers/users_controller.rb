@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def edit
     #I redirected the devise edit route (which doesn't put the user id in the URL) to this action,
     #fall back on current_user
-    @user = User.find(params[:id] || current_user)
+    @user = User.find(params[:id] || current_user.id)
     authorize! :update, @user
   end
 
