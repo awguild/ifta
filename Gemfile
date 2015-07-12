@@ -40,8 +40,5 @@ group :development, :test do
     gem 'meta_request'
     gem 'quiet_assets'
     gem 'poltergeist'
-end
-
-group :development do
     gem 'byebug'
 end
