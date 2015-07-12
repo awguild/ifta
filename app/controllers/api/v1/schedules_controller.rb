@@ -20,6 +20,7 @@ class Api::V1::SchedulesController < ApplicationController
   end
 
   def bulk_create
+    authorize! :edit, @conference
     @slots = CreateSlotsApi.new(slots_params)
     if @slots.valid?
       @slots = @slots.persist!
