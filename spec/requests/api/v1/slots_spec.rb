@@ -8,38 +8,6 @@ describe '/api/v1/conferences/*/slots' do
     sign_in_as_a_admin_user
   }
 
-  describe 'index' do
-    it 'should return an array of slots for the conference' do
-      get @stem
-      expect(response.status).to eql(200)
-
-      expect(json.length).to eql(3)
-    end
-  end
-
-  describe 'create' do
-    it 'should create 4 slots for the schedule and return them in the response body' do
-      expect {
-        post @stem, {
-          quantity: 4,
-          start_time: Time.now,
-          end_time: 1.hour.from_now
-        }
-      }.to change { @conference.schedule.slots.count }.by(4)
-
-      expect(response.status).to eql(201)
-      expect(json.length).to eql(4)
-    end
-
-    it 'should return 422 when no quantity is set' do
-      expect {
-        post @stem, {}
-      }.to_not change { @conference.schedule.slots.count }
-
-      expect(response.status).to eql(422)
-    end
-  end
-
   describe 'update' do
     it 'should update the slot attributes and return the slot' do
       slot = @schedule.slots.first
