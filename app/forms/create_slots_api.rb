@@ -1,12 +1,12 @@
 class CreateSlotsApi
   include ActiveModel::Model
 
-  attr_accessor :quantity, :start_time, :end_time
+  attr_accessor :quantity, :start_time, :end_time, :schedule_id
 
   validates :quantity, inclusion: { in: 1..50 }
   validates_datetime :start_time, allow_nil: true
   validates_datetime :end_time, allow_nil: true
-
+  validates :schedule_id, presence: true
 
   def persist!
     raise Exceptions::BadRequest.new(attributes) unless valid?
@@ -35,7 +35,8 @@ class CreateSlotsApi
   def create_slot
     Slot.create({
       start_time: start_time,
-      end_time: end_time
+      end_time: end_time,
+      schedule_id: schedule_id
     })
   end
 end

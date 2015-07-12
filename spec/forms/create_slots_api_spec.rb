@@ -3,17 +3,22 @@ require 'spec_helper'
 describe CreateSlotsApi do
   describe "validations" do
     it "should be invalid without a quantity" do
-      slots = CreateSlotsApi.new
+      slots = CreateSlotsApi.new schedule_id: 3
       expect(slots).to be_invalid
     end
 
     it 'should be invalid if quantity is not a number' do
-      slots = CreateSlotsApi.new quantity: "z"
+      slots = CreateSlotsApi.new quantity: "z", schedule_id: 3
       expect(slots).to be_invalid
     end
 
-    it "should be valid with a quantity" do
+    it "should be invalid without a schedule_id" do
       slots = CreateSlotsApi.new quantity: 3
+      expect(slots).to be_invalid
+    end
+
+    it "should be valid with a quantity and schedule" do
+      slots = CreateSlotsApi.new quantity: 3, schedule_id: 1
       expect(slots).to be_valid
     end
   end
@@ -25,9 +30,10 @@ describe CreateSlotsApi do
     end
 
     it 'should increase the number of slots by 4 and return the slots' do
-      slots = CreateSlotsApi.new quantity: 4
+      conference = FactoryGirl.create(:conference)
+      slots = CreateSlotsApi.new quantity: 4, schedule_id: conference.schedule.id
       result = nil
-      expect {result = slots.persist!}.to change { Slot.count }.by(4)
+      expect {result = slots.persist!}.to change { conference.schedule.slots.count }.by(4)
       expect(result.length).to eql(4)
     end
   end
