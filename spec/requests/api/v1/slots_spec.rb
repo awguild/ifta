@@ -41,4 +41,35 @@ describe '/api/v1/conferences/*/slots' do
       expect(response.status).to eql(422)
     end
   end
+
+  describe 'update' do
+    it 'should update the slot attributes and return the slot' do
+      slot = @conference.schedule.slots.create!
+      proposal = FactoryGirl.create(:proposal)
+
+      attributes = {
+        proposal_id: proposal.id,
+        room_id: 1,
+        code: 'abcd',
+        comments: 'Might be running late from the airport'
+      }
+
+      patch "#{@stem}/#{slot.id}", attributes
+      expect(response.status).to eql(200)
+      expect(json["id"]).to eql(slot.id)
+      slot.reload
+
+      expect(slot.proposal_id).to eql(attributes[:proposal_id])
+      expect(slot.room_id).to eql(attributes[:room_id])
+      expect(slot.code).to eql(attributes[:code])
+      expect(slot.comments).to eql(attributes[:comments])
+    end
+
+    it 'should return errors if the update fails' do
+      slot = @conference.schedule.slots.create!
+      patch "#{@stem}/#{slot.id}", {proposal_id: 'zz'}
+
+      expect(response.status).to eql(422)
+    end
+  end
 end
