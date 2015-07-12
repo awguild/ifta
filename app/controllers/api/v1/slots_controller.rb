@@ -1,18 +1,21 @@
 module Api
   module V1
     class SlotsController < ApplicationController
-      before_filter :load_conference
       skip_before_filter :verify_authenticity_token
       respond_to :json
 
-      def index
-        authorize! :edit, @conference
-        @slots = @conference.schedule.slots.includes([:proposal, :room])
+      def update
+        @slot = Slot.find(params[:id])
+        if @slot.update_attributes(slot_params)
+          render json: @slot, status: :ok
+        else
+          render json: @slot.errors, status: :unprocessable_entity
+        end
       end
 
       private
-        def load_conference
-          @conference = Conference.find_by(conference_year: params[:conference_id])
+        def slot_params
+          params.permit(:proposal_id, :room_id, :code, :comments, :start_time, :end_time)
         end
     end
   end
