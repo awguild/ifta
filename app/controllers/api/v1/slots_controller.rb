@@ -7,7 +7,7 @@ module Api
 
       def index
         authorize! :edit, @conference
-        @slots = @conference.schedule.slots.includes([:proposal, :room])
+        @time_blocks = @conference.schedule.time_blocks.includes({slots: [{proposal: [{user: [:country]}, :presenters]}, :room]})
       end
 
       def create
