@@ -62,6 +62,7 @@ Iftaconferenceapp::Application.routes.draw do
           get 'schedule' => 'schedules#show'
           post 'slots' => 'schedules#bulk_create'
           get 'proposals/search' => 'proposals#search'
+          get 'proposals/presenters' => 'proposals#presenters'
         end
         patch 'slots/:id' => 'slots#update'
         resources :rooms

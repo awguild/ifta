@@ -10,6 +10,11 @@ module Api
         render json: @proposals
       end
 
+      def presenters
+        @presenters = ProposalPresenters.exec(@conference.id)
+        render json: @presenters
+      end
+
       private
         def proposal_search
           {status: params[:status]}
