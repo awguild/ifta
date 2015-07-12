@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe '/api/v1/conferences/*/slots' do
   before {
-    @conference = FactoryGirl.create(:conference)
+    @conference = FactoryGirl.create(:conference_with_3_slots)
     @schedule = @conference.schedule
     @stem = "/api/v1/conferences/#{@conference.conference_year}/slots"
     sign_in_as_a_admin_user
@@ -10,12 +10,10 @@ describe '/api/v1/conferences/*/slots' do
 
   describe 'index' do
     it 'should return an array of slots for the conference' do
-      slot = @schedule.slots.create!
       get @stem
       expect(response.status).to eql(200)
 
-      expect(json.length).to eql(1)
-      expect(json[0]["id"]).to eql(slot.id)
+      expect(json.length).to eql(3)
     end
   end
 
@@ -44,7 +42,7 @@ describe '/api/v1/conferences/*/slots' do
 
   describe 'update' do
     it 'should update the slot attributes and return the slot' do
-      slot = @conference.schedule.slots.create!
+      slot = @schedule.slots.first
       proposal = FactoryGirl.create(:proposal)
 
       attributes = {
@@ -66,7 +64,7 @@ describe '/api/v1/conferences/*/slots' do
     end
 
     it 'should return errors if the update fails' do
-      slot = @conference.schedule.slots.create!
+      slot = @schedule.slots.first
       patch "#{@stem}/#{slot.id}", {proposal_id: 'zz'}
 
       expect(response.status).to eql(422)

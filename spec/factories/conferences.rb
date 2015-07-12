@@ -31,5 +31,18 @@ FactoryGirl.define do
         end
       end
     end
+
+    factory :conference_with_3_slots do
+      after(:create) do |conference, evaluator|
+        time_block = conference.schedule.time_blocks.create({
+          start_time: 1.hour.from_now,
+          end_time: 2.hours.from_now
+        })
+
+        3.times do
+          time_block.slots.create!
+        end
+      end
+    end
   end
 end
