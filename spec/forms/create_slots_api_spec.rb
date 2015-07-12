@@ -8,7 +8,7 @@ describe CreateSlotsApi do
     end
 
     it 'should be invalid if quantity is not a number' do
-      slots = CreateSlotsApi.new quantity: "5"
+      slots = CreateSlotsApi.new quantity: "z"
       expect(slots).to be_invalid
     end
 

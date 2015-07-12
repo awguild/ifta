@@ -26,6 +26,10 @@ class CreateSlotsApi
     }
   end
 
+  def quantity=(val)
+    @quantity = val.present? ? val.to_i : val
+  end
+
   private
 
   def create_slot
