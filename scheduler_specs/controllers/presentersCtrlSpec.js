@@ -14,7 +14,7 @@ describe('PresentersCtrl', function(){
     presentersCtrl = $controller('PresentersCtrl', { $scope: $scope});
   }));
 
-  describe('fetch presentesr', function(){
+  describe('fetch presenters', function(){
     it('should fetch presenters and set them on the controller', function(){
       var presenters = {email: 'jdoe@test.com'};
       deffered.resolve({data: presenters});

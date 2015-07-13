@@ -1,0 +1,11 @@
+<div class="proposals constrained" ng-controller="ProposalsCtrl as proposalsCtrl">
+  <h3>Unslotted Proposals ({{proposalsCtrl.proposals.length}})</h3>
+
+  <ol>
+    <li ng-repeat="proposal in proposalsCtrl.proposals">
+      <span class="title">#{{proposal.relative_number}} {{proposal.title}}</span>
+      <span class="format">{{proposal.format}}</span>
+      <span class="cateogry">{{proposal.category}}</span>
+    </li>
+  </ol>
+</div>

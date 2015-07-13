@@ -2,17 +2,38 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.presenters {
-  width: 325px;
-  height: 200px;
-  overflow: scroll;
+.scheduler {
 
-  ul {
-    list-style: none;
-    padding: 0;
-  }
+  .rightBar{
+    width: 325px;
+    float: right;
 
-  .slottedCount {
-    color: #33CC66;
+    .constrained {
+      width: 325px;
+      height: 200px;
+      overflow: scroll;
+
+      ul, ol {
+        list-style: none;
+        padding: 0;
+      }
+
+      &.proposals {
+        li {
+          border-top: 1px solid #999;
+        }
+
+        .title {
+          font-weight: bold;
+          display: block;
+        }
+      }
+
+      &.presenters {
+        .slottedCount {
+          color: #33CC66;
+        }
+      }
+    }
   }
 }
