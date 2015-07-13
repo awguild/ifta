@@ -1,3 +1,18 @@
 // Place all the styles related to the schedules controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.presenters {
+  width: 325px;
+  height: 200px;
+  overflow: scroll;
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .slottedCount {
+    color: #33CC66;
+  }
+}
