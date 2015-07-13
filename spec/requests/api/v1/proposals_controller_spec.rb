@@ -36,7 +36,7 @@ describe '/api/v1/conferences/*/proposals' do
 
   # TODO figure out how to share the db transaction
   # describe 'presenters' do
-  #   it 'should return a presenter with accepted count and listed count of 1' do
+  #   it 'should return a presenter with slotted count 0 and listed count of 1' do
   #     @proposal = FactoryGirl.create(:accepted_proposal_with_presenter)
   #     conference = @proposal.conference
   #     get "/api/v1/conferences/#{conference.conference_year}/proposals/presenters"
@@ -44,18 +44,18 @@ describe '/api/v1/conferences/*/proposals' do
   #     expect(response.status).to eql(200)
   #     expect(json.length).to eql(1)
   #     expect(json[0]["listed_count"]).to eql(1)
-  #     expect(json[0]["accepted_count"]).to eql(1)
+  #     expect(json[0]["slotted_count"]).to eql(0)
   #   end
 
-  #   it 'should return a presenter with accepted count of 0 and listed count of 1' do
-  #     @proposal = FactoryGirl.create(:rejected_proposal_with_presenter)
+  #   it 'should return a presenter with slotted count of 1 and listed count of 1' do
+  #     @proposal = FactoryGirl.create(:slotted_proposal_with_presenter)
   #     conference = @proposal.conference
   #     get "/api/v1/conferences/#{conference.conference_year}/proposals/presenters"
 
   #     expect(response.status).to eql(200)
   #     expect(json.length).to eql(1)
   #     expect(json[0]["listed_count"]).to eql(1)
-  #     expect(json[0]["accepted_count"]).to eql(0)
+  #     expect(json[0]["slotted_count"]).to eql(1)
   #   end
   # end
 end

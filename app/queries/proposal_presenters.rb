@@ -5,7 +5,7 @@ class ProposalPresenters
         "select
           a.email,
           listed_count,
-          COALESCE(accepted_count, 0) as accepted_count
+          COALESCE(slotted_count, 0) as slotted_count
         from
           (select
             email,
@@ -13,18 +13,21 @@ class ProposalPresenters
           from presenters
           inner join proposals
           on proposals.id = presenters.proposal_id
-          where proposals.conference_id = 11
+          where proposals.conference_id = ?
           group by email) a
         left join
-          (select email,
-          count(email) as accepted_count
+          (select
+            email,
+            count(email) as slotted_count
           from presenters
-          left join proposals
-          on proposals.id = presenters.proposal_id && proposals.status = 'accept'
+          inner join proposals
+          on proposals.id = presenters.proposal_id
+          inner join slots
+          on slots.proposal_id = proposals.id
           where proposals.conference_id = ?
           group by email) b
-          on a.email = b.email",
-        conference_id]
+        on a.email = b.email",
+        conference_id, conference_id]
       )
     )
   end
