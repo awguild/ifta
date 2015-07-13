@@ -4,13 +4,35 @@
 
 .scheduler {
 
+  .schedule {
+    width: 550px;
+    float: left;
+
+    .createSlots {
+      .floated {
+        width: 250px;
+        height: 55px;
+        float: left;
+
+        label {
+          width: 100px;
+          display: block;
+        }
+
+        input {
+          display: block;
+        }
+      }
+    }
+  }
+
   .rightBar{
     width: 325px;
     float: right;
 
     .constrained {
       width: 325px;
-      height: 200px;
+      height: 400px;
       overflow: scroll;
 
       ul, ol {

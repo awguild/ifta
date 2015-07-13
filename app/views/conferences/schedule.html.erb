@@ -5,6 +5,7 @@
 <div class="scheduler" ng-app="schedulerApp" ng-controller="ScheduleCtrl as scheduleCtrl">
   <span ng-init="scheduleCtrl.Config.conferenceYear = '<%= @conference.conference_year %>'"></span>
 
+  <%= render :partial => 'conferences/scheduler/schedule' %>
   <div class="rightBar">
     <%= render :partial => 'conferences/scheduler/proposals' %>
     <%= render :partial => 'conferences/scheduler/presenters' %>
