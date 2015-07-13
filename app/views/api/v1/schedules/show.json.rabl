@@ -1,5 +1,5 @@
 object @time_blocks
-attributes :id, :code, :start_time, :end_time
+attributes :id, :code, :label, :start_time, :end_time
 
 child :slots do
   attributes :id, :time_block_id, :proposal_id, :room_id
