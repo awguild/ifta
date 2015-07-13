@@ -10,14 +10,16 @@ This application handles various aspects of running IFTA's annual conference inc
 
 * Attendees signing up, registering for events, paying, and submitting proposals.
 * Reviewers accepting/rejecting/wait-listing proposals.
-* Admins declaring events, pricing events, declaring discounts, managing payments, scheduling, and other tasks. 
+* Admins declaring events, pricing events, declaring discounts, managing payments, scheduling, and other tasks.
+
+
 
 ## History
-The Web Guild took over running IFTA's annual conference in 2011.  At that time two separate PHP apps were built independently of each other. One app handled proposal submissions and the review process, the other app handled event registration.  The original code was pretty bad.  It was mostly procedural spaghetti code with a couple of omnibus classes that should have been called Thing1 and Thing2.  
+The Web Guild took over running IFTA's annual conference in 2011.  At that time two separate PHP apps were built independently of each other. One app handled proposal submissions and the review process, the other app handled event registration.  The original code was pretty bad.  It was mostly procedural spaghetti code with a couple of omnibus classes that should have been called Thing1 and Thing2.
 
 The PHP code successfully ran the conference for two years, but during the second year the code base was rewritten from scratch using RoR. What began as two separate PHP applications became one Rails app.  The biggest benefit of that move is that there is an association between a user, the proposals they submit, and the events they register for.
 
-IFTA also runs a membership system which is tangentially related to their conference (conference pricing is defined differently for members vs non members).  During the first year of the Rails app (2013) the web guild began work on a separate application that will handle the membership process.   
+IFTA also runs a membership system which is tangentially related to their conference (conference pricing is defined differently for members vs non members).  During the first year of the Rails app (2013) the web guild began work on a separate application that will handle the membership process.
 
 
 ##Developer Setup
@@ -31,11 +33,11 @@ IFTA also runs a membership system which is tangentially related to their confer
 ### App Dependencies
 *You can install these dependencies natively on your machine or install them on a VM and run the app on the VM instead of your native host machine*
 
-VM:  Install [Virtualbox](https://www.virtualbox.org/wiki/Downloads) & [Vagrant](http://www.vagrantup.com/) to run and manage a VM on your computer.  At some point I might release a pre-provisioned box, but for now the easiest thing to do is add this [ubuntu 13 base box](http://brennovich.s3.amazonaws.com/saucy64_vmware_fusion.box) to  vagrant and then use apt-get to install Ruby 1.9.3 and MySQL 
+VM:  Install [Virtualbox](https://www.virtualbox.org/wiki/Downloads) & [Vagrant](http://www.vagrantup.com/) to run and manage a VM on your computer.  At some point I might release a pre-provisioned box, but for now the easiest thing to do is add this [ubuntu 13 base box](http://brennovich.s3.amazonaws.com/saucy64_vmware_fusion.box) to  vagrant and then use apt-get to install Ruby 1.9.3 and MySQL
 
 Natively: If you choose to install Ruby and MySQL natively you'll want to use a Ruby version manager so that you can install multipe versions of ruby on your machine
 
-1. Download a Ruby manger [Pik](http://rubyinstaller.org/add-ons/pik/) (Windows)  [rbenv](https://github.com/sstephenson/rbenv) or [RVM](https://rvm.io/rvm/install), (Mac) 
+1. Download a Ruby manger [Pik](http://rubyinstaller.org/add-ons/pik/) (Windows)  [rbenv](https://github.com/sstephenson/rbenv) or [RVM](https://rvm.io/rvm/install), (Mac)
 1. Install Ruby 1.9.3 as per your Ruby manger's guide
 1. Install MySQL. MySQL is bundled in with [XAMPP](http://www.apachefriends.org/en/xampp.html), XAMPP is overkill for just installing MySQL, but it comes with Apache (a web server), an FTP server, a mail server and more.  These tools are all useful for a web developer, which is why I recommend XAMPP.
 
@@ -50,16 +52,24 @@ Natively: If you choose to install Ruby and MySQL natively you'll want to use a 
 foreman start -f Procfile.dev
 ```
 
+# JS tests
+The angular app that handles scheduling has its own jasmine test suite. To run the tests first install the dependencies
+
+    npm install -g grunt-cli
+    npm install
+
+Then you can run the tests with `` grunt test ``
+
 ## Integration with external services
 **Travis CI**: Whenever new code is moved into the staging branch and pushed to Github, Github will notify travis Travis CI which will then checkout the code from Github and run all the Rspec tests against the staging branch.  Travis configuration can be found in the .travis.yml file
 
 **Heroku**: If the builds pass on Travis CI, Travis will push the staging branch to the ifta-stage app on Heroku which can be viewed at http://ifta-stage.herokuapp.com/
 
-**PayPal** After a user creates a transaction on the conference site there is a button that says "Checkout with PayPal" backed with a hidden form that's been encrypted with all of the information that PayPal needs to allow someone to pay on their site. After PayPal confirms the payment they'll post a notification back to your site which we use to confirm that the payment was successfully completed. The callback is called Instant Payment Notification (IPN). 
+**PayPal** After a user creates a transaction on the conference site there is a button that says "Checkout with PayPal" backed with a hidden form that's been encrypted with all of the information that PayPal needs to allow someone to pay on their site. After PayPal confirms the payment they'll post a notification back to your site which we use to confirm that the payment was successfully completed. The callback is called Instant Payment Notification (IPN).
 
 If you want to test the IPN process you'll need to have the app on a publicly available host (like the heroku staging app). The guild has a sandbox account on PayPal set up with the public key from the certificate that the Heroku staging app uses to encrypt communication to PayPal. PayPal will use that key to decrypt the form it gets from the staging app.
 
-**Circle CI** Circle CI is a static code analysis tool that parses the code you've written to look for code smells (like huge methods or duplication)  and known security problems. Since this project is open source we get free partial analytics. 
+**Circle CI** Circle CI is a static code analysis tool that parses the code you've written to look for code smells (like huge methods or duplication)  and known security problems. Since this project is open source we get free partial analytics.
 
 **Gmail** The system sends emails for forgotten passwords, payment notifications, and proposal reviews through Gmail. In all environment's except production those emails are intercepted and redirected to the value of the GMAIL_USERNAME environment variable.
 
