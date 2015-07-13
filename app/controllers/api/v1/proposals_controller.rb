@@ -6,7 +6,7 @@ module Api
       respond_to :json
 
       def search
-        @proposals = @conference.proposals.where(proposal_search)
+        @proposals = @conference.proposals.accepted.includes(:slot).where({slots: {proposal_id: nil}})
         render json: @proposals
       end
 
@@ -16,9 +16,6 @@ module Api
       end
 
       private
-        def proposal_search
-          {status: params[:status]}
-        end
 
         def load_conference
           @conference = Conference.find_by(conference_year: params[:id])

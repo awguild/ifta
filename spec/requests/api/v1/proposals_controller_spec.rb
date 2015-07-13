@@ -8,24 +8,33 @@ describe '/api/v1/conferences/*/proposals' do
   }
 
   describe 'search' do
-    it 'should return an array of proposals without a status' do
+    it 'should return an empty array if proposals are not accepted' do
       get "#{@stem}/search"
       expect(response.status).to eql(200)
 
-      expect(json.length).to eql(3)
+      expect(json.length).to eql(0)
     end
 
-    it 'should return an accepted proposal when status=accept' do
+    it 'should return an accepted proposal' do
       @proposal = FactoryGirl.create(:accepted_proposal_with_presenter)
       conference = @proposal.conference
-      get "/api/v1/conferences/#{conference.conference_year}/proposals/search?status=accept"
+      get "/api/v1/conferences/#{conference.conference_year}/proposals/search"
       expect(response.status).to eql(200)
 
       expect(json.length).to eql(1)
     end
 
-    it 'should not return an accepted proposal when status is not set' do
-      @proposal = FactoryGirl.create(:accepted_proposal_with_presenter)
+    it 'should not return an unaccepted proposal' do
+      @proposal = FactoryGirl.create(:rejected_proposal_with_presenter)
+      conference = @proposal.conference
+      get "/api/v1/conferences/#{conference.conference_year}/proposals/search"
+      expect(response.status).to eql(200)
+
+      expect(json.length).to eql(0)
+    end
+
+    it 'should not return a slotted proposal' do
+      @proposal = FactoryGirl.create(:slotted_proposal_with_presenter)
       conference = @proposal.conference
       get "/api/v1/conferences/#{conference.conference_year}/proposals/search"
       expect(response.status).to eql(200)
