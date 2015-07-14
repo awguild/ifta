@@ -16,7 +16,7 @@ module Api
 
       private
         def slot_params
-          params.permit(:proposal_id, :room_id, :code, :comments, :start_time, :end_time)
+          params.permit(:proposal_id, :room_id, :code, :comments)
         end
     end
   end
