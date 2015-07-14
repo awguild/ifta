@@ -4,7 +4,7 @@
 
 .scheduler {
 
-  .schedule {
+  .leftBar {
     width: 550px;
     float: left;
 
@@ -14,14 +14,24 @@
         height: 55px;
         float: left;
 
-        label {
-          width: 100px;
+        .inputGroup {
           display: block;
         }
+      }
+    }
 
-        input {
-          display: block;
-        }
+    .currentSchedule {
+      .slotMarker {
+        font-weight: bold;
+      }
+
+      label {
+        display: block;
+      }
+
+      select {
+        display: block;
+        margin-bottom: 20px;
       }
     }
   }
