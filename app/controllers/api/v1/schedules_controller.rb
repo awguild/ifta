@@ -20,6 +20,7 @@ class Api::V1::SchedulesController < ApplicationController
   end
 
   def bulk_create
+    authorize! :edit, @conference
     @slots = CreateSlotsApi.new(slots_params)
     if @slots.valid?
       @slots = @slots.persist!
@@ -35,11 +36,16 @@ class Api::V1::SchedulesController < ApplicationController
     end
 
     def slots_params
-      {
+      slots = {
         quantity: params[:quantity],
-        start_time: params[:end_time],
+        start_time: params[:start_time],
         end_time: params[:end_time],
-        schedule_id: @conference.schedule.id
+        code: params[:code],
+        label: params[:label]
       }
+      if params[:time_block_id].blank?
+        slots[:schedule_id] = @conference.schedule.id
+      end
+      slots
     end
 end

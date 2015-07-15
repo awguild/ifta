@@ -1,0 +1,11 @@
+<div class="presenters constrained" ng-controller="PresentersCtrl as presentersCtrl">
+  <h3>Presenters ({{presentersCtrl.presenters.length}})</h3>
+
+  <ul>
+    <li ng-repeat="presenter in presentersCtrl.presenters">
+      <span class="slottedCount">({{presenter.slotted_count}})</span>
+      <span>{{presenter.email}}</span>
+      <span class="listedCount">({{presenter.listed_count}})</span>
+    </li>
+  </ul>
+</div>

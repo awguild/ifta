@@ -5,6 +5,7 @@ module Api
       respond_to :json
 
       def update
+        authorize! :edit, @conference
         @slot = Slot.find(params[:id])
         if @slot.update_attributes(slot_params)
           render json: @slot, status: :ok
@@ -15,7 +16,7 @@ module Api
 
       private
         def slot_params
-          params.permit(:proposal_id, :room_id, :code, :comments, :start_time, :end_time)
+          params.permit(:proposal_id, :room_id, :code, :comments)
         end
     end
   end

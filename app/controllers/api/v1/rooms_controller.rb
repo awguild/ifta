@@ -7,12 +7,14 @@ module Api
       respond_to :json
 
       def index
+        authorize! :edit, @conference
         @rooms = @conference.rooms
         authorize! :edit, @conference
         render json: @rooms
       end
 
       def create
+        authorize! :edit, @conference
         @room = Room.new room_params
         @room.schedule = @conference.schedule
 

@@ -15,7 +15,7 @@
 //= require jquery-ui
 //= require angular
 //= require angular-resource
-//= require angular-route
+//= require underscore
 //= require scheduler
 //= require_tree .
 

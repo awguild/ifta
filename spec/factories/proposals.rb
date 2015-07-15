@@ -37,5 +37,13 @@ FactoryGirl.define do
         proposal.presenters << FactoryGirl.create(:presenter)
       end
     end
+
+    factory :slotted_proposal_with_presenter do
+      status 'accept'
+      after(:create) do |proposal|
+        proposal.presenters << FactoryGirl.create(:presenter)
+        proposal.create_slot!
+      end
+    end
   end
 end

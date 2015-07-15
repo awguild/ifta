@@ -2,12 +2,12 @@
   <%= render :partial => "layouts/admin_nav" %>
 <%- end %>
 
-<div ng-app="schedulerApp">
-    <div>
-      <a href="#/rooms">Manage Rooms</a> |
-      <a href="#/format">Schedule Format</a> |
-      <a href="#/presentations">Schedule Proposals</a>
-    </div>
+<div class="scheduler" ng-app="schedulerApp" ng-controller="ScheduleCtrl as scheduleCtrl">
+  <span ng-init="scheduleCtrl.Config.conferenceYear = '<%= @conference.conference_year %>'"></span>
 
-    <div ng-view></div>
+  <%= render :partial => 'conferences/scheduler/schedule' %>
+  <div class="rightBar">
+    <%= render :partial => 'conferences/scheduler/proposals' %>
+    <%= render :partial => 'conferences/scheduler/presenters' %>
+  </div>
 </div>

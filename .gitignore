@@ -16,3 +16,4 @@
 /tmp
 .project
 /.env
+node_modules/*

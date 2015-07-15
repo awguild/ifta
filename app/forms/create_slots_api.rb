@@ -1,7 +1,7 @@
 class CreateSlotsApi
   include ActiveModel::Model
 
-  attr_accessor :quantity, :start_time, :end_time, :schedule_id, :time_block_id
+  attr_accessor :quantity, :start_time, :end_time, :schedule_id, :time_block_id, :label, :code
 
   validates :quantity, inclusion: { in: 1..50 }
   validates_datetime :start_time, allow_nil: true
@@ -45,7 +45,9 @@ class CreateSlotsApi
     {
       schedule_id: schedule_id,
       start_time: start_time,
-      end_time: end_time
+      end_time: end_time,
+      label: label,
+      code: code
     }
   end
 
