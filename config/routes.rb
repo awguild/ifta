@@ -60,7 +60,7 @@ Iftaconferenceapp::Application.routes.draw do
       resources :conferences do
         member do
           get 'schedule' => 'schedules#show'
-          post 'slots' => 'schedules#bulk_create'
+          post 'time_blocks' => 'time_blocks#create'
           get 'proposals/search' => 'proposals#search'
           get 'proposals/presenters' => 'proposals#presenters'
         end

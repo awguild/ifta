@@ -32,7 +32,7 @@ FactoryGirl.define do
       end
     end
 
-    factory :conference_with_3_slots do
+    factory :conference_with_3_slots, :aliases => [:conference_with_3_rooms] do
       after(:create) do |conference, evaluator|
         3.times do
           conference.schedule.rooms.create!

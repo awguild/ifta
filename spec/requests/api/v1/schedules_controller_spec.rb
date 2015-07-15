@@ -16,27 +16,4 @@ describe '/api/v1/conferences/*/schedule' do
       expect(json[0]["slots"].length).to eql(3)
     end
   end
-
-  describe 'create' do
-    it 'should create 4 slots for the schedule and return them in the response body' do
-      expect {
-        post "#{@stem}/slots", {
-          quantity: 4,
-          start_time: Time.now,
-          end_time: 1.hour.from_now
-        }
-      }.to change { @conference.schedule.slots.count }.by(4)
-
-      expect(response.status).to eql(201)
-      expect(json.length).to eql(4)
-    end
-
-    it 'should return 422 when no quantity is set' do
-      expect {
-        post "#{@stem}/slots", {}
-      }.to_not change { @conference.schedule.slots.count }
-
-      expect(response.status).to eql(422)
-    end
-  end
 end

@@ -19,33 +19,8 @@ class Api::V1::SchedulesController < ApplicationController
     })
   end
 
-  def bulk_create
-    authorize! :edit, @conference
-    @slots = CreateSlotsApi.new(slots_params)
-    if @slots.valid?
-      @slots = @slots.persist!
-      render json: @slots, status: :created
-    else
-      render json: @slots.errors, status: :unprocessable_entity
-    end
-  end
-
   private
     def load_conference
       @conference = Conference.find_by(conference_year: params[:id])
-    end
-
-    def slots_params
-      slots = {
-        quantity: params[:quantity],
-        start_time: params[:start_time],
-        end_time: params[:end_time],
-        code: params[:code],
-        label: params[:label]
-      }
-      if params[:time_block_id].blank?
-        slots[:schedule_id] = @conference.schedule.id
-      end
-      slots
     end
 end
