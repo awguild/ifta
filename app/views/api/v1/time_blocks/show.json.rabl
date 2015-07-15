@@ -1,4 +1,4 @@
-object @time_blocks
+object @time_block
 attributes :id, :code, :label, :start_time, :end_time
 
 child :slots do

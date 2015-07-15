@@ -20,7 +20,7 @@ describe '/api/v1/conferences/*/rooms' do
   describe 'create' do
     it 'should create a new room' do
       expect {
-        post "#{@stem}/rooms", room: {
+        post "#{@stem}/rooms", {
           label: 'Brown Room'
         }
       }.to change{Room.count}.by(1)
@@ -30,7 +30,7 @@ describe '/api/v1/conferences/*/rooms' do
 
     it 'should raise error when conference does not exist' do
       expect {
-        post "/api/v1/conferences/0000/rooms", room: {
+        post "/api/v1/conferences/0000/rooms", {
           label: 'Brown Room'
         }
       }.to raise_error{ActiveRecord::RecordNotFound}
@@ -40,7 +40,7 @@ describe '/api/v1/conferences/*/rooms' do
 
   describe 'update' do
     it 'should update the room label' do
-      put "#{@stem}/rooms/#{@room.id}", room: {
+      put "#{@stem}/rooms/#{@room.id}", {
         label: 'Green Room'
       }
       expect(response.status).to eql(204)
