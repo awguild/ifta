@@ -59,12 +59,11 @@ Iftaconferenceapp::Application.routes.draw do
     namespace :v1 do
       resources :conferences do
         member do
-          get 'schedule' => 'schedules#show'
-          post 'time_blocks' => 'time_blocks#create'
           get 'proposals/search' => 'proposals#search'
           get 'proposals/presenters' => 'proposals#presenters'
+          patch 'slots/:id' => 'slots#update'
         end
-        patch 'slots/:id' => 'slots#update'
+        resources :time_blocks
         resources :rooms
       end
     end

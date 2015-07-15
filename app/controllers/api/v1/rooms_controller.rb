@@ -1,7 +1,7 @@
 module Api
   module V1
     class RoomsController < ApplicationController
-      before_filter :set_room, only: [:show, :update, :destroy]
+      before_filter :find_room, only: [:update, :destroy]
       before_filter :find_conference, only: [:index, :create]
       skip_before_filter :verify_authenticity_token
       respond_to :json
@@ -45,7 +45,7 @@ module Api
 
       private
 
-      def set_room
+      def find_room
         @room = Room.find(params[:id])
       end
 
@@ -54,7 +54,7 @@ module Api
       end
 
       def room_params
-        params.require(:room).permit(:label, :audio, :video)
+        params.permit(:label, :audio, :video)
       end
     end
   end
