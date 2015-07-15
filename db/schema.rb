@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712144136) do
+ActiveRecord::Schema.define(version: 20150715023653) do
 
   create_table "conference_items", force: :cascade do |t|
     t.string   "name",                limit: 255
@@ -47,14 +47,6 @@ ActiveRecord::Schema.define(version: 20150712144136) do
   create_table "countries", force: :cascade do |t|
     t.string  "name",     limit: 255
     t.integer "category", limit: 4
-  end
-
-  create_table "days", force: :cascade do |t|
-    t.integer  "schedule_id", limit: 4
-    t.string   "label",       limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.date     "day_date"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -240,15 +232,6 @@ ActiveRecord::Schema.define(version: 20150712144136) do
     t.datetime "end_time"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-  end
-
-  create_table "time_slots", force: :cascade do |t|
-    t.integer  "day_id",     limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.time     "start_time"
-    t.time     "end_time"
-    t.string   "code",       limit: 255
   end
 
   create_table "transactions", force: :cascade do |t|
