@@ -1,36 +1,38 @@
-<form class="createTimeBlocks" ng-submit="scheduleCtrl.createSlots(createSlotsParams)">
-  <h3>Time Blocks</h3>
+<script type="text/ng-template" id="time_blocks.html">
+  <form class="createTimeBlocks" ng-submit="scheduleCtrl.createSlots(createSlotsParams)">
+    <h3>Time Blocks</h3>
 
-  <div class="floated">
-    <label for="startTime">Start Time</label>
-    <input name="startTime" type="datetime-local" ng-model="createSlotsParams.start_time">
-  </div>
+    <div class="floated">
+      <label for="startTime">Start Time</label>
+      <input name="startTime" type="datetime-local" ng-model="createSlotsParams.start_time">
+    </div>
 
-  <div class="floated">
-    <label for="endTime">End Time</label>
-    <input name="endTime" type="datetime-local" ng-model="createSlotsParams.end_time">
-  </div>
+    <div class="floated">
+      <label for="endTime">End Time</label>
+      <input name="endTime" type="datetime-local" ng-model="createSlotsParams.end_time">
+    </div>
 
-  <div class="floated">
-    <label for="quantity">Quantity</label>
-    <input name="quantity" type="text" ng-model="createSlotsParams.quantity">
-  </div>
+    <div class="floated">
+      <label for="quantity">Quantity</label>
+      <input name="quantity" type="text" ng-model="createSlotsParams.quantity">
+    </div>
 
-  <div class="floated">
-    <label for="timeBlock">Time Block</label>
-    <select ng-options="block.id as block.start_time | date:'medium' for block in scheduleCtrl.time_blocks" name="timeBlock" ng-model="createSlotsParams.time_block_id">
-    </select>
-  </div>
+    <div class="floated">
+      <label for="timeBlock">Time Block</label>
+      <select ng-options="block.id as block.start_time | date:'medium' for block in scheduleCtrl.time_blocks" name="timeBlock" ng-model="createSlotsParams.time_block_id">
+      </select>
+    </div>
 
-  <div class="floated">
-    <label for="label">Label</label>
-    <input name="label" type="text" ng-model="createSlotsParams.label">
-  </div>
+    <div class="floated">
+      <label for="label">Label</label>
+      <input name="label" type="text" ng-model="createSlotsParams.label">
+    </div>
 
-   <div class="floated">
-    <label for="code">Code</label>
-    <input name="code" type="text" ng-model="createSlotsParams.code">
-  </div>
+     <div class="floated">
+      <label for="code">Code</label>
+      <input name="code" type="text" ng-model="createSlotsParams.code">
+    </div>
 
-  <input type="submit" value="Create Slots">
-</form>
+    <input type="submit" value="Create Slots">
+  </form>
+</script>
