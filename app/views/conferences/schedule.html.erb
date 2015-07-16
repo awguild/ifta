@@ -3,6 +3,8 @@
 <%- end %>
 
 <div class="scheduler" ng-app="schedulerApp" ng-controller="ScheduleCtrl as scheduleCtrl">
+  <%= render :partial => 'conferences/scheduler/time_blocks' %>
+
   <%= render :partial => 'conferences/scheduler/schedule' %>
   <div class="rightBar">
     <%= render :partial => 'conferences/scheduler/proposals' %>
