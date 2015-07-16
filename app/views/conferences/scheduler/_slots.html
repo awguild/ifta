@@ -1,0 +1,37 @@
+<div class="leftBar" ng-controller="ScheduleCtrl as scheduleCtrl">
+  <div class="currentSchedule">
+    <h3>Assign Slots</h3>
+    <ul>
+      <div ng-repeat="block in scheduleCtrl.time_blocks">
+        <h4>{{block.start_time | date:'medium'}}-{{block.end_time | date:'medium'}}</h4>
+
+        <div ng-repeat="slot in block.slots">
+          <div class="slotMarker">Slot #{{$index}}</div>
+
+          <div class="inputGroup">
+            <label for="room">Room: </label>
+            <select ng-model="slot.room_id" name="room" ng-options="room.id as room.label for room in scheduleCtrl.rooms"></select>
+          </div>
+
+          <div class="inputGroup">
+            <label for="proposalId">Proposal Id: </label>
+            <input type="text" ng-model="slot.proposal_id" name="proposalId" />
+          </div>
+
+          <div class="inputGroup">
+            <label for="code">Code: </label>
+            <input type="text" ng-model="slot.code" name="code" />
+          </div>
+
+          <div class="inputGroup">
+            <label for="comments">Comments: </label>
+            <input type="text" ng-model="slot.comments" name="comments" />
+          </div>
+
+          <button ng-click="scheduleCtrl.updateSlot(slot)">Update</button>
+          <hr>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
