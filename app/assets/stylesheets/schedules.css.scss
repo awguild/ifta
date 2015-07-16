@@ -8,18 +8,6 @@
     width: 550px;
     float: left;
 
-    .createSlots {
-      .floated {
-        width: 250px;
-        height: 55px;
-        float: left;
-
-        .inputGroup {
-          display: block;
-        }
-      }
-    }
-
     .currentSchedule {
       .slotMarker {
         font-weight: bold;
@@ -32,6 +20,18 @@
       select {
         display: block;
         margin-bottom: 20px;
+      }
+    }
+  }
+
+  .createTimeBlocks {
+    .floated {
+      width: 250px;
+      height: 55px;
+      float: left;
+
+      .inputGroup {
+        display: block;
       }
     }
   }

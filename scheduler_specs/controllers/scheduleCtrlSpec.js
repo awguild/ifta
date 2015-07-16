@@ -2,7 +2,7 @@ describe('ScheduleCtrl', function(){
   beforeEach(module('schedulerApp'));
 
   beforeEach(module(function($provide){
-    $provide.value('Config', {conferenceYear: '2015'});
+    $provide.value('Config', {conference_year: '2015'});
   }));
 
   var scheduleCtrl, Config, $scope, $q, $httpBackend, Slot;
@@ -12,9 +12,9 @@ describe('ScheduleCtrl', function(){
     $q = _$q_;
 
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.whenGET('/api/v1/conferences/2015/schedule')
+    $httpBackend.whenGET('/api/v1/conferences/2015/time_blocks')
     .respond(200, "[]")
-    $httpBackend.whenGET('/api/v1/conferences/2016/schedule')
+    $httpBackend.whenGET('/api/v1/conferences/2016/time_blocks')
     .respond(500, "[]")
 
     $scope = $rootScope.$new();

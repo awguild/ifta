@@ -1,5 +1,10 @@
 angular.module('schedulerApp')
-.factory('Config', function(){
-  var Config = {};
+.factory('Config', ['$window', function($window){
+  var gon = $window.gon;
+
+  var Config = {
+    conference_year: gon.conference_year
+  };
+
   return Config
-})
+}])

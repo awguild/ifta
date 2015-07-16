@@ -1,6 +1,6 @@
 <div class="leftBar" ng-controller="ScheduleCtrl as scheduleCtrl">
   <div class="currentSchedule">
-    <h3>Current Schedule</h3>
+    <h3>Assign Slots</h3>
     <ul>
       <div ng-repeat="block in scheduleCtrl.time_blocks">
         <h4>{{block.start_time | date:'medium'}}-{{block.end_time | date:'medium'}}</h4>

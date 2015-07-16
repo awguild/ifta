@@ -2,7 +2,7 @@ describe('Slots', function(){
   beforeEach(module('schedulerApp'));
 
   beforeEach(module(function($provide){
-    $provide.value('Config', {conferenceYear: '2015'});
+    $provide.value('Config', {conference_year: '2015'});
   }));
 
   var Slots, $httpBackend;

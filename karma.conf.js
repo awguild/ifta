@@ -16,6 +16,7 @@ module.exports = function(config) {
       // bower:js
       'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-resource.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-mocks.js',
       'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js',
       // endbower

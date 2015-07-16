@@ -48,6 +48,8 @@ class ConferencesController < ApplicationController
   def schedule
     @schedule = @conference.schedule
     authorize! :edit, @schedule
+
+    gon.conference_year = @conference.conference_year
   end
 
   def select_year

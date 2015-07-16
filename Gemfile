@@ -23,6 +23,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'rabl'
 gem 'oj'
+gem 'gon'
 
 group :production do
   gem 'therubyracer', :platform => :ruby
