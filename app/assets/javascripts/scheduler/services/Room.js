@@ -2,15 +2,14 @@
 
 angular.module('schedulerApp')
 
-.factory('Room', function($resource){
-  var year = "2016"; //tood inject conference
+.factory('Room', ['$resource', 'Config', function($resource, Config){
   return $resource('/api/v1/conferences/:conference_year/rooms/:id',
     {
-        conference_year: year,
+        conference_year: Config.conference_year,
         id: "@id"
     },
     {
         update: {method: 'PUT'}
     }
   );
-});
+}]);

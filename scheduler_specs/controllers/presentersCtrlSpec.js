@@ -1,6 +1,10 @@
 describe('PresentersCtrl', function(){
   beforeEach(module('schedulerApp'));
 
+  beforeEach(module(function($provide){
+    $provide.value('Config', {conference_year: '2015'});
+  }));
+
   var $q, $scope, $window, presentersCtrl, Presenters, deffered;
   beforeEach(inject(function($rootScope, _$window_, _$q_, $controller, _Presenters_){
     Presenters = _Presenters_;
