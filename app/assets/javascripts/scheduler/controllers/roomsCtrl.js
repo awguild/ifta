@@ -5,11 +5,17 @@ angular.module('schedulerApp')
  * Controls
  *
  */
-.controller('RoomsCtrl', ["$scope", "$location", "$routeParams", "Room",
-function($scope, $location, $routeParams, Room){
-  $scope.rooms = Room.query();
+.controller('RoomsCtrl', ["Room",
+function(Room){
+  this.rooms = Room.query(function(data){
+    console.log('success with', data)
+  });
 
-  $scope.save = function(room){
-    room.$update();
+
+  this.room = new Room();
+  this.createRoom = function createRoom(room){
+    room.$save();
+    this.rooms.push(room);
+    this.room = new Room();
   }
 }]);

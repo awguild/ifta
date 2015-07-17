@@ -1,3 +1,24 @@
 <script type="text/ng-template" id="rooms.html">
-  TODO rooms template
+  <div ng-controller="RoomsCtrl as roomsCtrl">
+    <div ng-repeat="room in roomsCtrl.rooms">
+      <h4>{{room.label}}</h4>
+      Audio: {{room.audio}}<br>
+      Video: {{room.video}}
+      <hr>
+    </div>
+
+    <form ng-submit="roomsCtrl.createRoom(roomsCtrl.room)">
+      <h3>Create new room</h3>
+      <label for="label">Label</label>
+      <input name="label" ng-model="roomsCtrl.room.label" />
+
+      <label for="audio">Audio</label>
+      <input type="checkbox" name="audio" ng-model="roomsCtrl.room.audio" />
+
+      <label for="video">Video</label>
+      <input type="checkbox" name="video" ng-model="roomsCtrl.room.video" />
+
+      <input type="submit" value="Create Room" />
+    </form>
+  </div>
 </script>
