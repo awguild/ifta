@@ -45,5 +45,13 @@ FactoryGirl.define do
         proposal.create_slot!
       end
     end
+
+    trait :poster do
+      format 'poster'
+    end
+
+    trait :fortyfivemin do
+      format '45min'
+    end
   end
 end

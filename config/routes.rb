@@ -62,6 +62,7 @@ Iftaconferenceapp::Application.routes.draw do
           collection do
             get :search
             get :presenters
+            get :formats
           end
         end
 

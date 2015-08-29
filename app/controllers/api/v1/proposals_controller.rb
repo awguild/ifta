@@ -15,6 +15,11 @@ module Api
         render json: @presenters
       end
 
+      def formats
+        @formats = @conference.proposals.pluck(:format).uniq
+        render json: @formats
+      end
+
       private
 
         def load_conference

@@ -67,4 +67,14 @@ describe '/api/v1/conferences/*/proposals' do
   #     expect(json[0]["slotted_count"]).to eql(1)
   #   end
   # end
+
+  describe 'formats' do
+    it 'should return the distinct proposal formats' do
+      @proposal = FactoryGirl.create(:proposal, :fortyfivemin)
+      conference = @proposal.conference
+      get "/api/v1/conferences/#{conference.conference_year}/proposals/formats"
+      expect(json.length).to eql(1)
+      expect(json[0]).to eql(@proposal.format)
+    end
+  end
 end
