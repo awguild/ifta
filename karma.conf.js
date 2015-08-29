@@ -14,13 +14,14 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // bower:js
-      'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-resource.min.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.min.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-mocks.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js',
+      'http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js',
+      'http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-resource.min.js',
+      'http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.min.js',
+      'http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-mocks.js',
+      'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js',
       // endbower
       'ifta/app/assets/javascripts/scheduler/**/*.js',
+      'ifta/scheduler_specs/mocks.js',
       'ifta/scheduler_specs/**/*.js',
     ],
 
