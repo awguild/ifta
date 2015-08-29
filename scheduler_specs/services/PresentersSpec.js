@@ -1,10 +1,4 @@
 describe('Presenters', function(){
-  beforeEach(module('schedulerApp'));
-
-  beforeEach(module(function($provide){
-    $provide.value('Config', {conference_year: '2015'});
-  }));
-
   var Presenters, $httpBackend;
   beforeEach(inject(function(_Presenters_, $injector){
     Presenters = _Presenters_;
