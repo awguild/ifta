@@ -3,7 +3,7 @@ describe('Format', function(){
   beforeEach(inject(function(_Format_, $injector){
     Format = _Format_
     $httpBackend = $injector.get('$httpBackend')
-    $httpBackend.whenGET('/api/v1/proposals/formats')
+    $httpBackend.whenGET('/api/v1/conferences/2015/proposals/formats')
     .respond(200)
   }))
 

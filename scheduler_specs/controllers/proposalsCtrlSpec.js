@@ -5,14 +5,18 @@ describe('ProposalsCtrl', function(){
     $provide.value('Config', {conference_year: '2015'});
   }));
 
-  var $q, $scope, $window, proposalsCtrl, Proposals, deffered;
-  beforeEach(inject(function($rootScope, _$window_, _$q_, $controller, _Proposals_){
+  var $q, $scope, $window, proposalsCtrl, Proposals, deffered, Format;
+  beforeEach(inject(function($rootScope, _$window_, _$q_, $controller, _Proposals_, _Format_){
     Proposals = _Proposals_;
     $window = _$window_;
     $q = _$q_;
+    Format = _Format_;
 
     deffered = $q.defer();
     spyOn(Proposals, 'fetch').and.returnValue(deffered.promise);
+
+    deffered2 = $q.defer();
+    spyOn(Format, 'fetch').and.returnValue(deffered2.promise);
 
     $scope = $rootScope.$new();
     proposalsCtrl = $controller('ProposalsCtrl', { $scope: $scope});
