@@ -58,11 +58,14 @@ Iftaconferenceapp::Application.routes.draw do
   namespace :api, :defaults => { :format => 'json' } do
     namespace :v1 do
       resources :conferences do
-        member do
-          get 'proposals/search' => 'proposals#search'
-          get 'proposals/presenters' => 'proposals#presenters'
-          patch 'slots/:id' => 'slots#update'
+        resources :proposals, only: [] do
+          collection do
+            get :search
+            get :presenters
+          end
         end
+
+        resources :slots, only: [:update]
         resources :time_blocks
         resources :rooms
       end
