@@ -15,6 +15,9 @@ class LineItem < ActiveRecord::Base
   validates :price, :format => { :with => /\A\d+??(?:\.\d{0,2})?\z/ }, :numericality => {:greater_than_or_equal_to => 0}
   validate :check_price
 
+  scope :paid, -> { where(:paid => true) }
+  scope :pending, -> { where(:paid => false) }
+
   def self.total_price(line_items)
     return line_items.inject(0){|sum, item| sum + item.price}.round(2)
   end

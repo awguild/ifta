@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe '/api/v1/conferences/*/rooms' do
   before {
-    @room = FactoryGirl.create(:room)
-    @conference = @room.conference
+    @conference = create(:conference_with_rooms)
+    @rooms = @conference.rooms
     @stem = "/api/v1/conferences/#{@conference.conference_year}"
     sign_in_as_a_admin_user
   }
@@ -12,8 +12,8 @@ describe '/api/v1/conferences/*/rooms' do
     it 'should return the rooms for a conference' do
       get "#{@stem}/rooms"
 
-      expect(json.length).to eql(1)
-      expect(json[0]["id"]).to eql(@room.id)
+      expect(json.length).to eql(3)
+      expect(json[0]["id"]).to eql(@rooms.first.id)
     end
   end
 
@@ -40,19 +40,22 @@ describe '/api/v1/conferences/*/rooms' do
 
   describe 'update' do
     it 'should update the room label' do
-      put "#{@stem}/rooms/#{@room.id}", {
+      room = @rooms.first
+      put "#{@stem}/rooms/#{room.id}", {
         label: 'Green Room'
       }
       expect(response.status).to eql(204)
-      @room.reload
-      expect(@room.label).to eql('Green Room')
+      room.reload
+      expect(room.label).to eql('Green Room')
     end
   end
 
   describe 'destroy' do
     it 'should remove a room' do
+      room = @rooms.first
+
       expect {
-        delete "#{@stem}/rooms/#{@room.id}"
+        delete "#{@stem}/rooms/#{room.id}"
       }.to change{Room.count}.by(-1)
       expect(response.status).to eql(204)
     end

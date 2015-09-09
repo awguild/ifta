@@ -25,7 +25,7 @@ describe 'SignUp' do
     expect(response).to render_template('users/edit')
 
     user = assigns(:user)
-    country = FactoryGirl.create(:country)
+    country = create(:country)
     put "/users/#{user.id}", { user: {
       first_name: 'Jane',
       last_name: 'Doe',

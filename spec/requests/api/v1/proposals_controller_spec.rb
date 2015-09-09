@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe '/api/v1/conferences/*/proposals' do
   before {
-    @conference = FactoryGirl.create(:conference_with_3_proposals)
+    @conference = create(:conference_with_proposals)
     @stem = "/api/v1/conferences/#{@conference.conference_year}/proposals"
     sign_in_as_a_admin_user
   }
@@ -16,7 +16,7 @@ describe '/api/v1/conferences/*/proposals' do
     end
 
     it 'should return an accepted proposal' do
-      @proposal = FactoryGirl.create(:accepted_proposal_with_presenter)
+      @proposal = create(:proposal, :accepted)
       conference = @proposal.conference
       get "/api/v1/conferences/#{conference.conference_year}/proposals/search"
       expect(response.status).to eql(200)
@@ -25,7 +25,7 @@ describe '/api/v1/conferences/*/proposals' do
     end
 
     it 'should not return an unaccepted proposal' do
-      @proposal = FactoryGirl.create(:rejected_proposal_with_presenter)
+      @proposal = create(:proposal, :rejected)
       conference = @proposal.conference
       get "/api/v1/conferences/#{conference.conference_year}/proposals/search"
       expect(response.status).to eql(200)
@@ -34,7 +34,7 @@ describe '/api/v1/conferences/*/proposals' do
     end
 
     it 'should not return a slotted proposal' do
-      @proposal = FactoryGirl.create(:slotted_proposal_with_presenter)
+      @proposal = create(:slotted_proposal)
       conference = @proposal.conference
       get "/api/v1/conferences/#{conference.conference_year}/proposals/search"
       expect(response.status).to eql(200)
@@ -46,7 +46,7 @@ describe '/api/v1/conferences/*/proposals' do
   # TODO figure out how to share the db transaction
   # describe 'presenters' do
   #   it 'should return a presenter with slotted count 0 and listed count of 1' do
-  #     @proposal = FactoryGirl.create(:accepted_proposal_with_presenter)
+  #     @proposal = create(:accepted_proposal_with_presenter)
   #     conference = @proposal.conference
   #     get "/api/v1/conferences/#{conference.conference_year}/proposals/presenters"
 
@@ -57,7 +57,7 @@ describe '/api/v1/conferences/*/proposals' do
   #   end
 
   #   it 'should return a presenter with slotted count of 1 and listed count of 1' do
-  #     @proposal = FactoryGirl.create(:slotted_proposal_with_presenter)
+  #     @proposal = create(:slotted_proposal_with_presenter)
   #     conference = @proposal.conference
   #     get "/api/v1/conferences/#{conference.conference_year}/proposals/presenters"
 
@@ -70,7 +70,7 @@ describe '/api/v1/conferences/*/proposals' do
 
   describe 'formats' do
     it 'should return the distinct proposal formats' do
-      @proposal = FactoryGirl.create(:proposal, :fortyfivemin)
+      @proposal = create(:proposal, :fortyfivemin)
       conference = @proposal.conference
       get "/api/v1/conferences/#{conference.conference_year}/proposals/formats"
       expect(json.length).to eql(1)

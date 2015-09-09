@@ -24,28 +24,6 @@ class Conference < ActiveRecord::Base
   after_save :enforce_one_active_conference
   after_create :build_schedule
 
-
-  #returns the number of proposals scoped to this conference
-  def proposal_count
-    proposals.count
-  end
-
-  def accepted_proposal_count
-    proposals.accepted.count
-  end
-
-  def wait_listed_proposal_count
-    proposals.wait_listed.count
-  end
-
-  def registration_count
-    line_items.where(:paid => true).count
-  end
-
-  def pending_registration_count
-    line_items.where(:paid => false).count
-  end
-
   def registration_breakdown
     conference_items.map do |item|
       {

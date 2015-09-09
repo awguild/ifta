@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe '/api/v1/conferences/*/time_blocks' do
   before {
-    @conference = FactoryGirl.create(:conference_with_3_rooms)
+    @conference = create(:conference_with_rooms)
     @stem = "/api/v1/conferences/#{@conference.conference_year}"
     sign_in_as_a_admin_user
   }

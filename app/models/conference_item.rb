@@ -24,12 +24,6 @@ class ConferenceItem < ActiveRecord::Base
     (price_with_discount(discount_key) || price_for_user(user)).amount
   end
 
-  #loads and memoizes price objects for the given conference item
-  #can't use a query because we want to include price objects that have been built but not persisted yet
-  def sorted_regular_prices
-    @sorted_regular_prices ||= sorted_prices_without_discounts
-  end
-
   #loads and memoizes the number of registrations for this conference item
   def number_of_paid_registrants
     @number_of_paid_registrants ||= line_items.where(paid: true).count
@@ -48,13 +42,13 @@ class ConferenceItem < ActiveRecord::Base
   private
 
   #get the normal price for this person
-  def price_for_user user
+  def price_for_user(user)
     prices.user_price(user).first
   end
 
   #get the discount price if it's set
-  def price_with_discount discount_key
-      discount_key.blank? ? nil : prices.where('discount_key=?', discount_key).first
+  def price_with_discount(discount_key)
+    discount_key.blank? ? nil : prices.where('discount_key=?', discount_key).first
   end
 
   def build_price_objects
@@ -66,9 +60,5 @@ class ConferenceItem < ActiveRecord::Base
     prices.build(:amount => 0, :country_category => 2, :member => false)
     prices.build(:amount => 0, :country_category => 3, :member => false)
     prices.build(:amount => 0, :country_category => 4, :member => false)
-  end
-
-  def sorted_prices_without_discounts
-    self.prices.select {|price| price.discount_key.blank? ? price : nil}.sort
   end
 end

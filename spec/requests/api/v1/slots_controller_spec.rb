@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe '/api/v1/conferences/*/slots' do
   before {
-    @conference = FactoryGirl.create(:conference_with_3_slots)
+    @conference = create(:conference_with_slots)
     @schedule = @conference.schedule
     @stem = "/api/v1/conferences/#{@conference.conference_year}/slots"
     sign_in_as_a_admin_user
@@ -11,7 +11,7 @@ describe '/api/v1/conferences/*/slots' do
   describe 'update' do
     it 'should update the slot attributes and return the slot' do
       slot = @schedule.slots.first
-      proposal = FactoryGirl.create(:proposal)
+      proposal = create(:proposal)
 
       attributes = {
         proposal_id: proposal.id,

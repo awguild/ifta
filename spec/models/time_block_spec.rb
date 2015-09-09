@@ -24,40 +24,36 @@ describe TimeBlock do
   end
 
   context 'managing slots' do
-    it 'should create a slot for each room when creating a time block' do
-      conference = FactoryGirl.create(:conference)
+    context 'with rooms but no time blocks' do
+      let!(:conference) { create(:conference_with_rooms, num_rooms: 3, num_time_blocks: 0) }
 
-      3.times do
-        conference.schedule.rooms.create!
+      it 'should create a slot for each room + time block combo' do
+        expect {
+          time_block = conference.schedule.time_blocks.create({start_time: Time.now, end_time: Time.now})
+        }.to change{ conference.slots.count }.by(3)
       end
-
-      time_block = nil
-      expect {
-        time_block = conference.schedule.time_blocks.create({start_time: Time.now, end_time: Time.now})
-      }.to change{Slot.count}.by(3)
-
-      conference.schedule.rooms.each do |room|
-        expect(room.slots.count).to eql(1)
-      end
-
-      expect(time_block.slots.count).to eql(3)
     end
 
-    it 'should create 0 slots when creating a time block for a conference without rooms' do
-      conference = FactoryGirl.create(:conference)
+    context 'conference without rooms' do
+      let!(:conference) { create(:conference) }
 
-      time_block = nil
-      expect {
-        conference.schedule.time_blocks.create({start_time: Time.now, end_time: Time.now})
-      }.to_not change{Slot.count}
+      it 'should create 0 slots' do
+        time_block = nil
+        expect {
+          conference.schedule.time_blocks.create({start_time: Time.now, end_time: Time.now})
+        }.to_not change{ Slot.count }
+      end
     end
 
-    it 'should destroy the time blocks slots when a time block is destroyed' do
-      conference = FactoryGirl.create(:conference_with_3_slots)
+    context 'conference with time blocks and rooms' do
+      let!(:conference) { create(:conference_with_slots) }
 
-      expect{
-        conference.schedule.time_blocks.first.destroy!
-      }.to change{Slot.count}.by(-3)
+      it 'should destroy the time blocks slots when a time block is destroyed' do
+        conference.reload
+        expect{
+          conference.schedule.time_blocks.first.destroy!
+        }.to change{ Slot.count }.by(-3)
+      end
     end
   end
 end

@@ -11,23 +11,29 @@ FactoryGirl.define do
     city 'Springfield'
     state 'IL'
     zip 12345
-    country_id { Country.find_or_create_by({name: 'USA'}) }
-    country_category 1
-    phone "1112223333"
-    username "jdoe@example.com"
-    role "attendee"
-    emergency_name "John Doe"
-    emergency_relationship "Husband"
-    emergency_telephone "1112223334"
-    emergency_email "jdoe@example.com"
-    password "abcdefgh"
+    country
+    country_category { country.category }
+    phone '1112223333'
+    username 'jdoe@example.com'
+    role 'attendee'
+    emergency_name 'John Doe'
+    emergency_relationship 'Husband'
+    emergency_telephone '1112223334'
+    emergency_email 'jdoe@example.com'
+    password 'abcdefgh'
 
-    factory :admin do
-        role "admin"
+    trait :admin do
+      role 'admin'
     end
 
-    before(:create) do |user, evaluator|
-        FactoryGirl.create(:usa)
+    trait :category2 do
+      country_category 2
+    end
+
+    trait :member do
+      member true
+      ifta_member
+      ifta_member_email { ifta_member.email }
     end
   end
 end

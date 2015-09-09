@@ -2,37 +2,30 @@ require 'spec_helper'
 
 describe Payment do
   context 'mark_transaction on save' do
-    it 'should set transaction paid to false' do
-      payment = FactoryGirl.build(:unconfirmed_payment)
-      transaction = payment.order
-      transaction.paid = true
+    it 'unconfirmed payment sets order paid to false' do
+      order = build(:order, paid: true)
+      payment = build(:payment, :unconfirmed, order: order)
 
-      transaction.expects(:save)
       payment.save
-      expect(transaction.paid).to be_falsey
+      expect(payment.order.paid).to be_falsey
     end
 
-    it 'should set transaction paid to true' do
-      payment = FactoryGirl.build(:confirmed_payment)
-      transaction = payment.order
-      transaction.paid = false
+    it 'confirming the payment should set order paid' do
+      order = build(:order, paid: false)
+      payment = build(:payment, :confirmed, order: order)
 
-      transaction.expects(:save)
       payment.save
-      expect(transaction.paid).to be_truthy
+      expect(payment.order.paid).to be_truthy
     end
-
   end
 
   context 'clear_transaction on destroy' do
-    it 'should set the transaction paid flag to false on destroy' do
-      payment = FactoryGirl.build(:payment)
-      transaction = payment.order
-      transaction.paid = true
+    let(:payment) { create(:payment, :confirmed, order: create(:order)) }
 
-      transaction.expects(:save)
+    it 'should set the order paid flag to false on destroy' do
       payment.destroy
-      expect(transaction.paid).to be_falsey
+      payment.order.reload
+      expect(payment.order.paid).to be_falsey
     end
   end
 end

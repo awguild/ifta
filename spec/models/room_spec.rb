@@ -8,7 +8,7 @@ describe Room do
     end
 
     it 'should be valid if it has a schedule' do
-      conference = FactoryGirl.create(:conference)
+      conference = create(:conference)
       room = conference.schedule.rooms.build
       expect(room).to be_valid
     end
@@ -16,7 +16,7 @@ describe Room do
 
   context 'managing slots' do
     it 'should create a slot for each time block when creating a room' do
-      conference = FactoryGirl.create(:conference)
+      conference = create(:conference)
 
       3.times do
         conference.schedule.time_blocks.create!({start_time: Time.now, end_time: Time.now})
@@ -35,7 +35,7 @@ describe Room do
     end
 
     it 'should create 0 slots when creating a room for a conference without time blocks' do
-      conference = FactoryGirl.create(:conference)
+      conference = create(:conference)
 
       room = nil
       expect {
@@ -44,7 +44,7 @@ describe Room do
     end
 
     it 'should destroy the rooms slots when a room is destroyed' do
-      conference = FactoryGirl.create(:conference_with_3_rooms)
+      conference = create(:conference_with_rooms)
 
       expect{
         conference.schedule.rooms.first.destroy!
