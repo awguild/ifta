@@ -15,7 +15,7 @@ class TransactionsController < ApplicationController
     @transaction = @itinerary.transactions.build
     authorize! :create,  @transaction
 
-    @unpaid_line_items = @itinerary.line_items.find_all_by_paid(false)
+    @unpaid_line_items = @itinerary.line_items.where(paid: false)
     @transaction.line_items = @unpaid_line_items
     @transaction.tax = @transaction.pre_tax_total * selected_conference.tax_rate
     @transaction.payment_method = params[:payment_method]

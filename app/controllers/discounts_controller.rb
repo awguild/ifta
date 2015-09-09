@@ -13,7 +13,7 @@ class DiscountsController < ApplicationController
   end
 
   def create
-    @discount = @conference.discounts.build params[:discount]
+    @discount = @conference.discounts.build discount_params
     authorize! :create, @discount
     if @discount.save
       redirect_to conference_discounts_path(@conference)
@@ -30,7 +30,7 @@ class DiscountsController < ApplicationController
   def update
     @discount = Discount.find(params[:id])
     authorize! :update, @discount
-    if @discount.update_attributes params[:discount]
+    if @discount.update_attributes discount_params
       redirect_to conference_discounts_path(@conference)
     else
       render "edit"
@@ -46,6 +46,10 @@ class DiscountsController < ApplicationController
 
   private
     def load_conference
-      @conference = Conference.find_by_conference_year(params[:conference_id])
+      @conference = Conference.find_by(conference_year: params[:conference_id])
+    end
+
+    def discount_params
+      params.require(:discount).permit(:discount_key, :description, prices_attributes: Price::WHITE_LISTED)
     end
 end

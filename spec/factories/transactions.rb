@@ -1,4 +1,4 @@
 FactoryGirl.define do
-  factory :transaction do
+  factory :transaction, aliases: [:order] do
   end
 end

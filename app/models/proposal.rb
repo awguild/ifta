@@ -1,7 +1,4 @@
 class Proposal < ActiveRecord::Base
-  attr_accessible :format, :category, :title, :short_description, :long_description, :student, :agree, :presenters_attributes, :no_equipment, :sound, :projector, :keywords
-  attr_accessible :language_english, :language_spanish, :language_portuguese, :language_mandarin, :language_malay
-
   #object versioning, don't let the users delete yo data!
   has_paper_trail
 
@@ -9,6 +6,7 @@ class Proposal < ActiveRecord::Base
   has_many :presenters, :dependent => :destroy
   has_many :reviews
   has_one :slot
+  has_one :room, :through => :slot
   belongs_to :itinerary
   belongs_to :conference
   belongs_to :user
@@ -17,11 +15,11 @@ class Proposal < ActiveRecord::Base
 
   #query
   scope :current, ->(conference_id = Conference.active.id){ joins('INNER JOIN conferences ON conferences.id = proposals.conference_id').where('conference_id = ?', conference_id)}
-  scope :unreviewed, where(:status => nil)
-  scope :reviewed, joins(:reviews)
-  scope :unslotted, joins("LEFT OUTER JOIN slots ON slots.proposal_id = proposals.id").where("slots.proposal_id IS NULL AND proposals.status='accept'")
-  scope :accepted, where(:status => 'accept')
-  scope :wait_listed, where(:status => 'wait list')
+  scope :unreviewed, -> { where(:status => nil) }
+  scope :reviewed, -> { joins(:reviews) }
+  scope :unslotted, -> { joins("LEFT OUTER JOIN slots ON slots.proposal_id = proposals.id").where("slots.proposal_id IS NULL AND proposals.status='accept'") }
+  scope :accepted, -> { where(:status => 'accept') }
+  scope :wait_listed, -> { where(:status => 'wait list') }
 
   #validations
   validates :short_description, :length => {

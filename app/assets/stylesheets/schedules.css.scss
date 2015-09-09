@@ -1,3 +1,71 @@
 // Place all the styles related to the schedules controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.scheduler {
+
+  .leftBar {
+    width: 550px;
+    float: left;
+
+    .currentSchedule {
+      .slotMarker {
+        font-weight: bold;
+      }
+
+      label {
+        display: block;
+      }
+
+      select {
+        display: block;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .createTimeBlocks {
+    .floated {
+      width: 250px;
+      height: 55px;
+      float: left;
+
+      .inputGroup {
+        display: block;
+      }
+    }
+  }
+
+  .rightBar{
+    width: 325px;
+    float: right;
+
+    .constrained {
+      width: 325px;
+      height: 400px;
+      overflow: scroll;
+
+      ul, ol {
+        list-style: none;
+        padding: 0;
+      }
+
+      &.proposals {
+        li {
+          border-top: 1px solid #999;
+        }
+
+        .title {
+          font-weight: bold;
+          display: block;
+        }
+      }
+
+      &.presenters {
+        .slottedCount {
+          color: #33CC66;
+        }
+      }
+    }
+  }
+}

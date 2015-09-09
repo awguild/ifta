@@ -1,13 +1,13 @@
 class ConferencesController < ApplicationController
 
+  before_filter :find_conference, only: [:show, :update, :schedule]
   def show
-    @conference = Conference.find_by_conference_year(params[:id])
     authorize! @conference, :update
     @conference_item_breakdown_report = @conference.registration_breakdown
   end
 
   def create
-    @conference = Conference.new(params[:conference])
+    @conference = Conference.new(conference_params)
     authorize! :create, @conference
 
     if @conference.save
@@ -19,7 +19,7 @@ class ConferencesController < ApplicationController
   end
 
   def edit
-    @conference = Conference.includes(conference_items: [:regular_prices]).find_by_conference_year(params[:id])
+    @conference = Conference.includes(conference_items: [:regular_prices]).find_by(conference_year: params[:id])
     @new_conference = Conference.new(conference_year: (@conference.conference_year + 1), tax_rate: @conference.tax_rate)
     authorize! @conference, :update
     if params[:pricing]
@@ -32,9 +32,8 @@ class ConferencesController < ApplicationController
   end
 
   def update
-    @conference = Conference.find_by_conference_year(params[:id])
     authorize! @conference, :update
-    if @conference.update_attributes(params[:conference])
+    if @conference.update_attributes(conference_params)
       redirect_to conference_path(@conference)
     else
       if params[:pricing]
@@ -46,8 +45,33 @@ class ConferencesController < ApplicationController
     end
   end
 
+  def schedule
+    @schedule = @conference.schedule
+    authorize! :edit, @schedule
+
+    gon.conference_year = @conference.conference_year
+  end
+
   def select_year
     session[:selected_conference_id] = params[:conference_id]
     redirect_to after_sign_in_path_for(current_user)
   end
+
+  private
+
+    def find_conference
+      @conference = Conference.find_by(conference_year: params[:id])
+    end
+
+    def conference_params
+      params.require(:conference).permit(
+        # conference params
+        :conference_year, :tax_rate, :active,
+          # nested conference items
+          conference_items_attributes: [:name, :description, :multiple, :max, :visibility, :manual_price, :user_comment, :user_comment_prompt, :conference_id,
+            # nested prices
+            prices_attributes: Price::WHITE_LISTED
+          ]
+      )
+    end
 end

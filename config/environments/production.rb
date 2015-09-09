@@ -9,7 +9,7 @@ Iftaconferenceapp::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_files = false
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -19,6 +19,9 @@ Iftaconferenceapp::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+
+  config.eager_load = true
+  config.assets.js_compressor = :uglifier
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
@@ -66,6 +69,6 @@ Iftaconferenceapp::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Default URL Options
-  config.action_mailer.default_url_options = {:host => CONFIG[:mailer_host]}
+  config.action_mailer.default_url_options = {:host => ENV["MAILER_HOST"]}
 
 end
