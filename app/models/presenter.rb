@@ -12,9 +12,9 @@ class Presenter < ActiveRecord::Base
     #look for itinerary for the relevant conference
     itinerary = user.itineraries.find_by(conference_id: conference_id)
 
-    if itinerary.registered_for_conference?
+    if itinerary.try(:registered_for_conference?)
       return 'Registered'
-    elsif itinerary.has_pending_conference_registration?
+    elsif itinerary.try(:has_pending_conference_registration?)
       return 'Pending Registration'
     else
       return 'Not Registered'
