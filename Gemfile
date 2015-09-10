@@ -7,7 +7,7 @@ gem 'cancan'
 gem 'simple_form'
 gem 'jquery-rails'
 gem "validates_existence"
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.18'
 gem "recaptcha", :require => "recaptcha/rails"
 gem "paper_trail"
 gem 'delayed_job_active_record'
