@@ -1,9 +1,10 @@
+sudo: false
 language: ruby
 rvm:
-- 1.9.3
+- 2.1.2
 before_script:
 - mysql -e 'create database ifta_conference_test'
-- RAILS_ENV=test bundle exec rake db:migrate
+- RAILS_ENV=test bundle exec rake db:schema:load
 env:
   global:
   - APP_CERT='abc'
@@ -25,6 +26,8 @@ env:
   - PAYPAL_CERT_PEM='paypal_sandbox_cert.pem'
   - MYSQL_USERNAME='root'
   - MYSQL_PASSWORD=''
+  - SECRET_KEY_BASE=12345
+  - DEVISE_SECRET=67890
 deploy:
   provider: heroku
   api_key:

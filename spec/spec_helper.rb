@@ -7,13 +7,9 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
-  require 'rspec/autorun'
-  require 'capybara/rails'
-
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
 end
 
 Spork.each_run do
@@ -50,7 +46,8 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   config.include ValidUserRequestHelper, :type => :request
-  config.include Capybara::DSL
 
   config.infer_spec_type_from_file_location!
+  config.include Requests::JsonHelpers, type: :request
+  config.include FactoryGirl::Syntax::Methods
 end

@@ -1,15 +1,14 @@
 FactoryGirl.define do
   factory :payment do
-    transaction { FactoryGirl.create(:transaction)}
     amount 100
-    confirmed true
+    confirmed false
 
-    factory :unconfirmed_payment do
-      confirmed false
+    trait :confirmed do
+      confirmed true
     end
 
-    factory :confirmed_payment do
-      confirmed true
+    trait :unconfirmed do
+      confirmed false
     end
   end
 end

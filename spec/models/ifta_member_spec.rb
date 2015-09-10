@@ -9,12 +9,12 @@ describe IftaMember do
   # let defines a memoized helper method
   # Note: memoized means after you call it once it will just return a reference to its return value in all subsequent calls, aka it won't execute the method body again
   # the parameter inside of let (:ifta_member) will be the name of the helper method, you can use that method (ifta_member) anywhere in this describe block
-  # { FactoryGirl.build(:ifta_member) } is a proc that essentially opperates as the body of the function (let adds the memoization). In this case it will return an instance of the IftaMember class (as defined in our :ifta_member factory)
+  # { build(:ifta_member) } is a proc that essentially opperates as the body of the function (let adds the memoization). In this case it will return an instance of the IftaMember class (as defined in our :ifta_member factory)
   # the factory_girl_rails gem makes the FactoryGirl class avaialbe in the rspec tests
   # the build method will instantiate a new IftaMember object but not save it to the test database
   # the parameter to build (:ifta_member) is how FactoryGirl looks up what object to build
   # inside of the spec/factories/ifta_members file we defined a factory with the symbol :ifta_member
-  let!(:ifta_member) { FactoryGirl.build(:ifta_member) }
+  let!(:ifta_member) { build(:ifta_member) }
 
   describe "testing uniquness validation" do
     it "should create a uniquness error" do
@@ -29,7 +29,7 @@ describe IftaMember do
   describe "testing association with user" do
     # here we are going to save the IfaMember record to the database using create instead of build
     # we can access this object using the member helper method, and this object was set up to have an associated user record
-    let(:member) { FactoryGirl.create(:member_with_user)}
+    let(:member) { create(:member_with_user)}
 
     # the default implied subject of the IftaMember describe block is an instance of IftaMember created by calling IftaMember.new
     # we can set a different subject like this special ifta member with a user that we created
@@ -76,7 +76,7 @@ describe IftaMember do
         # this before block will execute before each of the tests in this context
         before {
             ifta_member.save!
-            IftaMember.count.should == 1
+            expect(IftaMember.count).to eql(1)
         }
 
         it "should have 2 ifta members" do

@@ -1,21 +1,17 @@
 FactoryGirl.define do
   factory :itinerary do
-    conference { FactoryGirl.create(:conference)}
-    user { FactoryGirl.create(:user)}
+    conference
+    user
 
-    factory :itinerary_with_pending_conference do
-      after(:create) do |itinerary, evaluator|
-        line_item = FactoryGirl.create(:pending_conference_line_item)
-        line_item.itinerary = itinerary
-        line_item.save
+    factory :itinerary_with_item do
+      transient do
+        item_name 'Conference'
+        paid false
       end
-    end
 
-    factory :itinerary_with_paid_conference do
       after(:create) do |itinerary, evaluator|
-        line_item = FactoryGirl.build(:paid_conference_line_item)
-        line_item.itinerary = itinerary
-        line_item.save
+        conference_item = create(:conference_item, conference: itinerary.conference, name: evaluator.item_name)
+        create(:line_item, paid: evaluator.paid, itinerary: itinerary, conference_item: conference_item)
       end
     end
   end

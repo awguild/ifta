@@ -2,8 +2,6 @@
 #users register for conference items by adding line items (conference item + price) to an itinerary
 #transactions group unpaid line items together to allow the user to pay for them via Paypal, check, or bank transfer
 class Itinerary < ActiveRecord::Base
-  attr_accessible :discount_key, :conference_id
-
   #associations
   belongs_to :user
   belongs_to :conference

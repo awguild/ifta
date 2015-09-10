@@ -7,34 +7,40 @@ FactoryGirl.define do
     long_description 'These ideas will help your kid play nice'
     student false
     agree true
-    itinerary { FactoryGirl.create(:itinerary) }
     no_equipment true
     keywords 'Bullying'
     language_english true
-    conference { FactoryGirl.create(:conference) } #not quite right, should have same conference as itinerary
+    user
+    itinerary { create(:itinerary, user: user) }
+    conference
 
-    factory :student_proposal do
+    trait :student do
       student true
     end
 
-    factory :accepted_proposal_with_presenter do
+    trait :accepted do
       status 'accept'
-      after(:create) do |proposal|
-        proposal.presenters << FactoryGirl.create(:presenter)
-      end
     end
 
-    factory :rejected_proposal_with_presenter do
+    trait :rejected do
       status 'decline'
-      after(:create) do |proposal|
-        proposal.presenters << FactoryGirl.create(:presenter)
-      end
     end
 
-    factory :wait_listed_proposal_with_presenter do
+    trait :wait_listed do
       status 'wait list'
+    end
+
+    trait :poster do
+      format 'poster'
+    end
+
+    trait :fortyfivemin do
+      format '45min'
+    end
+
+    factory :slotted_proposal, traits: [:accepted] do
       after(:create) do |proposal|
-        proposal.presenters << FactoryGirl.create(:presenter)
+        create(:slot, proposal: proposal)
       end
     end
   end

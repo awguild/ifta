@@ -1,18 +1,24 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :conference_item do
     visibility true
-    conference { FactoryGirl.create(:conference)}
-    name 'conference'
-    description '2014 conference'
+    name { Faker::Commerce.product_name }
+    description { Faker::Lorem.sentence }
 
-    factory :not_visible_conference_item do
+    trait :invisible do
       visibility false
     end
 
-    factory :conference_2014_conference_item do
-      name 'conference 2014'
+    factory :conference_item_with_registered_users do
+      transient do
+        paid_registrations 0
+        unpaid_registrations 1
+      end
+
+      after(:create) do |conference_item, evaluator|
+        itinerary = create(:itinerary, conference: conference_item.conference)
+        create_list(:line_item, evaluator.paid_registrations, :paid, conference_item: conference_item, itinerary: itinerary)
+        create_list(:line_item, evaluator.unpaid_registrations, conference_item: conference_item, itinerary: itinerary)
+      end
     end
   end
 end

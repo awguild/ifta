@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   def create
-    @review = Review.new(params[:review])
+    @review = Review.new(review_params)
     authorize! :create, @review
 
     respond_to do |format|
@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
     authorize! :create, @review
 
     respond_to do |format|
-      if @review.update_attributes(params[:review])
+      if @review.update_attributes(review_params)
         send_emails if send_emails?
         format.html { redirect_to after_sign_in_path_for(current_user), :notice => 'Proposal successfully updated.' }
         format.json { head :no_content }
@@ -47,5 +47,9 @@ class ReviewsController < ApplicationController
         flash[:alert] = flash[:alert].blank? ? warning : flash[:alert] + ". #{warning}"
       end
     end
+  end
+
+  def review_params
+    params.require(:review).permit(:proposal_id, :status, :comments, :reviewer_id)
   end
 end

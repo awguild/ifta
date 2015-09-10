@@ -2,7 +2,7 @@ Iftaconferenceapp::Application.routes.draw do
   root :to => 'welcome#index', :as => :root
   #user routes
   get 'users/:id/edit_password' => 'users#edit_password', :as => :edit_user_password
-  match 'users/:id/update_password' => 'users#update_password', :as => :update_user_password
+  patch 'users/:id/update_password' => 'users#update_password', :as => :update_user_password
   post 'users/:id/change_role' => 'users#change_role', :as => :change_role_user
   get 'users/edit' => 'users#edit'
 
@@ -21,8 +21,8 @@ Iftaconferenceapp::Application.routes.draw do
   devise_scope :user do
     get 'users/sign_out' => 'devise/sessions#destroy'
     put 'users/password' => 'devise/passwords#update'
-    match 'users/password' => 'devise/passwords#create' #Rails bug with post member routes
-    match 'users/password/edit' => 'devise/passwords#edit', :as => :edit_password
+    post 'users/password' => 'devise/passwords#create'
+    get 'users/password/edit' => 'devise/passwords#edit', :as => :edit_password
   end
   resources :users
   resources :itineraries do
@@ -41,9 +41,11 @@ Iftaconferenceapp::Application.routes.draw do
     collection do
       post 'select_year', as: :select_year
     end
+
+    member do
+      get 'schedule', as: :schedule
+    end
     resources :discounts
-    resource :schedule
-    resources :rooms
   end
   resources :reviews
 
@@ -52,4 +54,22 @@ Iftaconferenceapp::Application.routes.draw do
   get 'conferences/:id/registration_breakdown' => 'reports#registration_breakdown', :as => :registration_breakdown_report
   get 'conferences/:id/student_presentations' => 'reports#student_presentations', :as => :student_presentations_report
   get 'conferences/:id/presentations' => 'reports#presentations', :as => :presentations_report
+
+  namespace :api, :defaults => { :format => 'json' } do
+    namespace :v1 do
+      resources :conferences do
+        resources :proposals, only: [] do
+          collection do
+            get :search
+            get :presenters
+            get :formats
+          end
+        end
+
+        resources :slots, only: [:update]
+        resources :time_blocks
+        resources :rooms
+      end
+    end
+  end
 end

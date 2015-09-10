@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
 
+  def show
+  end
+
   def index
     @conference = selected_conference
     @conference_items = @conference.conference_items
@@ -11,7 +14,7 @@ class UsersController < ApplicationController
   def edit
     #I redirected the devise edit route (which doesn't put the user id in the URL) to this action,
     #fall back on current_user
-    @user = User.find(params[:id] || current_user)
+    @user = User.find(params[:id] || current_user.id)
     authorize! :update, @user
   end
 
@@ -20,7 +23,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id] || current_user)
     authorize! :update, @user
 
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       flash[:notice] = 'Account successfully updated.'
       redirect_to after_sign_in_path_for(current_user)
     else
@@ -52,11 +55,21 @@ class UsersController < ApplicationController
   def update_password
     @user = User.find(params[:id])
     authorize! :update, @user
-    if @user.update_with_password(params[:user]) #devise helper method, prevents updating password without current password
+    if @user.update_with_password(user_params) #devise helper method, prevents updating password without current password
       sign_in @user, :bypass => true
       redirect_to after_sign_in_path_for(@user)
     else
       render "edit_password"
     end
   end
+
+  private
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation, :remember_me,
+        :first_name, :last_name, :prefix, :initial, :suffix, :address,
+        :city, :state, :country_id, :zip, :phone, :username, :member,
+        :student, :ifta_member_email, :fax_number, :emergency_name,
+        :emergency_relationship, :emergency_telephone, :emergency_email,
+        :nametag_name, :certificate_name)
+    end
 end

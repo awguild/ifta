@@ -21,7 +21,7 @@ class ProposalsController < ApplicationController
   #Nothing special here, proposal model takes care of nested presenter models.  Gotta love Rails :)
   def create
     @itinerary = Itinerary.includes([:conference, :user]).find(params[:itinerary_id])
-    @proposal = @itinerary.proposals.build(params[:proposal])
+    @proposal = @itinerary.proposals.build(proposal_params)
     @proposal.conference = @itinerary.conference
     @proposal.user = @itinerary.user
     authorize! :create, @proposal
@@ -43,7 +43,7 @@ class ProposalsController < ApplicationController
     @itinerary = Itinerary.find(params[:itinerary_id])
     @proposal = Proposal.find(params[:id])
     authorize! :update, @proposal
-    if @proposal.update_attributes(params[:proposal])
+    if @proposal.update_attributes(proposal_params)
       redirect_to after_sign_in_path_for(current_user), :notice => 'Proposal successfully updated.'
     else
       render :action => 'edit'
@@ -62,4 +62,11 @@ class ProposalsController < ApplicationController
     authorize! :index, Proposal
     @proposals = Proposal.unslotted.includes(:presenters)
   end
+
+  private
+    def proposal_params
+      params.require(:proposal).permit(:format, :category, :title, :short_description, :long_description, :student, :agree, :no_equipment, :sound, :projector, :keywords, :language_english, :language_spanish, :language_portuguese, :language_mandarin, :language_malay,
+        presenters_attributes: [:first_name, :last_name, :home_telephone, :work_telephone, :fax_number, :email, :affiliation_name, :affiliation_position, :registered, :other_presentations, :other_emails]
+      )
+    end
 end

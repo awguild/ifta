@@ -4,7 +4,7 @@ class LineItemsController < ApplicationController
   #The admins can add line items on behalf of users since the itinerary is URL loaded (doesn't rely on current_user)
   def create
     @itinerary = Itinerary.find(params[:itinerary_id])
-    @line_item = @itinerary.line_items.build(params[:line_item])
+    @line_item = @itinerary.line_items.build(line_items_params)
     authorize! :create, @line_item unless @line_item.invalid? #the authorize! method expects valid associations, we can skip authorize! if the validations aren't going to pass because none of the data will be persisted anyway
 
     if @line_item.save
@@ -25,6 +25,8 @@ class LineItemsController < ApplicationController
     redirect_to edit_itinerary_path(@line_item.itinerary)
   end
 
-
-
+  private
+    def line_items_params
+      params.require(:line_item).permit(:conference_item_id, :itinerary_id, :price, :comment)
+    end
 end

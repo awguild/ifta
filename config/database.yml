@@ -4,8 +4,8 @@ development:
   reconnect: false
   database: ifta_conference_development
   pool: 5
-  username: <%= CONFIG[:mysql_username] %>
-  password: <%= CONFIG[:mysql_password] %>
+  username: <%= ENV["MYSQL_USERNAME"] %>
+  password: <%= ENV["MYSQL_PASSWORD"] %>
   host: 127.0.0.1
   port: 3306
 
@@ -18,8 +18,8 @@ test:
   reconnect: false
   database: ifta_conference_test
   pool: 5
-  username: <%= CONFIG[:mysql_username] %>
-  password: <%= CONFIG[:mysql_password] %>
+  username: <%= ENV["MYSQL_USERNAME"] %>
+  password: <%= ENV["MYSQL_PASSWORD"] %>
   host: 127.0.0.1
   port: 3306
 
@@ -29,8 +29,8 @@ staging:
   reconnect: false
   database: ifta_conference_staging
   pool: 5
-  username: <%= CONFIG[:mysql_username] %>
-  password: <%= CONFIG[:mysql_password] %>
+  username: <%= ENV["MYSQL_USERNAME"] %>
+  password: <%= ENV["MYSQL_PASSWORD"] %>
 
 production:
   adapter: mysql2
@@ -38,5 +38,5 @@ production:
   reconnect: false
   database: ifta_conference_production
   pool: 5
-  username: <%= CONFIG[:mysql_username] %>
-  password: <%= CONFIG[:mysql_password] %>
+  username: <%= ENV["MYSQL_USERNAME"] %>
+  password: <%= ENV["MYSQL_PASSWORD"] %>

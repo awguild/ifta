@@ -1,5 +1,5 @@
 <h3>Proposals</h3>
-Currently there have been <%= @conference.proposal_count %> proposal submissions!<br>
-<%= @conference.accepted_proposal_count %> proposal submissions have been accepted<br>
-<%= @conference.wait_listed_proposal_count %> proposal submissions have been wait listed<br>
+Currently there have been <%= @conference.proposals.count %> proposal submissions!<br>
+<%= @conference.proposals.accepted.count %> proposal submissions have been accepted<br>
+<%= @conference.proposals.wait_listed.count %> proposal submissions have been wait listed<br>
 To see more information about which presenters have registered see this report <%= link_to "Accepted Proposals Registrations", accepted_and_unregistered_report_path(@conference) %>
