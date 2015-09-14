@@ -1,6 +1,6 @@
 class Price < ActiveRecord::Base
   include Comparable
-  WHITE_LISTED = [:country_category, :amount, :discount_key, :member, :conference_item_id]
+  WHITE_LISTED = [:id, :_destroy, :country_category, :amount, :discount_key, :member, :conference_item_id]
 
   #associations
   belongs_to :conference_item

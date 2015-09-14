@@ -68,7 +68,7 @@ class ConferencesController < ApplicationController
         # conference params
         :conference_year, :tax_rate, :active,
           # nested conference items
-          conference_items_attributes: [:name, :description, :multiple, :max, :visibility, :manual_price, :user_comment, :user_comment_prompt, :conference_id,
+          conference_items_attributes: [:id, :_destroy, :name, :description, :multiple, :max, :visibility, :manual_price, :user_comment, :user_comment_prompt, :conference_id,
             # nested prices
             prices_attributes: Price::WHITE_LISTED
           ]
