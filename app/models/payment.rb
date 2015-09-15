@@ -8,7 +8,7 @@ class Payment < ActiveRecord::Base
   before_destroy :clear_transaction
 
   serialize :params
-  delegate :user, :to => :transaction
+  delegate :user, :to => :order
 
   private
 
