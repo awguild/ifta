@@ -6,7 +6,7 @@
 	<hr>
 	<div id='cart_total'>
 		Total: $<span id='cart_price'><%= sprintf("%.2f", itinerary.line_items_pre_tax_price) %></span><br>
-		Tax: $<span id='cart_tax'><%= sprintf("%.2f", itinerary.line_items_tax_price) %></span>
+		Fee: $<span id='cart_tax'><%= sprintf("%.2f", itinerary.line_items_tax_price) %></span>
 	</div>
 	<p><em>Choose your payment method</em><br>
 	<%= link_to "Pay With Paypal (Credit Card)", itinerary_transactions_path(itinerary, :payment_method => :paypal), id: "check_out", :method => :post, :class => 'btn btn-success' %><br>
