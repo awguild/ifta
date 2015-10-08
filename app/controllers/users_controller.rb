@@ -70,6 +70,6 @@ class UsersController < ApplicationController
         :city, :state, :country_id, :zip, :phone, :username, :member,
         :student, :ifta_member_email, :fax_number, :emergency_name,
         :emergency_relationship, :emergency_telephone, :emergency_email,
-        :nametag_name, :certificate_name)
+        :nametag_name, :certificate_name, :current_password)
     end
 end
