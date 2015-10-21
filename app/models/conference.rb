@@ -7,6 +7,7 @@ class Conference < ActiveRecord::Base
   has_many :discounts
   has_many :itineraries
   has_many :proposals
+  has_many :presenters, :through => :proposals
   has_one :schedule
   has_many :rooms, :through => :schedule
   has_many :slots, :through => :schedule

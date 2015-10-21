@@ -5,6 +5,10 @@ class Presenter < ActiveRecord::Base
   #validations
   validates :first_name, :last_name, :email, :presence => true
 
+  def reverse_full_name
+    "#{last_name}, #{first_name}"
+  end
+
   def self.presenter_conference_status(email, conference_id)
     #look for a user with the given email
     user = User.where(:email => email).first
