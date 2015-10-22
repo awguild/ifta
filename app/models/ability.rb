@@ -15,6 +15,7 @@ class Ability
       can :create, Transaction, :user => {:id => user.id}
       can :create, Review, :reviewer_id => user.id
       can :manage, Proposal
+      can :report, Conference
       # reviewer permissions
     else
       #attendee permissions
