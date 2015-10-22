@@ -1,3 +1,7 @@
+<%- content_for :nav do %>
+  <%= render :partial => 'layouts/admin_nav' %>
+<%- end %>
+
 <h1>Presenter Proposals</h1>
 <%- @presenter_proposals.each do |presenter, new_person| %>
   <%- if new_person %>
