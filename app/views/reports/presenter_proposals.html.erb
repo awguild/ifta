@@ -3,14 +3,16 @@
 <%- end %>
 
 <h1>Presenter Proposals</h1>
-<%- @presenter_proposals.each do |presenter, new_person| %>
-  <%- if new_person %>
-    <hr>
-    <div><%= presenter.reverse_full_name %></div>
-    <div><%= presenter.email %></div>
+<div class="presenter_proposals_report">
+  <%- @presenter_proposals.each do |presenter, new_person| %>
+    <%- if new_person %>
+      <hr>
+      <div><%= presenter.reverse_full_name %></div>
+      <div><%= presenter.email %></div>
 
-    <li><%= presenter.proposal.title %></li>
-  <%- else %>
-    <li><%= presenter.proposal.title %></li>
+      <%= render 'reports/presenter_proposals/proposal', proposal: presenter.proposal %>
+    <%- else %>
+      <%= render 'reports/presenter_proposals/proposal', proposal: presenter.proposal %>
+    <%- end %>
   <%- end %>
-<%- end %>
+</div>
