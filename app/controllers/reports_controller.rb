@@ -39,6 +39,7 @@ class ReportsController < ApplicationController
 	end
 
   def presenter_proposals
+    authorize! :report, @conference
     @presenter_proposals = PresenterProposalsQuery.new(@conference)
 
     respond_with(@presenter_proposals)

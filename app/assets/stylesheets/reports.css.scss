@@ -1,3 +1,24 @@
 // Place all the styles related to the reports controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.presenter_proposals_report {
+  li {
+    list-style: none;
+    padding-left: 5px;
+  }
+  .accept {
+    border-left: 3px solid #33CC66;
+  }
+
+  .reject, .drop_out {
+    border-left: 3px solid #680000;
+  }
+
+  .wait_list {
+    border-left: 3px solid #000;
+  }
+}
+
+
+
