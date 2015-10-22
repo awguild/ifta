@@ -1,0 +1,18 @@
+<%- content_for :nav do %>
+  <%= render :partial => 'layouts/admin_nav' %>
+<%- end %>
+
+<h1>Presenter Proposals</h1>
+<div class="presenter_proposals_report">
+  <%- @presenter_proposals.each do |presenter, new_person| %>
+    <%- if new_person %>
+      <hr>
+      <div><%= presenter.reverse_full_name %></div>
+      <div><%= presenter.email %></div>
+
+      <%= render 'reports/presenter_proposals/proposal', proposal: presenter.proposal %>
+    <%- else %>
+      <%= render 'reports/presenter_proposals/proposal', proposal: presenter.proposal %>
+    <%- end %>
+  <%- end %>
+</div>

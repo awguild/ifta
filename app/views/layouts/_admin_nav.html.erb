@@ -22,14 +22,6 @@
 		<li><%= link_to "Manage", mass_new_members_path %></li>
 	</ul>
 </li>
-<li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports<b class="caret"></b></a>
-	<ul class="dropdown-menu">
-		<li><%= link_to "Accepted Proposals Registrations", accepted_and_unregistered_report_path(conference) %></li>
-		<li><%= link_to "Registration Breakdown", registration_breakdown_report_path(conference) %></li>
-		<li><%= link_to "Student Presentations", student_presentations_report_path(conference) %></li>
-		<li><%= link_to "Presentations", presentations_report_path(conference, format: 'csv') %></li>
-	</ul>
-</li>
+  <%= render 'layouts/reports', conference: conference %>
 <li><%= link_to "Users", users_path(email: false) %></li>
 <li><%= link_to "Schedule", schedule_conference_path(conference) %></li>

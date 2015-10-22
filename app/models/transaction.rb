@@ -51,7 +51,7 @@ class Transaction < ActiveRecord::Base
      tax_id = line_items.length + 1
      values.merge!({
        "amount_#{tax_id}" => sprintf("%.2f", tax),
-       "item_name_#{tax_id}" => "Tax",
+       "item_name_#{tax_id}" => "Admin Fee",
        "item_number_#{tax_id}" => id
      })
      values[:invoice] = id
