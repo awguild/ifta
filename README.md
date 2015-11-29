@@ -33,20 +33,27 @@ IFTA also runs a membership system which is tangentially related to their confer
 ### App Dependencies
 *You can install these dependencies natively on your machine or install them on a VM and run the app on the VM instead of your native host machine*
 
-VM:  Install [Virtualbox](https://www.virtualbox.org/wiki/Downloads) & [Vagrant](http://www.vagrantup.com/) to run and manage a VM on your computer.  At some point I might release a pre-provisioned box, but for now the easiest thing to do is add this [ubuntu 13 base box](http://brennovich.s3.amazonaws.com/saucy64_vmware_fusion.box) to  vagrant and then use apt-get to install Ruby 1.9.3 and MySQL
+VM:  Install [Virtualbox](https://www.virtualbox.org/wiki/Downloads) & [Vagrant](http://www.vagrantup.com/) to run and manage a VM on your computer. Then Run
+
+    vagrant plugin install vagrant-vbguest
+    vagrant plugin install vagrant-librarian-chef-nochef
+    vagrant up # (NOTE: run this command from the project's root folder)
 
 Natively: If you choose to install Ruby and MySQL natively you'll want to use a Ruby version manager so that you can install multipe versions of ruby on your machine
 
-1. Download a Ruby manger [Pik](http://rubyinstaller.org/add-ons/pik/) (Windows)  [rbenv](https://github.com/sstephenson/rbenv) or [RVM](https://rvm.io/rvm/install), (Mac)
-1. Install Ruby 1.9.3 as per your Ruby manger's guide
-1. Install MySQL. MySQL is bundled in with [XAMPP](http://www.apachefriends.org/en/xampp.html), XAMPP is overkill for just installing MySQL, but it comes with Apache (a web server), an FTP server, a mail server and more.  These tools are all useful for a web developer, which is why I recommend XAMPP.
+1. Download a Ruby manger (e.g. [rbenv](https://github.com/sstephenson/rbenv) on Mac)
+1. Install Ruby 2.1.2 as per your Ruby manger's guide
+1. Install MySQL
 
 
 ### Starting the app
 1. Clone this project to your local machine
-1. Create a ifta_conference_development database in MySQL
+1. Create a ifta_conference_development database in MySQL (mysqld listening on 3307 if using vagrant)
 1. Request the latest sql dump from the Augie Web guild and import it into the development database
 1. Request a copy of the developer .env file and put it in the root of this project
+1. Run `gem install bundler`
+1. Run `rbenv rehash` to make sure all binaries are available
+1. Run `bundle` from the root of the project (inside the VM if using vagrant)
 1. Run the following command to start the app
 ```
 foreman start -f Procfile.dev
