@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
-ruby "2.1.2"
+ruby '2.1.2'
 
 gem 'rails', '4.2.3'
 gem 'devise'
 gem 'cancan'
 gem 'simple_form'
 gem 'jquery-rails'
-gem "validates_existence"
+gem 'validates_existence'
 gem 'mysql2', '~> 0.3.18'
-gem "recaptcha", :require => "recaptcha/rails"
-gem "paper_trail"
+gem 'recaptcha', :require => 'recaptcha/rails'
+gem 'paper_trail'
 gem 'delayed_job_active_record'
 gem 'will_paginate'
 gem 'newrelic_rpm'
