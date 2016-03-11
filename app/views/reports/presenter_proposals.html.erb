@@ -8,7 +8,8 @@
     <%- if new_person %>
       <hr>
       <div><%= presenter.reverse_full_name %></div>
-      <div><%= presenter.email %></div>
+      <div><b>Email: </b><%= presenter.email %></div>
+      <div><b>Country: </b><%= presenter.country_name %></div>
 
       <%= render 'reports/presenter_proposals/proposal', proposal: presenter.proposal %>
     <%- else %>

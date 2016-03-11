@@ -8,6 +8,7 @@
 	<%= f.label 'Home phone' %><%= f.text_field :home_telephone, class: 'phone_number' %><br>
 	<%= f.label 'Work phone' %><%= f.text_field :work_telephone, class: 'phone_number' %><br>
 	<%= f.label 'Fax number' %><%= f.text_field :fax_number, class: 'phone_number' %><br>
+  <%= f.association :country %>
 
 	<%= f.input :email %>
 

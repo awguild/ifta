@@ -2,7 +2,6 @@
 <em>Short Description: </em><%= proposal.short_description %><br>
 <em>Long Description: </em><%= proposal.long_description %><br>
 <em>Presenters: </em>
-<%- proposal.presenters.each do |presenter| %>
-	<%= presenter.first_name + " " + presenter.last_name + ", "%>
-<%- end %><br>
+<% proposal.presenters.collect(&:full_name).join(', ') %>
+<br>
 <hr>
