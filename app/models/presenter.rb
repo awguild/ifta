@@ -10,6 +10,14 @@ class Presenter < ActiveRecord::Base
     "#{last_name}, #{first_name}"
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def country_name
+    country.try(:name) || 'N/A'
+  end
+
   def self.presenter_conference_status(email, conference_id)
     #look for a user with the given email
     user = User.where(:email => email).first

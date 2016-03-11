@@ -12,7 +12,7 @@
 	<em>Presenters:</em>
 		<%- proposal.presenters.each_with_index do |presenter, index| %>
 			<%= "<span style='color: red;'>*</span>".html_safe if presenter.other_presentations %>
-			<%= presenter.first_name + " " + presenter.last_name + " (" + presenter.email + ")" %>
+			<%= "#{presenter.full_name} (#{presenter.email} -- #{presenter.country_name})" %>
 			<%= ", " unless index == proposal.presenters.length - 1 %>
 		<%- end %><br>
 	<%= form_for current_review(proposal), html: {:class => 'review_form'} do |f| %>
