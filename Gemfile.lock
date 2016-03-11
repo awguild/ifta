@@ -282,6 +282,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   shoulda
+  shoulda-matchers
   simple_form
   spork
   therubyracer

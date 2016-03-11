@@ -1,9 +1,10 @@
 class Presenter < ActiveRecord::Base
   #associations
   belongs_to :proposal
+  belongs_to :country
 
   #validations
-  validates :first_name, :last_name, :email, :presence => true
+  validates :first_name, :last_name, :email, :country_id, :presence => true
 
   def reverse_full_name
     "#{last_name}, #{first_name}"

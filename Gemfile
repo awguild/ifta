@@ -41,6 +41,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'quiet_assets'
   gem 'shoulda'
+  gem 'shoulda-matchers'
   gem 'spork'
   gem 'rspec-core'
   gem 'rspec-rails'

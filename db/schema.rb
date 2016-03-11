@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715023653) do
+ActiveRecord::Schema.define(version: 20160311034233) do
 
   create_table "conference_items", force: :cascade do |t|
     t.string   "name",                limit: 255
@@ -135,7 +135,10 @@ ActiveRecord::Schema.define(version: 20150715023653) do
     t.datetime "updated_at",                       null: false
     t.boolean  "other_presentations"
     t.string   "other_emails",         limit: 255
+    t.integer  "country_id",           limit: 4
   end
+
+  add_index "presenters", ["country_id"], name: "index_presenters_on_country_id", using: :btree
 
   create_table "prices", force: :cascade do |t|
     t.integer  "conference_item_id", limit: 4
