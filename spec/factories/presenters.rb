@@ -3,5 +3,6 @@ FactoryGirl.define do
     first_name 'Same'
     last_name 'Doe'
     email 'sdoe@example.com'
+    country
   end
 end

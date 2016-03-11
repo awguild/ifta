@@ -65,7 +65,8 @@ class Proposal < ActiveRecord::Base
       first_name: user.first_name,
       last_name: user.last_name,
       home_telephone: user.phone,
-      email: user.email
+      email: user.email,
+      country_id: user.country.id
     })
   end
 
