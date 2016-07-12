@@ -1,5 +1,6 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  users:
+    registrations:
+      create:
+        email_in_use:
+          The email your attempting to register with is already in use, if you can't Sign In with it try using the forgot your password link.
