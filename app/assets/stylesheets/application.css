@@ -180,6 +180,9 @@ fieldset.show-fieldset{
     padding:0;
     border:0;
 }
+.error {
+  color: red;
+}
 
 
 /*Users*/

@@ -36,6 +36,7 @@ class Proposal < ActiveRecord::Base
   validates_associated :presenters
   validates :presenters, :length => {:maximum => 4, :message => 'the maximum number of presenters is 4'}
   validates :agree, :acceptance => {:accept => true}
+  validate :check_av_requirements
 
   #life cycle hooks
   before_validation :add_relative_number
@@ -71,6 +72,12 @@ class Proposal < ActiveRecord::Base
   end
 
   private
+
+    def check_av_requirements
+      if no_equipment.blank? && projector.blank? && sound.blank?
+        errors.add(:no_equipment, 'Please select one of the AV options.')
+      end
+    end
 
     def self.search(options)
       proposals = Proposal.current(options[:conference_id])
