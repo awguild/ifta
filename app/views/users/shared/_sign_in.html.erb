@@ -5,14 +5,14 @@
   <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>
     <div class="controls">
-      <%= f.email_field :email %>
+      <%= f.email_field :email, required: true %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :password, :class => 'control-label' %>
     <div class="controls">
-      <%= f.password_field :password %>
+      <%= f.password_field :password, minlength: 6, required: true %>
     </div>
   </div>
 
