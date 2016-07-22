@@ -14,6 +14,16 @@ describe Proposal do
       proposal = create(:proposal)
       expect(proposal.relative_number).to eql(1)
     end
+
+    it 'does not allow no equipment with other av options' do
+      proposal = build(:proposal, sound: true, no_equipment: true)
+      expect(proposal).to be_invalid
+    end
+
+    it 'does not allow av options with 20 min format' do
+      proposal = build(:proposal, format: '20min', sound: true)
+      expect(proposal).to be_invalid
+    end
   end
 
   context :accepted_and_unregistered do
