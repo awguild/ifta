@@ -16,15 +16,37 @@ The Program Committee will make the decision as which language you will present 
 <hr>
 
 <h3>Presentation Format</h3>
-	<%= f.radio_button :format, "poster"%> <%= f.label :format_poster, "Poster Display" %>
-	<em>(Limit four presenters)</em><br>
-
-	<%= f.radio_button :format, "25min" %> <%= f.label :format_25min, "25 minutes"%>
-	<em>(Limit two registered presenters)</em><br>
-
-	<%= f.radio_button :format, "45min" %> <%= f.label :format_45min, "45 minutes"%>
-	<em>(Limit to four registered presenters)</em><br>
+	<%= f.radio_button :format, "poster"%>
+  <%= f.label :format_poster do %>
+	 <span>
+    Poster Display
+    <em>(Limit four presenters)</em>
+   </span>
+  <% end %>
+  <br>
+	<%= f.radio_button :format, "20min", data: { disable_av: true} %>
+  <%= f.label :format_20min do %>
+	  <span>
+      20 minutes
+      <em>(Limit two registered presenters, these presentations won't have Audio Visual available)</em>
+    </span>
+  <% end %>
+  <br>
+	<%= f.radio_button :format, "45min" %>
+  <%= f.label :format_45min do %>
+	 <span>45 minutes
+    <em>(Limit to four registered presenters)</em>
+   </span>
+  <% end %>
 <hr>
+
+<h3>Audio Visual Needs</h3>
+<div>
+  <strong>Please note that there is no wireless internet in the rooms!</strong><br>
+  <%= f.input :no_equipment, :label => "No Equipment Needed"%>
+  <%= f.input :projector, :label => "LCD Projector"%>
+  <%= f.input :sound, :label => "Sound (to play video)"%>
+</div>
 
 <h3>Category of Information to be presented</h3>
 	<%= f.radio_button :category, "clinical"%> <%= f.label :category_clinical, 'Clinical' %><br>
@@ -52,11 +74,6 @@ The Program Committee will make the decision as which language you will present 
 	<%= f.label :long_description, "(350 words max)"%>
 	<%= f.text_area :long_description, {cols: '60', rows: '20'} %>
 <hr>
-<h3>Audio Visual Needs</h3>
-<strong>Please note that there is no wireless internet in the rooms!</strong><br>
-<%= f.input :no_equipment, :label => "No Equipment Needed"%>
-<%= f.input :projector, :label => "LCD Projector"%>
-<%= f.input :sound, :label => "Sound (to play video)"%>
 
 <br>
 Note: Presenters must bring their own laptop

@@ -74,8 +74,16 @@ class Proposal < ActiveRecord::Base
   private
 
     def check_av_requirements
+      if (projector.present? || sound.present?) && no_equipment.present?
+        errors.add(:no_equipment, 'You cannot select no equipment with other options')
+      end
+
       if no_equipment.blank? && projector.blank? && sound.blank?
         errors.add(:no_equipment, 'Please select one of the AV options.')
+      end
+
+      if format == '20min' && (projector.present? || sound.present?)
+        errors.add(:format, '20 minutes does not allow AV equipment')
       end
     end
 
