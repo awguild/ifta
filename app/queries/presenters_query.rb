@@ -1,8 +1,6 @@
 class PresentersQuery
-
   def self.to_csv(presentations)
     CSV.generate do |csv|
-      # headers
       csv << [
         'id',
         'title',
@@ -47,36 +45,36 @@ class PresentersQuery
 
   def self.exec(conference_id)
     ActiveRecord::Base.connection.execute(
-    "SELECT relative_number, 
-       title, 
-       format               AS type, 
-       presenters.last_name, 
-       presenters.first_name, 
-       CASE 
-         WHEN proposals.user_id = users.id THEN 'primary' 
-         ELSE 'secondary' 
-       end                  AS primary_presenter, 
-       presenters.email, 
-       countries.name       AS country, 
-       proposals.updated_at AS date_accepted, 
-       payments.created_at  AS payment_date, 
-       transactions.payment_method, 
-       status, 
-       payments.amount      AS amount_paid 
-    FROM   proposals 
-       INNER JOIN presenters 
-               ON presenters.proposal_id = proposals.id 
-       LEFT JOIN users 
-              ON users.email = presenters.email 
-       LEFT JOIN itineraries 
-              ON itineraries.user_id = users.id 
-                 AND itineraries.conference_id = #{conference_id} 
-       LEFT JOIN countries 
-              ON countries.id = users.country_id 
-       LEFT JOIN transactions 
-              ON transactions.itinerary_id = itineraries.id 
-       LEFT JOIN payments 
-              ON payments.transaction_id = transactions.id 
-    WHERE  proposals.conference_id = #{conference_id}")
+    "SELECT relative_number,
+       title,
+       format               AS type,
+       presenters.last_name,
+       presenters.first_name,
+       CASE
+         WHEN proposals.user_id = users.id THEN 'primary'
+         ELSE 'secondary'
+       end                  AS primary_presenter,
+       presenters.email,
+       countries.name       AS country,
+       proposals.updated_at AS date_accepted,
+       payments.created_at  AS payment_date,
+       transactions.payment_method,
+       status,
+       payments.amount      AS amount_paid
+    FROM   proposals
+    INNER JOIN presenters
+    ON presenters.proposal_id = proposals.id
+    LEFT JOIN users
+    ON users.email = presenters.email
+    LEFT JOIN itineraries
+    ON itineraries.user_id = users.id AND itineraries.conference_id = #{conference_id}
+    LEFT JOIN countries
+    ON countries.id = users.country_id
+    LEFT JOIN transactions
+    ON transactions.itinerary_id = itineraries.id
+    LEFT JOIN payments
+    ON payments.transaction_id = transactions.id
+    WHERE proposals.conference_id = #{conference_id}
+    AND transactions.paid = true AND payments.confirmed = true")
   end
 end
