@@ -75,6 +75,7 @@ class PresentersQuery
     LEFT JOIN payments
     ON payments.transaction_id = transactions.id
     WHERE proposals.conference_id = #{conference_id}
+    AND proposals.status = 'accept'
     AND transactions.paid = true AND payments.confirmed = true")
   end
 end
