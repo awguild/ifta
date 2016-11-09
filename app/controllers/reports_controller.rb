@@ -13,13 +13,8 @@ class ReportsController < ApplicationController
 	def registration_breakdown
 		authorize! :report, @conference
 		@conference_item_breakdown_report = @conference.registration_breakdown
-		@registrations = RegistrationBreakdownQuery.exec(@conference.id)
-
-		respond_to do |format|
-			format.html
-			format.json { render json: @registrations }
-			format.csv { render json: RegistrationBreakdownQuery.to_csv(@registrations) }
-		end
+		@proposals = @conference.proposals.accepted.includes(user: [:country]).order(:user_id)
+    @paid_items = @conference.paid_items_by_user
 	end
 
 	def student_presentations

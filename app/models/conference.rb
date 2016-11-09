@@ -43,6 +43,15 @@ class Conference < ActiveRecord::Base
     conference_year.to_s
   end
 
+  def paid_items_by_user
+    itineraries.includes(:line_items, :conference_items).reduce({}) do |acc, itin|
+      acc[itin.user_id] = itin.line_items.select(&:paid).map do |item|
+                            item.conference_item.name
+                          end
+      acc
+    end
+  end
+
   private
 
   #creates a schedule for this conference
