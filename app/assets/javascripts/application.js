@@ -27,8 +27,8 @@ $(function(){
 	//formats telephone numbers.
 	//nested presenter fields can be added to a proposal by the user after the DOM is loaded
 	//attaching the handler through live ensures those phone numbers are formatted too
-	$('.phone_number').on("blur", function(){
-		var number = $(this).val($(this).val().replace(/\D/g,''));
+	$('.phone_number').on("blur", function(e){
+		$(this).val(sanitizePhoneNumber(e.target.value));
 	});
 
   	//date picker
@@ -39,3 +39,6 @@ $(function(){
     $('.add_fields').addClass("btn btn-primary");
 });
 
+function sanitizePhoneNumber(input){
+	return input.replace(/\D/g,'')
+};
