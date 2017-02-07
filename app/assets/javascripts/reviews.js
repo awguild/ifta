@@ -10,53 +10,57 @@ $(function(){
   });
 
   function submitForm(e){
-    var self = this;
-
+    var self = $(this);
+    var reviewForm = new ReviewForm(self);
     e.preventDefault();
 
     $.ajax({
-      type: getMethod(self),
+      type: reviewForm.getMethod(),
       dataType: 'json',
-      url: getUrl(self),
+      url: reviewForm.getUrl(),
       data: {
-        send_emails: shouldSendEmails(self),
+        send_emails: reviewForm.shouldSendEmails(),
         review: {
           status: submitButton.val(),
-          comments: getComments(self),
-          proposal_id: getProposalId(self),
-          reviewer_id: getReviewerId(self)
+          comments: reviewForm.getComments(),
+          proposal_id: reviewForm.getProposalId(),
+          reviewer_id: reviewForm.getReviewerId()
         }
       }
     }).done(function(data) {
-      $(self).fadeOut();
-      $(self).parent().prepend('<div class="notice">Saved review</div>');
+      self.fadeOut();
+      self.parent().prepend('<div class="notice">Saved review</div>');
     }).fail(function(data){
-      console.log(data)
-      $(self).parent().prepend('<div class="alert">Unable to save review</div>');
+      console.error(data)
+      self.parent().prepend('<div class="alert">Unable to save review</div>');
     });
   }
-
-  function shouldSendEmails(form){
-    return $(form).find('input[name=send_emails]').is(':checked');
-  }
-
-  function getUrl(form){
-    return $(form).attr('action');
-  }
-
-  function getMethod(form){
-    return $(form).find('input[name=_method]').val() || 'post';
-  }
-
-  function getComments(form){
-    return $(form).find('textarea[name=review\\[comments\\]]').val();
-  }
-
-  function getProposalId(form){
-    return $(form).find('input[name=review\\[proposal_id\\]]').val();
-  }
-
-  function getReviewerId(form){
-   return $(form).find('input[name=review\\[reviewer_id\\]]').val();
-  }
 })
+
+function ReviewForm(form){
+  this.form = form;
+};
+ReviewForm.prototype.shouldSendEmails = function(){
+  return this.form.find('input[name=send_emails]').is(':checked');
+}
+
+ReviewForm.prototype.getUrl = function(){
+  return this.form.attr('action');
+}
+
+ReviewForm.prototype.getMethod = function(){
+  return this.form.find('input[name=_method]').val() || 'post';
+}
+
+ReviewForm.prototype.getComments = function(){
+  return this.form.find('textarea[name=review\\[comments\\]]').val();
+}
+
+ReviewForm.prototype.getProposalId = function(){
+  return this.form.find('input[name=review\\[proposal_id\\]]').val();
+}
+
+ReviewForm.prototype.getReviewerId = function(){
+  return this.form.find('input[name=review\\[reviewer_id\\]]').val();
+}
+
