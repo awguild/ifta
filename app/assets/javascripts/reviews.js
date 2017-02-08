@@ -10,7 +10,7 @@ $(function(){
   });
 
   function submit(reviewForm){
-    $.ajax({
+    return $.ajax({
       type: reviewForm.getMethod(),
       dataType: 'json',
       url: reviewForm.getUrl(),
