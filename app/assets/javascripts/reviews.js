@@ -6,15 +6,11 @@ $(function(){
   });
 
   $('.review_form').each(function(index, form){
-    $(form).submit(submitForm);
+    $(form).submit(processForm);
   });
 
-  function submitForm(e){
-    var self = $(this);
-    var reviewForm = new ReviewForm(self);
-    e.preventDefault();
-
-    $.ajax({
+  function submit(reviewForm){
+    return $.ajax({
       type: reviewForm.getMethod(),
       dataType: 'json',
       url: reviewForm.getUrl(),
@@ -27,7 +23,15 @@ $(function(){
           reviewer_id: reviewForm.getReviewerId()
         }
       }
-    }).done(function(data) {
+    })
+  };
+
+  function processForm(e){
+    var self = $(this);
+    var reviewForm = new ReviewForm(self);
+    e.preventDefault();
+
+    submit(reviewForm).done(function(data) {
       self.fadeOut();
       self.parent().prepend('<div class="notice">Saved review</div>');
     }).fail(function(data){
