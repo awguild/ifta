@@ -1,6 +1,6 @@
 $(function(){
-  $('.review_form').each(function(index, form){
-    $(form).click(processForm);
+  $('.review_form input [type=submit]').each(function(index, button){
+    $(button).click(processForm);
   });
 
   function submit(reviewForm){
@@ -21,13 +21,13 @@ $(function(){
   };
 
   function processForm(e){
-    var self = $(this);
-    var reviewForm = new ReviewForm(self, e.target.value);
+    var $form = $(this).closest('form');
+    var reviewForm = new ReviewForm($form, e.target.value);
     e.preventDefault();
 
     submit(reviewForm).done(function(data) {
-      self.fadeOut();
-      self.parent().prepend('<div class="notice">Saved review</div>');
+      $form.fadeOut();
+      $form.parent().prepend('<div class="notice">Saved review</div>');
     }).fail(function(data){
       console.error(data)
       self.parent().prepend('<div class="alert">Unable to save review</div>');
