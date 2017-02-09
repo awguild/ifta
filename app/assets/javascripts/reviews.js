@@ -1,12 +1,6 @@
 $(function(){
-  var submitButton;
-
-  $('input[type=submit]').click(function(e) {
-    submitButton = $(e.target);
-  });
-
   $('.review_form').each(function(index, form){
-    $(form).submit(processForm);
+    $(form).click(processForm);
   });
 
   function submit(reviewForm){
@@ -17,7 +11,7 @@ $(function(){
       data: {
         send_emails: reviewForm.shouldSendEmails(),
         review: {
-          status: submitButton.val(),
+          status: reviewForm.status,
           comments: reviewForm.getComments(),
           proposal_id: reviewForm.getProposalId(),
           reviewer_id: reviewForm.getReviewerId()
@@ -28,7 +22,7 @@ $(function(){
 
   function processForm(e){
     var self = $(this);
-    var reviewForm = new ReviewForm(self);
+    var reviewForm = new ReviewForm(self, e.target.value);
     e.preventDefault();
 
     submit(reviewForm).done(function(data) {
@@ -41,9 +35,11 @@ $(function(){
   }
 })
 
-function ReviewForm(form){
+function ReviewForm(form, status){
   this.form = form;
+  this.status = status;
 };
+
 ReviewForm.prototype.shouldSendEmails = function(){
   return this.form.find('input[name=send_emails]').is(':checked');
 }
@@ -67,4 +63,3 @@ ReviewForm.prototype.getProposalId = function(){
 ReviewForm.prototype.getReviewerId = function(){
   return this.form.find('input[name=review\\[reviewer_id\\]]').val();
 }
-
