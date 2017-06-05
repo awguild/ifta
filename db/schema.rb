@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160311034233) do
+ActiveRecord::Schema.define(version: 20170605162207) do
 
   create_table "conference_items", force: :cascade do |t|
     t.string   "name",                limit: 255
@@ -184,6 +184,7 @@ ActiveRecord::Schema.define(version: 20160311034233) do
     t.datetime "date_emailed"
     t.datetime "invite_letter"
     t.text     "notes",               limit: 65535
+    t.boolean  "language_thai"
   end
 
   add_index "proposals", ["conference_id"], name: "index_proposals_on_conference_id", using: :btree
