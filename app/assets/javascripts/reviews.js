@@ -1,5 +1,5 @@
 $(function(){
-  $('.review_form input [type=submit]').each(function(index, button){
+  $('.review_form input[type=submit]').each(function(index, button){
     $(button).click(processForm);
   });
 
