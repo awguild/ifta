@@ -6,13 +6,6 @@ class Review < ActiveRecord::Base
   #life cycle hooks
   after_save :set_proposal #Since IFTA only uses one review we can immediately set the status of the proposal
 
-  private
-
-  def set_proposal
-    proposal.status = status
-    proposal.save
-  end
-
   def accepted?
     status == 'accept'
   end
@@ -23,6 +16,13 @@ class Review < ActiveRecord::Base
 
   def drop_out?
     status == 'drop out'
+  end
+
+  private
+
+  def set_proposal
+    proposal.status = status
+    proposal.save
   end
 
 end

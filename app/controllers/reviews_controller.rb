@@ -41,9 +41,9 @@ class ReviewsController < ApplicationController
     @review.proposal.presenters.each do |presenter|
       begin
         #email subject/message changes depending on the status of the review (accept, decline, wait-list)
-        ReviewMailer.review_notification(presenter, @review).deliver
-      rescue
-        warning = "Unable to send email to #{presenter.email} for #{presenter.first_name + " " + presenter.last_name}"
+        ReviewMailer.review_notification(presenter, @review).deliver_now
+      rescue StandardError => e
+        warning = "Unable to send email to #{presenter.email} for #{presenter.first_name + " " + presenter.last_name} #{e.message}"
         flash[:alert] = flash[:alert].blank? ? warning : flash[:alert] + ". #{warning}"
       end
     end
