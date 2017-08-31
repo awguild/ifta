@@ -1,18 +1,28 @@
 Hi <%= @user.first_name %>,<br><br>
 
-<%- if @review.status == 'accept' %>
-	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which has been accepted for the upcoming IFTA Congress Conference.</p>
-	<p>In order to secure your spot in the conference you must register within one month of today: <%= Time.now.strftime("%B %e %Y") %> You can register at <%= root_url %></p>
+
+<%- if @review.accepted? %>
+	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which has been <strong>accepted</strong> for the upcoming IFTA Congress Conference.</p>
+
+	<p>In order to secure your spot in the conference <strong>you must register</strong> within one month of today: <strong><%= Time.now.strftime("%B %e %Y") %></strong> You can register at <%= root_url %></p>
+
 	<p><strong>Please be advised that your proposal has been accepted as a <%= @review.proposal.format %>. This may be different from the length you originally requested.</strong></p>
-<%- elsif @review.status == 'decline' %>
+
+<%- elsif @review.declined? %>
 	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which, we regret to inform you, has not been accepted for the upcoming IFTA Congress Conference.</p>
+
 	<p>There are many proposals of very high quality, but unfortunately space and time constraints do not allow us to accept them all. We would still like to thank you for your submission and encourage you to try again next year. We hope to see you at the conference.</p>
-<%- elsif @review.status == 'drop out'%>
-	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which has been withdrawn from the upcoming IFTA Congress Conference.</p>
+
+<%- elsif @review.drop_out? %>
+	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which has been withdrawn from the upcoming IFTA Congress Conference <strong>because you have not registered within the 1 month time frame.</strong></p>
+
 	<p>Thank you for your submission.</p>
+
 <%- else %>
-	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which has been wait listed for the upcoming IFTA Congress Conference.</p>
-	<p>We will notify you as more information becomes available regarding our space and time constraints, hopefully with good news, but in the mean time we can only thank you for your promising submission.</p>
+	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which has been <strong>wait listed</strong> for the upcoming IFTA Congress Conference.</p>
+
+	<p><strong>As soon as you register, we will notify you regarding our space for your presentation.</strong></p>
+
 <%- end %>
 
 <p>If you think you received this message in error please reply for clarification.</p>

@@ -13,4 +13,16 @@ class Review < ActiveRecord::Base
     proposal.save
   end
 
+  def accepted?
+    status == 'accept'
+  end
+
+  def declined?
+    status == 'decline'
+  end
+
+  def drop_out?
+    status == 'drop out'
+  end
+
 end
