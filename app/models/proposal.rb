@@ -24,12 +24,12 @@ class Proposal < ActiveRecord::Base
   #validations
   validates :short_description, :length => {
     :maximum => 50,
-    :tokenizer => lambda { |str| str.scan(/\w+/) },
+    :tokenizer => lambda { |str| str.split },
     :too_long => "must have at most %{count} words"
   }
   validates :long_description, :length => {
     :maximum => 350,
-    :tokenizer => lambda { |str| str.scan(/\w+/) },
+    :tokenizer => lambda { |str| str.split },
     :too_long => "must have at most %{count} words"
   }
   validates :format, :category, :title, :relative_number, :itinerary, :conference, :presence => true
