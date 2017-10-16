@@ -11,7 +11,7 @@ class IftaMember < ActiveRecord::Base
 
   def self.replace_all_members_with(raw_emails)
     delete_all
-    add_new_members(raw_emails)
+    import(emails_to_members_array(raw_emails))
   end
 
 
