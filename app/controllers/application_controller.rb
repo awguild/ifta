@@ -27,16 +27,11 @@ class ApplicationController < ActionController::Base
   # return the currently active conference or the confernece selected by the session variable selected_conference_id
   def selected_conference
     return @selected_conference unless @selected_conference.blank?
-    if session[:selected_conference_id].blank?
-      @selected_conference = Conference.active
-    else
-      begin
-        @selected_conference = Conference.find(session[:selected_conference_id])
-      rescue ActiveRecord::RecordNotFound
-        session[:selected_conference_id] = nil
-        @selected_conference = Conference.active
-      end
+
+    if session[:selected_conference_id] && current_user.super_user?
+      @selected_conference = Conference.find_by(id: session[:selected_conference_id])
     end
+    @selected_conference ||= Conference.active
   end
 
 

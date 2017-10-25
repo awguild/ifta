@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     role == 'attendee'
   end
 
+  def super_user?
+    is_reviewer? || is_admin?
+  end
+
   def itinerary_by_conference_id(conference_id)
     itineraries.where(:conference_id => conference_id).first
   end
