@@ -65,8 +65,40 @@ class ProposalsController < ApplicationController
 
   private
     def proposal_params
-      params.require(:proposal).permit(:format, :category, :title, :short_description, :long_description, :student, :agree, :no_equipment, :sound, :projector, :keywords, :language_english, :language_spanish, :language_portuguese, :language_mandarin, :language_malay,
-        presenters_attributes: [:id, :_destroy, :first_name, :last_name, :home_telephone, :work_telephone, :fax_number, :country_id, :email, :affiliation_name, :affiliation_position, :registered, :other_presentations, :other_emails]
+      params.require(:proposal).permit(:format,
+       :category,
+       :title,
+       :short_description,
+       :long_description,
+       :student,
+       :agree,
+       :no_equipment,
+       :sound,
+       :projector,
+       :keywords,
+       :language_english,
+       :language_spanish,
+       :language_portuguese,
+       :language_mandarin,
+       :language_malay,
+       :learning_objective,
+        presenters_attributes: [:id,
+         :_destroy,
+         :first_name,
+         :last_name,
+         :home_telephone,
+         :work_telephone,
+         :fax_number,
+         :country_id,
+         :email,
+         :affiliation_name,
+         :affiliation_position,
+         :graduating_institution,
+         :highest_degree,
+         :qualifications,
+         :registered,
+         :other_presentations,
+         :other_emails]
       )
     end
 end

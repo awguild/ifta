@@ -12,14 +12,22 @@
 
 	<%= f.input :email %>
 
-	<%= f.input :affiliation_name, label: "Affiliation name (company, etc) "%>
+	<%= f.input :affiliation_name, label: "Affiliation name (company, etc)" %>
 
-	<%= f.input :affiliation_position, label: "Affiliation position "%>
+	<%= f.input :affiliation_position, label: "Affiliation position " %>
+
+	<%= f.input :highest_degree, label: "Terminal or Highest Degree" %>
+	<%= f.input :graduating_institution, label: "Graduating Institution" %>
 
 	<br>
-	<%= f.label :registered, "Is this person currently registered for the conference? "%>
+	<%= f.label "What qualifies you to present on this topic" %>
+	<br>
+	<%= f.text_area :qualifications, rows: 3, cols: 80 %>
+
+	<br>
+	<%= f.label :registered, "Is this person currently registered for the conference? " %>
 	<%= f.check_box :registered %><em>(Yes)</em><br>
-	<%= f.label :other_presentations, "Is this person currently listed as a presenter on any other proposals? "%>
+	<%= f.label :other_presentations, "Is this person currently listed as a presenter on any other proposals? " %>
 	<%= f.check_box :other_presentations %><em>(Yes)</em><br>
 	<br>
 	<p>If you answered yes to the question above and this person is using alternative email addresses please list any additional email addresses below (separated by commas)</p>

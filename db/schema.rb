@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605162207) do
+ActiveRecord::Schema.define(version: 20180403043025) do
 
   create_table "conference_items", force: :cascade do |t|
     t.string   "name",                limit: 255
@@ -120,22 +120,25 @@ ActiveRecord::Schema.define(version: 20170605162207) do
   end
 
   create_table "presenters", force: :cascade do |t|
-    t.string   "first_name",           limit: 255
-    t.string   "last_name",            limit: 255
-    t.string   "home_telephone",       limit: 255
-    t.string   "work_telephone",       limit: 255
-    t.string   "fax_number",           limit: 255
-    t.string   "email",                limit: 255
-    t.string   "affiliation_name",     limit: 255
-    t.string   "affiliation_position", limit: 255
-    t.string   "affiliation_location", limit: 255
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
+    t.string   "home_telephone",         limit: 255
+    t.string   "work_telephone",         limit: 255
+    t.string   "fax_number",             limit: 255
+    t.string   "email",                  limit: 255
+    t.string   "affiliation_name",       limit: 255
+    t.string   "affiliation_position",   limit: 255
+    t.string   "affiliation_location",   limit: 255
     t.boolean  "registered"
-    t.integer  "proposal_id",          limit: 4
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.integer  "proposal_id",            limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.boolean  "other_presentations"
-    t.string   "other_emails",         limit: 255
-    t.integer  "country_id",           limit: 4
+    t.string   "other_emails",           limit: 255
+    t.integer  "country_id",             limit: 4
+    t.string   "highest_degree",         limit: 255
+    t.string   "graduating_institution", limit: 255
+    t.text     "qualifications",         limit: 65535
   end
 
   add_index "presenters", ["country_id"], name: "index_presenters_on_country_id", using: :btree
@@ -185,6 +188,7 @@ ActiveRecord::Schema.define(version: 20170605162207) do
     t.datetime "invite_letter"
     t.text     "notes",               limit: 65535
     t.boolean  "language_thai"
+    t.text     "learning_objective",  limit: 65535
   end
 
   add_index "proposals", ["conference_id"], name: "index_proposals_on_conference_id", using: :btree
