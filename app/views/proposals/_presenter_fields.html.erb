@@ -12,9 +12,9 @@
 
 	<%= f.input :email %>
 
-	<%= f.input :affiliation_name, label: "Affiliation name (company, etc)" %>
+	<%= f.input :affiliation_name, label: "Affiliation Name", placeholder: "e.g. university, clinic, etc" %>
 
-	<%= f.input :affiliation_position, label: "Affiliation position " %>
+	<%= f.input :affiliation_position, label: "Affiliation Position " %>
 
 	<%= f.input :highest_degree, label: "Terminal or Highest Degree" %>
 	<%= f.input :graduating_institution, label: "Graduating Institution" %>
@@ -22,7 +22,7 @@
 	<br>
 	<%= f.label "What qualifies you to present on this topic" %>
 	<br>
-	<%= f.text_area :qualifications, rows: 3, cols: 80 %>
+	<%= f.text_area :qualifications, rows: 3, cols: 80, placeholder: "e.g., degrees, trainings, certifications with dates" %>
 
 	<br>
 	<%= f.label :registered, "Is this person currently registered for the conference? " %>

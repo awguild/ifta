@@ -76,7 +76,9 @@ The Program Committee will make the decision as which language you will present 
 <hr>
 
 <h3>Learning Objective</h3>
-  <%= f.text_area :learning_objective, cols: 60, rows: 3, placeholder: 'Complete this sentence:  "After this workshop, the learner will be able to… (do something, or state something, or list something or differentiate something)  (Do not use the word Understand)' %>
+  Complete this sentence:  "After this workshop, the learner will be able to… (do something, or state something, or list something or differentiate something) <em>(Do not use the word Understand)</em>
+  <br>
+  <%= f.text_area :learning_objective, cols: 60, rows: 3, required: true  %>
 <hr>
 
 <br>
