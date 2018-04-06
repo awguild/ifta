@@ -33,37 +33,29 @@ IFTA also runs a membership system which is tangentially related to their confer
 ### App Dependencies
 *You can install these dependencies natively on your machine or install them on a VM and run the app on the VM instead of your native host machine*
 
-VM:  Install [Virtualbox](https://www.virtualbox.org/wiki/Downloads) & [Vagrant](http://www.vagrantup.com/) to run and manage a VM on your computer. Then Run
-
-    vagrant plugin install vagrant-vbguest
-    vagrant plugin install vagrant-librarian-chef-nochef
-    vagrant up # (NOTE: run this command from the project's root folder)
-
-Natively: If you choose to install Ruby and MySQL natively you'll want to use a Ruby version manager so that you can install multipe versions of ruby on your machine
-
-1. Download a Ruby manger (e.g. [rbenv](https://github.com/sstephenson/rbenv) on Mac)
-1. Install Ruby 2.1.2 as per your Ruby manger's guide
-1. Install MySQL
-
+VM:  Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) (If your on Mac they come bundled together in docker for mac. But you might also want [Docker Sync](https://github.com/EugenMayer/docker-sync) Then Run
+```bash
+  docker-compose up
+```
 
 ### Starting the app
 1. Clone this project to your local machine
-1. Create a ifta_conference_development database in MySQL (mysqld listening on 3307 if using vagrant)
+1. Create a ifta_conference_development database in MySQL
 1. Request the latest sql dump from the Augie Web guild and import it into the development database
 1. Request a copy of the developer .env file and put it in the root of this project
-1. Run `gem install bundler`
-1. Run `rbenv rehash` to make sure all binaries are available
-1. Run `bundle` from the root of the project (inside the VM if using vagrant)
-1. Run the following command to start the app
-```
-foreman start -f Procfile.dev
-```
+1. Run `docker-compose up`
 
-# JS tests
+### Rspec Tests
+1. Connect to the docker container running the app `docker container exec -it ifta_ifta_1 bash`
+1. Setup the test database `RAILS_ENV=test DATABASE_URL=mysql2://mariadb/ifta_conference_test rake db:create`
+1. Run the specs `bin/tests`
+
+### JS tests
 The angular app that handles scheduling has its own jasmine test suite. To run the tests first install the dependencies
-
+```
     npm install -g grunt-cli
     npm install
+```
 
 Then you can run the tests with `` grunt test ``
 

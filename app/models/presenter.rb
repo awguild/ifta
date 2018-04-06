@@ -4,7 +4,7 @@ class Presenter < ActiveRecord::Base
   belongs_to :country
 
   #validations
-  validates :first_name, :last_name, :email, :country_id, :presence => true
+  validates :first_name, :last_name, :email, :country_id, :highest_degree, :graduating_institution, :qualifications, :presence => true
 
   def reverse_full_name
     "#{last_name}, #{first_name}"

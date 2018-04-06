@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+      - ./database_dump:/docker-entrypoint-initdb.d
+
+  ifta:
+    tty: true
+    image: 'bitnami/rails:4.2.6-r4'
+    labels:
+      kompose.service.type: nodeport
+    environment:
+      - DATABASE_URL=mysql2://mariadb/ifta_development
+      - DEVISE_SECRET=12845023948304
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD
+      - SECRET_KEY_BASE=123424423
+      - SECRET_TOKEN=30432493285
+    depends_on:
+      - mariadb
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - ifta-gems:/usr/local/bundle
+volumes:
+  db:
+    driver: local
+  ifta-gems:
+    driver: local

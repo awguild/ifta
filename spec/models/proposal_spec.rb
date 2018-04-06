@@ -53,18 +53,14 @@ describe Proposal do
   end
 
   context :add_self_as_presenter do
-    it 'should add a presenter' do
-      proposal = build(:proposal)
-      proposal.add_self_as_presenter
-
-      expect{
-        proposal.save
-      }.to change { proposal.presenters.count }.by(1)
-    end
-
     it 'persenter should be the user' do
       proposal = build(:proposal)
-      proposal.add_self_as_presenter
+      presenter = proposal.add_self_as_presenter
+      presenter.assign_attributes(
+        highest_degree: "Phd",
+        graduating_institution: "Augustana",
+        qualifications: "Bootcamp"
+      )
 
       expect{
         proposal.save

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+bundle exec byebug -R localhost:1048

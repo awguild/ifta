@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+RAILS_ENV=test DATABASE_URL=mysql2://mariadb/ifta_conference_test bundle exec rspec "$@"

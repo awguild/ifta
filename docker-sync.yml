@@ -1,0 +1,10 @@
+version: "2"
+base: &base
+  host_disk_mount_mode: "cached"
+  sync_excludes: [".git", "tmp", ".DS_Store", "node_modules", "*.log", ".rspec_status_persistence", "{.*,*}.sw[pon]"]
+  sync_excludes_type: "Name"
+  monit_enable: true
+syncs:
+  ifta-sync:
+    <<: *base
+    src: "./"
