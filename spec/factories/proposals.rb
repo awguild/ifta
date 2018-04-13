@@ -5,6 +5,7 @@ FactoryGirl.define do
     title 'How to avoid raising a bully'
     short_description 'Tips for encouraging positive behavior'
     long_description 'These ideas will help your kid play nice'
+    learning_objective 'conflict resolution'
     student false
     agree true
     no_equipment true
