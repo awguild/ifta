@@ -29,6 +29,7 @@ gem 'will_paginate'
 
 group :production do
   gem 'therubyracer', :platform => :ruby
+  gem 'rails_12factor'
 end
 
 group :development, :test do

@@ -131,7 +131,7 @@ GEM
     multi_json (1.11.2)
     mysql2 (0.3.21)
     newrelic_rpm (3.13.0.299)
-    nokogiri (1.8.2)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     oj (2.12.13)
     orm_adapter (0.5.0)
@@ -174,6 +174,11 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (4.2.7)
       actionpack (= 4.2.7)
       activesupport (= 4.2.7)
@@ -285,6 +290,7 @@ DEPENDENCIES
   quiet_assets
   rabl
   rails (= 4.2.7)
+  rails_12factor
   recaptcha
   rspec-core
   rspec-rails
