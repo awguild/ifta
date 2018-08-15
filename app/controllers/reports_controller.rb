@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
 	respond_to :html, :json
-	respond_to :csv, only: [:registration_breakdown, :presentations]
+	respond_to :csv, only: [:registration_breakdown, :presentations, :ceu]
 
   before_filter :find_conference
 
@@ -38,6 +38,13 @@ class ReportsController < ApplicationController
     @presenter_proposals = PresenterProposalsQuery.new(@conference)
 
     respond_with(@presenter_proposals)
+  end
+
+  def ceu
+    authorize! :report, @conference
+    respond_to do |format|
+      format.csv { render text: CeuQuery.new(@conference).to_csv }
+    end
   end
 
   private

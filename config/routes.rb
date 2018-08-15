@@ -55,6 +55,7 @@ Iftaconferenceapp::Application.routes.draw do
   get 'conferences/:id/student_presentations' => 'reports#student_presentations', :as => :student_presentations_report
   get 'conferences/:id/presentations' => 'reports#presentations', :as => :presentations_report
   get 'conferences/:id/presenter_proposals' => 'reports#presenter_proposals', :as => :presenter_proposals_report
+  get 'conferences/:id/ceu' => 'reports#ceu', :as => :ceu_report
   namespace :api, :defaults => { :format => 'json' } do
     namespace :v1 do
       resources :conferences do
