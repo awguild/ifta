@@ -1,5 +1,6 @@
 class CeuQuery
   HEADERS = [
+    'Proposal #',
     'First Name',
     'Last Name',
     'Email',
@@ -34,6 +35,7 @@ class CeuQuery
 
   def row(presenter)
     [
+      presenter.proposal.relative_number,
       presenter.first_name,
       presenter.last_name,
       presenter.email,
@@ -53,6 +55,6 @@ class CeuQuery
   end
 
   def presenters
-    @presenters ||= @conference.presenters.group(:email).includes(:proposal, :country)
+    @presenters ||= @conference.presenters.includes(:proposal, :country)
   end
 end
