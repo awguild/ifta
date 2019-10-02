@@ -55,6 +55,6 @@ class CeuQuery
   end
 
   def presenters
-    @presenters ||= @conference.presenters.includes(:proposal, :country)
+    @presenters ||= @conference.presenters.includes(:proposal, :country).merge(Proposal.accepted)
   end
 end
