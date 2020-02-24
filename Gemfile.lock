@@ -131,7 +131,7 @@ GEM
     multi_json (1.11.2)
     mysql2 (0.3.21)
     newrelic_rpm (3.13.0.299)
-    nokogiri (1.10.4)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     oj (2.12.13)
     orm_adapter (0.5.0)
