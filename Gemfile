@@ -41,8 +41,6 @@ group :development, :test do
   gem 'meta_request'
   gem 'mocha'
   gem 'poltergeist'
-  gem 'shoulda'
-  gem 'shoulda-matchers'
   gem 'spork'
   gem 'rspec-core'
   gem 'rspec-rails'

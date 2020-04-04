@@ -1,15 +1,6 @@
 require 'spec_helper'
 
 describe Conference do
-  context 'validations' do
-    subject { build(:conference) }
-
-    it { is_expected.to be_valid }
-    it { is_expected.to validate_numericality_of(:tax_rate).is_less_than_or_equal_to(1) }
-    it { is_expected.to validate_numericality_of(:tax_rate).is_greater_than_or_equal_to(0) }
-    it { is_expected.to validate_uniqueness_of(:conference_year) }
-  end
-
   context 'registration_breakdown' do
     before {
       subject.stubs(:conference_items).returns([

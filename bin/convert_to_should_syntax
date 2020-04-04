@@ -25,5 +25,3 @@ end
 
 require "rubygems"
 require "bundler/setup"
-
-load Gem.bin_path("shoulda", "convert_to_should_syntax")

@@ -235,9 +235,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    shoulda (2.11.3)
-    shoulda-matchers (4.3.0)
-      activesupport (>= 4.2.0)
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -314,8 +311,6 @@ DEPENDENCIES
   rspec-core
   rspec-rails
   sass-rails
-  shoulda
-  shoulda-matchers
   simple_form
   spork
   test-unit
