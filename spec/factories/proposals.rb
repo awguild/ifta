@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :proposal do
     format 'poster'
     category 'Bullying'

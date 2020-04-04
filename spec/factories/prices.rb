@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :price do
     amount 1000
     member false

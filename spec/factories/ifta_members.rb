@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :ifta_member do
     email 'jdoe@example.com'
 

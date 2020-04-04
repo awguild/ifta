@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :discount do
     description 'Discount for Augie students'
   end

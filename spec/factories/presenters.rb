@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :presenter do
     first_name 'Same'
     last_name 'Doe'

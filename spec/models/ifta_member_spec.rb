@@ -10,9 +10,9 @@ describe IftaMember do
   # Note: memoized means after you call it once it will just return a reference to its return value in all subsequent calls, aka it won't execute the method body again
   # the parameter inside of let (:ifta_member) will be the name of the helper method, you can use that method (ifta_member) anywhere in this describe block
   # { build(:ifta_member) } is a proc that essentially opperates as the body of the function (let adds the memoization). In this case it will return an instance of the IftaMember class (as defined in our :ifta_member factory)
-  # the factory_girl_rails gem makes the FactoryGirl class avaialbe in the rspec tests
+  # the factory_girl_rails gem makes the FactoryBot class avaialbe in the rspec tests
   # the build method will instantiate a new IftaMember object but not save it to the test database
-  # the parameter to build (:ifta_member) is how FactoryGirl looks up what object to build
+  # the parameter to build (:ifta_member) is how FactoryBot looks up what object to build
   # inside of the spec/factories/ifta_members file we defined a factory with the symbol :ifta_member
   let!(:ifta_member) { build(:ifta_member) }
 

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :conference_item do
     visibility true
     name { Faker::Commerce.product_name }
