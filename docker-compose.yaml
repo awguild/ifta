@@ -12,7 +12,7 @@ services:
 
   web:
     tty: true
-    image: 'bitnami/rails:4.2.6-r4'
+    image: 'bitnami/rails:6-debian-10'
     labels:
       kompose.service.type: nodeport
     environment:
