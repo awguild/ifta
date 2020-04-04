@@ -33,7 +33,7 @@ class ConferencesController < ApplicationController
 
   def update
     authorize! @conference, :update
-    if @conference.update_attributes(conference_params)
+    if @conference.update(conference_params)
       redirect_to conference_path(@conference)
     else
       if params[:pricing]

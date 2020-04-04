@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id] || current_user)
     authorize! :update, @user
 
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       flash[:notice] = 'Account successfully updated.'
       redirect_to after_sign_in_path_for(current_user)
     else

@@ -29,7 +29,7 @@ module Api
 
       def update
         authorize! :update, @room
-        if @room.update_attributes(room_params)
+        if @room.update(room_params)
           head :no_content
         else
           render json: @room.errors, status: :unprocessable_entity

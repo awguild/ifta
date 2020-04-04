@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
     authorize! :create, @review
 
     respond_to do |format|
-      if @review.update_attributes(review_params)
+      if @review.update(review_params)
         send_emails if send_emails?
         format.html { redirect_to after_sign_in_path_for(current_user), :notice => 'Proposal successfully updated.' }
         format.json { head :no_content }

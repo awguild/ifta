@@ -7,7 +7,7 @@ module Api
       def update
         authorize! :edit, @conference
         @slot = Slot.find(params[:id])
-        if @slot.update_attributes(slot_params)
+        if @slot.update(slot_params)
           render json: @slot, status: :ok
         else
           render json: @slot.errors, status: :unprocessable_entity

@@ -30,7 +30,7 @@ class DiscountsController < ApplicationController
   def update
     @discount = Discount.find(params[:id])
     authorize! :update, @discount
-    if @discount.update_attributes discount_params
+    if @discount.update discount_params
       redirect_to conference_discounts_path(@conference)
     else
       render "edit"

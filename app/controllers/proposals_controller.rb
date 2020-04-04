@@ -43,7 +43,7 @@ class ProposalsController < ApplicationController
     @itinerary = Itinerary.find(params[:itinerary_id])
     @proposal = Proposal.find(params[:id])
     authorize! :update, @proposal
-    if @proposal.update_attributes(proposal_params)
+    if @proposal.update(proposal_params)
       redirect_to after_sign_in_path_for(current_user), :notice => 'Proposal successfully updated.'
     else
       render :action => 'edit'

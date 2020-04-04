@@ -40,7 +40,7 @@ class PaymentsController < ApplicationController
   def update
     @payment = Payment.find(params[:id])
     authorize! :update, @payment
-    if @payment.update_attributes(payment_params)
+    if @payment.update(payment_params)
       render "update", :locals => {:notice_message => 'Successfully Updated Payment'}
     else
       render :partial => 'shared/error_messages', :locals => {:object => @line_item}

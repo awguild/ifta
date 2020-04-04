@@ -34,7 +34,7 @@ class Api::V1::TimeBlocksController < ApplicationController
   def update
     authorize! :edit, @time_block
 
-    if @time_block.update_attributes(time_block_params)
+    if @time_block.update(time_block_params)
       head :no_content
     else
       render json: @time_block.errors, status: :unprocessable_entity

@@ -20,7 +20,7 @@ class ItinerariesController < ApplicationController
     @itinerary = Itinerary.find(params[:id])
     authorize! :update, @itinerary
 
-    if @itinerary.update_attributes(itinerary_params)
+    if @itinerary.update(itinerary_params)
       redirect_to edit_itinerary_path(@itinerary)
     else
       render 'edit'

@@ -122,6 +122,6 @@ describe ConferenceItem do
     conference_item.prices.find_by(
       country_category: user.country_category,
       member: user.member
-    ).update_attributes(amount: price)
+    ).update(amount: price)
   end
 end
