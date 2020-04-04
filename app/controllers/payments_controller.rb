@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   #let paypal access the create action as an anynonmous user
   protect_from_forgery :except => :create
-  skip_before_filter :authenticate_user!, :only => :create
+  skip_before_action :authenticate_user!, :only => :create
 
   #This action only handles the Payments created through the PayPal IPN Process
   def create
@@ -15,7 +15,7 @@ class PaymentsController < ApplicationController
     else
       #TODO maybe send out some type of alert to an admin
     end
-    render :nothing => true
+    head :ok
   end
 
   def new

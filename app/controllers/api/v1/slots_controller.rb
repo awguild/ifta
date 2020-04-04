@@ -1,7 +1,7 @@
 module Api
   module V1
     class SlotsController < ApplicationController
-      skip_before_filter :verify_authenticity_token
+      skip_before_action :verify_authenticity_token
       respond_to :json
 
       def update

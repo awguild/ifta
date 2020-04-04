@@ -1,9 +1,9 @@
 module Api
   module V1
     class RoomsController < ApplicationController
-      before_filter :find_room, only: [:update, :destroy]
-      before_filter :find_conference, only: [:index, :create]
-      skip_before_filter :verify_authenticity_token
+      before_action :find_room, only: [:update, :destroy]
+      before_action :find_conference, only: [:index, :create]
+      skip_before_action :verify_authenticity_token
       respond_to :json
 
       def index

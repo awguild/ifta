@@ -1,5 +1,5 @@
 class DiscountsController < ApplicationController
-  before_filter :load_conference
+  before_action :load_conference
 
   def index
     @discounts = @conference.discounts

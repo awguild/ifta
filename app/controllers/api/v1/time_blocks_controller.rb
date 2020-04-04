@@ -1,7 +1,7 @@
 class Api::V1::TimeBlocksController < ApplicationController
-  before_filter :find_conference, only: [:create, :index]
-  before_filter :find_time_block, only: [:update, :destroy]
-  skip_before_filter :verify_authenticity_token
+  before_action :find_conference, only: [:create, :index]
+  before_action :find_time_block, only: [:update, :destroy]
+  skip_before_action :verify_authenticity_token
   respond_to :json
 
   def index

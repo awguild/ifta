@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   #overriding a devise helper method
   def after_sign_in_path_for(user)

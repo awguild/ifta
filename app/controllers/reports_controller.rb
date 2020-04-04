@@ -2,7 +2,7 @@ class ReportsController < ApplicationController
 	respond_to :html, :json
 	respond_to :csv, only: [:registration_breakdown, :presentations, :ceu]
 
-  before_filter :find_conference
+  before_action :find_conference
 
 	def accepted_and_unregistered
 

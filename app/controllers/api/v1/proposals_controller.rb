@@ -1,8 +1,8 @@
 module Api
   module V1
     class ProposalsController < ApplicationController
-      before_filter :load_conference
-      skip_before_filter :verify_authenticity_token
+      before_action :load_conference
+      skip_before_action :verify_authenticity_token
       respond_to :json
 
       def search

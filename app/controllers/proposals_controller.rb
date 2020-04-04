@@ -1,5 +1,5 @@
 class ProposalsController < ApplicationController
-  before_filter :check_contact_info
+  before_action :check_contact_info
 
   #There can be different proposal forms to choose from but they are all different representations of one proposal model
   #the links on the splash page are just pass information to the new action ie. student

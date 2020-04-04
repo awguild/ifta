@@ -1,5 +1,5 @@
 class ItinerariesController < ApplicationController
-  before_filter :check_contact_info
+  before_action :check_contact_info
 
   #Paypal sends the user back here
   def index

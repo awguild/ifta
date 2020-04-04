@@ -1,6 +1,6 @@
 class ConferencesController < ApplicationController
 
-  before_filter :find_conference, only: [:show, :update, :schedule]
+  before_action :find_conference, only: [:show, :update, :schedule]
   def show
     authorize! @conference, :update
     @conference_item_breakdown_report = @conference.registration_breakdown
