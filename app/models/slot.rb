@@ -4,7 +4,7 @@ class Slot < ActiveRecord::Base
   belongs_to :room
 
   #validations
-  validates :proposal, :existence => true, :unless => 'proposal_id.blank?'
-  validates :proposal_id, :uniqueness => true, :unless => 'proposal_id.blank?'
+  validates :proposal, :existence => true, :if => :proposal_id?
+  validates :proposal_id, :uniqueness => true, :if => :proposal_id?
 
 end

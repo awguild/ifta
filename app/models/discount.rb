@@ -12,7 +12,7 @@ class Discount < ActiveRecord::Base
   validates :discount_key, length: { is: 6 }
 
   #life cycle hooks
-  after_initialize :generate_key, :if => 'discount_key.blank?'
+  after_initialize :generate_key
 
   #build a new price item for each conference item that has been declared for this conference
   def build_prices_for_conference_items
@@ -27,6 +27,7 @@ class Discount < ActiveRecord::Base
   private
 
   def generate_key
+    return unless discount_key.blank?
     self.discount_key = SecureRandom.hex[0,6]
   end
 end

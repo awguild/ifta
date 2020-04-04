@@ -8,7 +8,7 @@ class ConferenceItem < ActiveRecord::Base
   has_many :itineraries, :through => :line_items
   has_many :regular_prices, -> { where :discount_key => nil }, :class_name => 'Price' #exclude all of the prices created for this item that have a discount key set
 
-  after_initialize :build_price_objects, :if => "prices.blank?" #When a new conference item is created the event planners will probably want to price these six categories
+  after_initialize :build_price_objects #When a new conference item is created the event planners will probably want to price these six categories
 
   accepts_nested_attributes_for :prices, allow_destroy: true
 
@@ -52,6 +52,8 @@ class ConferenceItem < ActiveRecord::Base
   end
 
   def build_price_objects
+    return unless prices.blank?
+
     prices.build(:amount => 0, :country_category => 1, :member => true)
     prices.build(:amount => 0, :country_category => 2, :member => true)
     prices.build(:amount => 0, :country_category => 3, :member => true)
