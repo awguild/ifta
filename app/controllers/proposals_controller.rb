@@ -58,11 +58,6 @@ class ProposalsController < ApplicationController
     @review = Review.new
   end
 
-  def unslotted
-    authorize! :index, Proposal
-    @proposals = Proposal.unslotted.includes(:presenters)
-  end
-
   private
     def proposal_params
       params.require(:proposal).permit(:format,
