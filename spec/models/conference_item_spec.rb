@@ -13,22 +13,6 @@ describe ConferenceItem do
   end
 
   describe '#item_price' do
-    context 'no discount' do
-      it 'should have a price of 200 for category 1 and 100 for category 2 member' do
-        user1 = create(:user)
-        member = create(:ifta_member)
-        user2 = create(:user, :category2, ifta_member_email: member.email)
-
-        conference_item = create(:conference_item)
-
-        set_price(conference_item, user1, 200)
-        set_price(conference_item, user2, 100)
-
-        expect(conference_item.item_price(user1, nil).to_i).to eql(200)
-        expect(conference_item.item_price(user2, nil).to_i).to eql(100)
-      end
-    end
-
     context 'discounted' do
       it 'should have a price of 50 with the discount key' do
         user = create(:user)
