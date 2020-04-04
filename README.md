@@ -72,4 +72,4 @@ If you want to test the IPN process you'll need to have the app on a publicly av
 
 **Gmail** The system sends emails for forgotten passwords, payment notifications, and proposal reviews through Gmail. In all environment's except production those emails are intercepted and redirected to the value of the GMAIL_USERNAME environment variable.
 
-**Recaptcha** The signup form uses a captcha from Recaptcha. Getting this to work with devise required monkey patching the registrations controller. You can see how that works inside of the Users::RegistrationsController class
+**Recaptcha** The signup form uses a captcha from Recaptcha. Getting this to work with devise required monkey patching the registrations controller. You can see how that works inside of the Users::RegistrationsController class.
