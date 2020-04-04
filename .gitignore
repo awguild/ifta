@@ -20,3 +20,4 @@ node_modules/*
 cookbooks/*
 /database_dump
 .docker-sync/*
+.byebug_history
