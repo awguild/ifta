@@ -19,7 +19,7 @@ class Conference < ActiveRecord::Base
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 1
   }
-  validates :conference_year, :uniqueness => true
+  validates :conference_year, :uniqueness => { :case_sensitive => false}
 
   #life cycle hooks
   after_save :enforce_one_active_conference

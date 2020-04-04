@@ -5,6 +5,6 @@ class Slot < ActiveRecord::Base
 
   #validations
   validates :proposal, :existence => true, :if => :proposal_id?
-  validates :proposal_id, :uniqueness => true, :if => :proposal_id?
+  validates :proposal_id, :uniqueness => { :case_sensitive => false }, :if => :proposal_id?
 
 end

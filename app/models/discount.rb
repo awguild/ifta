@@ -8,7 +8,7 @@ class Discount < ActiveRecord::Base
   accepts_nested_attributes_for :prices, allow_destroy: true
 
   #validations
-  validates :discount_key, :uniqueness => true
+  validates :discount_key, :uniqueness => { :case_sensitive => false }
   validates :discount_key, length: { is: 6 }
 
   #life cycle hooks

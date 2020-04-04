@@ -3,7 +3,7 @@ class IftaMember < ActiveRecord::Base
   has_one :user, primary_key: 'email', foreign_key: 'ifta_member_email'
 
   #validations
-  validates :email, :uniqueness => true
+  validates :email, :uniqueness => { :case_sensitive => false }
 
   def self.add_new_members(raw_emails)
     create(emails_to_members_array(raw_emails))
