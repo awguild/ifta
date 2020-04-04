@@ -2,32 +2,6 @@ require 'spec_helper'
 
 describe ConferenceItem do
   let(:conference) { create(:conference) }
-  describe '#current_active' do
-    it 'should find active items' do
-      create(:conference_with_items, active_items: 2)
-      expect(ConferenceItem.current_active.count).to eql(2)
-    end
-
-    it 'should not find invisible items' do
-      create(:conference_with_items, active_items: 3, inactive_items: 1)
-      expect(ConferenceItem.current_active.count).to eql(3)
-    end
-
-    it 'should not find active items from inactive conferences' do
-      create(:conference_with_items, :inactive, active_items: 4)
-      create(:conference_with_items, active_items: 2)
-      expect(ConferenceItem.current_active.count).to eql(2)
-    end
-  end
-
-  describe '#not_registered' do
-    it 'should exclude conference items associated with registrations' do
-      conference_item1 = create(:conference_item_with_registered_users, conference: conference)
-      conference_item2 = create(:conference_item, conference: conference)
-
-      expect(ConferenceItem.not_registered(conference_item1.line_items)).to match_array([conference_item2])
-    end
-  end
 
   describe '#not_discounted' do
     it 'should exclude conference items associated with discounts' do
@@ -50,8 +24,8 @@ describe ConferenceItem do
         set_price(conference_item, user1, 200)
         set_price(conference_item, user2, 100)
 
-        expect(conference_item.item_price(user1, nil)).to eql(200)
-        expect(conference_item.item_price(user2, nil)).to eql(100)
+        expect(conference_item.item_price(user1, nil).to_i).to eql(200)
+        expect(conference_item.item_price(user2, nil).to_i).to eql(100)
       end
     end
 
@@ -69,13 +43,6 @@ describe ConferenceItem do
 
         expect(conference_item.item_price(user, discount.discount_key)).to eql(50)
       end
-    end
-  end
-
-  describe '#number_of_paid_registrants' do
-    it 'should count paid registrants and ignore unpaid' do
-      conference_item = create(:conference_item_with_registered_users, paid_registrations: 4, unpaid_registrations: 2)
-      expect(conference_item.number_of_paid_registrants).to eql(4)
     end
   end
 

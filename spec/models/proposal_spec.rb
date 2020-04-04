@@ -2,19 +2,6 @@ require 'spec_helper'
 
 describe Proposal do
   context 'validations' do
-    it 'should add have a relative number of 4 when there are 3 proposals' do
-      conference = create(:conference_with_proposals)
-      proposal = build(:proposal, conference: conference)
-      proposal.save
-      expect(proposal.relative_number).to eql(4)
-    end
-
-    it 'should have a relative number of 1 when other proposals are different conference' do
-      conference = create(:conference_with_proposals)
-      proposal = create(:proposal)
-      expect(proposal.relative_number).to eql(1)
-    end
-
     it 'does not allow no equipment with other av options' do
       proposal = build(:proposal, sound: true, no_equipment: true)
       expect(proposal).to be_invalid

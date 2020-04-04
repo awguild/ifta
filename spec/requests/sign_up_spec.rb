@@ -9,7 +9,7 @@ describe 'SignUp' do
     ##################
     # Sign Up Page
     ##################
-    post '/users', { user: {
+    post '/users', params: { user: {
       email: 'test123@example.com',
       password: 'password',
       password_confirmation: 'password'
@@ -19,14 +19,15 @@ describe 'SignUp' do
     follow_redirect! # after sign in path itineraries page
     follow_redirect! # check_contact_info before filter
 
+
     ##################
     # Contact Info Page
     ##################
-    expect(response).to render_template('users/edit')
+    expect(response).to have_http_status(:ok)
 
-    user = assigns(:user)
+    user = User.last
     country = create(:country)
-    put "/users/#{user.id}", { user: {
+    put "/users/#{user.id}", params: { user: {
       first_name: 'Jane',
       last_name: 'Doe',
       nametag_name: 'Jane Doe',
@@ -52,7 +53,7 @@ describe 'SignUp' do
     ##################
     # Itineraries page
     ##################
-    expect(response).to render_template('itineraries/edit')
+    expect(response).to have_http_status(:ok)
 
   end
 end

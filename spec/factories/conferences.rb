@@ -7,29 +7,5 @@ FactoryBot.define do
     trait :inactive do
       active { false }
     end
-
-    factory :conference_with_items do
-      transient do
-        active_items { 3 }
-        inactive_items { 0 }
-      end
-
-      after(:create) do |conference, evaluator|
-        create_list(:conference_item, evaluator.active_items, conference: conference)
-        create_list(:conference_item, evaluator.inactive_items, :invisible, conference: conference)
-      end
-    end
-
-    factory :conference_with_proposals do
-      transient do
-        num_proposals { 3 }
-      end
-
-      after(:create) do |conference, evaluator|
-        user = create(:user)
-        itinerary = create(:itinerary, conference: conference, user: user)
-        create_list(:proposal, evaluator.num_proposals, conference: conference, user: user, itinerary: itinerary)
-      end
-    end
   end
 end

@@ -1,29 +1,7 @@
 require 'spec_helper'
 
 describe Itinerary do
-  describe :unpaid_line_items do
-    it 'should be blank when line items are paid' do
-      itinerary = create(:itinerary_with_item, paid: true)
-      expect(itinerary.unpaid_line_items).to be_blank
-    end
 
-    it 'should find 1 unpaid line item' do
-      itinerary = create(:itinerary_with_item, paid: false)
-      expect(itinerary.unpaid_line_items.length).to eql(1)
-    end
-  end
-
-  describe :paid_line_items do
-    it 'should be blank when line items are unpaid' do
-      itinerary = create(:itinerary_with_item, paid: false)
-      expect(itinerary.paid_line_items.count).to eql(0)
-    end
-
-    it 'should find 1 paid line item' do
-      itinerary = create(:itinerary_with_item, paid: true)
-      expect(itinerary.paid_line_items.count).to eql(1)
-    end
-  end
 
   context :available_conference_items do
     it 'should be blank when there are no discounted items or regular items' do
@@ -102,31 +80,11 @@ describe Itinerary do
       itinerary = build(:itinerary)
       expect(itinerary.registered_for_conference?).to be_falsey
     end
-
-    it 'should be false when itinerary has a pending conference registration' do
-      itinerary = create(:itinerary_with_item, paid: false)
-      expect(itinerary.registered_for_conference?).to be_falsey
-    end
-
-    it 'should be true when itinerary has a paid conference line item' do
-      itinerary = create(:itinerary_with_item, paid: true)
-      expect(itinerary.registered_for_conference?).to be_truthy
-    end
   end
 
   context :has_pending_conference_registration? do
     it 'should be false when itinerary has no line items' do
       itinerary = build(:itinerary)
-      expect(itinerary.has_pending_conference_registration?).to be_falsey
-    end
-
-    it 'should be true when itinerary has a pending conference registration' do
-      itinerary = create(:itinerary_with_item, paid: false)
-      expect(itinerary.has_pending_conference_registration?).to be_truthy
-    end
-
-    it 'should be false when itinerary has a paid conference line item' do
-      itinerary = create(:itinerary_with_item, paid: true)
       expect(itinerary.has_pending_conference_registration?).to be_falsey
     end
   end

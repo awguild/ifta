@@ -29,14 +29,5 @@ describe Discount do
       discount = Discount.new
       expect(discount.build_prices_for_conference_items).to eql(false)
     end
-
-    it 'should build a price for each conference item' do
-      conference = create(:conference_with_items)
-      discount = conference.discounts.build
-
-      discount.build_prices_for_conference_items
-
-      expect(discount.prices.length).to eql(3)
-    end
   end
 end
