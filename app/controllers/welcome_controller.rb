@@ -1,6 +1,5 @@
 class WelcomeController < ApplicationController
   skip_before_action :authenticate_user!
-  skip_before_action :check_contact_info
   #let the general public access the index page
 
   def index
