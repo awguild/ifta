@@ -29,11 +29,5 @@ FactoryBot.define do
     trait :category2 do
       country_category { 2 }
     end
-
-    trait :member do
-      member { true }
-      ifta_member
-      ifta_member_email { ifta_member.email }
-    end
   end
 end

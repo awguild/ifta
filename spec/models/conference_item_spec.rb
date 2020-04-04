@@ -42,7 +42,9 @@ describe ConferenceItem do
     context 'no discount' do
       it 'should have a price of 200 for category 1 and 100 for category 2 member' do
         user1 = create(:user)
-        user2 = create(:user, :member, :category2)
+        member = create(:ifta_member)
+        user2 = create(:user, :category2, ifta_member_email: member.email)
+
         conference_item = create(:conference_item)
 
         set_price(conference_item, user1, 200)

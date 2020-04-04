@@ -26,24 +26,6 @@ describe IftaMember do
     end
   end
 
-  describe "testing association with user" do
-    # here we are going to save the IfaMember record to the database using create instead of build
-    # we can access this object using the member helper method, and this object was set up to have an associated user record
-    let(:member) { create(:member_with_user)}
-
-    # the default implied subject of the IftaMember describe block is an instance of IftaMember created by calling IftaMember.new
-    # we can set a different subject like this special ifta member with a user that we created
-    subject { member }
-
-    # the parameter to its (:user) gets called user called on the subject (which we set above)
-    # should also gets called on the subject
-    #its(:user) { should belong_to(:country)} #TODO deprecated research what this was replaced with
-
-    # Note: [method].should [matcher][params] has fallen out of favour in rspec
-    # the perfered syntax is now expect [Proc or method call].to [matcher][params]
-    # you'll see many examples that use the should syntax; combined with its you can write some very concise tests
-  end
-
   describe "testing IftaMember#add_new_members" do
         it "should increase the number of members by 1" do
             # expect can take a Proc { code } (think function) which it will call in a series of steps
