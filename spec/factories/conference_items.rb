@@ -1,17 +1,17 @@
 FactoryBot.define do
   factory :conference_item do
-    visibility true
+    visibility { true }
     name { Faker::Commerce.product_name }
     description { Faker::Lorem.sentence }
 
     trait :invisible do
-      visibility false
+      visibility { false }
     end
 
     factory :conference_item_with_registered_users do
       transient do
-        paid_registrations 0
-        unpaid_registrations 1
+        paid_registrations { 0 }
+        unpaid_registrations { 1 }
       end
 
       after(:create) do |conference_item, evaluator|

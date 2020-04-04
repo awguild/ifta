@@ -1,14 +1,14 @@
 FactoryBot.define do
   factory :payment do
-    amount 100
-    confirmed false
+    amount { 100 }
+    confirmed { false }
 
     trait :confirmed do
-      confirmed true
+      confirmed { true }
     end
 
     trait :unconfirmed do
-      confirmed false
+      confirmed { false }
     end
   end
 end

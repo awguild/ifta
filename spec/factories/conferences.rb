@@ -1,17 +1,17 @@
 FactoryBot.define do
   factory :conference do
-    tax_rate 0.02
-    active true
+    tax_rate { 0.02 }
+    active { true }
     sequence(:conference_year) {|n| "200#{n}"}
 
     trait :inactive do
-      active false
+      active { false }
     end
 
     factory :conference_with_items do
       transient do
-        active_items 3
-        inactive_items 0
+        active_items { 3 }
+        inactive_items { 0 }
       end
 
       after(:create) do |conference, evaluator|
@@ -22,7 +22,7 @@ FactoryBot.define do
 
     factory :conference_with_proposals do
       transient do
-        num_proposals 3
+        num_proposals { 3 }
       end
 
       after(:create) do |conference, evaluator|
@@ -34,8 +34,8 @@ FactoryBot.define do
 
     factory :conference_with_slots, :aliases => [:conference_with_rooms] do
       transient do
-        num_time_blocks 1
-        num_rooms 3
+        num_time_blocks { 1 }
+        num_rooms { 3 }
       end
 
       after(:create) do |conference, evaluator|

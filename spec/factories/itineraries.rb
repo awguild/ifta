@@ -5,8 +5,8 @@ FactoryBot.define do
 
     factory :itinerary_with_item do
       transient do
-        item_name 'Conference'
-        paid false
+        item_name { 'Conference' }
+        paid { false }
       end
 
       after(:create) do |itinerary, evaluator|

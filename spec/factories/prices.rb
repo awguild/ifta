@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :price do
-    amount 1000
-    member false
+    amount { 1000 }
+    member { false }
   end
 end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :ifta_member do
-    email 'jdoe@example.com'
+    email { 'jdoe@example.com' }
 
     factory :member_with_user do
       after(:create) do |ifta_member, evaluator|
