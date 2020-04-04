@@ -8,9 +8,6 @@ class Conference < ActiveRecord::Base
   has_many :itineraries
   has_many :proposals
   has_many :presenters, :through => :proposals
-  has_one :schedule
-  has_many :rooms, :through => :schedule
-  has_many :slots, :through => :schedule
 
   accepts_nested_attributes_for :conference_items, allow_destroy: true
 
@@ -23,7 +20,6 @@ class Conference < ActiveRecord::Base
 
   #life cycle hooks
   after_save :enforce_one_active_conference
-  after_create :build_schedule
 
   def registration_breakdown
     conference_items.map do |item|
@@ -53,11 +49,6 @@ class Conference < ActiveRecord::Base
   end
 
   private
-
-  #creates a schedule for this conference
-  def build_schedule
-    create_schedule({:conference_id => id})
-  end
 
   def enforce_one_active_conference
     # if the current conference is going to be active then there cannot be any other active conferneces

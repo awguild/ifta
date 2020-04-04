@@ -31,17 +31,5 @@ FactoryBot.define do
         create_list(:proposal, evaluator.num_proposals, conference: conference, user: user, itinerary: itinerary)
       end
     end
-
-    factory :conference_with_slots, :aliases => [:conference_with_rooms] do
-      transient do
-        num_time_blocks { 1 }
-        num_rooms { 3 }
-      end
-
-      after(:create) do |conference, evaluator|
-        create_list(:room, evaluator.num_rooms, schedule: conference.schedule)
-        create_list(:time_block, evaluator.num_time_blocks, schedule: conference.schedule)
-      end
-    end
   end
 end

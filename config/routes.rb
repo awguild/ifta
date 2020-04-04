@@ -15,7 +15,6 @@ Iftaconferenceapp::Application.routes.draw do
 
   #proposal routes
   get 'conference/:id/proposals' => 'proposals#index', :as => :conference_proposals
-  get 'conference/:id/unslotted-proposals' => 'proposals#unslotted', :as => :unslotted_proposals
 
   devise_for :users, :controllers => { :registrations => "users/registrations", :passwords => "devise/passwords" }
   devise_scope :user do
@@ -41,10 +40,6 @@ Iftaconferenceapp::Application.routes.draw do
     collection do
       post 'select_year', as: :select_year
     end
-
-    member do
-      get 'schedule', as: :schedule
-    end
     resources :discounts
   end
   resources :reviews
@@ -56,21 +51,4 @@ Iftaconferenceapp::Application.routes.draw do
   get 'conferences/:id/presentations' => 'reports#presentations', :as => :presentations_report
   get 'conferences/:id/presenter_proposals' => 'reports#presenter_proposals', :as => :presenter_proposals_report
   get 'conferences/:id/ceu' => 'reports#ceu', :as => :ceu_report
-  namespace :api, :defaults => { :format => 'json' } do
-    namespace :v1 do
-      resources :conferences do
-        resources :proposals, only: [] do
-          collection do
-            get :search
-            get :presenters
-            get :formats
-          end
-        end
-
-        resources :slots, only: [:update]
-        resources :time_blocks
-        resources :rooms
-      end
-    end
-  end
 end

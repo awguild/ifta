@@ -38,11 +38,5 @@ FactoryBot.define do
     trait :fortyfivemin do
       format { '45min' }
     end
-
-    factory :slotted_proposal, traits: [:accepted] do
-      after(:create) do |proposal|
-        create(:slot, proposal: proposal)
-      end
-    end
   end
 end

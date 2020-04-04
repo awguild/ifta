@@ -1,15 +1,3 @@
 <%- content_for :nav do %>
   <%= render :partial => "layouts/admin_nav" %>
 <%- end %>
-
-<div class="scheduler" ng-app="schedulerApp" ng-controller="MainCtrl as mainCtrl">
-  <a href="#/rooms">Rooms</a>
-  <a href="#/time_blocks">Time Blocks</a>
-  <a href="#/schedule">Schedule</a>
-
-  <div ng-view></div>
-  <!-- render inline script tags with the templates-->
-  <%= render :partial => 'conferences/scheduler/rooms' %>
-  <%= render :partial => 'conferences/scheduler/time_blocks' %>
-  <%= render :partial => 'conferences/scheduler/schedule' %>
-</div>

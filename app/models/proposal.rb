@@ -5,8 +5,6 @@ class Proposal < ActiveRecord::Base
   #associations
   has_many :presenters, :dependent => :destroy
   has_many :reviews
-  has_one :slot
-  has_one :room, :through => :slot
   belongs_to :itinerary
   belongs_to :conference
   belongs_to :user
@@ -17,7 +15,6 @@ class Proposal < ActiveRecord::Base
   scope :current, ->(conference_id = Conference.active.id){ joins('INNER JOIN conferences ON conferences.id = proposals.conference_id').where('conference_id = ?', conference_id)}
   scope :unreviewed, -> { where(:status => nil) }
   scope :reviewed, -> { joins(:reviews) }
-  scope :unslotted, -> { joins("LEFT OUTER JOIN slots ON slots.proposal_id = proposals.id").where("slots.proposal_id IS NULL AND proposals.status='accept'") }
   scope :accepted, -> { where(:status => 'accept') }
   scope :wait_listed, -> { where(:status => 'wait list') }
 

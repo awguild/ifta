@@ -1,6 +1,6 @@
 class ConferencesController < ApplicationController
 
-  before_action :find_conference, only: [:show, :update, :schedule]
+  before_action :find_conference, only: [:show, :update]
   def show
     authorize! @conference, :update
     @conference_item_breakdown_report = @conference.registration_breakdown
@@ -43,13 +43,6 @@ class ConferencesController < ApplicationController
         render :edit
       end
     end
-  end
-
-  def schedule
-    @schedule = @conference.schedule
-    authorize! :edit, @schedule
-
-    gon.conference_year = @conference.conference_year
   end
 
   def select_year

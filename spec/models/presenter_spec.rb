@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe Presenter do
-  it { should validate_presence_of(:country_id) }
-  it { should belong_to(:country) }
-
   context 'presenter_conference_status' do
     it 'should return no user when no user exists' do
       status = Presenter.presenter_conference_status 'fake@example.com', nil
