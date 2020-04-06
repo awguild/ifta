@@ -19,16 +19,8 @@ class Proposal < ActiveRecord::Base
   scope :wait_listed, -> { where(:status => 'wait list') }
 
   #validations
-  validates :short_description, :length => {
-    :maximum => 50,
-    :tokenizer => lambda { |str| str.split },
-    :too_long => "must have at most %{count} words"
-  }
-  validates :long_description, :length => {
-    :maximum => 350,
-    :tokenizer => lambda { |str| str.split },
-    :too_long => "must have at most %{count} words"
-  }
+  validate :short_description_max_words
+  validate :long_description_max_words
   validates :format, :category, :title, :relative_number, :itinerary, :conference, :learning_objective, :presence => true
   validates_associated :presenters
   validates :presenters, :length => {:maximum => 4, :message => 'the maximum number of presenters is 4'}
@@ -98,5 +90,19 @@ class Proposal < ActiveRecord::Base
 
     def add_relative_number
       self.relative_number = Proposal.next_relative_number(conference_id) if relative_number.blank?
+    end
+
+    def short_description_max_words
+      count = short_description.scan(/\w+/).count
+      if count  > 50
+        errors.add(:short_description, "max words is 50 and you have #{count}")
+      end
+    end
+
+    def long_description_max_words
+      count = long_description.scan(/\w+/).count
+      if count > 350
+        errors.add(:long_description, "max words is 350 and you have #{count}")
+      end
     end
 end

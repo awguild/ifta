@@ -60,11 +60,17 @@ The Program Committee will make the decision as which language you will present 
 <h3>Title</h3>
 	<%= f.label :title, "Title of Abstract:"%>
 	<%= f.text_field  :title %> <br>
-	(90 characters max, including spaces)
+	(90 characters max, including spaces) <br>
+  <%= f.label :title_non_english, "Title of Abstract in your First Language:"%>
+	<%= f.text_field  :title_non_english %> <br>
 <hr>
 <h3>Short Description (published in Program Guide)</h3>
 	<%= f.label "(50 words max)"%>
 	<%= f.text_area :short_description, {cols: '60', rows: '6'} %>
+  <h1><%= @proposal.short_description.split.count %></h1>
+<h3>Short Description in your First Language</h3>
+	<%= f.label "(50 words max)"%>
+	<%= f.text_area :short_description_non_english, {cols: '60', rows: '6'} %>
 <hr>
 <h3>Long Description (published in Book of Abstracts)</h3>
 	<%= f.label :long_description, "(350 words max)"%>
