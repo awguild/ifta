@@ -16,6 +16,7 @@ class PresentersQuery
         'payment_type',
         'registration',
         'amount_paid',
+        'payment_confirmed',
         'invite_letter',
         'notes'
       ]
@@ -36,6 +37,7 @@ class PresentersQuery
           registration['payment_method'],
           'N/A',
           registration['amount_paid'],
+          registration['payment_confirmed'],
           'N/A',
           'N/A'
         ]
@@ -60,7 +62,9 @@ class PresentersQuery
        payments.created_at  AS payment_date,
        transactions.payment_method,
        status,
-       payments.amount      AS amount_paid
+       payments.amount      AS amount_paid,
+       CASE
+       WHEN (transactions.paid = true AND payments.confirmed = true) THEN 'yes' ELSE 'no' END as payment_confirmed
     FROM   proposals
     INNER JOIN presenters
     ON presenters.proposal_id = proposals.id
@@ -75,7 +79,6 @@ class PresentersQuery
     LEFT JOIN payments
     ON payments.transaction_id = transactions.id
     WHERE proposals.conference_id = #{conference_id}
-    AND proposals.status = 'accept'
-    AND transactions.paid = true AND payments.confirmed = true")
+    AND proposals.status = 'accept'")
   end
 end
