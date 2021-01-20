@@ -10,8 +10,8 @@ class LineItem < ActiveRecord::Base
   delegate :user, :to => :itinerary #slick, check out what this allows in the Ability class
 
   #validations
-  validates :itinerary, :existence => true
-  validates :conference_item_id, :existence => true
+  validates :itinerary, presence: true
+  validates :conference_item_id, presence: true
   validates :price, :format => { :with => /\A\d+??(?:\.\d{0,2})?\z/ }, :numericality => {:greater_than_or_equal_to => 0}
   validate :check_price
 

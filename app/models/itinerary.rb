@@ -12,7 +12,7 @@ class Itinerary < ActiveRecord::Base
   has_many :transactions
 
   #validations
-  validates :discount, :existence => true, :if => :discount_key?
+  validates :discount, :presence => true, :if => :discount_key?
 
   #Finding conference items and line items by various criteria
   def unpaid_line_items
