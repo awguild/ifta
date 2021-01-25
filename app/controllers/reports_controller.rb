@@ -43,7 +43,7 @@ class ReportsController < ApplicationController
   def ceu
     authorize! :report, @conference
     respond_to do |format|
-      format.csv { render text: CeuQuery.new(@conference).to_csv }
+      format.csv { render plain: CeuQuery.new(@conference).to_csv }
     end
   end
 
