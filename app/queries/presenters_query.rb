@@ -79,6 +79,7 @@ class PresentersQuery
     LEFT JOIN payments
     ON payments.transaction_id = transactions.id
     WHERE proposals.conference_id = #{conference_id}
-    AND proposals.status = 'accept'")
+    AND proposals.status = 'accept'
+    ORDER BY relative_number")
   end
 end
