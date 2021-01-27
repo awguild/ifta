@@ -6,7 +6,7 @@ Hi <%= @user.first_name %>,<br><br>
 
 	<p>In order to secure your spot in the conference <strong>you must register</strong> within one month of today: <strong><%= Time.now.strftime("%B %e %Y") %></strong> You can register at <%= root_url %></p>
 
-	<p><strong>Please be advised that your proposal has been accepted as a <%= @review.proposal.format %>. This may be different from the length you originally requested.</strong></p>
+	<p>Your proposal has been accepted. Please make your video presentation 20 minutes long. It can be as short as 10 minutes (particularly for a poster) and absolutely no longer than 30 minutes. See the website for information on how to make and submit your presentation: <a href="https://www.ifta-congress.org/video_submission.php">Video Submission Instructions</a>.</p>
 
 <%- elsif @review.declined? %>
 	<p>You have been listed as a presenter on the proposal entitled: <em><%= @review.proposal.title %></em> which, we regret to inform you, has not been accepted for the upcoming IFTA Congress Conference.</p>
