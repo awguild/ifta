@@ -70,6 +70,28 @@ class User < ActiveRecord::Base
     itineraries.where(:conference_id => conference_id).first
   end
 
+  def update_password_without_validations(params)
+    current_password = params.delete(:current_password)
+
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+
+    result = if valid_password?(current_password)
+      assign_attributes(params)
+      save(validate: false)
+    else
+      assign_attributes(params)
+      valid?
+      errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+      false
+    end
+
+    clean_up_passwords
+    result
+  end
+
   private
   def set_country_category
     update_column(:country_category, Country.find(self.country_id).category) unless country_id.blank?
