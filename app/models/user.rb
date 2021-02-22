@@ -70,26 +70,15 @@ class User < ActiveRecord::Base
     itineraries.where(:conference_id => conference_id).first
   end
 
-  def update_password_without_validations(params)
-    current_password = params.delete(:current_password)
-
-    if params[:password].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation) if params[:password_confirmation].blank?
-    end
-
-    result = if valid_password?(current_password)
-      assign_attributes(params)
+  def reset_password(new_password, new_password_confirmation)
+    if new_password.present?
+      self.password = new_password
+      self.password_confirmation = new_password_confirmation
       save(validate: false)
     else
-      assign_attributes(params)
-      valid?
-      errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+      errors.add(:password, :blank)
       false
     end
-
-    clean_up_passwords
-    result
   end
 
   private

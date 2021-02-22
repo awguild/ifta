@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   def update_password
     @user = User.find(params[:id])
     authorize! :update, @user
-    if @user.update_password_without_validations(user_params)
+    if @user.update_with_password(user_params) #devise helper method, prevents updating password without current password
       sign_in @user, :bypass => true
       redirect_to after_sign_in_path_for(@user)
     else
