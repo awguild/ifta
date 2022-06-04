@@ -67,6 +67,7 @@ class ProposalsController < ApplicationController
        :short_description,
        :short_description_non_english,
        :long_description,
+       :long_description_non_english,
        :student,
        :agree,
        :no_equipment,

@@ -4,13 +4,15 @@
 
 <%= f.hidden_field :student %>
 <h3>Language</h3>
-<p>Workshops will be presented in English or Spanish.  Please tell us which languages you speak fluently and would be willing to speak in your workshop.  Check as many as apply.
+<p>Workshops will be presented in English, Spanish, and Portuguese.  Please tell us which languages you speak fluently and would be willing to speak in your workshop.  Check as many as apply.
 The Program Committee will make the decision as which language you will present in based on the number and balance of the proposals.  </p>
 
 <%= f.label :language_english, 'English' %>
 <%= f.check_box :language_english %><br>
 <%= f.label :language_spanish, 'Spanish' %>
 <%= f.check_box :language_spanish %><br>
+<%= f.label :language_portuguese, 'Portuguese' %>
+<%= f.check_box :language_portuguese %><br>
 <hr>
 
 <h3>Presentation Format</h3>
@@ -53,6 +55,8 @@ The Program Committee will make the decision as which language you will present 
 	<%= f.radio_button :category, "training"%> <%= f.label :category_training, 'Training & Supervision' %><br>
 	<%= f.radio_button :category, "policy"%> <%= f.label :category_policy, 'Social Policy' %><br>
 	<%= f.radio_button :category, "justice"%> <%= f.label :category_justice, 'Social Justice' %><br>
+	<%= f.radio_button :category, "founders"%> <%= f.label :category_founders, 'Founders' %><br>
+	<%= f.radio_button :category, "innovative"%> <%= f.label :category_innovative, 'Innovative' %><br>
 <hr>
 
 <h3>Keyword</h3>
@@ -69,13 +73,16 @@ The Program Committee will make the decision as which language you will present 
 <h3>Short Description (published in Program Guide)</h3>
 	<%= f.label "(50 words max)"%>
 	<%= f.text_area :short_description, {cols: '60', rows: '6'} %>
-<h3>Short Description in your First Language</h3>
+<h3>Short Description in your Non-English Presentation Language – NOT REQUIRED</h3>
 	<%= f.label "(50 words max)"%>
 	<%= f.text_area :short_description_non_english, {cols: '60', rows: '6'} %>
 <hr>
 <h3>Long Description (published in Book of Abstracts)</h3>
 	<%= f.label :long_description, "(350 words max)"%>
 	<%= f.text_area :long_description, {cols: '60', rows: '20'} %>
+<h3>Long Description in your Non-English Presentation Language – NOT REQUIRED</h3>
+	<%= f.label "(350 words max)"%>
+	<%= f.text_area :long_description_non_english, {cols: '60', rows: '20'} %>
 <hr>
 
 <h3>Learning Objective</h3>

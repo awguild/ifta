@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_06_014057) do
+ActiveRecord::Schema.define(version: 2022_05_20_014059) do
 
   create_table "conference_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_014057) do
     t.text "learning_objective"
     t.string "title_non_english"
     t.text "short_description_non_english"
+    t.text "long_description_non_english"
     t.index ["conference_id"], name: "index_proposals_on_conference_id"
     t.index ["itinerary_id"], name: "index_proposals_on_itinerary_id"
     t.index ["user_id"], name: "index_proposals_on_user_id"
