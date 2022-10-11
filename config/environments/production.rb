@@ -68,4 +68,7 @@ Iftaconferenceapp::Application.configure do
   # Default URL Options
   config.action_mailer.default_url_options = {:host => ENV["MAILER_HOST"]}
 
+  config.after_initialize do
+    Rails.application.routes.default_url_options[:host] = ENV["MAILER_HOST"]
+  end
 end
