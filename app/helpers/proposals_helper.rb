@@ -78,8 +78,8 @@ module ProposalsHelper
   def show_languages(proposal)
     languages = ""
     languages += "English, " if proposal.language_english
-    languages += "Spanish, " if proposal.language_spanish
-    languages += "Portugese, " if proposal.language_portuguese
+    languages += "Japanese, " if proposal.language_japanese
+    languages += "Korean, " if proposal.language_korean
     languages.chomp(", ")
   end
 

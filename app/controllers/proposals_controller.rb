@@ -78,6 +78,8 @@ class ProposalsController < ApplicationController
        :language_spanish,
        :language_portuguese,
        :language_mandarin,
+       :language_japanese,
+       :language_korean,
        :language_malay,
        :learning_objective,
         presenters_attributes: [:id,

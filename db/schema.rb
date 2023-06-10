@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_20_014059) do
+ActiveRecord::Schema.define(version: 2023_06_10_210129) do
 
   create_table "conference_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
@@ -171,6 +171,8 @@ ActiveRecord::Schema.define(version: 2022_05_20_014059) do
     t.boolean "language_spanish"
     t.boolean "language_portuguese"
     t.boolean "language_mandarin"
+    t.boolean "language_japanese"
+    t.boolean "language_korean"
     t.boolean "language_malay"
     t.integer "relative_number"
     t.integer "conference_id"
