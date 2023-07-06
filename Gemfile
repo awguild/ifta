@@ -16,7 +16,6 @@ gem 'jquery-ui-rails'
 gem 'mini_racer'
 gem 'mysql2', "0.5.5"
 gem 'net-smtp', require: false
-gem 'newrelic_rpm'
 gem 'oj', '3.10.5'
 gem 'paper_trail'
 gem 'rabl'
