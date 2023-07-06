@@ -9,10 +9,13 @@ gem 'coffee-rails'
 gem 'delayed_job_active_record'
 gem 'devise'
 gem 'foreman'
+gem 'globalid', '~> 1.0'
 gem 'gon'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'mysql2'
+gem 'mini_racer'
+gem 'mysql2', "0.5.5"
+gem 'net-smtp', require: false
 gem 'newrelic_rpm'
 gem 'oj', '3.10.5'
 gem 'paper_trail'
@@ -27,7 +30,6 @@ gem 'validates_timeliness'
 gem 'will_paginate'
 
 group :production do
-  gem 'therubyracer', :platform => :ruby
   gem 'rails_12factor'
 end
 
@@ -36,7 +38,7 @@ group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails'
   gem 'factory_bot'
-  gem 'faker'
+  gem 'faker', "~> 3"
   gem 'meta_request'
   gem 'mocha'
   gem 'poltergeist'

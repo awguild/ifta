@@ -11,8 +11,9 @@ services:
       - db:/var/lib/mysql
 
   web:
+    entrypoint: /app/docker-entrypoint.sh
     tty: true
-    image: 'bitnami/rails:6-debian-10'
+    image: 'ruby:3.2.2-bullseye'
     labels:
       kompose.service.type: nodeport
     environment:
@@ -22,6 +23,8 @@ services:
       - MYSQL_PASSWORD
       - SECRET_KEY_BASE=123424423
       - SECRET_TOKEN=30432493285
+      - BUNDLER_VERSION=2.4.10
+      - RAILS_ENV=development
     depends_on:
       - db
     ports:

@@ -106,18 +106,18 @@ GEM
     execjs (2.7.0)
     factory_bot (5.1.2)
       activesupport (>= 4.2.0)
-    faker (2.11.0)
-      i18n (>= 1.6, < 2)
+    faker (3.2.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.12.2)
     foreman (0.87.1)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
+    globalid (1.1.0)
+      activesupport (>= 5.0)
     gon (6.4.0)
       actionpack (>= 3.0.20)
       i18n (>= 0.7)
       multi_json
       request_store (>= 1.0)
-    i18n (1.8.10)
+    i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     jquery-rails (4.3.5)
       rails-dom-testing (>= 1, < 3)
@@ -126,7 +126,7 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.3.0)
-    libv8 (3.16.14.19)
+    libv8-node (18.16.0.0)
     loofah (2.9.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -143,10 +143,16 @@ GEM
       rake
     mini_mime (1.0.2)
     mini_portile2 (2.5.1)
+    mini_racer (0.8.0)
+      libv8-node (~> 18.16.0.0)
     minitest (5.14.4)
     mocha (1.11.2)
     multi_json (1.15.0)
-    mysql2 (0.5.3)
+    mysql2 (0.5.5)
+    net-protocol (0.2.1)
+      timeout
+    net-smtp (0.3.3)
+      net-protocol
     newrelic_rpm (6.9.0.363)
     nio4r (2.5.2)
     nokogiri (1.11.3)
@@ -205,7 +211,6 @@ GEM
     rake (13.0.1)
     recaptcha (5.5.0)
       json
-    ref (2.0.0)
     regexp_parser (1.7.0)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -252,9 +257,6 @@ GEM
       sprockets (>= 3.0.0)
     test-unit (3.2.9)
       power_assert
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -263,6 +265,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.10)
     timeliness (0.4.4)
+    timeout (0.4.0)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
@@ -296,14 +299,17 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_bot
-  faker
+  faker (~> 3)
   foreman
+  globalid (~> 1.0)
   gon
   jquery-rails
   jquery-ui-rails
   meta_request
+  mini_racer
   mocha
-  mysql2
+  mysql2 (= 0.5.5)
+  net-smtp
   newrelic_rpm
   oj (= 3.10.5)
   paper_trail
@@ -318,7 +324,6 @@ DEPENDENCIES
   simple_form
   spork
   test-unit
-  therubyracer
   thin
   uglifier
   underscore-rails
@@ -327,4 +332,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.1.4
+   2.4.10
