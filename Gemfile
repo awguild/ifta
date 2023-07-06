@@ -7,7 +7,7 @@ gem 'angularjs-rails'
 gem 'cancan'
 gem 'coffee-rails'
 gem 'delayed_job_active_record'
-gem 'devise'
+gem 'devise', "4.9.2"
 gem 'foreman'
 gem 'globalid', '~> 1.0'
 gem 'gon'
