@@ -17,6 +17,7 @@ gem 'jquery-ui-rails'
 gem 'mini_racer'
 gem 'mysql2', "0.5.5"
 gem 'net-smtp', require: false
+gem 'net-pop', require: false
 gem 'oj', '3.10.5'
 gem 'paper_trail'
 gem 'puma'
