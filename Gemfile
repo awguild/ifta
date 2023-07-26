@@ -19,6 +19,7 @@ gem 'mysql2', "0.5.5"
 gem 'net-smtp', require: false
 gem 'oj', '3.10.5'
 gem 'paper_trail'
+gem 'puma'
 gem 'rabl'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'sass-rails'

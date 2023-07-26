@@ -168,6 +168,8 @@ GEM
       websocket-driver (>= 0.2.0)
     power_assert (1.1.3)
     public_suffix (4.0.3)
+    puma (6.3.0)
+      nio4r (~> 2.0)
     rabl (0.14.2)
       activesupport (>= 2.3.14)
     racc (1.5.2)
@@ -312,6 +314,7 @@ DEPENDENCIES
   oj (= 3.10.5)
   paper_trail
   poltergeist
+  puma
   rabl
   rails (= 6.0.3.1)
   rails_12factor
