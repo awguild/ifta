@@ -5,7 +5,7 @@ gem 'rails', '6.0.3.1'
 
 gem 'activerecord-import'
 gem 'angularjs-rails'
-gem 'cancan'
+gem 'cancancan'
 gem 'coffee-rails'
 gem 'delayed_job_active_record'
 gem 'devise', "4.9.2"
