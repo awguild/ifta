@@ -1,6 +1,5 @@
 require 'net/http'
 
-module PaypalCallback
 class PaypalCallback
   def initialize(params, raw_post, paypal_url)
     @params = params
@@ -30,5 +29,4 @@ class PaypalCallback
     @params[:payment_status] == "Completed"
   end
 
-end
 end
