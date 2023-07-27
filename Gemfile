@@ -40,13 +40,13 @@ end
 group :development, :test do
   gem 'awesome_print'
   gem 'byebug'
+  gem 'database_cleaner-active_record'
   gem 'dotenv-rails'
   gem 'factory_bot'
   gem 'faker', "~> 3"
   gem 'meta_request'
   gem 'mocha'
   gem 'poltergeist'
-  gem 'spork'
   gem 'rspec-core'
   gem 'rspec-rails'
   gem 'test-unit'

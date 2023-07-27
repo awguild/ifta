@@ -47,8 +47,8 @@ VM:  Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs
 
 ### Rspec Tests
 1. Connect to the docker container running the app `docker container exec -it ifta_ifta_1 bash`
-1. Setup the test database `RAILS_ENV=test DATABASE_URL=mysql2://mariadb/ifta_conference_test rake db:create`
-1. Run the specs `bin/tests`
+1. Setup the test database `RAILS_ENV=test DATABASE_URL=mysql2://db/ifta_conference_test bundle exec rake db:create`
+1. Run the specs `RAILS_ENV=test bundle exec rspec`
 
 ### JS tests
 The angular app that handles scheduling has its own jasmine test suite. To run the tests first install the dependencies
