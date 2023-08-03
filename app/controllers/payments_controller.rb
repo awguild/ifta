@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
     #check that the payment says completed & paypal verifies post content
     if response.completed? && response.valid?
       @transaction = Transaction.find(params[:invoice]) #invoice is a pass through variable that gets embedded in the encrpyted paypal form and we get it back here
-      Payment.create(:params => params.to_unsafe_h, :transaction_id => @transaction.id, :amount => params['payment_gross'], :confirmed => true)
+      Payment.create(:transaction_id => @transaction.id, :amount => params['payment_gross'], :confirmed => true)
     else
       #TODO maybe send out some type of alert to an admin
     end
