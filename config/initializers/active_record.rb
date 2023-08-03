@@ -1,5 +1,4 @@
-Rails.application.config.after_initialize do
-    ActiveRecord.yaml_column_permitted_classes += [
-        ActiveSupport::HashWithIndifferentAccess
-    ]
-end
+ActiveRecord::Base.yaml_column_permitted_classes = [
+  Symbol,
+  ActiveSupport::HashWithIndifferentAccess
+]
