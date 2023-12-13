@@ -3,7 +3,7 @@ name: Run RSpec
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   test:
