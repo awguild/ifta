@@ -19,8 +19,6 @@ services:
     environment:
       - DATABASE_URL=mysql2://db/ifta_development
       - DEVISE_SECRET=12845023948304
-      - MYSQL_USERNAME=root
-      - MYSQL_PASSWORD
       - SECRET_KEY_BASE=123424423
       - SECRET_TOKEN=30432493285
       - BUNDLER_VERSION=2.4.10

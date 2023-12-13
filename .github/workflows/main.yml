@@ -58,8 +58,6 @@ jobs:
           PAYPAL_SELLER: seller_1358613005_biz@gmail.com
           PAYPAL_CERT_ID: PM7ZU9P7KX3JQ
           PAYPAL_CERT_PEM: paypal_sandbox_cert.pem
-          MYSQL_USERNAME: root
-          MYSQL_PASSWORD: password
           SECRET_KEY_BASE: 12345
           DEVISE_SECRET: 67890
           DATABASE_URL: mysql2://root:password@localhost/test
