@@ -38,7 +38,7 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: mysql2://root:password@localhost/test
         run: |
-          bundle exec rake db:create
+          bundle exec rake db:create && bundle exec rake db:schema:load
 
       - name: Run tests
         env:
