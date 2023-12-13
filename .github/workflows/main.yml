@@ -43,6 +43,26 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
+          APP_CERT: abc
+          APP_KEY: abc
+          SECRET_TOKEN: abc
+          RECAPTCHA_PUBLIC_KEY: 6LdFod0SAAAAAFI1MtM_C2MzS0f9KtXSxJYQO29q
+          SUPER_ADMIN_EMAIL: jdoe@example.com
+          SUPER_ADMIN_PASSWORD: 12345
+          GMAIL_DOMAIN: augustana.edu
+          GMAIL_USERNAME: jdoe@example.com
+          GMAIL_PASSWORD: 12345
+          MAILER_HOST: localhost:3000
+          PAYPAL_POST_URL: https://www.sandbox.paypal.com/cgi-bin/webscr
+          PAYPAL_NOTIFY_URL: http://guilddev.augustana.edu/payments/
+          PAYPAL_RETURN_URL: http://guilddev.augustana.edu/itineraries/
+          PAYPAL_SELLER: seller_1358613005_biz@gmail.com
+          PAYPAL_CERT_ID: PM7ZU9P7KX3JQ
+          PAYPAL_CERT_PEM: paypal_sandbox_cert.pem
+          MYSQL_USERNAME: root
+          MYSQL_PASSWORD: password
+          SECRET_KEY_BASE: 12345
+          DEVISE_SECRET: 67890
           DATABASE_URL: mysql2://root:password@localhost/test
         run: |
           bundle exec rspec
