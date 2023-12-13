@@ -2,7 +2,7 @@ version: '2'
 
 services:
   db:
-    image: 'mariadb:10.5.8'
+    image: 'mariadb:11.1.0'
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     ports:
