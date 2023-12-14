@@ -35,7 +35,7 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          DATABASE_URL: mysql2://root:password@localhost/test
+          DATABASE_URL: mysql2://root:password@localhost:3306/ifta_conference_test
         run: |
           bundle exec rake db:create && bundle exec rake db:schema:load
 
@@ -60,6 +60,6 @@ jobs:
           PAYPAL_CERT_PEM: paypal_sandbox_cert.pem
           SECRET_KEY_BASE: 12345
           DEVISE_SECRET: 67890
-          DATABASE_URL: mysql2://root:password@localhost/test
+          DATABASE_URL: mysql2://root:password@localhost:3306/ifta_conference_test
         run: |
           bundle exec rspec
