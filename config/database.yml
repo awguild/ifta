@@ -29,3 +29,5 @@ production:
   encoding: utf8
   pool: 5
   url: <%= ENV["DATABASE_URL"] %>
+  reconnect: true
+  timeout: 30
