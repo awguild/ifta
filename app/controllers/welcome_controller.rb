@@ -6,4 +6,8 @@ class WelcomeController < ApplicationController
     redirect_to after_sign_in_path_for current_user if current_user
   end
 
+  def status
+    ActiveRecord::Base.connection.execute("SELECT 1 from users");
+  end
+
 end

@@ -51,4 +51,5 @@ Iftaconferenceapp::Application.routes.draw do
   get 'conferences/:id/presentations' => 'reports#presentations', :as => :presentations_report
   get 'conferences/:id/presenter_proposals' => 'reports#presenter_proposals', :as => :presenter_proposals_report
   get 'conferences/:id/ceu' => 'reports#ceu', :as => :ceu_report
+  get 'status' => 'welcome#status'
 end
