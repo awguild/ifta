@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "3.2.2"
 
-gem 'rails', '6.0.3.1'
+gem 'rails', '6.1.7.7'
 
 gem 'activerecord-import'
 gem 'angularjs-rails'
