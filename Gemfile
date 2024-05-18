@@ -24,7 +24,6 @@ gem 'paper_trail'
 gem 'puma'
 gem 'rabl'
 gem 'recaptcha', :require => 'recaptcha/rails'
-gem 'sass-rails'
 gem 'sprockets-rails', '3.4.2'
 gem 'simple_form'
 gem 'uglifier'
@@ -50,5 +49,4 @@ group :development, :test do
   gem 'rspec-core'
   gem 'rspec-rails'
   gem 'test-unit'
-  gem 'thin'
 end
