@@ -68,8 +68,8 @@ The Program Committee will make the decision as which language you will present 
 <hr>
 <h3>Short Description (published in Program Guide)</h3>
 	<%= f.label "(50 words max)"%>
-	<%= f.text_area :short_description, {cols: '60', rows: '6'} %>
-<h3>Short Description in your Non-English Presentation Language – NOT REQUIRED</h3>
+	<%= f.text_area :short_description, {cols: '60', rows: '6', required: true} %>
+<h3>Short Description in your Non-English Presentation Language</h3>
 	<%= f.label "(50 words max)"%>
 	<%= f.text_area :short_description_non_english, {cols: '60', rows: '6'} %>
 <hr>
