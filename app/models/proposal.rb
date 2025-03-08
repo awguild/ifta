@@ -21,7 +21,7 @@ class Proposal < ActiveRecord::Base
   #validations
   validate :short_description_max_words
   validate :long_description_max_words
-  validates :format, :category, :title, :relative_number, :itinerary, :conference, :learning_objective, :presence => true
+  validates :format, :category, :title, :short_description, :relative_number, :itinerary, :conference, :learning_objective, :presence => true
   validates_associated :presenters
   validates :presenters, :length => {:maximum => 4, :message => 'the maximum number of presenters is 4'}
   validates :agree, :acceptance => {:accept => true}
