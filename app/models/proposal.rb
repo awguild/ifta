@@ -101,8 +101,8 @@ class Proposal < ActiveRecord::Base
 
     def long_description_max_words
       count = long_description.scan(/\w+/).count
-      if count > 350
-        errors.add(:long_description, "max words is 350 and you have #{count}")
+      if count > 300
+        errors.add(:long_description, "max words is 300 and you have #{count}")
       end
     end
 end
