@@ -1,5 +1,5 @@
 class ReviewMailer < ActionMailer::Base
-  default from: ENV["GMAIL_USERNAME"],
+  default from: "IFTA Conference  <#{ENV["GMAIL_USERNAME"]}>",
           reply_to: ENV["GMAIL_REPLY_TO"]
 
   def review_notification(user, review)
