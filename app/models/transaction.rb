@@ -19,6 +19,7 @@ class Transaction < ActiveRecord::Base
     options[:email] ||= ""
     options[:first_name] ||= ""
     options[:last_name] ||= ""
+    Rails.logger.info(options)
     where('transactions.paid IN (?)', options[:status]).joins(:itinerary => :user).where('users.first_name LIKE ? AND users.last_name LIKE ? AND users.email LIKE ? AND itineraries.conference_id = ?', options[:first_name] + "%", options[:last_name] + "%", options[:email] + "%", options[:conference_id])
   end
 
