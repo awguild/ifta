@@ -6,11 +6,11 @@ ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.perform_deliveries = true
 ActionMailer::Base.raise_delivery_errors = true
 ActionMailer::Base.smtp_settings = {
-:address              => "smtp.gmail.com",
+:address              => "mail.smtp2go.com",
 :port                 => 587,
-:domain               => ENV["GMAIL_DOMAIN"],
-:user_name            => ENV["GMAIL_USERNAME"],
-:password             => ENV["GMAIL_PASSWORD"],
+:domain               => "ifta-congress.org",
+:user_name            => ENV["SMTP2GO_USERNAME"],
+:password             => ENV["SMTP2GO_PASSWORD"],
 :authentication       => 'plain',
 :enable_starttls_auto => true  }
 
