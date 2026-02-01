@@ -20,10 +20,8 @@ class TransactionsController < ApplicationController
     @transaction.tax = @transaction.pre_tax_total * selected_conference.tax_rate
     @transaction.payment_method = params[:payment_method]
 
-    if @transaction.save
+    if @transaction.save!
       redirect_to itinerary_transaction_path(@itinerary, @transaction)
-    else
-      #TODO there isn't any user input that could cause this action to fail, so probably apologize and send the developer an email..
     end
   end
 
