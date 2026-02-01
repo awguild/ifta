@@ -21,3 +21,4 @@ cookbooks/*
 /database_dump
 .docker-sync/*
 .byebug_history
+.env.development
