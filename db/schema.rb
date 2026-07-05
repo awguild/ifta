@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_10_210129) do
+ActiveRecord::Schema.define(version: 2026_07_05_180000) do
 
-  create_table "conference_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "conference_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.boolean "multiple", default: false
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.string "user_comment_prompt"
   end
 
-  create_table "conferences", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "conferences", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.integer "conference_year"
     t.decimal "tax_rate", precision: 10, scale: 2
     t.text "proposal_acceptance_message"
@@ -42,12 +42,12 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.index ["conference_year"], name: "index_conferences_on_conference_year"
   end
 
-  create_table "countries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "countries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.string "name"
     t.integer "category"
   end
 
-  create_table "delayed_jobs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "delayed_jobs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.integer "priority", default: 0
     t.integer "attempts", default: 0
     t.text "handler"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "discounts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "discounts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.string "discount_key"
     t.string "description"
     t.datetime "created_at", null: false
@@ -71,12 +71,12 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.index ["conference_id"], name: "index_discounts_on_conference_id"
   end
 
-  create_table "ifta_members", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "ifta_members", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.string "email"
     t.index ["email"], name: "index_ifta_members_on_email", unique: true
   end
 
-  create_table "itineraries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "itineraries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.integer "conference_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.string "discount_key"
   end
 
-  create_table "line_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "line_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.integer "conference_item_id"
     t.integer "itinerary_id"
     t.integer "transaction_id"
@@ -99,11 +99,11 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.index ["transaction_id"], name: "index_line_items_on_transaction_id"
   end
 
-  create_table "multimedia", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "multimedia", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.string "media_name"
   end
 
-  create_table "payments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "payments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.integer "transaction_id"
     t.decimal "amount", precision: 10, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.string "comments", default: ""
   end
 
-  create_table "presenters", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "presenters", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "home_telephone"
@@ -132,11 +132,11 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.integer "country_id"
     t.string "highest_degree"
     t.string "graduating_institution"
-    t.text "qualifications"
+    t.text "qualifications", size: :medium
     t.index ["country_id"], name: "index_presenters_on_country_id"
   end
 
-  create_table "prices", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "prices", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.integer "conference_item_id"
     t.integer "country_category"
     t.decimal "amount", precision: 10, scale: 2
@@ -150,10 +150,10 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.index ["member"], name: "index_prices_on_member"
   end
 
-  create_table "proposals", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "proposals", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "format"
     t.string "category"
-    t.string "title"
+    t.text "title"
     t.text "short_description"
     t.text "long_description"
     t.boolean "student"
@@ -180,10 +180,10 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.datetime "date_accepted"
     t.datetime "date_emailed"
     t.datetime "invite_letter"
-    t.text "notes"
+    t.text "notes", size: :medium
     t.boolean "language_thai"
-    t.text "learning_objective"
-    t.string "title_non_english"
+    t.text "learning_objective", size: :medium
+    t.text "title_non_english"
     t.text "short_description_non_english"
     t.text "long_description_non_english"
     t.index ["conference_id"], name: "index_proposals_on_conference_id"
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.index ["user_id"], name: "index_proposals_on_user_id"
   end
 
-  create_table "reviews", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "reviews", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.integer "proposal_id"
     t.string "status"
     t.string "comments"
@@ -202,42 +202,7 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.index ["status"], name: "index_reviews_on_status"
   end
 
-  create_table "rooms", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.integer "schedule_id"
-    t.string "label"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "audio"
-    t.boolean "video"
-  end
-
-  create_table "schedules", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.integer "conference_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "slots", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.integer "time_block_id"
-    t.integer "proposal_id"
-    t.integer "room_id"
-    t.string "code"
-    t.text "comments"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "time_blocks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "schedule_id"
-    t.string "code"
-    t.string "label"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "transactions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "transactions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci", force: :cascade do |t|
     t.integer "itinerary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -248,7 +213,7 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.index ["paid"], name: "index_transactions_on_paid"
   end
 
-  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -261,8 +226,8 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name", default: ""
-    t.string "last_name", default: ""
+    t.string "first_name"
+    t.string "last_name"
     t.string "prefix"
     t.string "initial"
     t.string "suffix"
@@ -289,7 +254,7 @@ ActiveRecord::Schema.define(version: 2023_06_10_210129) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "versions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "versions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
     t.string "event", null: false
